@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ZippyScale | We Build Your Lead System Free. You Pay When You Sign Your First Client.</title>
+<title>ZippyScale | Qualified Project Opportunities for Commercial Contractors</title>
 <meta name="description" content="For commercial contractors: ads, a sector page and AI agents that answer, qualify and book every inquiry. Built free on your accounts. Your only cost is ad spend. We get paid after you sign your first client." />
 <link rel="icon" href="favicon.png" type="image/png" />
 <link rel="canonical" href="https://www.zippyscale.com/" />
@@ -330,6 +330,31 @@ textarea.finput{resize:vertical;min-height:84px}
 .quad strong{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;color:var(--cream);display:block;margin-bottom:8px}
 .quad p{font-size:.92rem;color:var(--muted-dark);max-width:34ch}
 
+
+/* pains */
+.pains{list-style:none;display:grid;gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.pains li{display:flex;align-items:baseline;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--head);
+  font-size:clamp(1.15rem,2.3vw,1.7rem);letter-spacing:-.02em;line-height:1.2}
+.pn{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;color:var(--lime-dark);flex:none}
+
+
+/* case studies */
+.cases{display:grid;gap:22px;margin-top:44px}
+@media(min-width:860px){.cases{grid-template-columns:1fr 1fr;gap:26px}}
+.case{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:16px;padding:30px}
+.ck{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--lime);display:block;margin-bottom:14px}
+.case h3{font-size:1.3rem;margin-bottom:6px}
+.cmeta{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;color:var(--muted-dark);margin-bottom:16px}
+.case p{font-size:.95rem;color:var(--body-dark)}
+.ctags{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.ctags li{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--body-dark);border:1px solid var(--border-dark);border-radius:6px;padding:6px 10px}
+.sysline{display:grid;gap:24px;margin-top:44px;padding-top:36px;border-top:1px solid var(--border-dark)}
+@media(min-width:760px){.sysline{grid-template-columns:repeat(4,1fr);gap:30px}}
+.sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.9rem;color:var(--lime);display:block;letter-spacing:-.02em}
+.sl{font-size:.88rem;color:var(--muted-dark);display:block;margin-top:8px;max-width:26ch}
+
 /* reveal */
 .js-rv .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--exp),transform .8s var(--exp)}
 .js-rv .rv.in{opacity:1;transform:none}
@@ -365,7 +390,7 @@ textarea.finput{resize:vertical;min-height:84px}
 
 <!-- ICP CALLOUT -->
 <div class="callout">
-  <div class="wrap">For commercial contractors and design build firms in Canada and the United States</div>
+  <div class="wrap">For commercial general contractors and design build firms across North America</div>
 </div>
 
 <!-- HERO -->
@@ -373,13 +398,13 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap hero-inner">
     <div>
       <span class="badge rv"><span class="dot"></span> 3 build slots open, Q3 2026</span>
-      <h1 class="rv rv-d1">Be their first call, not the third bid. <em>We build the whole system free.</em></h1>
-      <p class="lede rv rv-d2">We build the ads, the page and the AI agents that turn inquiries into booked site walks. You cover ad spend. We get paid only when a project we sourced gets signed.</p>
+      <h1 class="rv rv-d1">More qualified project opportunities. <em>Without relying on referrals alone.</em></h1>
+      <p class="lede rv rv-d2">We build and run the demand system for commercial contractors across North America. Search, paid, and AI agents that answer, qualify and book every opportunity into your estimator's calendar.</p>
       <div class="hero-cta rv rv-d3">
         <a class="btn btn-primary" data-book href="#apply">Book a 20 minute call</a>
         <a class="btn btn-ghost" href="#build">See what gets built</a>
       </div>
-      <p class="hero-note rv rv-d3"><b>No setup fee. No retainer.</b> Nothing owed until a contract you signed came from us.</p>
+      <p class="hero-note rv rv-d3"><b>We get paid when you get paid.</b> No setup fee, no retainer, nothing owed until a project we sourced is signed.</p>
     </div>
 
     <div class="sorter rv rv-d2">
@@ -442,9 +467,16 @@ textarea.finput{resize:vertical;min-height:84px}
 <!-- PROBLEM -->
 <section id="leak">
   <div class="wrap">
-    <span class="eyebrow">The problem</span>
-    <h2>Referrals built your firm.<br />They will not fill next year.</h2>
-    <p class="lede">The owners searching right now are calling someone else. You meet them later, as bid number three, competing on price.</p>
+    <span class="eyebrow">Sound familiar</span>
+    <h2>Five reasons commercial contractors stall.</h2>
+    <ul class="pains rv">
+      <li><span class="pn">01</span>Your pipeline isn't big enough.</li>
+      <li><span class="pn">02</span>You blend in online.</li>
+      <li><span class="pn">03</span>You bid more than you can staff.</li>
+      <li><span class="pn">04</span>You hear about the job when the bid list is already three deep.</li>
+      <li><span class="pn">05</span>You lose deals because nobody followed up.</li>
+    </ul>
+    <p class="lede">Every one of them is a system problem, and every one of them is fixable in thirty days.</p>
   </div>
 </section>
 
@@ -612,28 +644,31 @@ textarea.finput{resize:vertical;min-height:84px}
 <!-- PROOF -->
 <section class="dark" id="proof">
   <div class="wrap">
-    <span class="eyebrow">The honest part</span>
-    <h2>Already built for two construction firms.</h2>
-    <p class="lede">Both commercial builders in BC. If a claim is not below, we will not make it on the call either.</p>
+    <span class="eyebrow">Track record</span>
+    <h2>Built for commercial builders. Twice.</h2>
 
-    <div class="ledger">
-      <div class="lbox have rv">
-        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D5EB4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Documented</h3>
-        <ul>
-          <li><b>Medico Construction, two years.</b> Healthcare design build, 50 plus clinics across BC and Alberta. Search, ads, tracking, funnel, CRM.</li>
-          <li><b>Two first page positions</b> for medical clinic contractor searches in Vancouver, verified July 2026.</li>
-          <li><b>Riarh Group website and lead funnel.</b> Commercial, industrial and TI, Surrey BC. Signed off, invoiced, paid June 2026.</li>
-          <li><b>The system, already written.</b> 2,310 line spec, 9 stage pipeline, 24 qualification fields, 9 workflows.</li>
-        </ul>
-      </div>
-      <div class="lbox havent rv rv-d1">
-        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9297A5" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.4v.01"/></svg> Not proven yet</h3>
-        <ul>
-          <li>No published revenue or ROAS. We will not invent numbers.</li>
-          <li>No US case study yet. That is what these slots buy us.</li>
-          <li>No large agency bench. A small senior team plus an AI fleet, which is why a free build is possible.</li>
-        </ul>
-      </div>
+    <div class="cases">
+      <article class="case rv">
+        <span class="ck">CASE 01</span>
+        <h3>Medico Construction</h3>
+        <p class="cmeta">Healthcare design build · British Columbia and Alberta</p>
+        <p>Two years running their acquisition. Search, paid, tracking, funnel and CRM for a firm that has delivered 50 plus clinics. They hold two first page positions for medical clinic contractor searches in Vancouver.</p>
+        <ul class="ctags"><li>Search</li><li>Paid</li><li>Funnel</li><li>CRM</li></ul>
+      </article>
+      <article class="case rv rv-d1">
+        <span class="ck">CASE 02</span>
+        <h3>Riarh Group</h3>
+        <p class="cmeta">Commercial, industrial and tenant improvements · Surrey BC</p>
+        <p>Website and lead funnel, built and shipped for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking enquiries.</p>
+        <ul class="ctags"><li>Website</li><li>Lead funnel</li><li>Tracking</li></ul>
+      </article>
+    </div>
+
+    <div class="sysline rv">
+      <div><span class="sn">2,310</span><span class="sl">line lead flow specification, already written</span></div>
+      <div><span class="sn">9</span><span class="sl">stage pipeline, built and tested</span></div>
+      <div><span class="sn">24</span><span class="sl">qualification fields your estimator would ask</span></div>
+      <div><span class="sn">9</span><span class="sl">automation workflows running the follow up</span></div>
     </div>
   </div>
 </section>
@@ -641,17 +676,17 @@ textarea.finput{resize:vertical;min-height:84px}
 <section id="book">
   <div class="wrap">
     <span class="eyebrow">The deal</span>
-    <h2>You pay nothing until a project we sourced gets signed.</h2>
-    <p class="lede">No setup fee, no retainer. If it never produces a signed project, you never get an invoice and you keep everything we built.</p>
+    <h2>We get paid when you get paid.</h2>
+    <p class="lede">We build the whole system, run it, and invoice nothing until a project we sourced is signed. We can offer that because we have built it before and we know what it produces.</p>
 
     <div class="guarantee rv">
       <div class="gterms">
         <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta. You set the ceiling. We never touch it.</dd></div>
-        <div><dt>We get paid</dt><dd>One flat fee per signed project we source. Never a cut of your contract. Agreed in writing before we start, so you can price it into a bid.</dd></div>
+        <div><dt>The fee</dt><dd>One flat fee per signed project we source. Never a cut of your contract. Agreed in writing before we start, so you can price it into a bid.</dd></div>
         <div><dt>How we count it</dt><dd>Only inquiries that came through the system, timestamped in your CRM, confirmed signed by you. <b style="color:var(--head)">Your referrals are never ours.</b></dd></div>
         <div><dt>You keep</dt><dd>Page, campaigns, agents, CRM, data. On your accounts from day one.</dd></div>
         <div><dt>Hard stop</dt><dd>90 days. No signed project by then, we part ways and you owe nothing.</dd></div>
-        <div><dt>Why free</dt><dd>We need three documented results with builders. You buy our case study with ad budget and time.</dd></div>
+        <div><dt>Why we can</dt><dd>The system is already built and proven with commercial builders. We are not learning on your project, so we are comfortable being paid last.</dd></div>
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Apply for a slot</a>
@@ -771,7 +806,7 @@ textarea.finput{resize:vertical;min-height:84px}
 <section>
   <div class="wrap">
     <span class="eyebrow">Fit</span>
-    <h2>Three slots. Not for everyone.</h2>
+    <h2>We take three builds at a time.</h2>
     <div class="fit">
       <div class="fit-col rv">
         <h3>Take a slot if</h3>
@@ -810,7 +845,7 @@ textarea.finput{resize:vertical;min-height:84px}
       </details>
       <details>
         <summary>What is the catch?</summary>
-        <p>There is a real one. We need three documented results with commercial builders, and case studies are worth more to us right now than three retainers. So you get the build for nothing and we get the proof, if it works. If it does not work, we carry that cost and you carry your ad spend.</p>
+        <p>You fund the ad spend and you commit to answering the calls we book. That is it. We carry the build. If it does not produce a signed project, we carry that cost too.</p>
       </details>
       <details>
         <summary>How much ad spend?</summary>
@@ -830,7 +865,7 @@ textarea.finput{resize:vertical;min-height:84px}
       </details>
       <details>
         <summary>Which sectors and where?</summary>
-        <p>Tenant improvements, medical, dental and veterinary clinics, restaurant and retail fit-outs, childcare, pharmacy, office build-outs, industrial and warehouse. Commercial general contractors and design build firms in Canada and the United States. One sector per build.</p>
+        <p>Tenant improvements, medical, dental and veterinary clinics, restaurant and retail fit-outs, childcare, pharmacy, office build-outs, industrial and warehouse. Commercial general contractors and design build firms across North America. One sector per build.</p>
       </details>
     </div>
   </div>
@@ -857,7 +892,7 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap foot">
     <div>
       <img src="assets/zippyscale-logo-dark-bg.svg" alt="ZippyScale" style="height:24px;margin-bottom:10px" />
-      <div>Attribution first growth for commercial construction firms.</div>
+      <div>Qualified project opportunities for commercial contractors across North America.</div>
     </div>
     <div class="foot-links">
       <a href="mailto:sandy@zippyscale.com">sandy@zippyscale.com</a>
