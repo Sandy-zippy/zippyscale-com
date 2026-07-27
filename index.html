@@ -6,14 +6,35 @@
 <title>ZippyScale | We Build Your Lead System Free. You Pay When You Sign Your First Client.</title>
 <meta name="description" content="For commercial contractors: ads, a sector page and AI agents that answer, qualify and book every inquiry. Built free on your accounts. Your only cost is ad spend. We get paid after you sign your first client." />
 <link rel="icon" href="favicon.png" type="image/png" />
-<link rel="canonical" href="https://zippyscale.com/" />
+<link rel="canonical" href="https://www.zippyscale.com/" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://zippyscale.com/" />
+<meta property="og:url" content="https://www.zippyscale.com/" />
 <meta property="og:title" content="We build your lead system free. You pay when you sign your first client." />
 <meta property="og:description" content="For commercial contractors and design build firms. Ads, a sector page and AI agents that answer, qualify and book every inquiry. Your only cost is ad spend." />
 <meta property="og:site_name" content="ZippyScale" />
-<meta property="og:image" content="https://zippyscale.com/assets/img/tour.jpg" />
+<meta property="og:image" content="https://www.zippyscale.com/assets/img/tour.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-38CLGNL7TJ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-38CLGNL7TJ');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '961643772929674');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=961643772929674&ev=PageView&noscript=1" /></noscript>
 
 <link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-700.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="fonts/inter-400.woff2" crossorigin />
@@ -174,14 +195,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .stack-foot b{color:var(--lime);font-weight:700}
 
 /* guarantee */
-.guarantee{margin-top:52px;background:var(--card-dark);border:1px solid var(--border-dark);border-radius:20px;padding:34px}
+.guarantee{margin-top:52px;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:34px}
 @media(min-width:820px){.guarantee{padding:48px}}
 .gterms{display:grid;gap:0;margin-top:2px}
-.gterms div{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:17px 0;border-top:1px solid var(--border-dark);align-items:baseline}
-.gterms div:last-child{border-bottom:1px solid var(--border-dark)}
+.gterms div{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:17px 0;border-top:1px solid var(--line);align-items:baseline}
+.gterms div:last-child{border-bottom:1px solid var(--line)}
 .gterms dt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--lime)}
-.gterms dd{font-size:.97rem;color:var(--body-dark)}
+  text-transform:uppercase;color:var(--lime-dark)}
+.gterms dd{font-size:.97rem;color:var(--body)}
 @media(max-width:640px){.gterms div{grid-template-columns:1fr;gap:6px}}
 
 /* proof ledger */
@@ -298,13 +319,13 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   <div class="wrap hero-inner">
     <div>
       <span class="badge rv"><span class="dot"></span> 3 build slots open, Q3 2026</span>
-      <h1 class="rv rv-d1">We build your entire lead system free. <em>You pay when you sign your first client.</em></h1>
-      <p class="lede rv rv-d2">Ads, a page that sells your sector work, and AI agents that answer, qualify, chase and book every inquiry straight into your estimator's calendar. Your only cost is the ad spend, paid direct to Google and Meta.</p>
+      <h1 class="rv rv-d1">Be their first call, not the third bid. <em>We build the whole system free.</em></h1>
+      <p class="lede rv rv-d2">Ads, a page that sells your sector work, and AI agents that answer, qualify and book every inquiry into your estimator's calendar. Your only cost is the ad spend. We get paid when a project we sourced gets signed.</p>
       <div class="hero-cta rv rv-d3">
         <a class="btn btn-primary" data-book href="#book">Book a 20 minute call</a>
         <a class="btn btn-ghost" href="#build">See what gets built</a>
       </div>
-      <p class="hero-note rv rv-d3"><b>No setup fee. No retainer.</b> No conversation about our money until a contract is signed.</p>
+      <p class="hero-note rv rv-d3"><b>No setup fee. No retainer.</b> Nothing owed until a contract you signed came from us.</p>
     </div>
 
     <div class="sorter rv rv-d2">
@@ -359,7 +380,7 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   <div class="wrap terms-in">
     <span><b>$0</b> to build it</span>
     <span><b>Ad spend</b> is your only cost</span>
-    <span><b>We get paid</b> per signed job, never a retainer</span>
+    <span><b>We get paid</b> per signed project, never a retainer</span>
     <span><b>3</b> slots</span>
   </div>
 </div>
@@ -367,9 +388,10 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 <!-- PROBLEM -->
 <section id="leak">
   <div class="wrap">
-    <span class="eyebrow">Why we can offer this</span>
+    <span class="eyebrow">The problem</span>
     <h2>Referrals built your firm.<br />They will not fill next year.</h2>
     <p class="lede">A dentist decides to build her second clinic. She searches, asks her architect, calls two firms. You hear about it when the bid list is already three deep and the only lever left is price. Meanwhile the inquiries that do reach you sit in an inbox until someone has a free hour.</p>
+    <p class="lede" style="margin-top:14px">That happens every month, in your sector, in your city. The owners searching right now are meeting someone else. You will meet them later, as bid number three.</p>
   </div>
 </section>
 
@@ -505,17 +527,46 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   </div>
 </section>
 
+<!-- PROOF -->
+<section class="dark" id="proof">
+  <div class="wrap">
+    <span class="eyebrow">The honest part</span>
+    <h2>We have already built this for two construction firms.</h2>
+    <p class="lede">Both commercial builders in British Columbia. Here is the whole record, split into what is documented and what is not. If a claim is not below, we will not make it on the call either.</p>
+
+    <div class="ledger">
+      <div class="lbox have rv">
+        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D5EB4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Documented</h3>
+        <ul>
+          <li><b>Two years running acquisition for Medico Construction.</b> Healthcare design build, 50 plus clinics across British Columbia and Alberta. Search, ads, tracking, funnel and CRM.</li>
+          <li><b>First page for the searches their buyers actually type.</b> Two first page positions for medical clinic contractor searches in Vancouver, verified July 2026.</li>
+          <li><b>Website and lead funnel for Riarh Group.</b> Commercial and industrial construction and tenant improvements, Surrey BC. Built, signed off by the principal, invoiced and paid June 2026.</li>
+          <li><b>The system, already written.</b> A 2,310 line lead flow specification, 9 stage pipeline, 24 qualification fields, 9 automation workflows. This is what gets installed, not a slide about it.</li>
+        </ul>
+      </div>
+      <div class="lbox havent rv rv-d1">
+        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9297A5" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.4v.01"/></svg> Not proven yet</h3>
+        <ul>
+          <li>No published revenue or return on ad spend. We do not publish client numbers and we will not invent them.</li>
+          <li>No United States case study yet. That is part of what these three slots buy us.</li>
+          <li>No large agency bench. A small senior team plus an AI operator fleet, which is the only reason a free build is possible at all.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- GUARANTEE -->
-<section class="dark" id="book">
+<section id="book">
   <div class="wrap">
     <span class="eyebrow">The deal</span>
-    <h2>You pay us nothing until you sign your first client from this.</h2>
-    <p class="lede">Not a discovery fee. Not a setup fee. Not a retainer. If the system never produces a signed contract, we never invoice you and you keep everything we built.</p>
+    <h2>You pay us nothing until a project we sourced gets signed.</h2>
+    <p class="lede">We call it the First Call System. Not a discovery fee, not a setup fee, not a retainer. If it never produces a signed project, we never invoice you and you keep everything we built.</p>
 
     <div class="guarantee rv">
       <div class="gterms">
         <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta on your own accounts. We never take custody of a media budget and we never mark it up.</dd></div>
         <div><dt>We get paid</dt><dd>A flat fee per signed project the system brings you, banded by project size. Never a percentage of your contract, never a retainer you carry whether it works or not. The schedule is agreed in writing before we build anything, so you know the number before you bid.</dd></div>
+        <div><dt>How we count it</dt><dd>A project is ours only if the inquiry came in through the system and is timestamped in your CRM, and you confirm the contract was signed. <b style="color:var(--head)">Your referrals and repeat clients are never ours</b>, even if they happened to see an ad on the way.</dd></div>
         <div><dt>You supply</dt><dd>A kickoff call, project photos, the sectors you want, and creative approval inside five business days. If we are blocked, the clock stops.</dd></div>
         <div><dt>You keep</dt><dd>The page, the campaigns, the agents, the CRM and the data. On your accounts from day one, whatever you decide at the end.</dd></div>
         <div><dt>Hard stop</dt><dd>90 days. If it has not produced a signed client by then, we part ways, you owe nothing and we have learned something expensive.</dd></div>
@@ -558,34 +609,6 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   </div>
 </section>
 
-<!-- PROOF -->
-<section class="dark" id="proof">
-  <div class="wrap">
-    <span class="eyebrow">The honest part</span>
-    <h2>We have already built this for two construction firms.</h2>
-    <p class="lede">Both commercial builders in British Columbia. Here is the whole record, split into what is documented and what is not. If a claim is not below, we will not make it on the call either.</p>
-
-    <div class="ledger">
-      <div class="lbox have rv">
-        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D5EB4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Documented</h3>
-        <ul>
-          <li><b>Two years running acquisition for Medico Construction.</b> Healthcare design build, 50 plus clinics across British Columbia and Alberta. Search, ads, tracking, funnel and CRM.</li>
-          <li><b>First page for the searches their buyers actually type.</b> Two first page positions for medical clinic contractor searches in Vancouver, verified July 2026.</li>
-          <li><b>Website and lead funnel for Riarh Group.</b> Commercial and industrial construction and tenant improvements, Surrey BC. Built, signed off by the principal, invoiced and paid June 2026.</li>
-          <li><b>The system, already written.</b> A 2,310 line lead flow specification, 9 stage pipeline, 24 qualification fields, 9 automation workflows. This is what gets installed, not a slide about it.</li>
-        </ul>
-      </div>
-      <div class="lbox havent rv rv-d1">
-        <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9297A5" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.4v.01"/></svg> Not proven yet</h3>
-        <ul>
-          <li>No published revenue or return on ad spend. We do not publish client numbers and we will not invent them.</li>
-          <li>No United States case study yet. That is part of what these three slots buy us.</li>
-          <li>No large agency bench. A small senior team plus an AI operator fleet, which is the only reason a free build is possible at all.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FAQ -->
 <section class="dark tight" id="faq">
@@ -661,7 +684,13 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 
   // one place to swap the booking link
   var BOOKING_URL = "mailto:sandy@zippyscale.com";
-  document.querySelectorAll('[data-book]').forEach(function(a){ a.setAttribute('href', BOOKING_URL); });
+  document.querySelectorAll('[data-book]').forEach(function(a){
+    a.setAttribute('href', BOOKING_URL);
+    a.addEventListener('click', function(){
+      if (window.fbq) fbq('track', 'Lead', {content_name: 'book_call'});
+      if (window.gtag) gtag('event', 'generate_lead', {method: 'book_call'});
+    });
+  });
 
   if (reduce) {
     var s = document.getElementById('sorter-svg');
