@@ -78,6 +78,7 @@ section{padding:96px 0}
   text-transform:uppercase;color:var(--lime-dark);margin-bottom:20px;display:block}
 .dark .eyebrow{color:var(--lime)}
 .lede{font-size:clamp(1.05rem,1.5vw,1.22rem);margin-top:20px;color:var(--body);max-width:56ch}
+.lede-diff{font-weight:700;color:var(--head);margin-top:14px}
 .dark .lede{color:var(--body-dark)}
 
 /* nav */
@@ -469,6 +470,35 @@ textarea.finput{resize:vertical;min-height:84px}
 .fees td:last-child{font-family:'JetBrains Mono',monospace;font-weight:700}
 .fees p{font-size:.88rem;color:var(--muted);margin-top:16px;max-width:60ch}
 
+
+/* what arrives */
+.arrives{display:grid;gap:22px;margin-top:46px}
+@media(min-width:820px){.arrives{grid-template-columns:1fr 1fr;gap:24px}}
+.arrives article{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:14px;padding:28px;align-content:start}
+.arrives-num{background:transparent;border-style:dashed}
+.ak{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--lime);display:block;margin-bottom:12px}
+.arrives h3{font-size:1.18rem;margin-bottom:14px;color:var(--cream)}
+.awhat{font-size:.95rem;color:var(--body-dark);margin-bottom:12px}
+.awhat b{color:var(--lime);font-weight:700}
+.awhere{font-size:.92rem;color:var(--muted-dark);margin-bottom:16px}
+.areplace{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.06em;color:var(--cream);
+  border-top:1px solid var(--border-dark);padding-top:14px;margin:0}
+
+
+.awho{font-size:.86rem;color:var(--lime);font-family:'JetBrains Mono',monospace;letter-spacing:.04em;margin-bottom:16px}
+.stackline{margin-top:44px;padding-top:36px;border-top:1px solid var(--border-dark)}
+.stackline table{width:100%;border-collapse:collapse;max-width:620px;margin-top:16px}
+.stackline td{padding:13px 0;border-bottom:1px solid var(--border-dark);font-size:.97rem;color:var(--body-dark)}
+.stackline td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--cream);white-space:nowrap;padding-left:20px}
+.stackline .stotal td{color:var(--lime);font-weight:700;border-bottom:0;font-size:1.05rem}
+.stackline .stotal td:last-child{color:var(--lime)}
+.stackline p{font-size:.88rem;color:var(--muted-dark);margin-top:18px;max-width:62ch}
+.when{list-style:none;counter-reset:w;margin-top:44px;border-top:1px solid var(--line)}
+.when li{padding:22px 0;border-bottom:1px solid var(--line);display:grid;gap:6px 24px;font-size:1rem;color:var(--body)}
+@media(min-width:700px){.when li{grid-template-columns:100px 1fr;align-items:baseline}}
+.wk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.72rem;letter-spacing:.12em;color:var(--lime-dark)}
+.when b{color:var(--head);font-family:'Space Grotesk',sans-serif;font-size:1.05rem;display:block;margin-bottom:4px}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js-rv .rv{opacity:1;transform:none;transition:none}
@@ -493,16 +523,17 @@ textarea.finput{resize:vertical;min-height:84px}
 
 <!-- 0. ICP CALLOUT -->
 <div class="callout">
-  <div class="wrap">Built for <b>commercial general contractors and design-build firms</b> across North America</div>
+  <div class="wrap">Fit-outs, tenant improvements, clinics, restaurants, childcare, industrial and office <b>across North America</b></div>
 </div>
 
 <!-- 1. HERO -->
 <section class="hero">
   <div class="wrap hero-inner">
     <div>
-      <span class="badge"><span class="dot"></span> Three builds at a time. One slot open.</span>
-      <h1>We become your <em>demand department.</em></h1>
-      <p class="lede">Five channels run for you, from scored tenders to answered enquiries. You pay nothing until a project we sourced is signed.</p>
+      <span class="badge"><span class="dot"></span> For commercial GCs and design-build firms in North America</span>
+      <h1>We find commercial projects for your firm. <em>You pay only when one gets signed.</em></h1>
+      <p class="lede">Tenders scored before your estimator opens them. Your architects and past clients worked every month. Google and Meta running. Every enquiry answered in minutes, day or night.</p>
+      <p class="lede lede-diff">Most agencies sell you the last one. We run all five.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Score my pipeline in 90 seconds</a>
       </div>
@@ -544,10 +575,9 @@ textarea.finput{resize:vertical;min-height:84px}
 <!-- 2. PROOF BAR -->
 <div class="terms">
   <div class="wrap terms-in">
-    <span><b>2</b> commercial builders run</span>
-    <span><b>50+</b> clinics delivered by a client we ran</span>
-    <span><b>16</b> named builds across 5 sectors</span>
-    <span><b>Page one</b> in Vancouver for their buyers' searches</span>
+    <span><b>2 years</b> running acquisition for a commercial builder</span>
+    <span><b>Page one</b> in Vancouver for the searches their buyers use</span>
+    <span><b>5 sectors</b> we have already sold: clinics, restaurants, childcare, industrial, office</span>
   </div>
 </div>
 
@@ -576,19 +606,73 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="band-copy"><div class="wrap"><p>She called three firms on Tuesday.<span>You replied Thursday.</span></p></div></div>
 </div>
 
-<!-- 4. HOW IT WORKS -->
+<!-- 4. WHAT ARRIVES -->
 <section class="dark" id="build">
   <div class="wrap">
-    <span class="eyebrow">What we run for you</span>
-    <h2>Five channels. One department.</h2>
-    <p class="lede">Most agencies sell you the smallest one.</p>
-    <div class="dept">
-      <article><span class="dk">01</span><h3>The Bid Desk</h3><p>Tenders scored go or no-go on size, geography, bonding and scope. Your estimator only opens the winnable ones.</p></article>
-      <article><span class="dk">02</span><h3>The Relationship Engine</h3><p>Architects, brokers and property managers contacted on a schedule, not when you are hungry. Past clients reactivated on warranty and lease dates.</p></article>
-      <article><span class="dk">03</span><h3>Owner-Direct Demand</h3><p>Search and paid on your accounts, aimed at one sector, landing on a page built to sell it.</p></article>
-      <article><span class="dk">04</span><h3>The Response System</h3><p>Every enquiry answered in minutes, qualified, booked into the estimator's calendar.</p></article>
-      <article><span class="dk">05</span><h3>The Credential Vault</h3><p>Prequalifications, WCB, insurance and bonding kept current, so you never lose an invitation to an expired document.</p></article>
-      <article class="dept-num"><span class="dk">AND THE NUMBER</span><h3>Cost per signed project, by channel</h3><p>Weekly, so you know which channel to turn up.</p></article>
+    <span class="eyebrow">What actually arrives</span>
+    <h2>Five things land on your desk. That is the whole service.</h2>
+    <p class="lede">No dashboard to log into. No report to read. Here is what shows up, when, and what it replaces.</p>
+
+    <div class="arrives">
+      <article>
+        <span class="ak">01</span>
+        <h3>Monday 7am, the bid list</h3>
+        <p class="awhat">Every tender in your area that fits your size, sector and bonding capacity. Each one marked <b>GO</b> or <b>NO GO</b> with a one line reason and the deadline.</p>
+        <p class="awhere">Your inbox, and a card in your CRM. You open only the GO ones.</p>
+        <p class="awho">Run by us. First list lands day 9.</p>
+        <p class="areplace">Replaces a bid coordinator, about $62k a year</p>
+      </article>
+      <article>
+        <span class="ak">02</span>
+        <h3>Friday, ten messages to approve</h3>
+        <p class="awhat">Drafted notes to your architects, brokers, property managers and past clients. A finished project they specified. A lease coming up for renewal. A warranty anniversary.</p>
+        <p class="awhere">You hit approve. They send from your address, not ours.</p>
+        <p class="awho">Written by us, approved by you. First batch day 14.</p>
+        <p class="areplace">Replaces a business development manager, about $86k a year</p>
+      </article>
+      <article>
+        <span class="ak">03</span>
+        <h3>Enquiries from people already searching</h3>
+        <p class="awhat">Google and Meta running on your accounts for one sector, landing on a page built from your own projects and photos, on your domain.</p>
+        <p class="awhere">Straight into your CRM, tagged by source.</p>
+        <p class="awho">Built and managed by us on your accounts. Live day 21.</p>
+        <p class="areplace">Replaces an agency retainer</p>
+      </article>
+      <article>
+        <span class="ak">04</span>
+        <h3>A text to your estimator, inside five minutes</h3>
+        <p class="awhat">Every enquiry answered day or night, asked the questions he would have asked, sector, square footage, location, budget, permit stage, timeline. If it qualifies it is already in his calendar.</p>
+        <p class="awhere">His phone. He walks in Monday with the week booked.</p>
+        <p class="awho">Runs itself, a human reviews edge cases daily. Live day 21.</p>
+        <p class="areplace">Replaces an after-hours answering service and about a day a week of a $89k estimator</p>
+      </article>
+      <article>
+        <span class="ak">05</span>
+        <h3>Prequalification forms, filled</h3>
+        <p class="awhat">WCB, insurance, bonding letter, safety record, references and past project sheets kept in one place and current. When a prequal comes up, it arrives filled for your signature.</p>
+        <p class="awhere">One folder you own. Alerts 30 days before anything expires.</p>
+        <p class="awho">Assembled by us from your documents. Built day 30.</p>
+        <p class="areplace">Replaces the invitation you never got because a certificate lapsed</p>
+      </article>
+      <article class="arrives-num">
+        <span class="ak">AND EVERY WEEK</span>
+        <h3>One number</h3>
+        <p class="awhat">Cost per signed project, by channel. Which of the five paid for itself this month.</p>
+        <p class="awhere">One email. Two minutes to read.</p>
+      </article>
+
+    <div class="stackline">
+      <span class="feek">WHAT THIS REPLACES, IF YOU HIRED IT</span>
+      <table>
+        <tr><td>A bid coordinator watching the portals</td><td>$62k a year</td></tr>
+        <tr><td>A business development manager working your architects</td><td>$86k a year</td></tr>
+        <tr><td>An agency running search and paid</td><td>$36k a year</td></tr>
+        <tr><td>After-hours answering, plus a day a week of your estimator</td><td>$18k a year</td></tr>
+        <tr><td>Prequalification admin and subscriptions</td><td>$4k a year</td></tr>
+        <tr class="stotal"><td>Total</td><td>$206k a year</td></tr>
+      </table>
+      <p>You pay $2,500 to $20,000 once, per project we source and you sign. Nothing if we source nothing. Those are US market averages for the roles, not our invoice.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -639,6 +723,22 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="band-veil"></div>
   <div class="band-copy"><div class="wrap"><p>Won on day zero. Not on price.<span>Be the firm she already found, already trusts and already booked.</span></p></div></div>
 </div>
+
+<!-- 6b. WHAT HAPPENS WHEN -->
+<section id="when">
+  <div class="wrap">
+    <span class="eyebrow">After you sign</span>
+    <h2>What happens, and when.</h2>
+    <ol class="when">
+      <li><span class="wk">DAY 1</span><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</li>
+      <li><span class="wk">DAY 9</span><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</li>
+      <li><span class="wk">DAY 14</span><b>First batch of messages to approve.</b> Ten drafts to your architects, brokers and past clients, waiting on your yes.</li>
+      <li><span class="wk">DAY 21</span><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every enquiry gets a reply inside five minutes.</li>
+      <li><span class="wk">DAY 30</span><b>Vault built, first numbers.</b> Prequalification documents filed and current. First weekly email with cost per qualified project by channel.</li>
+      <li><span class="wk">DAY 90</span><b>The decision point.</b> If nothing we sourced has been signed, we walk and you owe nothing.</li>
+    </ol>
+  </div>
+</section>
 
 <!-- 7. THE DEAL -->
 <section id="book">
