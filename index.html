@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.zippyscale.com/" />
 <meta property="og:title" content="We find commercial jobs for your firm. You pay only when you sign one." />
-<meta property="og:description" content="Five things for commercial GCs across North America: a bid list every Monday, ten messages every Friday, ads running, every inquiry answered in minutes, prequal papers current. One flat fee when you sign a job we found." />
+<meta property="og:description" content="For commercial GCs across North America. We run your ads and your bid list. One flat fee when you sign a job we found, nothing if nothing signs." />
 <meta property="og:site_name" content="ZippyScale" />
 <meta property="og:image" content="https://www.zippyscale.com/assets/img/tour.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -58,13 +58,14 @@ src="https://www.facebook.com/tr?id=961643772929674&ev=PageView&noscript=1" /></
   --exp:cubic-bezier(0.16,1,0.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+section,[id]{scroll-margin-top:88px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--charcoal)}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--body);
   font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:var(--head);line-height:1.08;letter-spacing:-0.025em}
 h1{font-size:clamp(2.05rem,4.1vw,3.35rem);line-height:1.06;text-wrap:balance;max-width:19ch}
-h2{font-size:clamp(1.9rem,4.2vw,3.05rem);line-height:1.1;text-wrap:balance;max-width:24ch}
-h3{font-size:1.1rem;line-height:1.25;letter-spacing:-0.01em}
+h2{font-size:clamp(1.85rem,3.8vw,3.05rem);line-height:1.1;text-wrap:balance;max-width:24ch}
+h3{font-size:1.32rem;line-height:1.25;letter-spacing:-0.01em}
 p{max-width:68ch}
 a{color:inherit}
 img,svg{max-width:100%;display:block}
@@ -153,12 +154,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .band{position:relative;overflow:hidden;height:clamp(300px,48vw,520px)}
 .band-short{height:clamp(240px,34vw,380px)}
 .band img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
-.band-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,42,53,.94) 0%,rgba(42,42,53,.86) 38%,rgba(42,42,53,.45) 72%,rgba(42,42,53,.2) 100%)}
+.band-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,42,53,.96) 0%,rgba(42,42,53,.92) 38%,rgba(42,42,53,.70) 72%,rgba(42,42,53,.45) 100%)}
 .band-copy{position:relative;height:100%;display:flex;align-items:center}
-.band-copy p{color:var(--cream);font-family:'Space Grotesk',sans-serif;font-weight:700;
+.band-copy p{color:var(--cream);text-wrap:balance;font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(1.3rem,3vw,2.1rem);line-height:1.2;max-width:19ch;letter-spacing:-0.02em}
 .band-copy span{display:block;font-family:'Inter',sans-serif;font-weight:400;font-size:.95rem;
-  color:var(--body-dark);margin-top:14px;max-width:38ch;line-height:1.55}
+  color:var(--cream);margin-top:14px;max-width:38ch;line-height:1.55}
 
 /* sprint timeline */
 .track{position:relative;margin-top:60px}
@@ -238,9 +239,9 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 .flabel{display:block;font-weight:700;font-size:.95rem;color:var(--head);margin:26px 0 12px}
 .fstep .flabel:first-of-type{margin-top:0}
 .finput{width:100%;font-family:'Inter',sans-serif;font-size:1rem;color:var(--head);background:var(--cream);
-  border:1px solid var(--line);border-radius:9px;padding:14px 15px;transition:border-color .2s var(--exp)}
+  border:1px solid #C3C7CE;border-radius:9px;padding:14px 15px;transition:border-color .2s var(--exp)}
 .finput:focus{border-color:var(--lime-text)}
-.finput::placeholder{color:#9BA1AC}
+.finput::placeholder{color:#7A8090}
 textarea.finput{resize:vertical;min-height:84px}
 .fgrid{display:grid;gap:18px}
 @media(min-width:640px){.fgrid{grid-template-columns:1fr 1fr;gap:18px 20px}}
@@ -294,12 +295,12 @@ textarea.finput{resize:vertical;min-height:84px}
 .qareas li:last-child{border-bottom:0}
 .qareas span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--lime-text)}
 .qbar{height:4px;background:#E9E7DE;border-radius:2px;overflow:hidden}
-.qbar i{display:block;height:100%;width:0;background:var(--lime-dark);border-radius:2px;transition:width .45s var(--exp)}
+.qbar i{display:block;height:100%;width:100%;background:var(--lime-dark);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .28s var(--exp)}
 .qcount{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--muted);margin:20px 0 12px}
 .qtitle{margin-bottom:26px;max-width:24ch}
 .qopts{display:grid;gap:10px}
 .qopt{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;color:var(--head);background:var(--cream);
-  border:1px solid var(--line);border-radius:11px;padding:17px 20px;cursor:pointer;text-align:left;
+  border:1px solid #C3C7CE;border-radius:11px;padding:17px 20px;cursor:pointer;text-align:left;
   transition:border-color .2s var(--exp),background-color .2s var(--exp)}
 .qopt:hover{border-color:var(--lime-dark);background:#FBFBF2}
 .qback{margin-top:26px;background:none;border:0;color:var(--muted);font-size:.9rem;cursor:pointer;
@@ -317,7 +318,7 @@ textarea.finput{resize:vertical;min-height:84px}
 .rrow{display:grid;grid-template-columns:118px 1fr auto;gap:14px;align-items:center;font-size:.9rem}
 .rrow b{font-weight:500;color:var(--body)}
 .rtrack{height:9px;background:#EDEBE2;border-radius:5px;overflow:hidden}
-.rfill{display:block;height:100%;background:var(--lime-dark);border-radius:5px;width:0;transition:width .8s var(--exp)}
+.rfill{display:block;height:100%;background:var(--lime-dark);border-radius:5px;width:100%;transform:scaleX(0);transform-origin:left;transition:transform .28s var(--exp)}
 .rfill.low{background:#D9A441}
 .rfill.bad{background:#C4705C}
 .rpct{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--muted)}
@@ -400,6 +401,7 @@ textarea.finput{resize:vertical;min-height:84px}
 .stackline p{font-size:.88rem;color:var(--muted-dark);margin-top:18px;max-width:62ch}
 .when{list-style:none;counter-reset:w;margin-top:44px;border-top:1px solid var(--line)}
 .when li{padding:22px 0;border-bottom:1px solid var(--line);display:grid;gap:6px 24px;font-size:1rem;color:var(--body)}
+.when li>div{max-width:68ch}
 @media(min-width:700px){.when li{grid-template-columns:100px 1fr;align-items:baseline}}
 .wk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.72rem;letter-spacing:.12em;color:var(--lime-text)}
 .when b{color:var(--head);font-family:'Space Grotesk',sans-serif;font-size:1.05rem;display:block;margin-bottom:4px}
@@ -424,6 +426,30 @@ textarea.finput{resize:vertical;min-height:84px}
 .trustgrid p{font-size:.94rem;color:var(--body-dark)}
 .trustcontact{margin-top:36px;padding-top:26px;border-top:1px solid var(--border-dark);font-size:.95rem;color:var(--body-dark)}
 .trustcontact a{color:var(--lime)}
+
+
+.two{display:grid;gap:24px;margin-top:46px}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr;gap:28px}}
+.two article{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:16px;padding:32px;align-content:start}
+.two h3{font-size:1.4rem;margin-bottom:16px;color:var(--cream)}
+.twonote{margin-top:32px;font-size:.97rem;color:var(--muted-dark);max-width:70ch}
+
+
+.deal2{display:grid;gap:36px;margin-top:44px}
+@media(min-width:900px){.deal2{grid-template-columns:1.05fr .95fr;gap:52px}}
+.dlist{list-style:none;display:grid;gap:14px;margin-top:16px}
+.dlist li{position:relative;padding-left:26px;font-size:.97rem;color:var(--body-dark);line-height:1.55}
+.dlist li:before{content:"";position:absolute;left:0;top:8px;width:11px;height:7px;
+  border-left:2px solid var(--lime);border-bottom:2px solid var(--lime);transform:rotate(-45deg)}
+.dlist b{color:var(--cream)}
+.bonus2 li:before{border-color:var(--muted-dark)}
+.dnote{font-size:.9rem;color:var(--muted-dark);margin-top:20px;max-width:56ch}
+.paybox{margin-top:16px;border-top:1px solid var(--border-dark)}
+.payrow{display:grid;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--border-dark)}
+@media(min-width:620px){.payrow{grid-template-columns:150px 1fr;align-items:baseline}}
+.payk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted-dark)}
+.payv{font-size:1.02rem;color:var(--cream);font-weight:500}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -458,8 +484,8 @@ textarea.finput{resize:vertical;min-height:84px}
       <span class="badge"><span class="dot"></span> For commercial GCs and design-build firms in North America</span>
       <h1>We find commercial jobs for your firm. <em>You pay only when you sign one.</em></h1>
       <p class="lede lede-dream">A schedule full of the jobs you want, without dropping your price to win them.</p>
-      <p class="lede">You pay us only if that happens. A bid list every Monday. Ten messages to your architects and past clients every Friday. Google and Meta running. Every inquiry answered in minutes. Your prequal papers kept current.</p>
-      <p class="lede lede-diff">Most agencies just run your ads. Ads are one of the five things above.</p>
+      <p class="lede">You pay us only if that happens. Two things get you there: ads that bring project inquiries and answer them in minutes, and a bid list every Monday that tells you which tenders are worth opening.</p>
+      <p class="lede lede-diff">Most agencies run the ads and stop there. Nobody works your bid list.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a>
       </div>
@@ -561,69 +587,28 @@ textarea.finput{resize:vertical;min-height:84px}
 <!-- 4. WHAT ARRIVES -->
 <section class="dark" id="build">
   <div class="wrap">
-    <span class="eyebrow">What actually arrives</span>
-    <h2>Five things land on your desk. That is the whole service.</h2>
-    <p class="lede">No dashboard to log into. No report to read. Here is what shows up, when, and what it replaces.</p>
+    <span class="eyebrow">What we actually do</span>
+    <h2>Two things. That is the whole service.</h2>
+    <p class="lede">We are not a full service agency and we do not want to be. We do the two things that put jobs in front of your estimator.</p>
 
-    <div class="arrives">
+    <div class="two">
       <article>
         <span class="ak">01</span>
-        <h3>Monday 7am, the bid list</h3>
-        <p class="awhat">Every tender in your area that fits your size, sector and bonding capacity. Each one marked <b>GO</b> or <b>NO GO</b> with a one line reason and the deadline. Pulled from BC Bid, CanadaBuys, MERX, BidCentral and the city portals, plus SAM.gov and the state sites in the US.</p>
-        <p class="awhere">Your inbox, and a card in your CRM. You open only the GO ones.</p>
-        <p class="awho">Run by us. First list lands day 9.</p>
-        <p class="areplace">Replaces a bid coordinator, about $62k a year</p>
+        <h3>Ads that bring you projects</h3>
+        <p class="awhat">Google and Meta running on your own accounts, aimed at one kind of work, landing on a page built from your own jobs and photos. Every inquiry that comes in is answered within minutes, day or night, asked what your estimator would ask, and booked into his calendar if it is real.</p>
+        <p class="awhere"><b>What lands on your desk:</b> a booked call in your estimator's calendar, with the sector, size, location, budget and start date already asked.</p>
+        <p class="awho">Built and run by us on your accounts. Live day 21.</p>
       </article>
       <article>
         <span class="ak">02</span>
-        <h3>Friday, ten messages to approve</h3>
-        <p class="awhat">Drafted notes to your architects, brokers, property managers and past clients. A finished project they specified. A lease coming up for renewal. A warranty anniversary.</p>
-        <p class="awhere">You hit approve. They send from your address, not ours.</p>
-        <p class="awho">Written by us, approved by you. First batch day 14.</p>
-        <p class="areplace">Replaces a business development manager, about $86k a year</p>
-      </article>
-      <article>
-        <span class="ak">03</span>
-        <h3>Inquiries from people already searching</h3>
-        <p class="awhat">Google and Meta running on your accounts for one sector, landing on a page built from your own projects and photos, on your domain.</p>
-        <p class="awhere">Straight into your CRM, tagged by source.</p>
-        <p class="awho">Built and managed by us on your accounts. Live day 21.</p>
-        <p class="areplace">Replaces an agency retainer, about $36k a year</p>
-      </article>
-      <article>
-        <span class="ak">04</span>
-        <h3>A text to your estimator, inside five minutes</h3>
-        <p class="awhat">Every inquiry answered day or night, asked the questions he would have asked, sector, square footage, location, budget, permit stage, timeline. If it qualifies it is already in his calendar.</p>
-        <p class="awhere">His phone. He walks in Monday with the week booked.</p>
-        <p class="awho">Live day 21. A person checks the odd ones every day.</p>
-        <p class="areplace">Replaces an after-hours answering service and about a day a week of a $89k estimator</p>
-      </article>
-      <article>
-        <span class="ak">05</span>
-        <h3>Prequalification forms, filled</h3>
-        <p class="awhat">WCB, insurance, bonding letter, safety record, references and past project sheets kept in one place and current. When a prequal comes up, it arrives filled for your signature.</p>
-        <p class="awhere">One folder you own. Alerts 30 days before anything expires.</p>
-        <p class="awho">Assembled by us from your documents. Built day 30.</p>
-        <p class="areplace">Replaces the invitation you never got because a certificate lapsed</p>
-      </article>
-      <article class="arrives-num">
-        <span class="ak">AND EVERY WEEK</span>
-        <h3>One number</h3>
-        <p class="awhat">What each job cost you to win, and where it came from. So you know which of the five is paying for itself.</p>
-        <p class="awhere">One email. Two minutes to read.</p>
+        <h3>Bid automation</h3>
+        <p class="awhat">Every tender in your area pulled from BC Bid, CanadaBuys, MERX, BidCentral and the city portals, plus SAM.gov and the state sites in the US. Each one scored against your size, your sector, your bonding capacity and your service area, then marked <b>GO</b> or <b>NO GO</b> with a one line reason.</p>
+        <p class="awhere"><b>What lands on your desk:</b> one email every Monday at 7am. You open only the GO ones.</p>
+        <p class="awho">Set up and run by us. First list lands day 9.</p>
       </article>
     </div>
-    <div class="stackline">
-      <span class="feek">WHAT THE FEE LOOKS LIKE ON A REAL JOB</span>
-      <table>
-        <tr><th>A job we find you</th><th>Gross on it</th><th>Our fee</th></tr>
-        <tr><td>$100k fit-out</td><td>$20,000</td><td>$2,500</td></tr>
-        <tr><td>$400k clinic</td><td>$80,000</td><td>$6,000</td></tr>
-        <tr><td>$800k build</td><td>$160,000</td><td>$12,000</td></tr>
-        <tr><td>$2M project</td><td>$400,000</td><td>$20,000</td></tr>
-      </table>
-      <p>Gross shown at 20 percent, the middle of the range for commercial GCs. Our fee is 5 to 12 percent of the gross on a job you would not otherwise have had. Six signed jobs in the middle band is $36,000 across a year, and you only ever pay it on jobs you won.</p>
-    </div>
+
+    <p class="twonote">That is it. We do not touch your estimating, we do not price your work, and we do not chase your architects. Those are your job and you are better at them than we are.</p>
   </div>
 </section>
 
@@ -689,8 +674,8 @@ textarea.finput{resize:vertical;min-height:84px}
         <p>Your Google Ads, your Meta, your domain, your CRM. You own the data from day one and you keep it if we part ways.</p>
       </div>
       <div>
-        <h3>Your name, not ours</h3>
-        <p>Messages to your architects and past clients send from your address. We do not put ourselves in front of your relationships.</p>
+        <h3>Your accounts, your name</h3>
+        <p>Ads run on your accounts and inquiries come to you. We never sit between you and a client.</p>
       </div>
       <div>
         <h3>We sign an NDA before the kickoff call</h3>
@@ -707,53 +692,57 @@ textarea.finput{resize:vertical;min-height:84px}
     <span class="eyebrow">After you sign</span>
     <h2>What happens, and when.</h2>
     <ol class="when">
-      <li><span class="wk">DAY 1</span><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</li>
-      <li><span class="wk">DAY 9</span><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</li>
-      <li><span class="wk">DAY 14</span><b>First batch of messages to approve.</b> Ten drafts to your architects, brokers and past clients, waiting on your yes.</li>
-      <li><span class="wk">DAY 21</span><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every inquiry gets a reply inside five minutes.</li>
-      <li><span class="wk">DAY 30</span><b>Vault built, first numbers.</b> Prequalification documents filed and current. First weekly email showing what each job cost you to win, and where it came from.</li>
-      <li><span class="wk">DAY 90</span><b>The decision point.</b> If you have not signed a job we found, we walk and you owe nothing.</li>
+      <li><span class="wk">DAY 1</span><div><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</div></li>
+      <li><span class="wk">DAY 9</span><div><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</div></li>
+      <li><span class="wk">DAY 14</span><div><b>First batch of messages to approve.</b> Ten drafts to your architects, brokers and past clients, waiting on your yes.</div></li>
+      <li><span class="wk">DAY 21</span><div><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every inquiry gets a reply inside five minutes.</div></li>
+      <li><span class="wk">DAY 30</span><div><b>Vault built, first numbers.</b> Prequalification documents filed and current. First weekly email showing what each job cost you to win, and where it came from.</div></li>
+      <li><span class="wk">DAY 90</span><div><b>The decision point.</b> If you have not signed a job we found, we walk and you owe nothing.</div></li>
     </ol>
   </div>
 </section>
 
 <!-- 7. THE DEAL -->
-<section id="book">
+<section id="book" class="dark">
   <div class="wrap">
     <span class="eyebrow">The deal</span>
-    <h2>We get paid when you get paid.</h2>
+    <h2>We build it. You run the ads. You pay us when you sign a job.</h2>
     <p class="offername">The Commercial Contractor's 90-Day Signed Job Program</p>
-    <p class="lede">You pay nothing until you sign a job we found. Nothing signed in 90 days, we walk and you owe nothing.</p>
-    <div class="guarantee">
-      <div class="gterms">
-        <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta. You set the ceiling.</dd></div>
-        <div><dt>The fee</dt><dd>One flat fee when you sign a job we found, by job size. Never a cut of your contract. Your own referrals are never ours.</dd></div>
-        <div><dt>You keep</dt><dd>Page, campaigns, CRM, credential vault, data. Your accounts from day one.</dd></div>
-        <div><dt>Hard stop</dt><dd>90 days. No signed project, no invoice.</dd></div>
+
+    <div class="deal2">
+      <div class="dealcol">
+        <span class="feek">WHAT WE BUILD AND RUN, AT NO COST TO YOU</span>
+        <ul class="dlist">
+          <li><b>Your sector page</b>, written and built from your own jobs and photos, on your domain</li>
+          <li><b>Google and Meta campaigns</b>, set up and managed on your own ad accounts</li>
+          <li><b>The answering system</b> that replies to every inquiry in minutes, day or night, and asks what your estimator would ask</li>
+          <li><b>Calendar booking</b>, so a real job lands in his diary already qualified</li>
+          <li><b>The bid feed</b>, every tender in your area pulled from the portals and scored GO or NO GO</li>
+          <li><b>Your CRM and call tracking</b>, so every inquiry, quote and job sits in one place</li>
+          <li><b>The Monday email and the weekly number</b>, what each job cost you to win and where it came from</li>
+        </ul>
+        <p class="dnote">Built in 30 days. Yours to keep from day one, on your accounts, whatever you decide at the end.</p>
       </div>
 
-      <div class="fees">
-        <span class="feek">THE FEE, IN FULL</span>
-        <table>
-          <tr><th>Signed contract value</th><th>Our fee</th></tr>
-          <tr><td>Under $150k</td><td>$2,500</td></tr>
-          <tr><td>$150k to $500k</td><td>$6,000</td></tr>
-          <tr><td>$500k to $1.5M</td><td>$12,000</td></tr>
-          <tr><td>Over $1.5M</td><td>$20,000</td></tr>
-        </table>
-        <p>USD, or CAD for Canadian firms. You pay it when you invoice your first draw, not at signature. Cheaper than a salesman on commission, and only on work you would not have had.</p>
+      <div class="dealcol">
+        <span class="feek">WHAT YOU PAY</span>
+        <div class="paybox">
+          <div class="payrow"><span class="payk">Now</span><span class="payv">Nothing</span></div>
+          <div class="payrow"><span class="payk">Every month</span><span class="payv">Your ad spend, direct to Google and Meta</span></div>
+          <div class="payrow"><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, $2,500 to $20,000 by job size</span></div>
+          <div class="payrow"><span class="payk">If nothing signs in 90 days</span><span class="payv">Nothing. We walk.</span></div>
+        </div>
+        <p class="dnote">You never write us a cheque before you have written an invoice.</p>
+
+        <span class="feek" style="margin-top:30px">AND TWO THINGS WE THROW IN</span>
+        <ul class="dlist bonus2">
+          <li><b>Your dead quote list, worked again.</b> Every estimate you sent this year that went quiet, chased by the same system. They already saw your number and did not say no.</li>
+          <li><b>The search map for your sector.</b> Every term an owner types before calling a contractor, and which competitor ranks for each one in your city. Yours whether or not you continue.</li>
+        </ul>
       </div>
-      <div class="bonusrow">
-        <div><span class="bk">INCLUDED</span><strong>Your dead quote list, revived</strong><p>Every quiet estimate from this year, worked again. Already qualified, already knows your price.</p></div>
-        <div><span class="bk">INCLUDED</span><strong>The search map for your sector</strong><p>Every term an owner types before calling a contractor, and who owns each one in your area. Yours either way.</p></div>
-      </div>
-      <div class="urgency">
-        <span class="feek">WHY THE START DATE MATTERS</span>
-        <p>Setup takes 30 days. The first jobs land in the 60 days after that. Start now and you are quoting winter work with this already running. Start in November and you are quoting it the way you do now.</p>
-        <p class="usmall">Two of us run every account, so we take three firms at a time. When one finishes, one place opens.</p>
-      </div>
-      <div class="hero-cta"><a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a></div>
     </div>
+
+    <div class="hero-cta"><a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a></div>
   </div>
 </section>
 
@@ -799,10 +788,10 @@ textarea.finput{resize:vertical;min-height:84px}
         <h3>Your score is ready.</h3>
         <p class="qlede">Tell us where to send it and we will show it now.</p>
         <div class="fgrid">
-          <div><label class="flabel" for="g-company">Company</label><input class="finput" id="g-company" type="text" required /></div>
-          <div><label class="flabel" for="g-name">Your name</label><input class="finput" id="g-name" type="text" required /></div>
-          <div><label class="flabel" for="g-email">Email</label><input class="finput" id="g-email" type="email" required /></div>
-          <div><label class="flabel" for="g-phone">Phone</label><input class="finput" id="g-phone" type="tel" required /></div>
+          <div><label class="flabel" for="g-company">Company</label><input class="finput" id="g-company" autocomplete="organization" type="text" required /></div>
+          <div><label class="flabel" for="g-name">Your name</label><input class="finput" id="g-name" autocomplete="name" type="text" required /></div>
+          <div><label class="flabel" for="g-email">Email</label><input class="finput" id="g-email" autocomplete="email" type="email" required /></div>
+          <div><label class="flabel" for="g-phone">Phone</label><input class="finput" id="g-phone" autocomplete="tel" type="tel" required /></div>
         </div>
         <label class="flabel" for="g-region">Where do you build</label>
         <input class="finput" id="g-region" type="text" placeholder="Metro Vancouver, Calgary, Seattle" required />
@@ -895,7 +884,7 @@ textarea.finput{resize:vertical;min-height:84px}
 </section>
 
 <!-- FINAL -->
-<section class="final">
+<section class="final dark">
   <img src="assets/img/build.jpg" alt="Commercial building under construction at dusk" />
   <div class="veil"></div>
   <div class="wrap">
@@ -1003,7 +992,7 @@ textarea.finput{resize:vertical;min-height:84px}
       document.getElementById('qnum').textContent = idx + 1;
       document.getElementById('qtot').textContent = Q.length;
       document.getElementById('qtitle').textContent = q.t;
-      document.getElementById('qprog').style.width = ((idx) / Q.length * 100) + '%';
+      document.getElementById('qprog').style.transform = 'scaleX(' + (idx / Q.length) + ')';
       document.getElementById('qback').classList.toggle('hide', idx === 0);
       var box = document.getElementById('qopts');
       box.innerHTML = '';
@@ -1020,7 +1009,7 @@ textarea.finput{resize:vertical;min-height:84px}
             areaMax[q.area] = (areaMax[q.area] || 0) + 3;
           }
           if (idx < Q.length - 1) { idx++; render(); }
-          else { document.getElementById('qprog').style.width = '100%'; panel('gate'); }
+          else { document.getElementById('qprog').style.transform = 'scaleX(1)'; panel('gate'); }
         });
         box.appendChild(b);
       });
@@ -1065,7 +1054,7 @@ textarea.finput{resize:vertical;min-height:84px}
         var row = document.createElement('div'); row.className = 'rrow';
         row.innerHTML = '<b>' + a + '</b><div class="rtrack"><i class="rfill' + (p < 40 ? ' bad' : p < 70 ? ' low' : '') + '"></i></div><span class="rpct">' + p + '%</span>';
         bars.appendChild(row);
-        setTimeout(function(){ row.querySelector('.rfill').style.width = p + '%'; }, 80);
+        setTimeout(function(){ row.querySelector('.rfill').style.transform = 'scaleX(' + (p/100) + ')'; }, 80);
       });
       var gap = GAPS[worst] || GAPS['Is work coming in'];
       document.getElementById('rgaptitle').textContent = gap[0];
