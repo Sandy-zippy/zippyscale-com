@@ -398,7 +398,14 @@ textarea.finput{resize:vertical;min-height:84px}
 .stackline .stotal td{color:var(--lime);font-weight:700;border-bottom:0;font-size:1.05rem}
 .stackline .stotal td:last-child{color:var(--lime)}
 .stackline p{font-size:.88rem;color:var(--muted-dark);margin-top:18px;max-width:62ch}
-.when{list-style:none;counter-reset:w;margin-top:44px;border-top:1px solid var(--line)}
+.whenwrap{position:relative;margin-top:44px}
+.whenrail{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.whenrail i{display:block;width:100%;height:100%;background:var(--lime-text);transform:scaleY(var(--p,1));transform-origin:top}
+.when{list-style:none;counter-reset:w;margin-top:0;border-top:1px solid var(--line);padding-left:26px}
+.when li{position:relative}
+.when li:before{content:"";position:absolute;left:-31px;top:30px;width:10px;height:10px;border-radius:50%;
+  background:var(--cream);border:2px solid var(--line)}
+.when li.past:before{background:var(--lime-text);border-color:var(--lime-text)}
 .when li{padding:22px 0;border-bottom:1px solid var(--line);display:grid;gap:6px 24px;font-size:1rem;color:var(--body)}
 .when li>div{max-width:68ch}
 @media(min-width:700px){.when li{grid-template-columns:100px 1fr;align-items:baseline}}
@@ -777,14 +784,17 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">After you sign</span>
     <h2>What happens, and when.</h2>
-    <ol class="when">
+    <div class="whenwrap">
+      <span class="whenrail" aria-hidden="true"><i></i></span>
+      <ol class="when">
       <li><span class="wk">DAY 1</span><div><b>Kickoff call, 45 minutes.</b> Your sector, your minimum project size, your service area, and who takes a booked call. We take your project photos. This is the only meeting.</div></li>
       <li><span class="wk">DAY 3</span><div><b>First bid list in your inbox.</b> Every tender in your area, scored GO or NO GO. The first thing you can judge us on.</div></li>
       <li><span class="wk">DAY 5</span><div><b>Your page and ads, waiting on your yes.</b> Written from your own jobs. Nothing goes live until you approve it.</div></li>
       <li><span class="wk">DAY 7</span><div><b>Live.</b> Campaigns running on your accounts, and every inquiry answered inside five minutes, day or night.</div></li>
       <li><span class="wk">DAY 14</span><div><b>Your first qualified inquiry, or your money back.</b> A commercial project in your sector and service area, at or above your minimum size, from someone who has decided to build. If it has not happened, the setup fee is refunded and you keep the build.</div></li>
       <li><span class="wk">DAY 90</span><div><b>The decision point.</b> No signed job by then and you can walk, with the last month refunded.</div></li>
-    </ol>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -1201,6 +1211,32 @@ textarea.finput{resize:vertical;min-height:84px}
   setTimeout(function(){
     document.querySelectorAll('.anim .rlyrow:not(.in),.anim .trow:not(.in)').forEach(function(k){k.classList.add('in')});
   },4000);
+})();
+
+(function(){
+  var wrap=document.querySelector('.whenwrap'); if(!wrap) return;
+  var fill=wrap.querySelector('.whenrail i'), items=[].slice.call(wrap.querySelectorAll('.when li'));
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    fill.style.setProperty('--p',1); items.forEach(function(li){li.classList.add('past')}); return;
+  }
+  fill.style.setProperty('--p',0);
+  var queued=false;
+  function frame(){
+    queued=false;
+    var r=wrap.getBoundingClientRect(), vh=innerHeight, mark=vh*0.62;
+    var p=(mark-r.top)/r.height;
+    p=p<0?0:(p>1?1:p);
+    fill.style.setProperty('--p',p);
+    var cut=r.top+r.height*p;
+    for(var i=0;i<items.length;i++){
+      var t=items[i].getBoundingClientRect().top;
+      items[i].classList.toggle('past', t<=cut+8);
+    }
+  }
+  function onScroll(){ if(!queued){queued=true; requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
 })();
 </script>
 </body>
