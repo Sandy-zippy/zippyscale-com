@@ -274,6 +274,12 @@ textarea.finput{resize:vertical;min-height:84px}
 
 
 /* case studies */
+.cstats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;
+  padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cstat b{display:block;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.3rem;
+  color:var(--head);line-height:1.1}
+.cstat i{display:block;font-style:normal;font-size:.74rem;color:var(--muted);margin-top:5px;line-height:1.35}
+.cnote{font-size:.85rem;color:var(--muted);margin:6px 0 18px;max-width:60ch}
 .cases{display:grid;gap:22px;margin-top:44px}
 @media(min-width:860px){.cases{grid-template-columns:1fr 1fr;gap:26px}}
 .case{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:16px;padding:30px}
@@ -720,15 +726,26 @@ textarea.finput{resize:vertical;min-height:84px}
         <span class="ck">CASE 01</span>
         <h3>Medico Construction</h3>
         <p class="cmeta">Healthcare design build · BC and Alberta</p>
-        <p>Two years finding them work. Ads, search, tracking, and the page that takes the inquiry, for a firm with 50 plus clinics built. They come up first in Vancouver when someone searches for a clinic builder.</p>
+        <div class="cstats">
+          <div class="cstat"><b>15+</b><i>years building clinics</i></div>
+          <div class="cstat"><b>13</b><i>clinic types, dental to veterinary</i></div>
+          <div class="cstat"><b>2</b><i>provinces, BC and Alberta</i></div>
+        </div>
+        <p>Two years finding them work. Ads, search, tracking, and the page that takes the inquiry. They come up first in Vancouver when an owner searches for a clinic builder.</p>
       </article>
       <article class="case light">
         <span class="ck">CASE 02</span>
         <h3>Riarh Group</h3>
         <p class="cmeta">Commercial, industrial and TI · Surrey BC</p>
-        <p>Website and lead funnel for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking inquiries.</p>
+        <div class="cstats">
+          <div class="cstat"><b>100k+</b><i>sq ft constructed</i></div>
+          <div class="cstat"><b>50+</b><i>units built</i></div>
+          <div class="cstat"><b>15+</b><i>years in commercial</i></div>
+        </div>
+        <p>Website and lead funnel, built and shipped. Signed off by the principal, live and taking inquiries.</p>
       </article>
     </div>
+    <p class="cnote">Every figure above is that firm’s own published record, on the site we built for them.</p>
     <div class="sectors light">
       <div class="proofsplit">
         <div class="proofimg">
