@@ -4,17 +4,17 @@
 
 ## What this is
 
-A single-page site that sells one offer: The 30 Day Site-Visit Sprint. A property developer lands here, understands in under a minute that we install a complete buyer-acquisition engine on one of their projects, sees that the risk sits with us and not with them, and books a 20 minute diagnosis call.
+A single-page site that sells one offer: a 30 day sprint that gets a commercial construction firm in front of the owner before the bid list forms. A builder lands here, understands in under a minute that we install the demand and qualification system for one of their sectors, sees that the risk sits with us and not with them, and books a 20 minute diagnosis call.
 
 The page is the pitch. There is no second page, no blog, no services grid. Every section exists to move one reader one step.
 
 ## Users
 
-Principals and marketing heads at property development firms in the Gulf (Dubai first), the United States, the United Kingdom, Australia and Canada. Mid-size developers, not enterprise REITs with in-house performance teams.
+Owners and principals of commercial general contractors and design build firms in Canada and the United States. The Riarh Group and Medico Construction profile: 5 to 100 staff, principal led, building tenant improvements, medical and dental clinics, restaurant and retail fit-outs, childcare, pharmacy, office build-outs, industrial and warehouse.
 
-They are commercially literate and marketing-fatigued. They have been sold "leads" before and got a dashboard login. They think in absorption rate, cost per unit sold, and whether the sales gallery was busy on Saturday. They read on a laptop between site meetings, often skimming, often on a phone.
+They are referral built and referral dependent. They have been sold "leads" before and got a folder of residential renovation inquiries. They think in backlog, project size, sectors they want more of, and whether the estimator's week was wasted. They read on a phone, on site, between trades.
 
-Two lanes: sell-side (moving units) and lease-side (finding tenants).
+Their buyer is the owner deciding to build: a dentist, a franchisee, a clinic group, a warehouse operator, a property manager. Our job is to reach that owner before they assemble a bid list.
 
 ## Brand
 
@@ -36,14 +36,14 @@ The single most distinctive move: a visible ledger of what we can prove and what
 
 - Agency sites that open with a full-bleed stock photo of a handshake and the word "growth".
 - SaaS landing-page template: hero metric row, three identical feature cards, purple gradient, testimonial carousel.
-- Real-estate marketing sites: gold serif on navy, drone footage, "luxury redefined".
+- Contractor marketing sites: hard hat stock photo, "quality you can trust since 1987", a services grid nobody reads.
 - Anything that implies results we have not recorded. No fake dashboards showing invented revenue.
 - Dark neon "AI startup" aesthetic. We use AI, we do not cosplay it.
 
 ## Strategic principles
 
 1. One CTA everywhere: book the 20 minute diagnosis. Never a second competing action.
-2. Explain the mechanism visually. A developer should be able to point at the page and say "so the enquiry hits the agent here, and my team gets it here".
-3. Scarcity is real, not decorative. Three pilot slots, and the page says so once, not on every scroll.
+2. Explain the mechanism visually. A builder should be able to point at the page and say "so the inquiry hits the agent here, and my estimator gets it here".
+3. Scarcity is real, not decorative. Three pilot slots, one firm and one sector each, and the page says so once.
 4. Every claim traces to the documented ledger. If it is not in the ledger, it does not appear anywhere on the page.
 5. Motion carries meaning: it shows flow, sorting and time passing. Decoration that moves for its own sake gets removed.
