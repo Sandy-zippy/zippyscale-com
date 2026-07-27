@@ -14,7 +14,7 @@ Brand-locked hex values are canonical (they exist across decks, invoices and the
 | Card dark | #33333F | oklch(33.5% 0.018 285) | Cards on charcoal |
 | Border dark | #3E3E48 | oklch(38.8% 0.015 285) | Hairlines on charcoal |
 | Lime | #D5EB4B | oklch(89.5% 0.166 111) | CTA fill, accents on dark, motion trails |
-| Lime dark | #B8CF2E | oklch(80.6% 0.169 113) | Accent text on cream |
+| Lime text | #6B7C10 | oklch(52.4% 0.121 116) | Accent text on cream (4.57:1). #B8CF2E fails at 1.72:1, never use it for text |
 | Head | #1A1A2E | oklch(22.6% 0.028 285) | Headings on light |
 | Body | #4A5568 | oklch(45.9% 0.036 264) | Body on light |
 | Body dark | #C9CBD6 | oklch(83.6% 0.011 285) | Body on charcoal |
@@ -45,7 +45,7 @@ No side-stripe borders. No gradient text. No decorative glass. No hero-metric te
 
 - Curve: ease-out-expo `cubic-bezier(0.16, 1, 0.3, 1)` for entrances, 500 to 900ms. Never bounce.
 - Never animate layout properties. Transform and opacity only, plus `stroke-dashoffset` for diagram draw-on.
-- Motion must mean something: flow along the pipeline, sorting into qualified and nurture, a counter reaching a real figure, time advancing across the 30 days.
+- Motion must mean something: flow along the pipeline, sorting into qualified and nurture, tenders resolving to GO or NO GO, time advancing across the 7 days.
 - Scroll-linked movement uses a single rAF loop reading one `getBoundingClientRect` batch, not one observer per element.
 - `prefers-reduced-motion` collapses every animation to its final state, including diagram draws and counters.
 

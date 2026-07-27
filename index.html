@@ -329,14 +329,22 @@ textarea.finput{resize:vertical;min-height:84px}
 
 
 /* sector depth */
+.proofsplit{display:grid;gap:34px;align-items:stretch}
+@media(min-width:880px){.proofsplit{grid-template-columns:.8fr 1.2fr;gap:52px}}
+.proofimg{border-radius:16px;overflow:hidden;background:var(--charcoal)}
+.proofimg img{display:block;width:100%;height:100%;min-height:300px;object-fit:cover;filter:saturate(.72) contrast(1.03)}
+.stally{margin:22px 0 20px;display:grid;gap:1px}
+.strow{display:grid;grid-template-columns:1fr 42px;gap:6px 16px;align-items:center;
+  padding:11px 0;border-bottom:1px solid var(--line)}
+@media(min-width:560px){.strow{grid-template-columns:200px 1fr 42px}}
+.sbar{height:6px;border-radius:3px;background:var(--lime);max-width:220px;transform:scaleX(calc(var(--n)/5));
+  transform-origin:left;grid-column:1/-1;width:100%}
+@media(min-width:560px){.sbar{grid-column:auto}}
+.sct{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:var(--head);text-align:right}
 .sectors{margin-top:48px;padding-top:40px;border-top:1px solid var(--border-dark)}
 .sectors h3{font-size:1.3rem;margin-bottom:8px}
-.secgrid{display:grid;gap:26px}
-@media(min-width:700px){.secgrid{grid-template-columns:1fr 1fr;gap:26px 44px}}
-@media(min-width:1050px){.secgrid{grid-template-columns:1fr 1fr 1fr}}
 .sk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--lime);display:block;margin-bottom:9px}
-.secgrid p{font-size:.92rem;color:var(--body-dark);line-height:1.6}
 .secclose{margin-top:34px;font-size:1.02rem;color:var(--cream);font-family:'Space Grotesk',sans-serif;font-weight:700;max-width:52ch}
 
 
@@ -354,7 +362,6 @@ textarea.finput{resize:vertical;min-height:84px}
 .case.light .cmeta{color:var(--muted)}
 .sectors.light{border-top-color:var(--line)}
 .sectors.light h3{color:var(--head)}
-.sectors.light .secgrid p{color:var(--body)}
 .sectors.light .sk{color:var(--lime-text)}
 .sectors.light .secclose{color:var(--head)}
 /* bonuses inside the deal */
@@ -374,12 +381,7 @@ textarea.finput{resize:vertical;min-height:84px}
 
 
 /* what arrives */
-.arrives{display:grid;gap:22px;margin-top:46px}
-@media(min-width:820px){.arrives{grid-template-columns:1fr 1fr;gap:24px}}
-.arrives article{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:14px;padding:28px;align-content:start}
-.arrives article.arrives-num{background:transparent;border-style:dashed}
 .ak{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--lime);display:block;margin-bottom:12px}
-.arrives h3{font-size:1.18rem;margin-bottom:14px;color:var(--cream)}
 .awhat{font-size:.95rem;color:var(--body-dark);margin-bottom:12px}
 .awhat b{color:var(--lime);font-weight:700}
 .awhere{font-size:.92rem;color:#A8ADBA;margin-bottom:16px}
@@ -425,10 +427,45 @@ textarea.finput{resize:vertical;min-height:84px}
 .trustcontact a{color:var(--lime)}
 
 
-.two{display:grid;gap:24px;margin-top:46px}
-@media(min-width:900px){.two{grid-template-columns:1fr 1fr;gap:28px}}
-.two article{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:16px;padding:32px;align-content:start}
-.two h3{font-size:1.4rem;margin-bottom:16px;color:var(--cream)}
+.svc{margin-top:44px;display:grid;gap:56px}
+.svcrow{display:grid;gap:30px;align-items:center}
+@media(min-width:900px){.svcrow{grid-template-columns:.92fr 1.08fr;gap:56px}
+  .svcflip{grid-template-columns:1.08fr .92fr}
+  .svcflip .svctxt{order:2}.svcflip .svcart{order:1}}
+.svctxt p{color:var(--body-dark);margin-bottom:14px;max-width:46ch}
+.svctxt h3{font-size:1.5rem;margin-bottom:14px;color:var(--cream)}
+.svccap{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted-dark)}
+.svcart{min-width:0;container-type:inline-size}
+/* artifact: the reply clock */
+.rly{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:14px;overflow:hidden}
+.rlyrow{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:baseline;padding:15px 18px;
+  border-bottom:1px solid var(--border-dark)}
+.anim .rlyrow{opacity:0;transform:translateY(8px)}
+.rlyrow:last-child{border-bottom:0}
+.anim .rlyrow.in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.rlyt{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.08em;color:#9DA2B0}
+.rlyd{font-size:.93rem;color:var(--body-dark)}
+.rlyok{color:var(--lime);font-weight:500}
+/* artifact: the Monday bid list */
+.tlist{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:14px;overflow:hidden}
+.tmeta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 18px;
+  border-bottom:1px solid var(--border-dark);font-family:'JetBrains Mono',monospace;
+  font-size:.63rem;letter-spacing:.13em;color:var(--lime)}
+.tnum{color:var(--muted-dark)}
+.trow{display:grid;grid-template-columns:62px 1fr;gap:6px 14px;padding:13px 18px;
+  border-bottom:1px solid var(--border-dark)}
+.anim .trow{opacity:0;transform:translateY(8px)}
+@container (min-width:520px){.trow{grid-template-columns:62px 1fr auto;align-items:baseline}}
+.trow:last-child{border-bottom:0}
+.anim .trow.in{opacity:1;transform:none;transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .45s cubic-bezier(.16,1,.3,1)}
+.tchip{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.6rem;letter-spacing:.1em;
+  padding:4px 0;border-radius:4px;text-align:center}
+.tgo{background:var(--lime);color:#22270A}
+.tno{background:#3E3E48;color:var(--muted-dark)}
+.td{font-size:.92rem;color:var(--body-dark)}
+.tw{font-size:.78rem;color:#9DA2B0;grid-column:2/-1}
+@container (min-width:520px){.tw{grid-column:auto;text-align:right;white-space:nowrap}}
 .twonote{margin-top:32px;font-size:.97rem;color:var(--muted-dark);max-width:70ch}
 
 
@@ -604,23 +641,49 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">What we actually do</span>
     <h2>Two things. That is the whole service.</h2>
-    <p class="lede">We are not a full service agency and we do not want to be. We do the two things that put jobs in front of your estimator.</p>
 
-    <div class="two">
-      <article>
-        <span class="ak">01</span>
-        <h3>Ads that bring you projects</h3>
-        <p class="awhat">Google and Meta running on your own accounts, aimed at one kind of work, landing on a page built from your own jobs and photos. Every inquiry that comes in is answered within minutes, day or night, asked what your estimator would ask, and booked into his calendar if it is real.</p>
-        <p class="awhere"><b>What lands on your desk:</b> a booked call in your estimator's calendar, with the sector, size, location, budget and start date already asked.</p>
-        <p class="awho">Built and run by us on your accounts. Live day 7.</p>
-      </article>
-      <article>
-        <span class="ak">02</span>
-        <h3>Bid automation</h3>
-        <p class="awhat">Every tender in your area pulled from BC Bid, CanadaBuys, MERX, BidCentral and the city portals, plus SAM.gov and the state sites in the US. Each one scored against your size, your sector, your bonding capacity and your service area, then marked <b>GO</b> or <b>NO GO</b> with a one line reason.</p>
-        <p class="awhere"><b>What lands on your desk:</b> one email every Monday at 7am. You open only the GO ones.</p>
-        <p class="awho">Set up and run by us. First list lands day 3.</p>
-      </article>
+    <div class="svc">
+
+      <div class="svcrow">
+        <div class="svctxt">
+          <span class="ak">01</span>
+          <h3>Ads that bring you projects</h3>
+          <p>Google and Meta on your own accounts, aimed at one kind of work, landing on a page built from your own jobs. Every inquiry is answered in minutes, at any hour, and asked what your estimator would ask.</p>
+          <p class="awhere"><b>What lands on your desk:</b> a booked call in your estimator's diary, already qualified.</p>
+          <p class="awho">Live day 7.</p>
+        </div>
+        <div class="svcart" aria-hidden="true">
+          <div class="rly">
+            <div class="rlyrow"><span class="rlyt">9:42 PM</span><span class="rlyd">Dental fit-out, Burnaby. 2,400 sq ft.</span></div>
+            <div class="rlyrow"><span class="rlyt">9:44 PM</span><span class="rlyd rlyok">Replied. 2 minutes.</span></div>
+            <div class="rlyrow"><span class="rlyt">9:51 PM</span><span class="rlyd">Sector, size, area, budget, permit stage captured.</span></div>
+            <div class="rlyrow"><span class="rlyt">TUE 8:00</span><span class="rlyd rlyok">Booked with your estimator.</span></div>
+          </div>
+          <p class="svccap">Every inquiry, every hour.</p>
+        </div>
+      </div>
+
+      <div class="svcrow svcflip">
+        <div class="svctxt">
+          <span class="ak">02</span>
+          <h3>Bid automation</h3>
+          <p>Every tender in your area from BC Bid, CanadaBuys, MERX, BidCentral, the city portals, SAM.gov and the state sites. Each one scored against your size, your sector, your bonding capacity and your service area.</p>
+          <p class="awhere"><b>What lands on your desk:</b> one email, Monday 7am. You open only the GO ones.</p>
+          <p class="awho">First list lands day 3.</p>
+        </div>
+        <div class="svcart" aria-hidden="true">
+          <div class="tlist" id="tlist">
+            <p class="tmeta">MONDAY 07:00 <span class="tnum">14 tenders scanned</span></p>
+            <div class="trow"><span class="tchip tgo">GO</span><span class="td">Surrey, clinic fit-out, $420k</span><span class="tw">sector and size match</span></div>
+            <div class="trow"><span class="tchip tno">NO GO</span><span class="td">Burnaby, highway resurfacing, $2.1M</span><span class="tw">outside your scope</span></div>
+            <div class="trow"><span class="tchip tgo">GO</span><span class="td">Langley, childcare TI, $310k</span><span class="tw">sector and area match</span></div>
+            <div class="trow"><span class="tchip tno">NO GO</span><span class="td">Delta, bridge repair, $8M</span><span class="tw">over your bonding capacity</span></div>
+            <div class="trow"><span class="tchip tno">NO GO</span><span class="td">Richmond, residential tower, $40M</span><span class="tw">not commercial TI</span></div>
+          </div>
+          <p class="svccap">You open two of fourteen.</p>
+        </div>
+      </div>
+
     </div>
 
     <p class="twonote">That is it. We do not touch your estimating, we do not price your work, and we do not chase your architects. Those are your job and you are better at them than we are.</p>
@@ -653,16 +716,24 @@ textarea.finput{resize:vertical;min-height:84px}
       </article>
     </div>
     <div class="sectors light">
-      <h3>The work we have had to sell.</h3>
-      <div class="secgrid">
-        <div><span class="sk">Healthcare and veterinary</span><p>Woodland Veterinary Clinic · Coquitlam Animal Hospital · Smile Plus Dentistry · Happy Prairie Pharmacy · Heal Wellness</p></div>
-        <div><span class="sk">Restaurant</span><p>Mucho Burrito, Abbotsford · Mucho Burrito, Burnaby</p></div>
-        <div><span class="sk">Childcare</span><p>Sunshine Rain Daycare, Surrey</p></div>
-        <div><span class="sk">Industrial</span><p>Fresh Haul Logistics, Surrey and Langley</p></div>
-        <div><span class="sk">Office and professional</span><p>Broadway Towers · Law Firm, Vancouver · Mortgage Offices · Ignis Gale, Calgary · Co-Working Space</p></div>
-        <div><span class="sk">Head offices</span><p>Medico Head Office · Riarh Group HQ</p></div>
+      <div class="proofsplit">
+        <div class="proofimg">
+          <img src="assets/img/plans.jpg" width="1800" height="1200" loading="lazy" decoding="async"
+               alt="Commercial construction drawings on a table.">
+        </div>
+        <div>
+          <h3>The work we have had to sell.</h3>
+          <div class="stally">
+            <div class="strow"><span class="sk">Healthcare and veterinary</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
+            <div class="strow"><span class="sk">Office and professional</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
+            <div class="strow"><span class="sk">Restaurant</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
+            <div class="strow"><span class="sk">Head offices</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
+            <div class="strow"><span class="sk">Industrial</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
+            <div class="strow"><span class="sk">Childcare</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
+          </div>
+          <p class="secclose">Sixteen named builds, five sectors, two provinces. We do not need you to explain what a tenant improvement is.</p>
+        </div>
       </div>
-      <p class="secclose">Sixteen named builds across five sectors and two provinces. We do not need you to explain what a tenant improvement is.</p>
     </div>
   </div>
 </section>
@@ -1108,6 +1179,28 @@ textarea.finput{resize:vertical;min-height:84px}
     });
   }
 
+})();
+
+(function(){
+  var boxes=document.querySelectorAll('.rly,.tlist');
+  if(!boxes.length) return;
+  // rows render visible by default. Only opt into the reveal when we can finish it.
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  boxes.forEach(function(b){b.classList.add('anim')});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.querySelectorAll('.rlyrow,.trow').forEach(function(k,i){
+        setTimeout(function(){k.classList.add('in')}, i*140);
+      });
+      io.unobserve(e.target);
+    });
+  },{threshold:0,rootMargin:'0px 0px -12% 0px'});
+  boxes.forEach(function(b){io.observe(b)});
+  // failsafe: nothing stays hidden past 4s
+  setTimeout(function(){
+    document.querySelectorAll('.anim .rlyrow:not(.in),.anim .trow:not(.in)').forEach(function(k){k.classList.add('in')});
+  },4000);
 })();
 </script>
 </body>
