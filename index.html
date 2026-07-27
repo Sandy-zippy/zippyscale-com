@@ -411,6 +411,10 @@ textarea.finput{resize:vertical;min-height:84px}
 .urgency p{font-size:.97rem;color:var(--body);max-width:64ch}
 .urgency .usmall{font-size:.88rem;color:var(--muted);margin-top:12px}
 
+.src{grid-column:1/-1;font-size:.8rem;color:var(--muted);margin-top:8px}
+.stackline th{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-dark);padding:0 0 10px;border-bottom:1px solid var(--border-dark)}
+.stackline th:not(:first-child),.stackline td:not(:first-child){text-align:right}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js-rv .rv{opacity:1;transform:none;transition:none}
@@ -533,6 +537,7 @@ textarea.finput{resize:vertical;min-height:84px}
       <div><span class="bn">20-30</span><span class="bl">estimator hours per $500k bid, win or lose</span></div>
       <div><span class="bn">under 10%</span><span class="bl">of contractors track which bids they win</span></div>
       <div><span class="bn">10%</span><span class="bl">of this work arrives through advertising. The rest arrives through people</span></div>
+      <p class="src">Sources: constructionbids.ai bid win-rate study, downtobid bid-hit ratio survey of 2,000 plus contractors, RIBAJ on where commissions originate.</p>
     </div>
   </div>
 </section>
@@ -580,7 +585,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <h3>A text to your estimator, inside five minutes</h3>
         <p class="awhat">Every enquiry answered day or night, asked the questions he would have asked, sector, square footage, location, budget, permit stage, timeline. If it qualifies it is already in his calendar.</p>
         <p class="awhere">His phone. He walks in Monday with the week booked.</p>
-        <p class="awho">Runs itself, a human reviews edge cases daily. Live day 21.</p>
+        <p class="awho">Live day 21. A person checks the odd ones every day.</p>
         <p class="areplace">Replaces an after-hours answering service and about a day a week of a $89k estimator</p>
       </article>
       <article>
@@ -599,16 +604,15 @@ textarea.finput{resize:vertical;min-height:84px}
       </article>
     </div>
     <div class="stackline">
-      <span class="feek">WHAT THIS REPLACES, IF YOU HIRED IT</span>
+      <span class="feek">WHAT THE FEE LOOKS LIKE ON A REAL JOB</span>
       <table>
-        <tr><td>A bid coordinator watching the portals</td><td>$62k a year</td></tr>
-        <tr><td>A business development manager working your architects</td><td>$86k a year</td></tr>
-        <tr><td>An agency running search and paid</td><td>$36k a year</td></tr>
-        <tr><td>After-hours answering, plus a day a week of your estimator</td><td>$18k a year</td></tr>
-        <tr><td>Prequalification admin and subscriptions</td><td>$4k a year</td></tr>
-        <tr class="stotal"><td>Total</td><td>$206k a year</td></tr>
+        <tr><th>A job we find you</th><th>Gross on it</th><th>Our fee</th></tr>
+        <tr><td>$100k fit-out</td><td>$20,000</td><td>$2,500</td></tr>
+        <tr><td>$400k clinic</td><td>$80,000</td><td>$6,000</td></tr>
+        <tr><td>$800k build</td><td>$160,000</td><td>$12,000</td></tr>
+        <tr><td>$2M project</td><td>$400,000</td><td>$20,000</td></tr>
       </table>
-      <p>You pay $2,500 to $20,000 once, when you sign a job we found. Nothing if we find you nothing. Those salaries are US market averages for the roles, not our invoice.</p>
+      <p>Gross shown at 20 percent, the middle of the range for commercial GCs. Our fee is 5 to 12 percent of the gross on a job you would not otherwise have had. Six signed jobs in the middle band is $36,000 across a year, and you only ever pay it on jobs you won.</p>
     </div>
   </div>
 </section>
@@ -681,7 +685,7 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">The deal</span>
     <h2>We get paid when you get paid.</h2>
-    <p class="offername">The 90-Day Signed Job Program</p>
+    <p class="offername">The Commercial Contractor's 90-Day Signed Job Program</p>
     <p class="lede">You pay nothing until you sign a job we found. Nothing signed in 90 days, we walk and you owe nothing.</p>
     <div class="guarantee">
       <div class="gterms">
