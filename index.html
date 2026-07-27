@@ -355,6 +355,53 @@ textarea.finput{resize:vertical;min-height:84px}
 .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.9rem;color:var(--lime);display:block;letter-spacing:-.02em}
 .sl{font-size:.88rem;color:var(--muted-dark);display:block;margin-top:8px;max-width:26ch}
 
+
+/* scorecard */
+.quizbox{margin-top:44px;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:30px;min-height:430px}
+@media(min-width:820px){.quizbox{padding:46px}}
+.qpanel{display:none}
+.qpanel.on{display:block}
+.qgrid{display:grid;gap:34px}
+@media(min-width:820px){.qgrid{grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}}
+.quizbox h3{font-size:clamp(1.35rem,2.4vw,1.85rem);margin-bottom:14px}
+.qlede{font-size:1rem;color:var(--body);margin-bottom:26px;max-width:46ch}
+.qareas{list-style:none;display:grid;gap:2px}
+.qareas li{display:flex;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--head);font-size:1rem}
+.qareas li:last-child{border-bottom:0}
+.qareas span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--lime-dark)}
+.qbar{height:4px;background:#E9E7DE;border-radius:2px;overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--lime-dark);border-radius:2px;transition:width .45s var(--exp)}
+.qcount{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--muted);margin:20px 0 12px}
+.qtitle{margin-bottom:26px;max-width:24ch}
+.qopts{display:grid;gap:10px}
+.qopt{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;color:var(--head);background:var(--cream);
+  border:1px solid var(--line);border-radius:11px;padding:17px 20px;cursor:pointer;text-align:left;
+  transition:border-color .2s var(--exp),background-color .2s var(--exp)}
+.qopt:hover{border-color:var(--lime-dark);background:#FBFBF2}
+.qback{margin-top:26px;background:none;border:0;color:var(--muted);font-size:.9rem;cursor:pointer;
+  font-family:'Inter',sans-serif;padding:8px 0;transition:color .2s var(--exp)}
+.qback:hover{color:var(--head)}
+.qback.hide{visibility:hidden}
+/* result */
+.rhead{display:grid;gap:22px;align-items:center;padding-bottom:30px;border-bottom:1px solid var(--line)}
+@media(min-width:640px){.rhead{grid-template-columns:auto 1fr;gap:34px}}
+.rscore{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:4.2rem;color:var(--head);line-height:1;letter-spacing:-.04em}
+.rscore small{font-size:1.15rem;color:var(--muted);letter-spacing:0;margin-left:4px}
+.rgrade{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.74rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lime-dark);display:block;margin-bottom:10px}
+.rbars{display:grid;gap:14px;margin:30px 0}
+.rrow{display:grid;grid-template-columns:118px 1fr auto;gap:14px;align-items:center;font-size:.9rem}
+.rrow b{font-weight:500;color:var(--body)}
+.rtrack{height:9px;background:#EDEBE2;border-radius:5px;overflow:hidden}
+.rfill{display:block;height:100%;background:var(--lime-dark);border-radius:5px;width:0;transition:width .8s var(--exp)}
+.rfill.low{background:#D9A441}
+.rfill.bad{background:#C4705C}
+.rpct{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--muted)}
+.rgap{background:var(--charcoal);border-radius:14px;padding:28px;margin-bottom:30px}
+.rgap h3{color:var(--cream);font-size:1.2rem;margin:6px 0 10px}
+.rgap p{color:var(--body-dark);font-size:.96rem}
+
 /* reveal */
 .js-rv .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--exp),transform .8s var(--exp)}
 .js-rv .rv.in{opacity:1;transform:none}
@@ -377,7 +424,7 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="nav-right">
       <nav class="nav-links" aria-label="Primary">
         <a href="#build">What gets built</a>
-        <a href="#book">The deal</a>
+        <a href="#apply">Scorecard</a>
         <a href="#proof">Proof</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -689,114 +736,81 @@ textarea.finput{resize:vertical;min-height:84px}
         <div><dt>Why we can</dt><dd>The system is already built and proven with commercial builders. We are not learning on your project, so we are comfortable being paid last.</dd></div>
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" data-book href="#apply">Apply for a slot</a>
+        <a class="btn btn-primary" data-book href="#apply">Take the 90 second scorecard</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- APPLY -->
+<!-- SCORECARD -->
 <section id="apply">
   <div class="wrap">
-    <span class="eyebrow">Apply</span>
-    <h2>Apply for one of the three build slots.</h2>
-    <p class="lede">Five questions, about a minute.</p>
+    <span class="eyebrow">The scorecard</span>
+    <h2>Where is your pipeline leaking?</h2>
+    <p class="lede">Nine questions, about ninety seconds. You get a score out of 100, the one gap costing you the most work, and what we would fix first.</p>
 
-    <div class="applybox rv">
-      <form id="applyform" novalidate>
-        <div class="steps-bar" aria-hidden="true">
-          <span class="sdot on"></span><span class="sdot"></span><span class="sdot"></span>
+    <div class="quizbox rv">
+      <!-- INTRO -->
+      <div class="qpanel on" id="q-intro">
+        <div class="qgrid">
+          <div>
+            <h3>The Commercial Contractor Growth Scorecard</h3>
+            <p class="qlede">We grade six areas: visibility, demand, response speed, qualification, follow up and measurement. Same six that decide whether an owner calls you first or third.</p>
+            <button type="button" class="btn btn-primary" id="qstart">Start the scorecard</button>
+            <p class="fhint">No email needed to answer the questions.</p>
+          </div>
+          <ul class="qareas">
+            <li><span>01</span>Visibility</li>
+            <li><span>02</span>Demand</li>
+            <li><span>03</span>Response speed</li>
+            <li><span>04</span>Qualification</li>
+            <li><span>05</span>Follow up</li>
+            <li><span>06</span>Measurement</li>
+          </ul>
         </div>
+      </div>
 
-        <!-- STEP 1 -->
-        <fieldset class="fstep on" data-step="1">
-          <legend class="flegend">01 / The work you want more of</legend>
+      <!-- QUESTIONS -->
+      <div class="qpanel" id="q-run">
+        <div class="qbar"><i id="qprog"></i></div>
+        <p class="qcount"><span id="qnum">1</span> of 9</p>
+        <h3 class="qtitle" id="qtitle"></h3>
+        <div class="qopts" id="qopts"></div>
+        <button type="button" class="qback" id="qback">Back</button>
+      </div>
 
-          <label class="flabel" for="q-sector">Which sector do you want more of</label>
-          <div class="chips" data-name="entry.2033019157" id="q-sector">
-            <button type="button" class="chip">Medical, dental or veterinary clinics</button>
-            <button type="button" class="chip">Restaurant and retail fit-outs</button>
-            <button type="button" class="chip">Childcare centres</button>
-            <button type="button" class="chip">Industrial and warehouse</button>
-            <button type="button" class="chip">Office build-outs</button>
-            <button type="button" class="chip">Pharmacy</button>
-            <button type="button" class="chip">Something else</button>
-          </div>
+      <!-- GATE -->
+      <div class="qpanel" id="q-gate">
+        <h3>Your score is ready.</h3>
+        <p class="qlede">Tell us where to send it and we will show it now.</p>
+        <div class="fgrid">
+          <div><label class="flabel" for="g-company">Company</label><input class="finput" id="g-company" type="text" required /></div>
+          <div><label class="flabel" for="g-name">Your name</label><input class="finput" id="g-name" type="text" required /></div>
+          <div><label class="flabel" for="g-email">Email</label><input class="finput" id="g-email" type="email" required /></div>
+          <div><label class="flabel" for="g-phone">Phone</label><input class="finput" id="g-phone" type="tel" required /></div>
+        </div>
+        <label class="flabel" for="g-region">Where do you build</label>
+        <input class="finput" id="g-region" type="text" placeholder="Metro Vancouver, Calgary, Seattle" required />
+        <div class="fnav"><button type="button" class="btn btn-primary" id="qsubmit">Show my score</button></div>
+        <p class="ferror" id="qerror" role="alert"></p>
+      </div>
 
-          <label class="flabel" for="q-region">Where do you build</label>
-          <input class="finput" id="q-region" name="entry.669657284" type="text" placeholder="Metro Vancouver, Calgary, Seattle" required />
-
-          <label class="flabel">Typical project size</label>
-          <div class="chips" data-name="entry.18820584">
-            <button type="button" class="chip">Under $100k</button>
-            <button type="button" class="chip">$100k to $400k</button>
-            <button type="button" class="chip">$400k to $1M</button>
-            <button type="button" class="chip">Over $1M</button>
-          </div>
-
-          <div class="fnav"><button type="button" class="btn btn-primary fnext">Continue</button></div>
-        </fieldset>
-
-        <!-- STEP 2 -->
-        <fieldset class="fstep" data-step="2">
-          <legend class="flegend">02 / Where you are now</legend>
-
-          <label class="flabel">How do projects reach you today</label>
-          <div class="chips" data-name="entry.1127033124">
-            <button type="button" class="chip">Almost all referrals and repeat clients</button>
-            <button type="button" class="chip">Referrals plus some inbound from search</button>
-            <button type="button" class="chip">We already run ads</button>
-            <button type="button" class="chip">Mostly brokers and architects</button>
-          </div>
-
-          <label class="flabel">Can you fund your own ad spend for 90 days</label>
-          <div class="chips" data-name="entry.1506521833">
-            <button type="button" class="chip">Yes</button>
-            <button type="button" class="chip">Not sure, depends on the number</button>
-            <button type="button" class="chip">No</button>
-          </div>
-          <p class="fhint">You set the ceiling and it is paid direct to Google and Meta. We never touch it.</p>
-
-          <div class="fnav"><button type="button" class="btn btn-ghost fback">Back</button><button type="button" class="btn btn-primary fnext">Continue</button></div>
-        </fieldset>
-
-        <!-- STEP 3 -->
-        <fieldset class="fstep" data-step="3">
-          <legend class="flegend">03 / Where to reach you</legend>
-
-          <div class="fgrid">
-            <div>
-              <label class="flabel" for="q-company">Company</label>
-              <input class="finput" id="q-company" name="entry.1847603292" type="text" required />
-            </div>
-            <div>
-              <label class="flabel" for="q-name">Your name</label>
-              <input class="finput" id="q-name" name="entry.342936001" type="text" required />
-            </div>
-            <div>
-              <label class="flabel" for="q-email">Email</label>
-              <input class="finput" id="q-email" name="entry.565810067" type="email" required />
-            </div>
-            <div>
-              <label class="flabel" for="q-phone">Phone</label>
-              <input class="finput" id="q-phone" name="entry.548638896" type="tel" required />
-            </div>
-          </div>
-
-          <label class="flabel" for="q-notes">Anything we should know before the call</label>
-          <textarea class="finput" id="q-notes" name="entry.2084048378" rows="3"></textarea>
-
-          <div class="fnav"><button type="button" class="btn btn-ghost fback">Back</button><button type="submit" class="btn btn-primary" id="fsubmit">Apply for a slot</button></div>
-          <p class="fhint">We reply within one business day. If you are not a fit we will tell you, and why.</p>
-        </fieldset>
-
-        <p class="ferror" id="ferror" role="alert"></p>
-      </form>
-
-      <div class="fdone" id="fdone" role="status">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B8CF2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
-        <h3>That is in.</h3>
-        <p>We read every one of these ourselves. You will hear back within one business day, from sandy@zippyscale.com.</p>
+      <!-- RESULT -->
+      <div class="qpanel" id="q-result">
+        <div class="rhead">
+          <div class="rscore"><span id="rnum">0</span><small>/100</small></div>
+          <div><span class="rgrade" id="rgrade"></span><p class="qlede" id="rline"></p></div>
+        </div>
+        <div class="rbars" id="rbars"></div>
+        <div class="rgap">
+          <span class="ck">Your biggest gap</span>
+          <h3 id="rgaptitle"></h3>
+          <p id="rgapbody"></p>
+        </div>
+        <div class="fnav">
+          <a class="btn btn-primary" href="#book">See how we would fix it</a>
+          <a class="btn btn-ghost" href="mailto:sandy@zippyscale.com">Talk it through</a>
+        </div>
       </div>
     </div>
   </div>
@@ -880,7 +894,7 @@ textarea.finput{resize:vertical;min-height:84px}
     <h2>Twenty minutes. One sector.</h2>
     <p>Tell us the work you want more of. We will tell you where it is going instead, and whether we want the slot.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" data-book href="#apply">Apply for a slot</a>
+      <a class="btn btn-primary" data-book href="#apply">Take the 90 second scorecard</a>
       <a class="btn btn-ghost" href="mailto:sandy@zippyscale.com">Email instead</a>
     </div>
   </div>
@@ -939,87 +953,138 @@ textarea.finput{resize:vertical;min-height:84px}
   setTimeout(function(){ if(!document.querySelector('.rv.in')) document.documentElement.classList.remove('js-rv'); }, 2000);
 
 
-  // ---- application form ----
-  var form = document.getElementById('applyform');
-  if (form) {
-    var FORM_POST = 'https://docs.google.com/forms/d/e/1FAIpQLScxiO0Zp9-hWvCU-Hz8GrojoCKAMf5huflxDsNNH_XotTfmzA/formResponse';
-    var steps = [].slice.call(form.querySelectorAll('.fstep'));
-    var dots = [].slice.call(form.querySelectorAll('.sdot'));
-    var err = document.getElementById('ferror');
-    var current = 0;
 
-    // chip groups behave like radios
-    form.querySelectorAll('.chips').forEach(function(group){
-      group.addEventListener('click', function(e){
-        var chip = e.target.closest('.chip');
-        if (!chip) return;
-        group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); });
-        chip.classList.add('sel');
-        err.classList.remove('on');
+  // ---- scorecard ----
+  var quiz = document.getElementById('q-run');
+  if (quiz) {
+    var POST = 'https://docs.google.com/forms/d/e/1FAIpQLScxiO0Zp9-hWvCU-Hz8GrojoCKAMf5huflxDsNNH_XotTfmzA/formResponse';
+    var Q = [
+      {area:'Fit', field:'entry.2033019157', t:'Which sector do you want more of?', score:false,
+       o:['Medical, dental or veterinary clinics','Restaurant and retail fit-outs','Childcare centres','Industrial and warehouse','Office build-outs','Pharmacy','Something else']},
+      {area:'Visibility', field:'entry.94847149', t:'When an owner searches for a contractor who builds your kind of project, where do you appear?',
+       o:[['Top of page one',3],['Somewhere on page one',2],['Not sure',1],['Nowhere',0]]},
+      {area:'Demand', field:'entry.1127033124', t:'Where does your work come from today?',
+       o:[['We already run ads',3],['Referrals plus some inbound from search',2],['Mostly brokers and architects',1],['Almost all referrals and repeat clients',0]]},
+      {area:'Response speed', field:'entry.400411152', t:'How fast does a new enquiry get its first reply?',
+       o:[['Within minutes',3],['Same day',2],['Next day',1],['Whenever someone gets to it',0]]},
+      {area:'Qualification', field:'entry.1480494227', t:'Before your estimator gets involved, who checks sector, size, budget and timeline?',
+       o:[['A set process every time',3],['Whoever picks up the phone',1],['Nobody, everything goes to the estimator',0]]},
+      {area:'Qualification', field:'entry.40289008', t:'How often do you bid work you could not staff if you won it?',
+       o:[['Rarely',3],['Sometimes',1],['Often',0]]},
+      {area:'Follow up', field:'entry.1369176754', t:'A quote goes quiet for three weeks. What happens?',
+       o:[['Automated follow up runs for weeks',3],['Someone remembers to chase',1],['Nothing happens',0]]},
+      {area:'Measurement', field:'entry.1064870871', t:'Can you say what a signed project costs you to win, by source?',
+       o:[['Yes, cost per signed project by source',3],['Roughly',1],['No idea',0]]},
+      {area:'Fit', field:'entry.18820584', t:'What is your typical project size?', score:false,
+       o:['Under $100k','$100k to $400k','$400k to $1M','Over $1M']},
+      {area:'Fit', field:'entry.1506521833', t:'If the plan needed ad budget for 90 days, could you fund it?', score:false,
+       o:['Yes','Not sure, depends on the number','No']}
+    ];
+    var GAPS = {
+      'Visibility':['Owners cannot find you','The people who will sign your next contract are searching right now and landing on a competitor. Search and paid put you in that moment, on terms owners actually type.'],
+      'Demand':['You are one relationship away from a quiet quarter','Referrals are the best lead you will get, but they cannot be turned up when the schedule thins. A second channel you control is what makes next year predictable.'],
+      'Response speed':['You are answering after the decision is made','Owners call two or three firms in an afternoon. The first credible reply usually walks the space. Minutes matter more than polish here.'],
+      'Qualification':['Your estimator is your most expensive filter','Every unqualified enquiry that reaches estimating costs you a day you could have spent on work you can actually staff. Qualify on sector, size, budget and permit stage first.'],
+      'Follow up':['Quotes are dying of silence','Most projects that go quiet are not lost, they are delayed. Nothing chases them, so they get awarded to whoever called back.'],
+      'Measurement':['You cannot scale what you cannot see','Without cost per signed project by source, every marketing decision is a guess and the good channel gets cut with the bad one.']
+    };
+    var idx = 0, answers = {}, areaScore = {}, areaMax = {}, history = [];
+
+    var panels = {intro:document.getElementById('q-intro'), run:quiz,
+                  gate:document.getElementById('q-gate'), result:document.getElementById('q-result')};
+    function panel(k){ Object.keys(panels).forEach(function(n){ panels[n].classList.toggle('on', n===k); }); }
+
+    function render(){
+      var q = Q[idx];
+      document.getElementById('qnum').textContent = idx + 1;
+      document.getElementById('qtitle').textContent = q.t;
+      document.getElementById('qprog').style.width = ((idx) / Q.length * 100) + '%';
+      document.getElementById('qback').classList.toggle('hide', idx === 0);
+      var box = document.getElementById('qopts');
+      box.innerHTML = '';
+      q.o.forEach(function(opt){
+        var label = Array.isArray(opt) ? opt[0] : opt;
+        var pts = Array.isArray(opt) ? opt[1] : null;
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'qopt'; b.textContent = label;
+        b.addEventListener('click', function(){
+          answers[q.field] = label;
+          history[idx] = (q.score !== false && pts !== null) ? {area: q.area, pts: pts} : null;
+          if (history[idx]) {
+            areaScore[q.area] = (areaScore[q.area] || 0) + pts;
+            areaMax[q.area] = (areaMax[q.area] || 0) + 3;
+          }
+          if (idx < Q.length - 1) { idx++; render(); }
+          else { document.getElementById('qprog').style.width = '100%'; panel('gate'); }
+        });
+        box.appendChild(b);
       });
-    });
-
-    function show(i){
-      steps.forEach(function(s, n){ s.classList.toggle('on', n === i); });
-      dots.forEach(function(d, n){ d.classList.toggle('on', n <= i); });
-      current = i;
-      var top = document.getElementById('apply').getBoundingClientRect().top + window.scrollY - 90;
-      if (window.scrollY > top) window.scrollTo({top: top, behavior: 'smooth'});
     }
 
-    function validate(i){
-      var step = steps[i];
-      var missing = [].slice.call(step.querySelectorAll('.chips')).some(function(g){ return !g.querySelector('.sel'); });
-      var inputs = [].slice.call(step.querySelectorAll('[required]'));
-      var badInput = inputs.some(function(el){ return !el.checkValidity(); });
-      if (missing || badInput) {
-        err.textContent = missing ? 'Pick an option to continue.' : 'Check the highlighted fields.';
-        err.classList.add('on');
-        if (badInput) inputs.filter(function(el){ return !el.checkValidity(); })[0].focus();
-        return false;
-      }
+    document.getElementById('qstart').addEventListener('click', function(){ panel('run'); render(); });
+    document.getElementById('qback').addEventListener('click', function(){
+      if (idx === 0) return;
+      idx--;
+      var h = history[idx];           // undo the answer we are stepping back onto
+      if (h) { areaScore[h.area] -= h.pts; areaMax[h.area] -= 3; }
+      history[idx] = null;
+      delete answers[Q[idx].field];
+      render();
+    });
+
+    document.getElementById('qsubmit').addEventListener('click', function(){
+      var need = ['g-company','g-name','g-email','g-phone','g-region'];
+      var bad = need.filter(function(id){ var el = document.getElementById(id); return !el.value || !el.checkValidity(); });
+      var err = document.getElementById('qerror');
+      if (bad.length) { err.textContent = 'Fill these in and we will show the score.'; err.classList.add('on');
+                        document.getElementById(bad[0]).focus(); return; }
       err.classList.remove('on');
-      return true;
-    }
 
-    form.querySelectorAll('.fnext').forEach(function(b){
-      b.addEventListener('click', function(){ if (validate(current)) show(current + 1); });
-    });
-    form.querySelectorAll('.fback').forEach(function(b){
-      b.addEventListener('click', function(){ err.classList.remove('on'); show(current - 1); });
-    });
+      var got = 0, max = 0;
+      Object.keys(areaMax).forEach(function(a){ got += areaScore[a] || 0; max += areaMax[a]; });
+      var pct = max ? Math.round(got / max * 100) : 0;
+      var grade = pct >= 75 ? 'Dialled in' : pct >= 45 ? 'Leaking' : 'Invisible';
+      var line = pct >= 75 ? 'The machine is mostly there. The gap below is what is still costing you contracts.'
+               : pct >= 45 ? 'The work is coming in, but it is leaking on the way to your estimator.'
+               : 'Almost everything is running on referrals and memory. That is fixable, and quickly.';
 
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      if (!validate(current)) return;
+      document.getElementById('rnum').textContent = pct;
+      document.getElementById('rgrade').textContent = grade;
+      document.getElementById('rline').textContent = line;
 
-      var data = new FormData();
-      form.querySelectorAll('.chips').forEach(function(g){
-        data.append(g.getAttribute('data-name'), g.querySelector('.sel').textContent.trim());
+      var bars = document.getElementById('rbars'); bars.innerHTML = '';
+      var worst = null, worstPct = 200;
+      Object.keys(areaMax).forEach(function(a){
+        var p = Math.round((areaScore[a] || 0) / areaMax[a] * 100);
+        if (p < worstPct) { worstPct = p; worst = a; }
+        var row = document.createElement('div'); row.className = 'rrow';
+        row.innerHTML = '<b>' + a + '</b><div class="rtrack"><i class="rfill' + (p < 40 ? ' bad' : p < 70 ? ' low' : '') + '"></i></div><span class="rpct">' + p + '%</span>';
+        bars.appendChild(row);
+        setTimeout(function(){ row.querySelector('.rfill').style.width = p + '%'; }, 80);
       });
-      form.querySelectorAll('[name]').forEach(function(el){ data.append(el.name, el.value); });
+      var gap = GAPS[worst] || GAPS['Demand'];
+      document.getElementById('rgaptitle').textContent = gap[0];
+      document.getElementById('rgapbody').textContent = gap[1];
 
-      // real POST through a hidden iframe, so the browser reports when it completed
-      var sink = document.getElementById('zs-sink');
+      answers['entry.1847603292'] = document.getElementById('g-company').value;
+      answers['entry.342936001'] = document.getElementById('g-name').value;
+      answers['entry.565810067'] = document.getElementById('g-email').value;
+      answers['entry.548638896'] = document.getElementById('g-phone').value;
+      answers['entry.669657284'] = document.getElementById('g-region').value;
+      answers['entry.667769839'] = String(pct);
+      answers['entry.94753441'] = grade + ' (weakest: ' + worst + ')';
+
       var post = document.createElement('form');
-      post.action = FORM_POST; post.method = 'POST'; post.target = 'zs-sink'; post.style.display = 'none';
-      data.forEach(function(v, k){
-        var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; post.appendChild(i);
+      post.action = POST; post.method = 'POST'; post.target = 'zs-sink'; post.style.display = 'none';
+      Object.keys(answers).forEach(function(k){
+        var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = answers[k]; post.appendChild(i);
       });
-      document.body.appendChild(post);
+      document.body.appendChild(post); post.submit();
 
-      var done = false;
-      function finish(){
-        if (done) return; done = true;
-        form.style.display = 'none';
-        document.getElementById('fdone').classList.add('on');
-        if (window.fbq) fbq('track', 'Lead', {content_name: 'build_slot_application'});
-        if (window.gtag) gtag('event', 'generate_lead', {method: 'application_form'});
-      }
-      sink.addEventListener('load', finish, {once: true});
-      setTimeout(finish, 2500); // Google's response is opaque, do not strand the user
-      document.getElementById('fsubmit').textContent = 'Sending...';
-      post.submit();
+      if (window.fbq) fbq('track', 'Lead', {content_name: 'scorecard', value: pct});
+      if (window.gtag) gtag('event', 'generate_lead', {method: 'scorecard', score: pct});
+      panel('result');
+      document.getElementById('apply').scrollIntoView({behavior: 'smooth', block: 'start'});
     });
   }
 
