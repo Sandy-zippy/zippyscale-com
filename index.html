@@ -184,6 +184,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .phase li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:1px;background:#C7CBD3}
 .phase.on li:before{background:var(--lime-dark)}
 
+.pline{font-size:.95rem;margin-top:12px;color:var(--body)}
+
 /* stack */
 .stack{display:grid;gap:0;margin-top:48px;border-top:1px solid var(--border-dark)}
 .stack li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;
@@ -276,6 +278,58 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 .fit-col.out{background:transparent;border-style:dashed}
 .fit-col.out li:before{border:0;width:12px;height:2px;background:#B6BBC4;top:12px;transform:none}
 
+
+/* apply form */
+.applybox{margin-top:44px;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:30px}
+@media(min-width:820px){.applybox{padding:44px}}
+.steps-bar{display:flex;gap:8px;margin-bottom:30px}
+.sdot{height:4px;flex:1;border-radius:2px;background:#E5E3DA;transition:background .5s var(--exp)}
+.sdot.on{background:var(--lime-dark)}
+.fstep{border:0;display:none}
+.fstep.on{display:block}
+.flegend{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--lime-dark);margin-bottom:24px;padding:0}
+.flabel{display:block;font-weight:700;font-size:.95rem;color:var(--head);margin:26px 0 12px}
+.fstep .flabel:first-of-type{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;color:var(--body);background:var(--cream);
+  border:1px solid var(--line);border-radius:9px;padding:11px 16px;cursor:pointer;text-align:left;
+  transition:border-color .2s var(--exp),background-color .2s var(--exp),color .2s var(--exp)}
+.chip:hover{border-color:#C3C7D0}
+.chip.sel{background:var(--lime);border-color:var(--lime);color:#22222B;font-weight:700}
+.finput{width:100%;font-family:'Inter',sans-serif;font-size:1rem;color:var(--head);background:var(--cream);
+  border:1px solid var(--line);border-radius:9px;padding:14px 15px;transition:border-color .2s var(--exp)}
+.finput:focus{outline:none;border-color:var(--lime-dark);box-shadow:0 0 0 3px rgba(184,207,46,.18)}
+.finput::placeholder{color:#9BA1AC}
+textarea.finput{resize:vertical;min-height:84px}
+.fgrid{display:grid;gap:18px}
+@media(min-width:640px){.fgrid{grid-template-columns:1fr 1fr;gap:18px 20px}}
+.fgrid .flabel{margin-top:0}
+.fnav{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.fhint{font-size:.86rem;color:var(--muted);margin-top:14px}
+.ferror{color:#B4402F;font-size:.9rem;margin-top:16px;font-weight:500;display:none}
+.ferror.on{display:block}
+.fdone{display:none;text-align:center;padding:26px 0}
+.fdone.on{display:block}
+.fdone h3{font-size:1.4rem;margin:18px 0 10px}
+.fdone p{margin:0 auto;color:var(--body);max-width:44ch}
+.fdone svg{margin:0 auto}
+
+
+/* machine diagram + quad */
+.machine{display:none;width:100%;height:auto;margin:44px 0 8px}
+.machine-v{display:block;width:100%;max-width:300px;height:auto;margin:38px auto 10px}
+@media(min-width:820px){.machine{display:block}.machine-v{display:none}}
+.mlbl{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.12em}
+.msub{font-family:'Inter',sans-serif;font-size:12px}
+.quad{display:grid;gap:26px;margin-top:34px}
+@media(min-width:700px){.quad{grid-template-columns:1fr 1fr;gap:30px 40px}}
+@media(min-width:1000px){.quad{grid-template-columns:repeat(4,1fr);gap:32px}}
+.quad>div{align-content:start}
+.qk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.14em;color:var(--lime);display:block;margin-bottom:9px}
+.quad strong{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;color:var(--cream);display:block;margin-bottom:8px}
+.quad p{font-size:.92rem;color:var(--muted-dark);max-width:34ch}
+
 /* reveal */
 .js-rv .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--exp),transform .8s var(--exp)}
 .js-rv .rv.in{opacity:1;transform:none}
@@ -302,7 +356,7 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
         <a href="#proof">Proof</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-primary btn-sm" data-book href="#book">Book a call</a>
+      <a class="btn btn-primary btn-sm" data-book href="#apply">Book a call</a>
     </div>
   </div>
 </header>
@@ -311,7 +365,7 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 
 <!-- ICP CALLOUT -->
 <div class="callout">
-  <div class="wrap">For commercial general contractors and design build firms in Canada and the United States. Fit-outs, tenant improvements, clinics, restaurants, childcare, office and industrial.</div>
+  <div class="wrap">For commercial contractors and design build firms in Canada and the United States</div>
 </div>
 
 <!-- HERO -->
@@ -320,9 +374,9 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
     <div>
       <span class="badge rv"><span class="dot"></span> 3 build slots open, Q3 2026</span>
       <h1 class="rv rv-d1">Be their first call, not the third bid. <em>We build the whole system free.</em></h1>
-      <p class="lede rv rv-d2">Ads, a page that sells your sector work, and AI agents that answer, qualify and book every inquiry into your estimator's calendar. Your only cost is the ad spend. We get paid when a project we sourced gets signed.</p>
+      <p class="lede rv rv-d2">We build the ads, the page and the AI agents that turn inquiries into booked site walks. You cover ad spend. We get paid only when a project we sourced gets signed.</p>
       <div class="hero-cta rv rv-d3">
-        <a class="btn btn-primary" data-book href="#book">Book a 20 minute call</a>
+        <a class="btn btn-primary" data-book href="#apply">Book a 20 minute call</a>
         <a class="btn btn-ghost" href="#build">See what gets built</a>
       </div>
       <p class="hero-note rv rv-d3"><b>No setup fee. No retainer.</b> Nothing owed until a contract you signed came from us.</p>
@@ -390,8 +444,7 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   <div class="wrap">
     <span class="eyebrow">The problem</span>
     <h2>Referrals built your firm.<br />They will not fill next year.</h2>
-    <p class="lede">A dentist decides to build her second clinic. She searches, asks her architect, calls two firms. You hear about it when the bid list is already three deep and the only lever left is price. Meanwhile the inquiries that do reach you sit in an inbox until someone has a free hour.</p>
-    <p class="lede" style="margin-top:14px">That happens every month, in your sector, in your city. The owners searching right now are meeting someone else. You will meet them later, as bid number three.</p>
+    <p class="lede">The owners searching right now are calling someone else. You meet them later, as bid number three, competing on price.</p>
   </div>
 </section>
 
@@ -431,9 +484,8 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
       </div>
 
       <div class="rv rv-d1">
-        <h3 style="color:var(--cream);font-size:1.35rem;margin-bottom:16px">We are betting on the two leaks.</h3>
-        <p style="color:var(--body-dark);font-size:.98rem">They are the same two in almost every construction firm we have opened the books on. They are also the cheapest two to fix, which is why we can afford to fix them before you pay us anything.</p>
-        <p style="color:var(--body-dark);font-size:.98rem;margin-top:16px">If we are wrong about your firm, the bet costs you nothing.</p>
+        <h3 style="color:var(--cream);font-size:1.35rem;margin-bottom:14px">We bet on the two leaks.</h3>
+        <p style="color:var(--body-dark);font-size:.98rem">Same two in nearly every firm, and the cheapest two to fix. That is why we can fix them before you pay anything.</p>
       </div>
     </div>
   </div>
@@ -443,44 +495,86 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 <div class="band">
   <img src="assets/img/tour.jpg" alt="Two commercial construction professionals walking an empty industrial building" data-parallax="0.12" />
   <div class="band-veil"></div>
-  <div class="band-copy"><div class="wrap"><p>The job is won before the bid list exists.
-    <span>Be the firm the owner already found, already trusts and already booked. Not the third quote they collect for comparison.</span></p></div></div>
+  <div class="band-copy"><div class="wrap"><p>The job is won before the bid list exists.<span>Be the firm they already found. Not the third quote.</span></p></div></div>
 </div>
 
 <!-- WHAT GETS BUILT -->
 <section class="dark" id="build">
   <div class="wrap">
     <span class="eyebrow">What gets built</span>
-    <h2>All of it, on your accounts, before you pay us anything.</h2>
-    <p class="lede">You pick one sector you want more of. Dental fit-outs, restaurants, childcare, warehouses. We build the machine that fills it.</p>
+    <h2>One machine. Four parts.</h2>
 
-    <ul class="stack rv">
-      <li><span class="i">01</span><span><strong>Sector demand audit</strong><span>What the owners in your area are searching for, who owns those searches today, and what you are missing</span></span></li>
-      <li><span class="i">02</span><span><strong>The page</strong><span>One page that sells your work in that sector, written and built, using your projects and your photos</span></span></li>
-      <li><span class="i">03</span><span><strong>Google and Meta campaigns</strong><span>Built, launched and managed on your own ad accounts, so the data stays yours</span></span></li>
-      <li><span class="i">04</span><span><strong>Intake agent</strong><span>Answers every inquiry in minutes, at 11pm, on Sunday, during a site meeting</span></span></li>
-      <li><span class="i">05</span><span><strong>Qualification agent</strong><span>Asks sector, square footage, location, budget range, permit stage and timeline, then scores it</span></span></li>
-      <li><span class="i">06</span><span><strong>Follow up agent</strong><span>Chases the ones who go quiet for weeks, the way a good salesperson would if you had one</span></span></li>
-      <li><span class="i">07</span><span><strong>Booking and reminders</strong><span>Site walks placed straight into your estimator's calendar, confirmed and recovered when they cancel</span></span></li>
-      <li><span class="i">08</span><span><strong>CRM and call tracking</strong><span>Every inquiry, call and quote in one pipeline instead of three inboxes</span></span></li>
-      <li><span class="i">09</span><span><strong>The weekly number</strong><span>Cost per qualified project, per booked site walk, per signed contract, by source</span></span></li>
-      <li><span class="i">10</span><span><strong>Handover</strong><span>Every asset, account and workflow documented and yours, whatever you decide at the end</span></span></li>
-    </ul>
+    <svg class="machine rv" viewBox="0 0 980 190" role="img"
+         aria-label="Diagram: ads and a sector page create demand, four AI agents answer, qualify, follow up and book, everything lands in your CRM, and site walks land in your estimator's calendar.">
+      <defs>
+        <path id="mline" d="M120 95 H860" />
+      </defs>
+      <use href="#mline" stroke="#3E3E48" stroke-width="1.5" fill="none"/>
 
-    <div class="bonus rv">
-      <h3>Two things we throw in</h3>
-      <div class="bonus-grid">
-        <div>
-          <span class="bk">BONUS 01</span>
-          <strong>Your dead quote list, revived</strong>
-          <p>We point the follow up agent at every estimate you sent this year that went quiet. Those projects are already qualified and already know your price.</p>
-        </div>
-        <div>
-          <span class="bk">BONUS 02</span>
-          <strong>The search map for your sector</strong>
-          <p>Every term an owner types before they call a contractor, who ranks for each one in your area today, and what it would take to own them. Yours to keep either way.</p>
-        </div>
-      </div>
+      <g class="mnode">
+        <rect x="10" y="62" width="180" height="66" rx="12" fill="#33333F" stroke="#4A4A57"/>
+        <text x="100" y="88" text-anchor="middle" class="mlbl" fill="#FFFDF7">DEMAND</text>
+        <text x="100" y="108" text-anchor="middle" class="msub" fill="#9297A5">Ads + sector page</text>
+      </g>
+      <g class="mnode">
+        <rect x="255" y="52" width="230" height="86" rx="12" fill="#33333F" stroke="#D5EB4B"/>
+        <text x="370" y="80" text-anchor="middle" class="mlbl" fill="#D5EB4B">4 AI AGENTS</text>
+        <text x="370" y="100" text-anchor="middle" class="msub" fill="#C9CBD6">Answer · Qualify</text>
+        <text x="370" y="118" text-anchor="middle" class="msub" fill="#C9CBD6">Follow up · Book</text>
+      </g>
+      <g class="mnode">
+        <rect x="550" y="62" width="180" height="66" rx="12" fill="#33333F" stroke="#4A4A57"/>
+        <text x="640" y="88" text-anchor="middle" class="mlbl" fill="#FFFDF7">YOUR CRM</text>
+        <text x="640" y="108" text-anchor="middle" class="msub" fill="#9297A5">Every lead, one place</text>
+      </g>
+      <g class="mnode">
+        <rect x="795" y="62" width="175" height="66" rx="12" fill="#D5EB4B"/>
+        <text x="882" y="88" text-anchor="middle" class="mlbl" fill="#22222B">CALENDAR</text>
+        <text x="882" y="108" text-anchor="middle" class="msub" fill="#3A3A20">Site walks booked</text>
+      </g>
+
+      <circle r="5" fill="#D5EB4B" opacity="0">
+        <animateMotion dur="5s" repeatCount="indefinite"><mpath href="#mline"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="5" fill="#8C8C99" opacity="0">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="2.1s"><mpath href="#mline"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="5s" repeatCount="indefinite" begin="2.1s"/>
+      </circle>
+    </svg>
+
+    <svg class="machine-v rv" viewBox="0 0 300 440" role="img"
+         aria-label="Diagram: demand from ads and a sector page flows through four AI agents into your CRM and out to booked site walks.">
+      <defs><path id="mlineV" d="M150 78 V362" /></defs>
+      <use href="#mlineV" stroke="#3E3E48" stroke-width="1.5" fill="none"/>
+      <rect x="35" y="14" width="230" height="62" rx="12" fill="#33333F" stroke="#4A4A57"/>
+      <text x="150" y="40" text-anchor="middle" class="mlbl" fill="#FFFDF7">DEMAND</text>
+      <text x="150" y="60" text-anchor="middle" class="msub" fill="#9297A5">Ads + sector page</text>
+      <rect x="20" y="128" width="260" height="84" rx="12" fill="#33333F" stroke="#D5EB4B"/>
+      <text x="150" y="156" text-anchor="middle" class="mlbl" fill="#D5EB4B">4 AI AGENTS</text>
+      <text x="150" y="176" text-anchor="middle" class="msub" fill="#C9CBD6">Answer · Qualify</text>
+      <text x="150" y="194" text-anchor="middle" class="msub" fill="#C9CBD6">Follow up · Book</text>
+      <rect x="35" y="252" width="230" height="62" rx="12" fill="#33333F" stroke="#4A4A57"/>
+      <text x="150" y="278" text-anchor="middle" class="mlbl" fill="#FFFDF7">YOUR CRM</text>
+      <text x="150" y="298" text-anchor="middle" class="msub" fill="#9297A5">Every lead, one place</text>
+      <rect x="35" y="364" width="230" height="62" rx="12" fill="#D5EB4B"/>
+      <text x="150" y="390" text-anchor="middle" class="mlbl" fill="#22222B">CALENDAR</text>
+      <text x="150" y="410" text-anchor="middle" class="msub" fill="#3A3A20">Site walks booked</text>
+      <circle r="5" fill="#D5EB4B" opacity="0">
+        <animateMotion dur="5s" repeatCount="indefinite"><mpath href="#mlineV"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="5" fill="#8C8C99" opacity="0">
+        <animateMotion dur="5s" repeatCount="indefinite" begin="2.1s"><mpath href="#mlineV"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="5s" repeatCount="indefinite" begin="2.1s"/>
+      </circle>
+    </svg>
+
+    <div class="quad rv">
+      <div><span class="qk">01</span><strong>Demand</strong><p>Google and Meta on your accounts, pointed at one sector, landing on a page built to sell that work.</p></div>
+      <div><span class="qk">02</span><strong>Agents</strong><p>Answer in minutes at any hour. Qualify on size, budget, area and permit stage. Chase the quiet ones. Book the real ones.</p></div>
+      <div><span class="qk">03</span><strong>Pipeline</strong><p>CRM and call tracking, so every lead and quote sits in one place with a number attached.</p></div>
+      <div><span class="qk">04</span><strong>Handover</strong><p>All of it on your accounts, documented, yours at day 30 whatever you decide.</p></div>
     </div>
   </div>
 </section>
@@ -489,8 +583,8 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 <section id="sprint">
   <div class="wrap">
     <span class="eyebrow">How it runs</span>
-    <h2>Thirty days to live. Your team does almost nothing.</h2>
-    <p class="lede">You approve, we build. The only time we need is a kickoff call, your project photos, and creative approval inside five business days.</p>
+    <h2>Thirty days to live.</h2>
+    <p class="lede">You approve, we build. We need a kickoff call, your project photos, and creative sign off inside five business days.</p>
 
     <div class="track">
       <div class="track-line"><i></i></div>
@@ -498,29 +592,17 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
         <div class="phase" data-phase>
           <span class="k">DAY 1 TO 7</span>
           <h3>Audit and build</h3>
-          <ul>
-            <li>Where your projects come from today, and what each source costs</li>
-            <li>The sector page live on your domain</li>
-            <li>Tracking, call tracking and CRM wired up</li>
-          </ul>
+          <p class="pline">Sector page live, tracking wired, campaigns ready for your approval.</p>
         </div>
         <div class="phase" data-phase>
           <span class="k">DAY 8 TO 21</span>
           <h3>Live and qualifying</h3>
-          <ul>
-            <li>Campaigns live on your ad accounts</li>
-            <li>The agents answering, qualifying and chasing every inquiry</li>
-            <li>Real projects reaching your estimator in minutes</li>
-          </ul>
+          <p class="pline">Ads running, agents answering, real projects reaching your estimator in minutes.</p>
         </div>
         <div class="phase" data-phase>
           <span class="k">DAY 22 TO 30</span>
           <h3>Site walks and numbers</h3>
-          <ul>
-            <li>Site walks booked into the calendar</li>
-            <li>Cost per qualified project, by source</li>
-            <li>Everything handed over and documented</li>
-          </ul>
+          <p class="pline">Walks on the calendar, cost per qualified project by source, everything handed over.</p>
         </div>
       </div>
     </div>
@@ -531,25 +613,25 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 <section class="dark" id="proof">
   <div class="wrap">
     <span class="eyebrow">The honest part</span>
-    <h2>We have already built this for two construction firms.</h2>
-    <p class="lede">Both commercial builders in British Columbia. Here is the whole record, split into what is documented and what is not. If a claim is not below, we will not make it on the call either.</p>
+    <h2>Already built for two construction firms.</h2>
+    <p class="lede">Both commercial builders in BC. If a claim is not below, we will not make it on the call either.</p>
 
     <div class="ledger">
       <div class="lbox have rv">
         <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D5EB4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Documented</h3>
         <ul>
-          <li><b>Two years running acquisition for Medico Construction.</b> Healthcare design build, 50 plus clinics across British Columbia and Alberta. Search, ads, tracking, funnel and CRM.</li>
-          <li><b>First page for the searches their buyers actually type.</b> Two first page positions for medical clinic contractor searches in Vancouver, verified July 2026.</li>
-          <li><b>Website and lead funnel for Riarh Group.</b> Commercial and industrial construction and tenant improvements, Surrey BC. Built, signed off by the principal, invoiced and paid June 2026.</li>
-          <li><b>The system, already written.</b> A 2,310 line lead flow specification, 9 stage pipeline, 24 qualification fields, 9 automation workflows. This is what gets installed, not a slide about it.</li>
+          <li><b>Medico Construction, two years.</b> Healthcare design build, 50 plus clinics across BC and Alberta. Search, ads, tracking, funnel, CRM.</li>
+          <li><b>Two first page positions</b> for medical clinic contractor searches in Vancouver, verified July 2026.</li>
+          <li><b>Riarh Group website and lead funnel.</b> Commercial, industrial and TI, Surrey BC. Signed off, invoiced, paid June 2026.</li>
+          <li><b>The system, already written.</b> 2,310 line spec, 9 stage pipeline, 24 qualification fields, 9 workflows.</li>
         </ul>
       </div>
       <div class="lbox havent rv rv-d1">
         <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9297A5" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.4v.01"/></svg> Not proven yet</h3>
         <ul>
-          <li>No published revenue or return on ad spend. We do not publish client numbers and we will not invent them.</li>
-          <li>No United States case study yet. That is part of what these three slots buy us.</li>
-          <li>No large agency bench. A small senior team plus an AI operator fleet, which is the only reason a free build is possible at all.</li>
+          <li>No published revenue or ROAS. We will not invent numbers.</li>
+          <li>No US case study yet. That is what these slots buy us.</li>
+          <li>No large agency bench. A small senior team plus an AI fleet, which is why a free build is possible.</li>
         </ul>
       </div>
     </div>
@@ -559,50 +641,156 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
 <section id="book">
   <div class="wrap">
     <span class="eyebrow">The deal</span>
-    <h2>You pay us nothing until a project we sourced gets signed.</h2>
-    <p class="lede">We call it the First Call System. Not a discovery fee, not a setup fee, not a retainer. If it never produces a signed project, we never invoice you and you keep everything we built.</p>
+    <h2>You pay nothing until a project we sourced gets signed.</h2>
+    <p class="lede">No setup fee, no retainer. If it never produces a signed project, you never get an invoice and you keep everything we built.</p>
 
     <div class="guarantee rv">
       <div class="gterms">
-        <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta on your own accounts. We never take custody of a media budget and we never mark it up.</dd></div>
-        <div><dt>We get paid</dt><dd>A flat fee per signed project the system brings you, banded by project size. Never a percentage of your contract, never a retainer you carry whether it works or not. The schedule is agreed in writing before we build anything, so you know the number before you bid.</dd></div>
-        <div><dt>How we count it</dt><dd>A project is ours only if the inquiry came in through the system and is timestamped in your CRM, and you confirm the contract was signed. <b style="color:var(--head)">Your referrals and repeat clients are never ours</b>, even if they happened to see an ad on the way.</dd></div>
-        <div><dt>You supply</dt><dd>A kickoff call, project photos, the sectors you want, and creative approval inside five business days. If we are blocked, the clock stops.</dd></div>
-        <div><dt>You keep</dt><dd>The page, the campaigns, the agents, the CRM and the data. On your accounts from day one, whatever you decide at the end.</dd></div>
-        <div><dt>Hard stop</dt><dd>90 days. If it has not produced a signed client by then, we part ways, you owe nothing and we have learned something expensive.</dd></div>
-        <div><dt>Why free</dt><dd>We need three documented results with commercial builders. You are buying our case study with your ad budget and your time, which is a fair trade for a working system.</dd></div>
+        <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta. You set the ceiling. We never touch it.</dd></div>
+        <div><dt>We get paid</dt><dd>One flat fee per signed project we source. Never a cut of your contract. Agreed in writing before we start, so you can price it into a bid.</dd></div>
+        <div><dt>How we count it</dt><dd>Only inquiries that came through the system, timestamped in your CRM, confirmed signed by you. <b style="color:var(--head)">Your referrals are never ours.</b></dd></div>
+        <div><dt>You keep</dt><dd>Page, campaigns, agents, CRM, data. On your accounts from day one.</dd></div>
+        <div><dt>Hard stop</dt><dd>90 days. No signed project by then, we part ways and you owe nothing.</dd></div>
+        <div><dt>Why free</dt><dd>We need three documented results with builders. You buy our case study with ad budget and time.</dd></div>
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" data-book href="mailto:sandy@zippyscale.com">Book a 20 minute call</a>
+        <a class="btn btn-primary" data-book href="#apply">Apply for a slot</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- APPLY -->
+<section id="apply">
+  <div class="wrap">
+    <span class="eyebrow">Apply</span>
+    <h2>Apply for one of the three build slots.</h2>
+    <p class="lede">Five questions, about a minute.</p>
+
+    <div class="applybox rv">
+      <form id="applyform" novalidate>
+        <div class="steps-bar" aria-hidden="true">
+          <span class="sdot on"></span><span class="sdot"></span><span class="sdot"></span>
+        </div>
+
+        <!-- STEP 1 -->
+        <fieldset class="fstep on" data-step="1">
+          <legend class="flegend">01 / The work you want more of</legend>
+
+          <label class="flabel" for="q-sector">Which sector do you want more of</label>
+          <div class="chips" data-name="entry.2033019157" id="q-sector">
+            <button type="button" class="chip">Medical, dental or veterinary clinics</button>
+            <button type="button" class="chip">Restaurant and retail fit-outs</button>
+            <button type="button" class="chip">Childcare centres</button>
+            <button type="button" class="chip">Industrial and warehouse</button>
+            <button type="button" class="chip">Office build-outs</button>
+            <button type="button" class="chip">Pharmacy</button>
+            <button type="button" class="chip">Something else</button>
+          </div>
+
+          <label class="flabel" for="q-region">Where do you build</label>
+          <input class="finput" id="q-region" name="entry.669657284" type="text" placeholder="Metro Vancouver, Calgary, Seattle" required />
+
+          <label class="flabel">Typical project size</label>
+          <div class="chips" data-name="entry.18820584">
+            <button type="button" class="chip">Under $100k</button>
+            <button type="button" class="chip">$100k to $400k</button>
+            <button type="button" class="chip">$400k to $1M</button>
+            <button type="button" class="chip">Over $1M</button>
+          </div>
+
+          <div class="fnav"><button type="button" class="btn btn-primary fnext">Continue</button></div>
+        </fieldset>
+
+        <!-- STEP 2 -->
+        <fieldset class="fstep" data-step="2">
+          <legend class="flegend">02 / Where you are now</legend>
+
+          <label class="flabel">How do projects reach you today</label>
+          <div class="chips" data-name="entry.1127033124">
+            <button type="button" class="chip">Almost all referrals and repeat clients</button>
+            <button type="button" class="chip">Referrals plus some inbound from search</button>
+            <button type="button" class="chip">We already run ads</button>
+            <button type="button" class="chip">Mostly brokers and architects</button>
+          </div>
+
+          <label class="flabel">Can you fund your own ad spend for 90 days</label>
+          <div class="chips" data-name="entry.1506521833">
+            <button type="button" class="chip">Yes</button>
+            <button type="button" class="chip">Not sure, depends on the number</button>
+            <button type="button" class="chip">No</button>
+          </div>
+          <p class="fhint">You set the ceiling and it is paid direct to Google and Meta. We never touch it.</p>
+
+          <div class="fnav"><button type="button" class="btn btn-ghost fback">Back</button><button type="button" class="btn btn-primary fnext">Continue</button></div>
+        </fieldset>
+
+        <!-- STEP 3 -->
+        <fieldset class="fstep" data-step="3">
+          <legend class="flegend">03 / Where to reach you</legend>
+
+          <div class="fgrid">
+            <div>
+              <label class="flabel" for="q-company">Company</label>
+              <input class="finput" id="q-company" name="entry.1847603292" type="text" required />
+            </div>
+            <div>
+              <label class="flabel" for="q-name">Your name</label>
+              <input class="finput" id="q-name" name="entry.342936001" type="text" required />
+            </div>
+            <div>
+              <label class="flabel" for="q-email">Email</label>
+              <input class="finput" id="q-email" name="entry.565810067" type="email" required />
+            </div>
+            <div>
+              <label class="flabel" for="q-phone">Phone</label>
+              <input class="finput" id="q-phone" name="entry.548638896" type="tel" required />
+            </div>
+          </div>
+
+          <label class="flabel" for="q-notes">Anything we should know before the call</label>
+          <textarea class="finput" id="q-notes" name="entry.2084048378" rows="3"></textarea>
+
+          <div class="fnav"><button type="button" class="btn btn-ghost fback">Back</button><button type="submit" class="btn btn-primary" id="fsubmit">Apply for a slot</button></div>
+          <p class="fhint">We reply within one business day. If you are not a fit we will tell you, and why.</p>
+        </fieldset>
+
+        <p class="ferror" id="ferror" role="alert"></p>
+      </form>
+
+      <div class="fdone" id="fdone" role="status">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B8CF2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <h3>That is in.</h3>
+        <p>We read every one of these ourselves. You will hear back within one business day, from sandy@zippyscale.com.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<iframe name="zs-sink" id="zs-sink" style="display:none" title="form target"></iframe>
 <!-- FIT FILTER -->
 <section>
   <div class="wrap">
     <span class="eyebrow">Fit</span>
-    <h2>Three slots. They are not for everyone.</h2>
+    <h2>Three slots. Not for everyone.</h2>
     <div class="fit">
       <div class="fit-col rv">
         <h3>Take a slot if</h3>
         <ul>
-          <li>You are a commercial GC or design build firm, not a residential renovator</li>
-          <li>You have finished project photos we can actually use</li>
-          <li>You can fund your own ad spend for 90 days</li>
-          <li>An estimator can take a booked call within a day or two</li>
-          <li>You want more of one specific kind of work, and you can name it</li>
+          <li>Commercial GC or design build, not residential</li>
+          <li>You have usable project photos</li>
+          <li>You can fund ad spend for 90 days</li>
+          <li>An estimator can take a booked call</li>
+          <li>You can name the work you want more of</li>
         </ul>
       </div>
       <div class="fit-col out rv rv-d1">
         <h3>Do not take a slot if</h3>
         <ul>
-          <li>You want brand awareness with no number attached</li>
-          <li>You need approval from four people before any creative goes live</li>
-          <li>You are happy with your backlog and not looking to add</li>
-          <li>You want us to guarantee a contract value we do not control</li>
-          <li>You would rather pay a retainer and stay hands off</li>
+          <li>You want brand awareness, no number attached</li>
+          <li>Four people approve every piece of creative</li>
+          <li>Your backlog is full and you like it that way</li>
+          <li>You want a guaranteed contract value</li>
+          <li>You would rather pay a retainer and stay out of it</li>
         </ul>
       </div>
     </div>
@@ -654,10 +842,10 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   <div class="veil"></div>
   <div class="wrap">
     <span class="eyebrow">Next step</span>
-    <h2>Twenty minutes. One sector. No pitch deck.</h2>
-    <p>Tell us the work you want more of. We will tell you where those projects are going instead and whether we want the slot. If we do not, we will say so on the call.</p>
+    <h2>Twenty minutes. One sector.</h2>
+    <p>Tell us the work you want more of. We will tell you where it is going instead, and whether we want the slot.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" data-book href="mailto:sandy@zippyscale.com">Book a 20 minute call</a>
+      <a class="btn btn-primary" data-book href="#apply">Apply for a slot</a>
       <a class="btn btn-ghost" href="mailto:sandy@zippyscale.com">Email instead</a>
     </div>
   </div>
@@ -683,7 +871,7 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // one place to swap the booking link
-  var BOOKING_URL = "mailto:sandy@zippyscale.com";
+  var BOOKING_URL = "#apply";
   document.querySelectorAll('[data-book]').forEach(function(a){
     a.setAttribute('href', BOOKING_URL);
     a.addEventListener('click', function(){
@@ -714,6 +902,91 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   requestAnimationFrame(revealVisible);
   window.addEventListener('load', revealVisible);
   setTimeout(function(){ if(!document.querySelector('.rv.in')) document.documentElement.classList.remove('js-rv'); }, 2000);
+
+
+  // ---- application form ----
+  var form = document.getElementById('applyform');
+  if (form) {
+    var FORM_POST = 'https://docs.google.com/forms/d/e/1FAIpQLScxiO0Zp9-hWvCU-Hz8GrojoCKAMf5huflxDsNNH_XotTfmzA/formResponse';
+    var steps = [].slice.call(form.querySelectorAll('.fstep'));
+    var dots = [].slice.call(form.querySelectorAll('.sdot'));
+    var err = document.getElementById('ferror');
+    var current = 0;
+
+    // chip groups behave like radios
+    form.querySelectorAll('.chips').forEach(function(group){
+      group.addEventListener('click', function(e){
+        var chip = e.target.closest('.chip');
+        if (!chip) return;
+        group.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('sel'); });
+        chip.classList.add('sel');
+        err.classList.remove('on');
+      });
+    });
+
+    function show(i){
+      steps.forEach(function(s, n){ s.classList.toggle('on', n === i); });
+      dots.forEach(function(d, n){ d.classList.toggle('on', n <= i); });
+      current = i;
+      var top = document.getElementById('apply').getBoundingClientRect().top + window.scrollY - 90;
+      if (window.scrollY > top) window.scrollTo({top: top, behavior: 'smooth'});
+    }
+
+    function validate(i){
+      var step = steps[i];
+      var missing = [].slice.call(step.querySelectorAll('.chips')).some(function(g){ return !g.querySelector('.sel'); });
+      var inputs = [].slice.call(step.querySelectorAll('[required]'));
+      var badInput = inputs.some(function(el){ return !el.checkValidity(); });
+      if (missing || badInput) {
+        err.textContent = missing ? 'Pick an option to continue.' : 'Check the highlighted fields.';
+        err.classList.add('on');
+        if (badInput) inputs.filter(function(el){ return !el.checkValidity(); })[0].focus();
+        return false;
+      }
+      err.classList.remove('on');
+      return true;
+    }
+
+    form.querySelectorAll('.fnext').forEach(function(b){
+      b.addEventListener('click', function(){ if (validate(current)) show(current + 1); });
+    });
+    form.querySelectorAll('.fback').forEach(function(b){
+      b.addEventListener('click', function(){ err.classList.remove('on'); show(current - 1); });
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!validate(current)) return;
+
+      var data = new FormData();
+      form.querySelectorAll('.chips').forEach(function(g){
+        data.append(g.getAttribute('data-name'), g.querySelector('.sel').textContent.trim());
+      });
+      form.querySelectorAll('[name]').forEach(function(el){ data.append(el.name, el.value); });
+
+      // real POST through a hidden iframe, so the browser reports when it completed
+      var sink = document.getElementById('zs-sink');
+      var post = document.createElement('form');
+      post.action = FORM_POST; post.method = 'POST'; post.target = 'zs-sink'; post.style.display = 'none';
+      data.forEach(function(v, k){
+        var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; post.appendChild(i);
+      });
+      document.body.appendChild(post);
+
+      var done = false;
+      function finish(){
+        if (done) return; done = true;
+        form.style.display = 'none';
+        document.getElementById('fdone').classList.add('on');
+        if (window.fbq) fbq('track', 'Lead', {content_name: 'build_slot_application'});
+        if (window.gtag) gtag('event', 'generate_lead', {method: 'application_form'});
+      }
+      sink.addEventListener('load', finish, {once: true});
+      setTimeout(finish, 2500); // Google's response is opaque, do not strand the user
+      document.getElementById('fsubmit').textContent = 'Sending...';
+      post.submit();
+    });
+  }
 
   // scroll-driven work: one rAF loop, one read pass
   var track = document.querySelector('.track');
