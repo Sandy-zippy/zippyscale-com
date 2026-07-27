@@ -195,6 +195,12 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
   border-right:2px solid #7C7C89;border-bottom:2px solid #7C7C89;transform:rotate(45deg);transition:transform .3s var(--exp)}
 .faq details[open] summary:after{transform:rotate(225deg);top:33px}
 .faq details p{padding:0 0 26px;font-size:.97rem;color:var(--body-dark);max-width:72ch}
+/* grid-rows 0fr to 1fr is the only way to transition to intrinsic height */
+.faq .fanswer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s cubic-bezier(.16,1,.3,1)}
+.faq details[open] .fanswer{grid-template-rows:1fr}
+.faq .fanswer>div{overflow:hidden}
+.faq summary:focus-visible{outline:3px solid var(--lime);outline-offset:-3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.faq .fanswer{transition:none}}
 
 /* final */
 .final{position:relative;overflow:hidden;padding:0}
@@ -224,16 +230,14 @@ footer{background:var(--charcoal);border-top:1px solid var(--border-dark);paddin
   color:var(--lime);display:block;margin-bottom:12px}
 
 /* fit filter */
-.fit{display:grid;gap:24px;margin-top:44px;align-items:start}
-@media(min-width:820px){.fit{grid-template-columns:1fr 1fr;gap:28px}}
-.fit-col{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:30px}
-.fit-col h3{margin-bottom:18px;font-size:1.05rem}
-.fit-col ul{list-style:none;display:grid;gap:13px}
-.fit-col li{position:relative;padding-left:26px;font-size:.96rem;line-height:1.5}
-.fit-col li:before{content:"";position:absolute;left:0;top:7px;width:12px;height:7px;border-left:2px solid var(--lime-dark);
-  border-bottom:2px solid var(--lime-dark);transform:rotate(-45deg)}
-.fit-col.out{background:transparent;border-style:dashed}
-.fit-col.out li:before{border:0;width:12px;height:2px;background:#B6BBC4;top:12px;transform:none}
+.fitlist{margin-top:40px;border-top:1px solid var(--line)}
+.fitrow{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:baseline;
+  padding:15px 0;border-bottom:1px solid var(--line);font-size:1rem;color:var(--body)}
+.fchip{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.6rem;letter-spacing:.1em;
+  padding:5px 0;border-radius:4px;text-align:center}
+.fgo{background:var(--lime);color:#22270A}
+.fno{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.fitnote{margin-top:26px;font-size:.95rem;color:var(--muted);max-width:64ch}
 @media(min-width:820px){.applybox{padding:44px}}
 .sdot.on{background:var(--lime-dark)}
 .fstep.on{display:block}
@@ -429,6 +433,9 @@ textarea.finput{resize:vertical;min-height:84px}
 .trustgrid{display:grid;gap:26px;margin-top:44px}
 @media(min-width:760px){.trustgrid{grid-template-columns:1fr 1fr;gap:30px 44px}}
 .trustgrid h3{font-size:1.08rem;margin-bottom:9px;color:var(--cream)}
+.tnum2{display:block;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.62rem;
+  letter-spacing:.16em;color:var(--lime);margin-bottom:10px}
+.trustgrid>div{padding-top:20px;border-top:1px solid var(--border-dark)}
 .trustgrid p{font-size:.94rem;color:var(--body-dark)}
 .trustcontact{margin-top:36px;padding-top:26px;border-top:1px solid var(--border-dark);font-size:.95rem;color:var(--body-dark)}
 .trustcontact a{color:var(--lime)}
@@ -494,7 +501,7 @@ textarea.finput{resize:vertical;min-height:84px}
 .veqk{display:block;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.6rem;letter-spacing:.14em;color:var(--lime-text);margin-bottom:7px}
 .veqi b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--head);line-height:1.1;margin-bottom:4px}
 .veqi i{font-style:normal;font-size:.85rem;color:var(--muted)}
-.fitwhen{font-size:1.02rem;color:var(--body);max-width:62ch;margin:-8px 0 34px;line-height:1.55}
+.fitwhen{font-size:1.02rem;color:var(--body);max-width:62ch;margin:20px 0 0;line-height:1.55}
 .paybox{margin-top:16px;border-top:1px solid var(--border-dark)}
 .payrow{display:grid;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--border-dark)}
 @media(min-width:620px){.payrow{grid-template-columns:150px 1fr;align-items:baseline}}
@@ -759,19 +766,19 @@ textarea.finput{resize:vertical;min-height:84px}
     <h2>A small team, on your accounts, under your name.</h2>
     <div class="trustgrid">
       <div>
-        <h3>Two people run every account</h3>
+        <span class="tnum2">01</span><h3>Two people run every account</h3>
         <p>Not a pod, not an intern. That is why we take three firms at a time and no more.</p>
       </div>
       <div>
-        <h3>Everything is built on your accounts</h3>
+        <span class="tnum2">02</span><h3>Everything is built on your accounts</h3>
         <p>Your Google Ads, your Meta, your domain, your CRM. You own the data from day one and you keep it if we part ways.</p>
       </div>
       <div>
-        <h3>Your accounts, your name</h3>
+        <span class="tnum2">03</span><h3>Your accounts, your name</h3>
         <p>Ads run on your accounts and inquiries come to you. We never sit between you and a client.</p>
       </div>
       <div>
-        <h3>We sign an NDA before the kickoff call</h3>
+        <span class="tnum2">04</span><h3>We sign an NDA before the kickoff call</h3>
         <p>Your project list, your pricing and your client names stay yours. We will not name you as a client without asking.</p>
       </div>
     </div>
@@ -924,26 +931,17 @@ textarea.finput{resize:vertical;min-height:84px}
     <span class="eyebrow">Fit</span>
     <h2>We run three builds at a time.</h2>
     <p class="fitwhen">Two people run every account, so three is the cap. It also decides your start date. A build that starts now is answering inquiries before the winter tender season opens. One that starts in November spends that season still being built.</p>
-    <div class="fit">
-      <div class="fit-col">
-        <h3>This works if</h3>
-        <ul>
-          <li>Commercial GC or design build, not residential</li>
-          <li>You have usable project photos</li>
-          <li>You can fund 90 days of ad spend</li>
-          <li>An estimator can take a booked call</li>
-        </ul>
-      </div>
-      <div class="fit-col out">
-        <h3>This does not work if</h3>
-        <ul>
-          <li>You just want your name out there</li>
-          <li>Four people approve every piece of creative</li>
-          <li>Your backlog is full and you like it</li>
-          <li>You want a guaranteed contract value</li>
-        </ul>
-      </div>
+    <div class="fitlist">
+      <div class="fitrow"><span class="fchip fgo">GO</span><span>Commercial GC or design build, not residential</span></div>
+      <div class="fitrow"><span class="fchip fgo">GO</span><span>You have usable project photos</span></div>
+      <div class="fitrow"><span class="fchip fgo">GO</span><span>You can fund 90 days of ad spend</span></div>
+      <div class="fitrow"><span class="fchip fgo">GO</span><span>An estimator can take a booked call</span></div>
+      <div class="fitrow"><span class="fchip fno">NO GO</span><span>You just want your name out there</span></div>
+      <div class="fitrow"><span class="fchip fno">NO GO</span><span>Four people approve every piece of creative</span></div>
+      <div class="fitrow"><span class="fchip fno">NO GO</span><span>Your backlog is full and you like it</span></div>
+      <div class="fitrow"><span class="fchip fno">NO GO</span><span>You want a guaranteed contract value</span></div>
     </div>
+    <p class="fitnote">We score you the same way we score your tenders. If it is a NO GO we will say so on the first call rather than take the setup fee.</p>
   </div>
 </section>
 
@@ -956,35 +954,35 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="faq">
       <details>
         <summary>So what does it cost once it works?</summary>
-        <p>$5,000 to build it, $3,000 a month to run it, and $2,500 to $20,000 when you sign a job we found, banded by contract size. The full table is above. Never a percentage of your contract, because at 3 to 8 percent net margin a percentage eats your profit. Price the success fee into a bid like any other cost of sale.</p>
+        <div class="fanswer"><div><p>$5,000 to build it, $3,000 a month to run it, and $2,500 to $20,000 when you sign a job we found, banded by contract size. The full table is above. Never a percentage of your contract, because at 3 to 8 percent net margin a percentage eats your profit. Price the success fee into a bid like any other cost of sale.</p></div></div>
       </details>
       <details>
         <summary>What is the catch?</summary>
-        <p>You fund the ads and answer the calls we book. That is it. If you have no qualified inquiry inside 14 days, the $5,000 comes back and you keep the page, the campaigns, the answering system and the bid desk.</p>
+        <div class="fanswer"><div><p>You fund the ads and answer the calls we book. That is it. If you have no qualified inquiry inside 14 days, the $5,000 comes back and you keep the page, the campaigns, the answering system and the bid desk.</p></div></div>
       </details>
       <details>
         <summary>How much ad spend?</summary>
-        <p>Sized from your scorecard answers, your sector and your area. You set the ceiling, you pay Google and Meta direct. We never touch it or take a cut.</p>
+        <div class="fanswer"><div><p>Sized from your scorecard answers, your sector and your area. You set the ceiling, you pay Google and Meta direct. We never touch it or take a cut.</p></div></div>
       </details>
       <details>
         <summary>What counts as a qualified inquiry?</summary>
-        <p>A commercial project in your sector, inside your service area, at or above the minimum project size you set on the kickoff call, from an owner or tenant who has decided to build, with budget range and timeline captured. Not a price shopper, not a residential job, not someone three years out. If it does not meet that bar it does not count, and the guarantee stands.</p>
+        <div class="fanswer"><div><p>A commercial project in your sector, inside your service area, at or above the minimum project size you set on the kickoff call, from an owner or tenant who has decided to build, with budget range and timeline captured. Not a price shopper, not a residential job, not someone three years out. If it does not meet that bar it does not count, and the guarantee stands.</p></div></div>
       </details>
       <details>
         <summary>Why not just do it free until it works?</summary>
-        <p>Because free work gets treated like free work. The setup fee buys you a team that is paid to be fast, and it buys us the right to say no to firms that were never going to answer the phone. The risk is still ours: miss the 14 days and you get it all back and keep the build.</p>
+        <div class="fanswer"><div><p>Because free work gets treated like free work. The setup fee buys you a team that is paid to be fast, and it buys us the right to say no to firms that were never going to answer the phone. The risk is still ours: miss the 14 days and you get it all back and keep the build.</p></div></div>
       </details>
       <details>
         <summary>How do you know a job came from you?</summary>
-        <p>The inquiry has to arrive through the system and be timestamped in your CRM, and you have to confirm the contract was signed. Your own referrals and repeat clients are never ours, even if they saw an ad on the way. If it is not in the system, we are not owed for it.</p>
+        <div class="fanswer"><div><p>The inquiry has to arrive through the system and be timestamped in your CRM, and you have to confirm the contract was signed. Your own referrals and repeat clients are never ours, even if they saw an ad on the way. If it is not in the system, we are not owed for it.</p></div></div>
       </details>
       <details>
         <summary>We get everything by referral. Why change?</summary>
-        <p>Referrals are the best lead you get and this does not touch them. It adds the owners who never reach your network. You keep the referrals and stop being the third bid on everything else.</p>
+        <div class="fanswer"><div><p>Referrals are the best lead you get and this does not touch them. It adds the owners who never reach your network. You keep the referrals and stop being the third bid on everything else.</p></div></div>
       </details>
       <details>
         <summary>Which sectors and where?</summary>
-        <p>Tenant improvements, clinics, restaurant and retail fit-outs, childcare, pharmacy, office, industrial and warehouse. Commercial GCs and design build firms across North America. One sector per build.</p>
+        <div class="fanswer"><div><p>Tenant improvements, clinics, restaurant and retail fit-outs, childcare, pharmacy, office, industrial and warehouse. Commercial GCs and design build firms across North America. One sector per build.</p></div></div>
       </details>
     </div>
   </div>
@@ -1237,6 +1235,27 @@ textarea.finput{resize:vertical;min-height:84px}
   addEventListener('scroll',onScroll,{passive:true});
   addEventListener('resize',onScroll,{passive:true});
   frame();
+})();
+
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.faq details'));
+  if(!items.length) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  items.forEach(function(d){
+    var sum=d.querySelector('summary'), box=d.querySelector('.fanswer');
+    if(!sum||!box) return;
+    sum.addEventListener('click',function(ev){
+      if(reduce) return;                 // native behaviour, no animation
+      if(!d.open) return;                // opening animates via CSS already
+      ev.preventDefault();               // closing: let the row collapse first
+      box.addEventListener('transitionend',function te(){
+        box.removeEventListener('transitionend',te); d.open=false;
+      });
+      box.style.gridTemplateRows='0fr';
+      setTimeout(function(){ if(d.open){d.open=false;} box.style.gridTemplateRows=''; },480);
+    });
+    d.addEventListener('toggle',function(){ if(d.open) box.style.gridTemplateRows=''; });
+  });
 })();
 </script>
 </body>
