@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ZippyScale | We Find Commercial Jobs for Your Firm</title>
-<meta name="description" content="We find commercial jobs for contractors in North America. A bid list every Monday, ten messages to send every Friday, ads running, and every enquiry answered in minutes. You pay only when you sign a job we found." />
+<meta name="description" content="We find commercial jobs for contractors in North America. A bid list every Monday, ten messages to send every Friday, ads running, and every inquiry answered in minutes. You pay only when you sign a job we found." />
 <link rel="icon" href="favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="assets/icon-256.png" />
 <link rel="canonical" href="https://www.zippyscale.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.zippyscale.com/" />
-<meta property="og:title" content="We build your lead system free. You pay when you sign your first client." />
-<meta property="og:description" content="For commercial contractors and design-build firms. Search, paid and a response system that answers, qualifies and books every opportunity. You pay only ad spend." />
+<meta property="og:title" content="We find commercial jobs for your firm. You pay only when you sign one." />
+<meta property="og:description" content="Five things for commercial GCs across North America: a bid list every Monday, ten messages every Friday, ads running, every inquiry answered in minutes, prequal papers current. One flat fee when you sign a job we found." />
 <meta property="og:site_name" content="ZippyScale" />
 <meta property="og:image" content="https://www.zippyscale.com/assets/img/tour.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -126,7 +126,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 @media(min-width:820px){#sorter-svg{display:block}#sorter-svg-v{display:none}}
 .svg-lbl{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.1em}
 .svg-mini{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:9px;letter-spacing:.16em}
-.sorter-foot{display:flex;justify-content:space-between;gap:16px;margin-top:20px;
+#mpause{background:none;border:0;color:var(--muted-dark);font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;cursor:pointer;padding:6px 0;transition:color .2s var(--exp)}
+#mpause:hover{color:var(--cream)}
+.sorter-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;
   font-size:.76rem;color:var(--muted-dark);font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
 
 /* terms bar */
@@ -415,6 +417,14 @@ textarea.finput{resize:vertical;min-height:84px}
 .stackline th{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-dark);padding:0 0 10px;border-bottom:1px solid var(--border-dark)}
 .stackline th:not(:first-child),.stackline td:not(:first-child){text-align:right}
 
+
+.trustgrid{display:grid;gap:26px;margin-top:44px}
+@media(min-width:760px){.trustgrid{grid-template-columns:1fr 1fr;gap:30px 44px}}
+.trustgrid h3{font-size:1.08rem;margin-bottom:9px;color:var(--cream)}
+.trustgrid p{font-size:.94rem;color:var(--body-dark)}
+.trustcontact{margin-top:36px;padding-top:26px;border-top:1px solid var(--border-dark);font-size:.95rem;color:var(--body-dark)}
+.trustcontact a{color:var(--lime)}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js-rv .rv{opacity:1;transform:none;transition:none}
@@ -448,17 +458,17 @@ textarea.finput{resize:vertical;min-height:84px}
       <span class="badge"><span class="dot"></span> For commercial GCs and design-build firms in North America</span>
       <h1>We find commercial jobs for your firm. <em>You pay only when you sign one.</em></h1>
       <p class="lede lede-dream">A schedule full of the jobs you want, without dropping your price to win them.</p>
-      <p class="lede">That is what we are paid to build. A bid list every Monday. Ten messages to your architects and past clients every Friday. Google and Meta running. Every enquiry answered in minutes. Your prequal papers kept current.</p>
-      <p class="lede lede-diff">Most agencies only run your ads. That is one of the five.</p>
+      <p class="lede">You pay us only if that happens. A bid list every Monday. Ten messages to your architects and past clients every Friday. Google and Meta running. Every inquiry answered in minutes. Your prequal papers kept current.</p>
+      <p class="lede lede-diff">Most agencies just run your ads. Ads are one of the five things above.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a>
       </div>
       <p class="hero-note">Ten questions. No email until the last step.</p>
     </div>
     <div class="sorter">
-      <p class="sorter-title">What happens to every enquiry</p>
+      <p class="sorter-title">What happens to every inquiry</p>
       <svg id="sorter-svg" viewBox="0 0 470 250" role="img"
-           aria-label="Diagram: an enquiry is answered in minutes, qualified on size, budget, area and permit stage, then either booked with your estimator or moved into follow up.">
+           aria-label="Diagram: an inquiry is answered in minutes, qualified on size, budget, area and permit stage, then either booked with your estimator or moved into follow up.">
         <defs>
           <path id="pIn"  d="M94 125 H176" />
           <path id="pUp"  d="M304 125 H330 Q348 125 348 107 V64 H366" />
@@ -468,7 +478,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <use href="#pUp" stroke="#4A4A57" stroke-width="1.5" fill="none"/>
         <use href="#pDn" stroke="#4A4A57" stroke-width="1.5" fill="none"/>
         <rect x="8" y="107" width="78" height="36" rx="8" fill="#3A3A46"/>
-        <text x="47" y="130" text-anchor="middle" class="svg-lbl" fill="#C9CBD6">ENQUIRY</text>
+        <text x="47" y="130" text-anchor="middle" class="svg-lbl" fill="#C9CBD6">INQUIRY</text>
         <rect x="176" y="92" width="128" height="66" rx="11" fill="#33333F" stroke="#D5EB4B" stroke-width="1.2"/>
         <text x="240" y="117" text-anchor="middle" class="svg-mini" fill="#D5EB4B">ANSWERED IN MINUTES</text>
         <text x="240" y="139" text-anchor="middle" class="svg-lbl" fill="#FFFDF7">QUALIFIED</text>
@@ -484,7 +494,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <g fill="#8C8C99"><circle r="4.5" opacity="0"><animateMotion dur="4s" repeatCount="indefinite" begin="3.1s"><mpath href="#pDn"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.8;1" dur="4s" repeatCount="indefinite" begin="3.1s"/></circle></g>
       </svg>
       <svg id="sorter-svg-v" viewBox="0 0 300 400" role="img" aria-hidden="false"
-           aria-label="Diagram: an enquiry is answered in minutes and qualified, then either booked with your estimator or moved into follow up.">
+           aria-label="Diagram: an inquiry is answered in minutes and qualified, then either booked with your estimator or moved into follow up.">
         <defs>
           <path id="vIn" d="M150 58 V112" />
           <path id="vUp" d="M150 200 V240 Q150 258 132 258 H96 V300" />
@@ -494,7 +504,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <use href="#vUp" stroke="#4A4A57" stroke-width="1.5" fill="none"/>
         <use href="#vDn" stroke="#4A4A57" stroke-width="1.5" fill="none"/>
         <rect x="94" y="14" width="112" height="42" rx="9" fill="#3A3A46"/>
-        <text x="150" y="40" text-anchor="middle" class="svg-lbl" fill="#C9CBD6">ENQUIRY</text>
+        <text x="150" y="40" text-anchor="middle" class="svg-lbl" fill="#C9CBD6">INQUIRY</text>
         <rect x="34" y="114" width="232" height="84" rx="12" fill="#33333F" stroke="#D5EB4B" stroke-width="1.2"/>
         <text x="150" y="146" text-anchor="middle" class="svg-mini" fill="#D5EB4B">ANSWERED IN MINUTES</text>
         <text x="150" y="172" text-anchor="middle" class="svg-lbl" fill="#FFFDF7">QUALIFIED</text>
@@ -508,7 +518,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <g fill="#D5EB4B"><circle r="4.5" opacity="0"><animateMotion dur="4s" repeatCount="indefinite" begin="1.1s"><mpath href="#vUp"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.8;1" dur="4s" repeatCount="indefinite" begin="1.1s"/></circle></g>
         <g fill="#8C8C99"><circle r="4.5" opacity="0"><animateMotion dur="4s" repeatCount="indefinite" begin="2.6s"><mpath href="#vDn"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.8;1" dur="4s" repeatCount="indefinite" begin="2.6s"/></circle></g>
       </svg>
-      <div class="sorter-foot"><span>Sector, size, budget, area, permit stage</span><span>Day or night</span></div>
+      <div class="sorter-foot"><span>Sector, size, budget, area, permit stage</span><button type="button" id="mpause" aria-pressed="false">Pause</button></div>
     </div>
   </div>
 </section>
@@ -559,7 +569,7 @@ textarea.finput{resize:vertical;min-height:84px}
       <article>
         <span class="ak">01</span>
         <h3>Monday 7am, the bid list</h3>
-        <p class="awhat">Every tender in your area that fits your size, sector and bonding capacity. Each one marked <b>GO</b> or <b>NO GO</b> with a one line reason and the deadline.</p>
+        <p class="awhat">Every tender in your area that fits your size, sector and bonding capacity. Each one marked <b>GO</b> or <b>NO GO</b> with a one line reason and the deadline. Pulled from BC Bid, CanadaBuys, MERX, BidCentral and the city portals, plus SAM.gov and the state sites in the US.</p>
         <p class="awhere">Your inbox, and a card in your CRM. You open only the GO ones.</p>
         <p class="awho">Run by us. First list lands day 9.</p>
         <p class="areplace">Replaces a bid coordinator, about $62k a year</p>
@@ -574,16 +584,16 @@ textarea.finput{resize:vertical;min-height:84px}
       </article>
       <article>
         <span class="ak">03</span>
-        <h3>Enquiries from people already searching</h3>
+        <h3>Inquiries from people already searching</h3>
         <p class="awhat">Google and Meta running on your accounts for one sector, landing on a page built from your own projects and photos, on your domain.</p>
         <p class="awhere">Straight into your CRM, tagged by source.</p>
         <p class="awho">Built and managed by us on your accounts. Live day 21.</p>
-        <p class="areplace">Replaces an agency retainer</p>
+        <p class="areplace">Replaces an agency retainer, about $36k a year</p>
       </article>
       <article>
         <span class="ak">04</span>
         <h3>A text to your estimator, inside five minutes</h3>
-        <p class="awhat">Every enquiry answered day or night, asked the questions he would have asked, sector, square footage, location, budget, permit stage, timeline. If it qualifies it is already in his calendar.</p>
+        <p class="awhat">Every inquiry answered day or night, asked the questions he would have asked, sector, square footage, location, budget, permit stage, timeline. If it qualifies it is already in his calendar.</p>
         <p class="awhere">His phone. He walks in Monday with the week booked.</p>
         <p class="awho">Live day 21. A person checks the odd ones every day.</p>
         <p class="areplace">Replaces an after-hours answering service and about a day a week of a $89k estimator</p>
@@ -633,13 +643,13 @@ textarea.finput{resize:vertical;min-height:84px}
         <span class="ck">CASE 01</span>
         <h3>Medico Construction</h3>
         <p class="cmeta">Healthcare design build · BC and Alberta</p>
-        <p>Two years finding them work. Ads, search, tracking, and the page that takes the enquiry, for a firm with 50 plus clinics built. They come up first in Vancouver when someone searches for a clinic builder.</p>
+        <p>Two years finding them work. Ads, search, tracking, and the page that takes the inquiry, for a firm with 50 plus clinics built. They come up first in Vancouver when someone searches for a clinic builder.</p>
       </article>
       <article class="case light">
         <span class="ck">CASE 02</span>
         <h3>Riarh Group</h3>
         <p class="cmeta">Commercial, industrial and TI · Surrey BC</p>
-        <p>Website and lead funnel for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking enquiries.</p>
+        <p>Website and lead funnel for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking inquiries.</p>
       </article>
     </div>
     <div class="sectors light">
@@ -661,8 +671,35 @@ textarea.finput{resize:vertical;min-height:84px}
 <div class="band">
   <img src="assets/img/tour.jpg" alt="Two commercial construction professionals walking an empty industrial building" />
   <div class="band-veil"></div>
-  <div class="band-copy"><div class="wrap"><p>Won on day zero. Not on price.<span>Be the firm she already found, already trusts and already booked.</span></p></div></div>
+  <div class="band-copy"><div class="wrap"><p>She picked you before the bid list existed.<span>You were the one who called back first.</span></p></div></div>
 </div>
+
+<!-- 6c. WHO YOU ARE DEALING WITH -->
+<section class="dark" id="trust">
+  <div class="wrap">
+    <span class="eyebrow">Who you are dealing with</span>
+    <h2>A small team, on your accounts, under your name.</h2>
+    <div class="trustgrid">
+      <div>
+        <h3>Two people run every account</h3>
+        <p>Not a pod, not an intern. That is why we take three firms at a time and no more.</p>
+      </div>
+      <div>
+        <h3>Everything is built on your accounts</h3>
+        <p>Your Google Ads, your Meta, your domain, your CRM. You own the data from day one and you keep it if we part ways.</p>
+      </div>
+      <div>
+        <h3>Your name, not ours</h3>
+        <p>Messages to your architects and past clients send from your address. We do not put ourselves in front of your relationships.</p>
+      </div>
+      <div>
+        <h3>We sign an NDA before the kickoff call</h3>
+        <p>Your project list, your pricing and your client names stay yours. We will not name you as a client without asking.</p>
+      </div>
+    </div>
+    <p class="trustcontact">Questions before you start? Email <a href="mailto:sandy@zippyscale.com">sandy@zippyscale.com</a> and you will get a person, same day.</p>
+  </div>
+</section>
 
 <!-- 6b. WHAT HAPPENS WHEN -->
 <section id="when">
@@ -673,7 +710,7 @@ textarea.finput{resize:vertical;min-height:84px}
       <li><span class="wk">DAY 1</span><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</li>
       <li><span class="wk">DAY 9</span><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</li>
       <li><span class="wk">DAY 14</span><b>First batch of messages to approve.</b> Ten drafts to your architects, brokers and past clients, waiting on your yes.</li>
-      <li><span class="wk">DAY 21</span><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every enquiry gets a reply inside five minutes.</li>
+      <li><span class="wk">DAY 21</span><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every inquiry gets a reply inside five minutes.</li>
       <li><span class="wk">DAY 30</span><b>Vault built, first numbers.</b> Prequalification documents filed and current. First weekly email showing what each job cost you to win, and where it came from.</li>
       <li><span class="wk">DAY 90</span><b>The decision point.</b> If you have not signed a job we found, we walk and you owe nothing.</li>
     </ol>
@@ -704,7 +741,7 @@ textarea.finput{resize:vertical;min-height:84px}
           <tr><td>$500k to $1.5M</td><td>$12,000</td></tr>
           <tr><td>Over $1.5M</td><td>$20,000</td></tr>
         </table>
-        <p>USD, or CAD for Canadian firms. You pay it when you invoice your first draw, not at signature. That is roughly 1 to 4 percent of the contract. Cheaper than a salesman on commission, and only on work you would not have had.</p>
+        <p>USD, or CAD for Canadian firms. You pay it when you invoice your first draw, not at signature. Cheaper than a salesman on commission, and only on work you would not have had.</p>
       </div>
       <div class="bonusrow">
         <div><span class="bk">INCLUDED</span><strong>Your dead quote list, revived</strong><p>Every quiet estimate from this year, worked again. Already qualified, already knows your price.</p></div>
@@ -712,8 +749,8 @@ textarea.finput{resize:vertical;min-height:84px}
       </div>
       <div class="urgency">
         <span class="feek">WHY THE START DATE MATTERS</span>
-        <p>A build takes 30 days to go live and the first jobs land in the 60 after that. Start now and you are quoting through the winter bid season with the system already running. Start in November and you are bidding into it with what you have got.</p>
-        <p class="usmall">We run three builds at a time because five parts done properly is what a small senior team can carry. When one finishes, one slot opens.</p>
+        <p>Setup takes 30 days. The first jobs land in the 60 days after that. Start now and you are quoting winter work with this already running. Start in November and you are quoting it the way you do now.</p>
+        <p class="usmall">Two of us run every account, so we take three firms at a time. When one finishes, one place opens.</p>
       </div>
       <div class="hero-cta"><a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a></div>
     </div>
@@ -738,12 +775,12 @@ textarea.finput{resize:vertical;min-height:84px}
             <p class="fhint">No email until the last step. Ten questions, ninety seconds.</p>
           </div>
           <ul class="qareas">
-            <li><span>01</span>Visibility</li>
-            <li><span>02</span>Demand</li>
-            <li><span>03</span>Response speed</li>
-            <li><span>04</span>Qualification</li>
-            <li><span>05</span>Follow up</li>
-            <li><span>06</span>Measurement</li>
+            <li><span>01</span>Can they find you</li>
+            <li><span>02</span>Is work coming in</li>
+            <li><span>03</span>How fast you reply</li>
+            <li><span>04</span>Who checks a job first</li>
+            <li><span>05</span>Who chases quotes</li>
+            <li><span>06</span>What a job costs to win</li>
           </ul>
         </div>
       </div>
@@ -835,7 +872,7 @@ textarea.finput{resize:vertical;min-height:84px}
       </details>
       <details>
         <summary>What is the catch?</summary>
-        <p>You fund the ad spend and answer the calls we book. That is it. If it produces nothing, we carry the build cost.</p>
+        <p>You fund the ads and answer the calls we book. That is it. If it produces nothing, we eat the setup cost.</p>
       </details>
       <details>
         <summary>How much ad spend?</summary>
@@ -882,6 +919,7 @@ textarea.finput{resize:vertical;min-height:84px}
     </div>
     <div class="foot-links">
       <a href="mailto:sandy@zippyscale.com">sandy@zippyscale.com</a>
+      <a href="privacy.html">Privacy</a>
       <a href="#top">Back to top</a>
     </div>
   </div>
@@ -902,11 +940,22 @@ textarea.finput{resize:vertical;min-height:84px}
   });
 
   // reduced motion stops the diagram, it must never stop the scorecard
-  if (reduce) {
-    document.querySelectorAll('svg').forEach(function(el){
-      if (el.pauseAnimations) el.pauseAnimations();
+  var svgs = [].slice.call(document.querySelectorAll('#sorter-svg, #sorter-svg-v'));
+  function setMotion(on){
+    svgs.forEach(function(el){
+      if (!el.pauseAnimations) return;
+      on ? el.unpauseAnimations() : el.pauseAnimations();
     });
   }
+  if (reduce) setMotion(false);
+  var mp = document.getElementById('mpause');
+  if (mp) mp.addEventListener('click', function(){
+    var paused = mp.getAttribute('aria-pressed') === 'true';
+    setMotion(paused);
+    mp.setAttribute('aria-pressed', String(!paused));
+    mp.textContent = paused ? 'Pause' : 'Play';
+  });
+  if (reduce && mp) { mp.setAttribute('aria-pressed','true'); mp.textContent = 'Play'; }
 
 
   // ---- scorecard ----
@@ -916,19 +965,19 @@ textarea.finput{resize:vertical;min-height:84px}
     var Q = [
       {area:'Fit', field:'entry.2033019157', t:'Which sector do you want more of?', score:false,
        o:['Medical, dental or veterinary clinics','Restaurant and retail fit-outs','Childcare centres','Industrial and warehouse','Office build-outs','Pharmacy','Something else']},
-      {area:'Visibility', field:'entry.94847149', t:'When an owner searches for a contractor who builds your kind of project, where do you appear?',
+      {area:'Can they find you', field:'entry.94847149', t:'When an owner searches for a contractor who builds your kind of project, where do you appear?',
        o:[['Top of page one',3],['Somewhere on page one',2],['Not sure',1],['Nowhere',0]]},
-      {area:'Demand', field:'entry.1127033124', t:'Where does your work come from today?',
+      {area:'Is work coming in', field:'entry.1127033124', t:'Where does your work come from today?',
        o:[['We already run ads',3],['Referrals plus some inbound from search',2],['Mostly brokers and architects',1],['Almost all referrals and repeat clients',0]]},
-      {area:'Response speed', field:'entry.400411152', t:'How fast does a new enquiry get its first reply?',
+      {area:'How fast you reply', field:'entry.400411152', t:'How fast does a new inquiry get its first reply?',
        o:[['Within minutes',3],['Same day',2],['Next day',1],['Whenever someone gets to it',0]]},
-      {area:'Qualification', field:'entry.1480494227', t:'Before your estimator gets involved, who checks sector, size, budget and timeline?',
+      {area:'Who checks a job first', field:'entry.1480494227', t:'Before your estimator gets involved, who checks sector, size, budget and timeline?',
        o:[['A set process every time',3],['Whoever picks up the phone',1],['Nobody, everything goes to the estimator',0]]},
-      {area:'Qualification', field:'entry.40289008', t:'How often do you bid work you could not staff if you won it?',
+      {area:'Who checks a job first', field:'entry.40289008', t:'How often do you bid work you could not staff if you won it?',
        o:[['Rarely',3],['Sometimes',1],['Often',0]]},
-      {area:'Follow up', field:'entry.1369176754', t:'A quote goes quiet for three weeks. What happens?',
+      {area:'Who chases quotes', field:'entry.1369176754', t:'A quote goes quiet for three weeks. What happens?',
        o:[['Automated follow up runs for weeks',3],['Someone remembers to chase',1],['Nothing happens',0]]},
-      {area:'Measurement', field:'entry.1064870871', t:'Can you say what a signed project costs you to win, by source?',
+      {area:'What a job costs to win', field:'entry.1064870871', t:'Can you say what a signed project costs you to win, by source?',
        o:[['Yes, cost per signed project by source',3],['Roughly',1],['No idea',0]]},
       {area:'Fit', field:'entry.18820584', t:'What is your typical project size?', score:false,
        o:['Under $100k','$100k to $400k','$400k to $1M','Over $1M']},
@@ -936,12 +985,12 @@ textarea.finput{resize:vertical;min-height:84px}
        o:['Yes','Not sure, depends on the number','No']}
     ];
     var GAPS = {
-      'Visibility':['Owners cannot find you','The people who will sign your next contract are searching right now and landing on a competitor. Search and paid put you in that moment, on terms owners actually type.'],
-      'Demand':['You are one relationship away from a quiet quarter','Referrals are the best lead you will get, but they cannot be turned up when the schedule thins. A second channel you control is what makes next year predictable.'],
-      'Response speed':['You are answering after the decision is made','Owners call two or three firms in an afternoon. The first credible reply usually walks the space. Minutes matter more than polish here.'],
-      'Qualification':['Your estimator is your most expensive filter','Every unqualified enquiry that reaches estimating costs you a day you could have spent on work you can actually staff. Qualify on sector, size, budget and permit stage first.'],
-      'Follow up':['Quotes are dying of silence','Most projects that go quiet are not lost, they are delayed. Nothing chases them, so they get awarded to whoever called back.'],
-      'Measurement':['You cannot scale what you cannot see','Without cost per signed project by source, every marketing decision is a guess and the good channel gets cut with the bad one.']
+      'Can they find you':['Owners cannot find you','The people who will sign your next contract are searching right now and landing on a competitor. Search and paid put you in that moment, on terms owners actually type.'],
+      'Is work coming in':['You are one relationship away from a quiet quarter','Referrals are the best lead you will get, but they cannot be turned up when the schedule thins. A second channel you control is what makes next year predictable.'],
+      'How fast you reply':['You are answering after the decision is made','Owners call two or three firms in an afternoon. The first credible reply usually walks the space. Minutes matter more than polish here.'],
+      'Who checks a job first':['Your estimator is your most expensive filter','Every unqualified inquiry that reaches estimating costs you a day you could have spent on work you can actually staff. Qualify on sector, size, budget and permit stage first.'],
+      'Who chases quotes':['Quotes are dying of silence','Most projects that go quiet are not lost, they are delayed. Nothing chases them, so they get awarded to whoever called back.'],
+      'What a job costs to win':['You cannot scale what you cannot see','Without cost per signed project by source, every marketing decision is a guess and the good channel gets cut with the bad one.']
     };
     var idx = 0, answers = {}, areaScore = {}, areaMax = {}, history = [];
 
@@ -1018,7 +1067,7 @@ textarea.finput{resize:vertical;min-height:84px}
         bars.appendChild(row);
         setTimeout(function(){ row.querySelector('.rfill').style.width = p + '%'; }, 80);
       });
-      var gap = GAPS[worst] || GAPS['Demand'];
+      var gap = GAPS[worst] || GAPS['Is work coming in'];
       document.getElementById('rgaptitle').textContent = gap[0];
       document.getElementById('rgapbody').textContent = gap[1];
 
