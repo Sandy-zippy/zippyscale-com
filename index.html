@@ -457,6 +457,18 @@ textarea.finput{resize:vertical;min-height:84px}
 .bonusrow p{font-size:.92rem;color:var(--body)}
 .bonusrow .bk{color:var(--lime-dark)}
 
+
+/* fee table */
+.fees{margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+.feek{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--lime-dark);display:block;margin-bottom:16px}
+.fees table{width:100%;border-collapse:collapse;max-width:460px}
+.fees th{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);padding:0 0 10px;border-bottom:1px solid var(--line)}
+.fees th:last-child,.fees td:last-child{text-align:right}
+.fees td{padding:13px 0;border-bottom:1px solid var(--line);font-size:1rem;color:var(--head)}
+.fees td:last-child{font-family:'JetBrains Mono',monospace;font-weight:700}
+.fees p{font-size:.88rem;color:var(--muted);margin-top:16px;max-width:60ch}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js-rv .rv{opacity:1;transform:none;transition:none}
@@ -637,9 +649,21 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="guarantee">
       <div class="gterms">
         <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta. You set the ceiling.</dd></div>
-        <div><dt>The fee</dt><dd>Agreed in writing before we start. One flat number per signed project we source, never a cut of your contract. Your referrals are never ours.</dd></div>
+        <div><dt>The fee</dt><dd>A flat fee per signed project we source, banded by size. Never a percentage of your contract. Your referrals are never ours.</dd></div>
         <div><dt>You keep</dt><dd>Page, campaigns, CRM, credential vault, data. Your accounts from day one.</dd></div>
         <div><dt>Hard stop</dt><dd>90 days. No signed project, no invoice.</dd></div>
+      </div>
+
+      <div class="fees">
+        <span class="feek">THE FEE, IN FULL</span>
+        <table>
+          <tr><th>Signed contract value</th><th>Our fee</th></tr>
+          <tr><td>Under $150k</td><td>$2,500</td></tr>
+          <tr><td>$150k to $500k</td><td>$6,000</td></tr>
+          <tr><td>$500k to $1.5M</td><td>$12,000</td></tr>
+          <tr><td>Over $1.5M</td><td>$20,000</td></tr>
+        </table>
+        <p>USD, or the CAD equivalent for Canadian firms. Payable when you invoice your first progress draw, not at signature. That is between 1 and 2.5 percent of contract value, which is less than a commissioned salesperson and it only happens on work you would not otherwise have had.</p>
       </div>
       <div class="bonusrow">
         <div><span class="bk">INCLUDED</span><strong>Your dead quote list, revived</strong><p>Every quiet estimate from this year, worked again. Already qualified, already knows your price.</p></div>
@@ -761,7 +785,7 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="faq">
       <details>
         <summary>So what does it cost once it works?</summary>
-        <p>A flat fee per signed project, banded by the size of the job. Not a percentage of your contract value, because your net margin is thin and a percentage would eat it. Not a monthly retainer you pay whether the phone rings or not. You see the whole schedule before we start, so you can price it into a bid like any other cost of sale. Think of it as a commissioned salesperson who costs nothing until they close.</p>
+        <p>$2,500 to $20,000 per signed project, banded by contract size, and the full table is above. Not a percentage of your contract, because at 3 to 8 percent net margin a percentage eats your profit. Not a retainer you pay whether the phone rings or not. Price it into a bid like any other cost of sale.</p>
       </details>
       <details>
         <summary>What is the catch?</summary>
