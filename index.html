@@ -432,6 +432,9 @@ textarea.finput{resize:vertical;min-height:84px}
 
 .lede-dream{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.15rem,1.9vw,1.42rem);
   color:var(--head);line-height:1.28;max-width:24ch;margin-top:22px}
+.oneline{font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(1.12rem,1.75vw,1.35rem);line-height:1.4;color:var(--cream);
+  max-width:60ch;margin:18px 0 6px}
 .offername{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.76rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--lime-text);margin-top:14px}
 .urgency{margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
@@ -493,6 +496,18 @@ textarea.finput{resize:vertical;min-height:84px}
 .td{font-size:.92rem;color:var(--body-dark)}
 .tw{font-size:.78rem;color:#9DA2B0;grid-column:2/-1}
 @container (min-width:520px){.tw{grid-column:auto;text-align:right;white-space:nowrap}}
+/* One reveal system for every section. Children are visible by default;
+   .rv-on is added by JS only when it can finish the job. */
+.rv-on [data-rv-item]{opacity:0;transform:translateY(10px)}
+.rv-on [data-rv-item].rv-in{opacity:1;transform:none;
+  transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+.rv-on .sbar{transform:scaleX(0)}
+.rv-on .strow.rv-in .sbar{transform:scaleX(calc(var(--n)/5));
+  transition:transform .8s cubic-bezier(.16,1,.3,1)}
+@media(prefers-reduced-motion:reduce){
+  .rv-on [data-rv-item]{opacity:1;transform:none}
+  .rv-on .sbar{transform:scaleX(calc(var(--n)/5))}
+}
 .twonote{margin-top:32px;font-size:.97rem;color:var(--muted-dark);max-width:70ch}
 
 
@@ -648,10 +663,10 @@ textarea.finput{resize:vertical;min-height:84px}
       <li><span class="pn">03</span>You hear about it when the bid list is three deep.</li>
       <li><span class="pn">04</span>Your best lead this month is still in someone's voicemail.</li>
     </ul>
-    <div class="statline">
-      <div><span class="bn">20-30</span><span class="bl">estimator hours per $500k bid, win or lose</span></div>
-      <div><span class="bn">under 10%</span><span class="bl">of contractors track which bids they win</span></div>
-      <div><span class="bn">10%</span><span class="bl">of this work arrives through advertising. The rest arrives through people</span></div>
+    <div class="statline" data-rv>
+      <div data-rv-item><span class="bn" data-count>20-30</span><span class="bl">estimator hours per $500k bid, win or lose</span></div>
+      <div data-rv-item><span class="bn" data-count>under 10%</span><span class="bl">of contractors track which bids they win</span></div>
+      <div data-rv-item><span class="bn" data-count>10%</span><span class="bl">of this work arrives through advertising. The rest arrives through people</span></div>
       <p class="src">Sources: constructionbids.ai bid win-rate study, downtobid bid-hit ratio survey of 2,000 plus contractors, RIBAJ on where commissions originate.</p>
     </div>
   </div>
@@ -713,7 +728,7 @@ textarea.finput{resize:vertical;min-height:84px}
 
     </div>
 
-    <p class="twonote">That is it. We do not touch your estimating, we do not price your work, and we do not chase your architects. Those are your job and you are better at them than we are.</p>
+    <p class="twonote">That is it. We do not touch your estimating, price your work, or chase your architects. Those are yours, and you are better at them.</p>
   </div>
 </section>
 
@@ -770,13 +785,13 @@ textarea.finput{resize:vertical;min-height:84px}
         </div>
         <div>
           <h3>The work we have had to sell.</h3>
-          <div class="stally">
-            <div class="strow"><span class="sk">Healthcare and veterinary</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
-            <div class="strow"><span class="sk">Office and professional</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
-            <div class="strow"><span class="sk">Restaurant</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
-            <div class="strow"><span class="sk">Head offices</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
-            <div class="strow"><span class="sk">Industrial</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
-            <div class="strow"><span class="sk">Childcare</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
+          <div class="stally" data-rv>
+            <div class="strow" data-rv-item><span class="sk">Healthcare and veterinary</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
+            <div class="strow" data-rv-item><span class="sk">Office and professional</span><span class="sbar" style="--n:5"></span><span class="sct">5</span></div>
+            <div class="strow" data-rv-item><span class="sk">Restaurant</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
+            <div class="strow" data-rv-item><span class="sk">Head offices</span><span class="sbar" style="--n:2"></span><span class="sct">2</span></div>
+            <div class="strow" data-rv-item><span class="sk">Industrial</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
+            <div class="strow" data-rv-item><span class="sk">Childcare</span><span class="sbar" style="--n:1"></span><span class="sct">1</span></div>
           </div>
           <p class="secclose">Sixteen named builds, five sectors, two provinces. We do not need you to explain what a tenant improvement is.</p>
         </div>
@@ -797,20 +812,20 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">Who you are dealing with</span>
     <h2>A small team, on your accounts, under your name.</h2>
-    <div class="trustgrid">
-      <div>
+    <div class="trustgrid" data-rv>
+      <div data-rv-item>
         <span class="tnum2">01</span><h3>Two people run every account</h3>
         <p>Not a pod, not an intern. That is why we take three firms at a time and no more.</p>
       </div>
-      <div>
+      <div data-rv-item>
         <span class="tnum2">02</span><h3>Everything is built on your accounts</h3>
         <p>Your Google Ads, your Meta, your domain, your CRM. You own the data from day one and you keep it if we part ways.</p>
       </div>
-      <div>
+      <div data-rv-item>
         <span class="tnum2">03</span><h3>Your accounts, your name</h3>
         <p>Ads run on your accounts and inquiries come to you. We never sit between you and a client.</p>
       </div>
-      <div>
+      <div data-rv-item>
         <span class="tnum2">04</span><h3>We sign an NDA before the kickoff call</h3>
         <p>Your project list, your pricing and your client names stay yours. We will not name you as a client without asking.</p>
       </div>
@@ -844,39 +859,40 @@ textarea.finput{resize:vertical;min-height:84px}
     <span class="eyebrow">The deal</span>
     <h2>Live in 7 days. A qualified inquiry in 14, or your money back.</h2>
     <p class="offername">The 7-Day Job Pipeline</p>
+    <p class="oneline">We build your job pipeline in 7 days. No qualified inquiry inside 14 and you get the $5,000 back and keep everything. After that it is $3,000 a month, and a flat fee only when you sign a job we found.</p>
 
     <div class="deal2">
       <div class="dealcol">
         <span class="feek">WHAT WE BUILD, LIVE IN 7 DAYS</span>
-        <ul class="dlist">
-          <li><b>Your sector page</b>, written and built from your own jobs and photos, on your domain</li>
-          <li><b>Google and Meta campaigns</b>, set up and managed on your own ad accounts</li>
-          <li><b>The answering system</b> that replies to every inquiry in minutes, day or night, and asks what your estimator would ask</li>
-          <li><b>Calendar booking</b>, so a real job lands in his diary already qualified</li>
-          <li><b>The bid feed</b>, every tender in your area pulled from the portals and scored GO or NO GO</li>
-          <li><b>Your CRM and call tracking</b>, so every inquiry, quote and job sits in one place</li>
-          <li><b>The Monday email and the weekly number</b>, what each job cost you to win and where it came from</li>
+        <ul class="dlist" data-rv>
+          <li data-rv-item><b>Your sector page</b>, written and built from your own jobs and photos, on your domain</li>
+          <li data-rv-item><b>Google and Meta campaigns</b>, set up and managed on your own ad accounts</li>
+          <li data-rv-item><b>The answering system</b>, every inquiry answered in minutes at any hour, asked what your estimator would ask</li>
+          <li data-rv-item><b>Calendar booking</b>, a qualified job straight into his diary</li>
+          <li data-rv-item><b>The bid feed</b>, every tender in your area pulled from the portals and scored GO or NO GO</li>
+          <li data-rv-item><b>Your CRM and call tracking</b>, one place for every inquiry, quote and job</li>
+          <li data-rv-item><b>The Monday email and the weekly number</b>, what each job cost to win, and where it came from</li>
         </ul>
-        <p class="dnote">Built in 7 days. Yours to keep from day one, on your accounts, whatever you decide at the end.</p>
+        <p class="dnote">Yours from day one, on your accounts, whatever you decide at the end.</p>
       </div>
 
       <div class="dealcol">
         <span class="feek">WHAT YOU PAY</span>
-        <div class="paybox">
-          <div class="payrow"><span class="payk">To build it</span><span class="payv">$5,000 once. Live in 7 days. Refunded in full if you have no qualified inquiry inside 14 days, and you keep everything.</span></div>
-          <div class="payrow"><span class="payk">Every month after</span><span class="payv">$3,000, ads managed and the bid desk run. Cancel any time.</span></div>
-          <div class="payrow"><span class="payk">Your ad spend</span><span class="payv">Direct to Google and Meta on your own accounts. We never touch it or mark it up.</span></div>
-          <div class="payrow"><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, by the size of that job<span class="fbands"><span class="fband"><i>Under $150k</i><b>$2,500</b></span><span class="fband"><i>$150k to $500k</i><b>$6,000</b></span><span class="fband"><i>$500k to $1.5M</i><b>$12,000</b></span><span class="fband"><i>Over $1.5M</i><b>$20,000</b></span></span></span></div>
+        <div class="paybox" data-rv>
+          <div class="payrow" data-rv-item><span class="payk">To build it</span><span class="payv">$5,000 once. Live in 7 days. Refunded in full if you have no qualified inquiry inside 14 days, and you keep everything.</span></div>
+          <div class="payrow" data-rv-item><span class="payk">Every month after</span><span class="payv">$3,000, ads managed and the bid desk run. Cancel any time.</span></div>
+          <div class="payrow" data-rv-item><span class="payk">Your ad spend</span><span class="payv">Direct to Google and Meta on your own accounts. We never touch it or mark it up.</span></div>
+          <div class="payrow" data-rv-item><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, by the size of that job<span class="fbands"><span class="fband"><i>Under $150k</i><b>$2,500</b></span><span class="fband"><i>$150k to $500k</i><b>$6,000</b></span><span class="fband"><i>$500k to $1.5M</i><b>$12,000</b></span><span class="fband"><i>Over $1.5M</i><b>$20,000</b></span></span></span></div>
         </div>
-        <p class="dnote">Not a percentage of your contract. Not a retainer you pay whether the phone rings or not.</p>
+        <p class="dnote">No percentage of your contract. No retainer whether the phone rings or not.</p>
       </div>
     </div>
 
     <div class="incl">
       <span class="feek">TWO THINGS INCLUDED, YOURS EITHER WAY</span>
       <ul class="dlist bonus2">
-          <li><b>Your dead quote list, worked again.</b> Every estimate you sent this year that went quiet, chased by the same system. At 20 to 30 estimator hours a bid, you have already paid for that work once. They saw your number and did not say no.</li>
-          <li><b>The search map for your sector.</b> Every term an owner types before calling a contractor, and which competitor ranks for each one in your city. Sold on its own as a keyword gap audit this runs $1,500 to $2,500. Yours whether or not you continue.</li>
+          <li><b>Your dead quote list, worked again.</b> Every estimate that went quiet this year, chased by the same system. At 20 to 30 estimator hours a bid, you already paid for that work once.</li>
+          <li><b>The search map for your sector.</b> Every term an owner types before calling a contractor, and who ranks for each in your city. A $1,500 to $2,500 audit elsewhere. Yours either way.</li>
         </ul>
     </div>
 
@@ -964,15 +980,15 @@ textarea.finput{resize:vertical;min-height:84px}
     <span class="eyebrow">Fit</span>
     <h2>We run three builds at a time.</h2>
     <p class="fitwhen">Two people run every account, so three is the cap. It also decides your start date. A build that starts now is answering inquiries before the winter tender season opens. One that starts in November spends that season still being built.</p>
-    <div class="fitlist">
-      <div class="fitrow"><span class="fchip fgo">GO</span><span>Commercial GC or design build, not residential</span></div>
-      <div class="fitrow"><span class="fchip fgo">GO</span><span>You have usable project photos</span></div>
-      <div class="fitrow"><span class="fchip fgo">GO</span><span>You can fund 90 days of ad spend</span></div>
-      <div class="fitrow"><span class="fchip fgo">GO</span><span>An estimator can take a booked call</span></div>
-      <div class="fitrow"><span class="fchip fno">NO GO</span><span>You just want your name out there</span></div>
-      <div class="fitrow"><span class="fchip fno">NO GO</span><span>Four people approve every piece of creative</span></div>
-      <div class="fitrow"><span class="fchip fno">NO GO</span><span>Your backlog is full and you like it</span></div>
-      <div class="fitrow"><span class="fchip fno">NO GO</span><span>You want a guaranteed contract value</span></div>
+    <div class="fitlist" data-rv>
+      <div class="fitrow" data-rv-item><span class="fchip fgo">GO</span><span>Commercial GC or design build, not residential</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fgo">GO</span><span>You have usable project photos</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fgo">GO</span><span>You can fund 90 days of ad spend</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fgo">GO</span><span>An estimator can take a booked call</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fno">NO GO</span><span>You just want your name out there</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fno">NO GO</span><span>Four people approve every piece of creative</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fno">NO GO</span><span>Your backlog is full and you like it</span></div>
+      <div class="fitrow" data-rv-item><span class="fchip fno">NO GO</span><span>You want a guaranteed contract value</span></div>
     </div>
     <p class="fitnote">We score you the same way we score your tenders. If it is a NO GO we will say so on the first call rather than take the setup fee.</p>
   </div>
@@ -1025,11 +1041,11 @@ textarea.finput{resize:vertical;min-height:84px}
 <section class="final dark">
   <img src="assets/img/build.jpg" alt="Commercial building under construction at dusk" />
   <div class="veil"></div>
-  <div class="wrap">
-    <span class="eyebrow">Next step</span>
-    <h2>Ninety seconds. One sector.</h2>
+  <div class="wrap" data-rv>
+    <span class="eyebrow" data-rv-item>Next step</span>
+    <h2 data-rv-item>Ninety seconds. One sector.</h2>
     <p>Ten questions about how work reaches you today. A score out of 100 and the gap costing you the most projects. No call, no pitch deck.</p>
-    <div class="hero-cta">
+    <div class="hero-cta" data-rv-item>
       <a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a>
       <a class="btn btn-ghost" href="#build">See what we run</a>
     </div>
@@ -1289,6 +1305,50 @@ textarea.finput{resize:vertical;min-height:84px}
     });
     d.addEventListener('toggle',function(){ if(d.open) box.style.gridTemplateRows=''; });
   });
+})();
+
+(function(){
+  var groups=[].slice.call(document.querySelectorAll('[data-rv]'));
+  if(!groups.length || !('IntersectionObserver' in window)) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // count-up: animate the LAST number in the string, keep prefix and suffix
+  function countUp(el){
+    var raw=el.getAttribute('data-count-src')||el.textContent;
+    el.setAttribute('data-count-src',raw);
+    var m=raw.match(/^(.*?)(\d+)(\D*)$/);
+    if(!m){ return; }
+    var pre=m[1], target=parseInt(m[2],10), post=m[3], t0=null, dur=900;
+    function step(ts){
+      if(!t0) t0=ts;
+      var k=Math.min(1,(ts-t0)/dur), eased=1-Math.pow(1-k,4);
+      el.textContent=pre+Math.round(target*eased)+post;
+      if(k<1) requestAnimationFrame(step);
+    }
+    el.textContent=pre+'0'+post;
+    requestAnimationFrame(step);
+  }
+
+  document.documentElement.classList.add('rv-on');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var items=e.target.querySelectorAll('[data-rv-item]');
+      items.forEach(function(it,i){
+        setTimeout(function(){
+          it.classList.add('rv-in');
+          if(!reduce) it.querySelectorAll('[data-count]').forEach(countUp);
+        }, reduce?0:i*90);
+      });
+      io.unobserve(e.target);
+    });
+  },{threshold:0,rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){ io.observe(g); });
+
+  // nothing may stay invisible: hard backstop
+  setTimeout(function(){
+    document.querySelectorAll('[data-rv-item]:not(.rv-in)').forEach(function(x){x.classList.add('rv-in')});
+  },5000);
 })();
 </script>
 </body>
