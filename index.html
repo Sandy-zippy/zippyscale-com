@@ -157,6 +157,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 
 /* image band */
 .band{position:relative;overflow:hidden;height:clamp(300px,48vw,520px)}
+.band-short{height:clamp(240px,34vw,380px)}
 .band img{width:100%;height:120%;object-fit:cover;position:absolute;top:-10%;left:0;will-change:transform}
 .band-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,42,53,.94) 0%,rgba(42,42,53,.86) 38%,rgba(42,42,53,.45) 72%,rgba(42,42,53,.2) 100%)}
 .band-copy{position:relative;height:100%;display:flex;align-items:center}
@@ -489,7 +490,7 @@ textarea.finput{resize:vertical;min-height:84px}
     <div>
       <span class="badge"><span class="dot"></span> Three builds at a time. One slot open.</span>
       <h1>We become your <em>demand department.</em></h1>
-      <p class="lede">Tenders scored before your estimator opens them. Architects and past clients worked on a schedule. Search and paid running. Every enquiry answered in minutes. You pay us nothing until a project we sourced is signed.</p>
+      <p class="lede">Five channels run for you, from scored tenders to answered enquiries. You pay nothing until a project we sourced is signed.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Score my pipeline in 90 seconds</a>
       </div>
@@ -550,29 +551,41 @@ textarea.finput{resize:vertical;min-height:84px}
       <li><span class="pn">04</span>Your best lead this month is still in someone's voicemail.</li>
     </ul>
     <div class="statline">
-      <div><span class="bn">20-30</span><span class="bl">estimator hours a $500k retrofit costs you, win or lose</span></div>
-      <div><span class="bn">under 10%</span><span class="bl">of contractors track which bids they actually win</span></div>
-      <div><span class="bn">10%</span><span class="bl">of commercial work arrives through advertising. The rest arrives through people</span></div>
+      <div><span class="bn">20-30</span><span class="bl">estimator hours per $500k bid, win or lose</span></div>
+      <div><span class="bn">under 10%</span><span class="bl">of contractors track which bids they win</span></div>
+      <div><span class="bn">10%</span><span class="bl">of this work arrives through advertising. The rest arrives through people</span></div>
     </div>
   </div>
 </section>
+
+<div class="band">
+  <img src="assets/img/waiting.jpg" alt="A woman alone in an empty commercial shell at dusk, plans under her arm, phone to her ear" />
+  <div class="band-veil"></div>
+  <div class="band-copy"><div class="wrap"><p>She called three firms on Tuesday.<span>You replied Thursday.</span></p></div></div>
+</div>
 
 <!-- 4. HOW IT WORKS -->
 <section class="dark" id="build">
   <div class="wrap">
     <span class="eyebrow">What we run for you</span>
     <h2>Five channels. One department.</h2>
-    <p class="lede">Most agencies sell you the smallest one. We run all five, and the two that matter most are the ones nobody else touches.</p>
+    <p class="lede">Most agencies sell you the smallest one.</p>
     <div class="dept">
-      <article><span class="dk">01</span><h3>The Bid Desk</h3><p>Every relevant tender scored go or no-go against your size, geography, bonding capacity and scope match. Your estimator opens the ones you can win.</p></article>
-      <article><span class="dk">02</span><h3>The Relationship Engine</h3><p>Your architects, brokers and property managers contacted on a schedule instead of when you are hungry. Past clients reactivated on warranty and lease dates.</p></article>
-      <article><span class="dk">03</span><h3>Owner-Direct Demand</h3><p>Search and paid on your own accounts, aimed at one sector, landing on a page built to sell that work.</p></article>
-      <article><span class="dk">04</span><h3>The Response System</h3><p>Every enquiry answered in minutes at any hour, qualified, and booked into your estimator's calendar.</p></article>
-      <article><span class="dk">05</span><h3>The Credential Vault</h3><p>Prequalifications, WCB, insurance and bonding letters kept current and filed, so you never lose an invitation to an expired document.</p></article>
-      <article class="dept-num"><span class="dk">AND THE NUMBER</span><h3>Cost per signed project, by channel</h3><p>Weekly. So you know which of the five is paying for itself and which to turn up.</p></article>
+      <article><span class="dk">01</span><h3>The Bid Desk</h3><p>Tenders scored go or no-go on size, geography, bonding and scope. Your estimator only opens the winnable ones.</p></article>
+      <article><span class="dk">02</span><h3>The Relationship Engine</h3><p>Architects, brokers and property managers contacted on a schedule, not when you are hungry. Past clients reactivated on warranty and lease dates.</p></article>
+      <article><span class="dk">03</span><h3>Owner-Direct Demand</h3><p>Search and paid on your accounts, aimed at one sector, landing on a page built to sell it.</p></article>
+      <article><span class="dk">04</span><h3>The Response System</h3><p>Every enquiry answered in minutes, qualified, booked into the estimator's calendar.</p></article>
+      <article><span class="dk">05</span><h3>The Credential Vault</h3><p>Prequalifications, WCB, insurance and bonding kept current, so you never lose an invitation to an expired document.</p></article>
+      <article class="dept-num"><span class="dk">AND THE NUMBER</span><h3>Cost per signed project, by channel</h3><p>Weekly, so you know which channel to turn up.</p></article>
     </div>
   </div>
 </section>
+
+<div class="band band-short">
+  <img src="assets/img/missed.jpg" alt="Two people in hard hats on a taped off clinic build, one checking a phone" />
+  <div class="band-veil"></div>
+  <div class="band-copy"><div class="wrap"><p>Most quotes are not lost.<span>They are just never chased.</span></p></div></div>
+</div>
 
 <!-- 5. NAMED PROOF -->
 <section id="proof">
@@ -584,13 +597,13 @@ textarea.finput{resize:vertical;min-height:84px}
         <span class="ck">CASE 01</span>
         <h3>Medico Construction</h3>
         <p class="cmeta">Healthcare design build · BC and Alberta</p>
-        <p>Two years running their acquisition. Search, paid, tracking, funnel and CRM for a firm that has delivered 50 plus clinics. They hold two first page positions for medical clinic contractor searches in Vancouver.</p>
+        <p>Two years running their acquisition. Search, paid, tracking, funnel and CRM for a firm with 50 plus clinics delivered. Two first page positions in Vancouver for their buyers' searches.</p>
       </article>
       <article class="case light">
         <span class="ck">CASE 02</span>
         <h3>Riarh Group</h3>
         <p class="cmeta">Commercial, industrial and TI · Surrey BC</p>
-        <p>Website and lead funnel built and shipped for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking enquiries.</p>
+        <p>Website and lead funnel for a firm running four offices across BC and Alberta. Signed off by the principal, live and taking enquiries.</p>
       </article>
     </div>
     <div class="sectors light">
@@ -624,13 +637,13 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="guarantee">
       <div class="gterms">
         <div><dt>Your only cost</dt><dd>Ad spend, paid direct to Google and Meta. You set the ceiling.</dd></div>
-        <div><dt>The fee</dt><dd>Agreed in writing before we start. One flat number per signed project we source, never a cut of your contract. Your own referrals are never ours.</dd></div>
+        <div><dt>The fee</dt><dd>Agreed in writing before we start. One flat number per signed project we source, never a cut of your contract. Your referrals are never ours.</dd></div>
         <div><dt>You keep</dt><dd>Page, campaigns, CRM, credential vault, data. Your accounts from day one.</dd></div>
         <div><dt>Hard stop</dt><dd>90 days. No signed project, no invoice.</dd></div>
       </div>
       <div class="bonusrow">
-        <div><span class="bk">INCLUDED</span><strong>Your dead quote list, revived</strong><p>Every estimate you sent this year that went quiet, worked again. Already qualified, already knows your price.</p></div>
-        <div><span class="bk">INCLUDED</span><strong>The search map for your sector</strong><p>Every term an owner types before calling a contractor, who owns each one in your area, and what it takes to take it. Yours either way.</p></div>
+        <div><span class="bk">INCLUDED</span><strong>Your dead quote list, revived</strong><p>Every quiet estimate from this year, worked again. Already qualified, already knows your price.</p></div>
+        <div><span class="bk">INCLUDED</span><strong>The search map for your sector</strong><p>Every term an owner types before calling a contractor, and who owns each one in your area. Yours either way.</p></div>
       </div>
       <div class="hero-cta"><a class="btn btn-primary" data-book href="#apply">Score my pipeline in 90 seconds</a></div>
     </div>
@@ -642,7 +655,7 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">The scorecard</span>
     <h2>Where is your pipeline leaking?</h2>
-    <p class="lede">Nine questions, about ninety seconds. You get a score out of 100, the one gap costing you the most work, and what we would fix first.</p>
+    <p class="lede">Nine questions. A score out of 100 and the one gap costing you the most work.</p>
 
     <div class="quizbox">
       <!-- INTRO -->
@@ -650,7 +663,7 @@ textarea.finput{resize:vertical;min-height:84px}
         <div class="qgrid">
           <div>
             <h3>The Commercial Contractor Growth Scorecard</h3>
-            <p class="qlede">We grade six areas: visibility, demand, response speed, qualification, follow up and measurement. Same six that decide whether an owner calls you first or third.</p>
+            <p class="qlede">Six areas: visibility, demand, response speed, qualification, follow up, measurement. The six that decide whether you get called first or third.</p>
             <button type="button" class="btn btn-primary" id="qstart">Start the scorecard</button>
             <p class="fhint">No email until the last step. Nine questions, ninety seconds.</p>
           </div>
@@ -752,11 +765,11 @@ textarea.finput{resize:vertical;min-height:84px}
       </details>
       <details>
         <summary>What is the catch?</summary>
-        <p>You fund the ad spend and you commit to answering the calls we book. That is it. We carry the build. If it does not produce a signed project, we carry that cost too.</p>
+        <p>You fund the ad spend and answer the calls we book. That is it. If it produces nothing, we carry the build cost.</p>
       </details>
       <details>
         <summary>How much ad spend?</summary>
-        <p>We size it from your scorecard answers, your sector and your area, and you set the ceiling. It is paid direct to Google and Meta on your own accounts. We never touch it and we never take a cut of it.</p>
+        <p>Sized from your scorecard answers, your sector and your area. You set the ceiling, you pay Google and Meta direct. We never touch it or take a cut.</p>
       </details>
       <details>
         <summary>What does "your first signed client" mean exactly?</summary>
@@ -764,15 +777,15 @@ textarea.finput{resize:vertical;min-height:84px}
       </details>
       <details>
         <summary>What do the AI agents actually do?</summary>
-        <p>Four jobs. Answer every inquiry within minutes at any hour. Ask what your estimator would ask, sector, square footage, location, budget range, permit stage and timeline. Book the qualified ones into the calendar. Chase the quiet ones for weeks without getting bored. A human on our side reviews the edge cases every day.</p>
+        <p>Answer within minutes at any hour. Ask what your estimator would ask: sector, square footage, location, budget, permit stage, timeline. Book the real ones, chase the quiet ones for weeks. A human reviews edge cases daily.</p>
       </details>
       <details>
         <summary>We get everything by referral. Why change?</summary>
-        <p>Referrals are the best lead you will ever get and this does not touch them. It adds the owners who never reach your network, the ones searching right now for a contractor who has built their exact thing. You keep the referrals and stop being the third bid on everything else.</p>
+        <p>Referrals are the best lead you get and this does not touch them. It adds the owners who never reach your network. You keep the referrals and stop being the third bid on everything else.</p>
       </details>
       <details>
         <summary>Which sectors and where?</summary>
-        <p>Tenant improvements, medical, dental and veterinary clinics, restaurant and retail fit-outs, childcare, pharmacy, office build-outs, industrial and warehouse. Commercial general contractors and design build firms across North America. One sector per build.</p>
+        <p>Tenant improvements, clinics, restaurant and retail fit-outs, childcare, pharmacy, office, industrial and warehouse. Commercial GCs and design build firms across North America. One sector per build.</p>
       </details>
     </div>
   </div>
@@ -785,7 +798,7 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">Next step</span>
     <h2>Ninety seconds. One sector.</h2>
-    <p>Answer nine questions about how work reaches you today. You get a score out of 100, the one gap costing you the most projects, and what we would fix first. No call, no pitch deck.</p>
+    <p>Nine questions about how work reaches you today. A score out of 100 and the gap costing you the most projects. No call, no pitch deck.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" data-book href="#apply">Score my pipeline in 90 seconds</a>
       <a class="btn btn-ghost" href="#build">See what we run</a>
