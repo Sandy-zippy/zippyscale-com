@@ -357,16 +357,12 @@ textarea.finput{resize:vertical;min-height:84px}
 .sectors.light .sk{color:var(--lime-text)}
 .sectors.light .secclose{color:var(--head)}
 /* bonuses inside the deal */
-.bonusrow{display:grid;gap:20px;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
-@media(min-width:760px){.bonusrow{grid-template-columns:1fr 1fr;gap:26px}}
-.bonusrow strong{font-family:'Space Grotesk',sans-serif;font-size:1.02rem;color:var(--head);display:block;margin-bottom:8px}
-.bonusrow p{font-size:.92rem;color:var(--body)}
-.bonusrow .bk{color:var(--lime-text)}
 
 
 /* fee table */
 .fees{margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
 .feek{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.16em;color:var(--lime-text);display:block;margin-bottom:16px}
+.dark .feek{color:var(--lime)}
 .fees table{width:100%;border-collapse:collapse;max-width:460px}
 .fees th{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.66rem;letter-spacing:.12em;
   text-transform:uppercase;color:var(--muted);padding:0 0 10px;border-bottom:1px solid var(--line)}
@@ -435,7 +431,7 @@ textarea.finput{resize:vertical;min-height:84px}
 .twonote{margin-top:32px;font-size:.97rem;color:var(--muted-dark);max-width:70ch}
 
 
-.deal2{display:grid;gap:36px;margin-top:44px}
+.deal2{display:grid;gap:36px;margin-top:44px;align-items:start}
 @media(min-width:900px){.deal2{grid-template-columns:1.05fr .95fr;gap:52px}}
 .dlist{list-style:none;display:grid;gap:14px;margin-top:16px}
 .dlist li{position:relative;padding-left:26px;font-size:.97rem;color:var(--body-dark);line-height:1.55}
@@ -443,13 +439,20 @@ textarea.finput{resize:vertical;min-height:84px}
   border-left:2px solid var(--lime);border-bottom:2px solid var(--lime);transform:rotate(-45deg)}
 .dlist b{color:var(--cream)}
 .bonus2 li:before{border-color:var(--muted-dark)}
+.incl{margin-top:44px;padding-top:32px;border-top:1px solid var(--border-dark)}
+@media(min-width:900px){.incl .bonus2{display:grid;grid-template-columns:1fr 1fr;gap:0 52px;align-content:start}}
 .dnote{font-size:.9rem;color:var(--muted-dark);margin-top:20px;max-width:56ch}
+.fitwhen{font-size:1.02rem;color:var(--body);max-width:62ch;margin:-8px 0 34px;line-height:1.55}
 .paybox{margin-top:16px;border-top:1px solid var(--border-dark)}
 .payrow{display:grid;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--border-dark)}
 @media(min-width:620px){.payrow{grid-template-columns:150px 1fr;align-items:baseline}}
 .payk{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted-dark)}
 .payv{font-size:1.02rem;color:var(--cream);font-weight:500}
+.fbands{display:block;margin-top:12px;border-top:1px solid var(--border-dark)}
+.fband{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border-dark)}
+.fband i{font-style:normal;font-size:.86rem;color:var(--muted-dark)}
+.fband b{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:var(--lime);font-weight:700;white-space:nowrap}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -694,9 +697,9 @@ textarea.finput{resize:vertical;min-height:84px}
     <ol class="when">
       <li><span class="wk">DAY 1</span><div><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</div></li>
       <li><span class="wk">DAY 9</span><div><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</div></li>
-      <li><span class="wk">DAY 14</span><div><b>First batch of messages to approve.</b> Ten drafts to your architects, brokers and past clients, waiting on your yes.</div></li>
+      <li><span class="wk">DAY 14</span><div><b>Your page and your ads, waiting on your yes.</b> The sector page written from your own jobs, and the first campaigns. Nothing goes live until you approve it.</div></li>
       <li><span class="wk">DAY 21</span><div><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every inquiry gets a reply inside five minutes.</div></li>
-      <li><span class="wk">DAY 30</span><div><b>Vault built, first numbers.</b> Prequalification documents filed and current. First weekly email showing what each job cost you to win, and where it came from.</div></li>
+      <li><span class="wk">DAY 30</span><div><b>First numbers.</b> The weekly email starts: what came in, what it cost you to win, and which of the two channels it came from.</div></li>
       <li><span class="wk">DAY 90</span><div><b>The decision point.</b> If you have not signed a job we found, we walk and you owe nothing.</div></li>
     </ol>
   </div>
@@ -729,17 +732,19 @@ textarea.finput{resize:vertical;min-height:84px}
         <div class="paybox">
           <div class="payrow"><span class="payk">Now</span><span class="payv">Nothing</span></div>
           <div class="payrow"><span class="payk">Every month</span><span class="payv">Your ad spend, direct to Google and Meta</span></div>
-          <div class="payrow"><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, $2,500 to $20,000 by job size</span></div>
+          <div class="payrow"><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, by the size of that job<span class="fbands"><span class="fband"><i>Under $150k</i><b>$2,500</b></span><span class="fband"><i>$150k to $500k</i><b>$6,000</b></span><span class="fband"><i>$500k to $1.5M</i><b>$12,000</b></span><span class="fband"><i>Over $1.5M</i><b>$20,000</b></span></span></span></div>
           <div class="payrow"><span class="payk">If nothing signs in 90 days</span><span class="payv">Nothing. We walk.</span></div>
         </div>
         <p class="dnote">You never write us a cheque before you have written an invoice.</p>
+      </div>
+    </div>
 
-        <span class="feek" style="margin-top:30px">AND TWO THINGS WE THROW IN</span>
-        <ul class="dlist bonus2">
+    <div class="incl">
+      <span class="feek">TWO THINGS INCLUDED, YOURS EITHER WAY</span>
+      <ul class="dlist bonus2">
           <li><b>Your dead quote list, worked again.</b> Every estimate you sent this year that went quiet, chased by the same system. They already saw your number and did not say no.</li>
           <li><b>The search map for your sector.</b> Every term an owner types before calling a contractor, and which competitor ranks for each one in your city. Yours whether or not you continue.</li>
         </ul>
-      </div>
     </div>
 
     <div class="hero-cta"><a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a></div>
@@ -825,6 +830,7 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap">
     <span class="eyebrow">Fit</span>
     <h2>We run three builds at a time.</h2>
+    <p class="fitwhen">Two people run every account, so three is the cap. It also decides your start date. A build that starts now is answering inquiries before the winter tender season opens. One that starts in November spends that season still being built.</p>
     <div class="fit">
       <div class="fit-col">
         <h3>This works if</h3>
@@ -868,8 +874,8 @@ textarea.finput{resize:vertical;min-height:84px}
         <p>Sized from your scorecard answers, your sector and your area. You set the ceiling, you pay Google and Meta direct. We never touch it or take a cut.</p>
       </details>
       <details>
-        <summary>What does "your first signed client" mean exactly?</summary>
-        <p>A project that came through the system, walked by your estimator, and signed. You confirm it. That is when the fee in the table above applies.</p>
+        <summary>How do you know a job came from you?</summary>
+        <p>The inquiry has to arrive through the system and be timestamped in your CRM, and you have to confirm the contract was signed. Your own referrals and repeat clients are never ours, even if they saw an ad on the way. If it is not in the system, we are not owed for it.</p>
       </details>
       <details>
         <summary>We get everything by referral. Why change?</summary>
