@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Self-hosted, same six faces as the current build. */
+@font-face{font-family:'Inter';src:url('/fonts/inter-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Inter';src:url('/fonts/inter-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Inter';src:url('/fonts/inter-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('/fonts/space-grotesk-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('/fonts/space-grotesk-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url('/fonts/jetbrains-mono-700.woff2') format('woff2');font-weight:700;font-display:swap}
+
+/* Tokens are the locked brand system from DESIGN.md. lime-text is the
+   on-cream accent at 4.57:1; B8CF2E is 1.72:1 and must never be text. */
+@theme {
+  --color-cream:      #FFFDF7;
+  --color-white:      #FFFFFF;
+  --color-charcoal:   #2A2A35;
+  --color-card-dark:  #33333F;
+  --color-border-dark:#3E3E48;
+  --color-lime:       #D5EB4B;
+  --color-lime-text:  #6B7C10;
+  --color-head:       #1A1A2E;
+  --color-body:       #4A5568;
+  --color-body-dark:  #C9CBD6;
+  --color-muted:      #6B7280;
+  --color-muted-dark: #9DA2B0;
+  --color-line:       #E5E7EB;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; background:var(--color-charcoal); }
+body{ font-family:var(--font-sans); font-size:17px; line-height:1.65;
+      color:var(--color-body); background:var(--color-cream); }
+h1,h2,h3{ font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; color:var(--color-head); }
+:focus-visible{ outline:3px solid var(--color-lime-text); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto }
+  *{ animation:none !important; transition-duration:.01ms !important }
+}
