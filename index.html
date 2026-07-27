@@ -63,7 +63,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--charc
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--body);
   font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:var(--head);line-height:1.08;letter-spacing:-0.025em}
-h1{font-size:clamp(2.05rem,4.1vw,3.35rem);line-height:1.06;text-wrap:balance;max-width:19ch}
+h1{font-size:clamp(2.05rem,4.1vw,3.35rem);line-height:1.06;text-wrap:balance;max-width:24ch}
 h2{font-size:clamp(1.85rem,3.8vw,3.05rem);line-height:1.1;text-wrap:balance;max-width:24ch}
 h3{font-size:1.32rem;line-height:1.25;letter-spacing:-0.01em}
 p{max-width:68ch}
@@ -104,11 +104,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .dark a:focus-visible,.dark summary:focus-visible{outline-color:var(--lime)}
 
 /* hero */
-.hero{padding:78px 0 88px;position:relative;overflow:hidden}
+.hero{padding:60px 0 76px;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;top:-260px;right:-200px;width:680px;height:680px;
   background:radial-gradient(circle,rgba(213,235,75,.28) 0%,rgba(213,235,75,0) 66%);pointer-events:none}
 .hero-inner{position:relative;display:grid;gap:52px}
-@media(min-width:1000px){.hero-inner{grid-template-columns:1.02fr .98fr;align-items:center;gap:60px}}
+@media(min-width:1000px){.hero-inner{grid-template-columns:1.18fr .82fr;align-items:start;gap:56px}}
 .badge{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--line);
   border-radius:999px;padding:8px 16px 8px 12px;font-size:.82rem;font-weight:500;color:var(--head);margin-bottom:26px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--lime-dark);flex:none;position:relative}
@@ -120,6 +120,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 
 /* hero sorting diagram */
 .sorter{background:var(--charcoal);border-radius:20px;padding:26px 22px 22px;position:relative;overflow:hidden}
+@media(min-width:1000px){.sorter{margin-top:64px}}
 .sorter-title{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.68rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--lime);margin-bottom:26px}
 #sorter-svg{display:none;width:100%;height:auto}
@@ -442,6 +443,13 @@ textarea.finput{resize:vertical;min-height:84px}
 .incl{margin-top:44px;padding-top:32px;border-top:1px solid var(--border-dark)}
 @media(min-width:900px){.incl .bonus2{display:grid;grid-template-columns:1fr 1fr;gap:0 52px;align-content:start}}
 .dnote{font-size:.9rem;color:var(--muted-dark);margin-top:20px;max-width:56ch}
+.veq{display:grid;gap:2px;margin:26px 0 30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(min-width:660px){.veq{grid-template-columns:repeat(3,1fr);gap:0}}
+.veqi{padding:16px 0}
+@media(min-width:660px){.veqi{padding:18px 22px 18px 0}.veqi+.veqi{border-left:1px solid var(--line);padding-left:22px}}
+.veqk{display:block;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.6rem;letter-spacing:.14em;color:var(--lime-text);margin-bottom:7px}
+.veqi b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--head);line-height:1.1;margin-bottom:4px}
+.veqi i{font-style:normal;font-size:.85rem;color:var(--muted)}
 .fitwhen{font-size:1.02rem;color:var(--body);max-width:62ch;margin:-8px 0 34px;line-height:1.55}
 .paybox{margin-top:16px;border-top:1px solid var(--border-dark)}
 .payrow{display:grid;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--border-dark)}
@@ -485,10 +493,14 @@ textarea.finput{resize:vertical;min-height:84px}
   <div class="wrap hero-inner">
     <div>
       <span class="badge"><span class="dot"></span> For commercial GCs and design-build firms in North America</span>
-      <h1>We find commercial jobs for your firm. <em>You pay only when you sign one.</em></h1>
+      <h1>Your job pipeline, live in 7 days. <em>A qualified inquiry inside 14, or your money back.</em></h1>
       <p class="lede lede-dream">A schedule full of the jobs you want, without dropping your price to win them.</p>
-      <p class="lede">You pay us only if that happens. Two things get you there: ads that bring project inquiries and answer them in minutes, and a bid list every Monday that tells you which tenders are worth opening.</p>
-      <p class="lede lede-diff">Most agencies run the ads and stop there. Nobody works your bid list.</p>
+      <p class="lede">Two things get you there. Ads that bring project inquiries and answer them in minutes, and a bid list every Monday that tells you which tenders are worth opening.</p>
+      <div class="veq">
+        <div class="veqi"><span class="veqk">LIVE IN</span><b>7 days</b><i>Not 30. Not a quarter.</i></div>
+        <div class="veqi"><span class="veqk">YOUR EFFORT</span><b>One call</b><i>45 minutes, then approve the ads.</i></div>
+        <div class="veqi"><span class="veqk">YOUR RISK</span><b>None</b><i>No inquiry in 14 days, full refund.</i></div>
+      </div>
       <div class="hero-cta">
         <a class="btn btn-primary" data-book href="#apply">Find out where you are losing work</a>
       </div>
@@ -600,14 +612,14 @@ textarea.finput{resize:vertical;min-height:84px}
         <h3>Ads that bring you projects</h3>
         <p class="awhat">Google and Meta running on your own accounts, aimed at one kind of work, landing on a page built from your own jobs and photos. Every inquiry that comes in is answered within minutes, day or night, asked what your estimator would ask, and booked into his calendar if it is real.</p>
         <p class="awhere"><b>What lands on your desk:</b> a booked call in your estimator's calendar, with the sector, size, location, budget and start date already asked.</p>
-        <p class="awho">Built and run by us on your accounts. Live day 21.</p>
+        <p class="awho">Built and run by us on your accounts. Live day 7.</p>
       </article>
       <article>
         <span class="ak">02</span>
         <h3>Bid automation</h3>
         <p class="awhat">Every tender in your area pulled from BC Bid, CanadaBuys, MERX, BidCentral and the city portals, plus SAM.gov and the state sites in the US. Each one scored against your size, your sector, your bonding capacity and your service area, then marked <b>GO</b> or <b>NO GO</b> with a one line reason.</p>
         <p class="awhere"><b>What lands on your desk:</b> one email every Monday at 7am. You open only the GO ones.</p>
-        <p class="awho">Set up and run by us. First list lands day 9.</p>
+        <p class="awho">Set up and run by us. First list lands day 3.</p>
       </article>
     </div>
 
@@ -695,12 +707,12 @@ textarea.finput{resize:vertical;min-height:84px}
     <span class="eyebrow">After you sign</span>
     <h2>What happens, and when.</h2>
     <ol class="when">
-      <li><span class="wk">DAY 1</span><div><b>Kickoff call, 45 minutes.</b> You tell us the sector you want more of, your minimum project size, your service area and who takes a booked call. We take your project photos and your documents.</div></li>
-      <li><span class="wk">DAY 9</span><div><b>First bid list in your inbox.</b> Scored GO or NO GO. This is the first thing you can judge us on.</div></li>
-      <li><span class="wk">DAY 14</span><div><b>Your page and your ads, waiting on your yes.</b> The sector page written from your own jobs, and the first campaigns. Nothing goes live until you approve it.</div></li>
-      <li><span class="wk">DAY 21</span><div><b>Ads live, phone answered.</b> Your sector page is up, campaigns are running on your accounts, and every inquiry gets a reply inside five minutes.</div></li>
-      <li><span class="wk">DAY 30</span><div><b>First numbers.</b> The weekly email starts: what came in, what it cost you to win, and which of the two channels it came from.</div></li>
-      <li><span class="wk">DAY 90</span><div><b>The decision point.</b> If you have not signed a job we found, we walk and you owe nothing.</div></li>
+      <li><span class="wk">DAY 1</span><div><b>Kickoff call, 45 minutes.</b> Your sector, your minimum project size, your service area, and who takes a booked call. We take your project photos. This is the only meeting.</div></li>
+      <li><span class="wk">DAY 3</span><div><b>First bid list in your inbox.</b> Every tender in your area, scored GO or NO GO. The first thing you can judge us on.</div></li>
+      <li><span class="wk">DAY 5</span><div><b>Your page and ads, waiting on your yes.</b> Written from your own jobs. Nothing goes live until you approve it.</div></li>
+      <li><span class="wk">DAY 7</span><div><b>Live.</b> Campaigns running on your accounts, and every inquiry answered inside five minutes, day or night.</div></li>
+      <li><span class="wk">DAY 14</span><div><b>Your first qualified inquiry, or your money back.</b> A commercial project in your sector and service area, at or above your minimum size, from someone who has decided to build. If it has not happened, the setup fee is refunded and you keep the build.</div></li>
+      <li><span class="wk">DAY 90</span><div><b>The decision point.</b> No signed job by then and you can walk, with the last month refunded.</div></li>
     </ol>
   </div>
 </section>
@@ -709,12 +721,12 @@ textarea.finput{resize:vertical;min-height:84px}
 <section id="book" class="dark">
   <div class="wrap">
     <span class="eyebrow">The deal</span>
-    <h2>We build it. You run the ads. You pay us when you sign a job.</h2>
-    <p class="offername">The Commercial Contractor's 90-Day Signed Job Program</p>
+    <h2>Live in 7 days. A qualified inquiry in 14, or your money back.</h2>
+    <p class="offername">The 7-Day Job Pipeline</p>
 
     <div class="deal2">
       <div class="dealcol">
-        <span class="feek">WHAT WE BUILD AND RUN, AT NO COST TO YOU</span>
+        <span class="feek">WHAT WE BUILD, LIVE IN 7 DAYS</span>
         <ul class="dlist">
           <li><b>Your sector page</b>, written and built from your own jobs and photos, on your domain</li>
           <li><b>Google and Meta campaigns</b>, set up and managed on your own ad accounts</li>
@@ -724,18 +736,18 @@ textarea.finput{resize:vertical;min-height:84px}
           <li><b>Your CRM and call tracking</b>, so every inquiry, quote and job sits in one place</li>
           <li><b>The Monday email and the weekly number</b>, what each job cost you to win and where it came from</li>
         </ul>
-        <p class="dnote">Built in 30 days. Yours to keep from day one, on your accounts, whatever you decide at the end.</p>
+        <p class="dnote">Built in 7 days. Yours to keep from day one, on your accounts, whatever you decide at the end.</p>
       </div>
 
       <div class="dealcol">
         <span class="feek">WHAT YOU PAY</span>
         <div class="paybox">
-          <div class="payrow"><span class="payk">Now</span><span class="payv">Nothing</span></div>
-          <div class="payrow"><span class="payk">Every month</span><span class="payv">Your ad spend, direct to Google and Meta</span></div>
+          <div class="payrow"><span class="payk">To build it</span><span class="payv">$5,000 once. Live in 7 days. Refunded in full if you have no qualified inquiry inside 14 days, and you keep everything.</span></div>
+          <div class="payrow"><span class="payk">Every month after</span><span class="payv">$3,000, ads managed and the bid desk run. Cancel any time.</span></div>
+          <div class="payrow"><span class="payk">Your ad spend</span><span class="payv">Direct to Google and Meta on your own accounts. We never touch it or mark it up.</span></div>
           <div class="payrow"><span class="payk">When you sign a job we found</span><span class="payv">One flat fee, by the size of that job<span class="fbands"><span class="fband"><i>Under $150k</i><b>$2,500</b></span><span class="fband"><i>$150k to $500k</i><b>$6,000</b></span><span class="fband"><i>$500k to $1.5M</i><b>$12,000</b></span><span class="fband"><i>Over $1.5M</i><b>$20,000</b></span></span></span></div>
-          <div class="payrow"><span class="payk">If nothing signs in 90 days</span><span class="payv">Nothing. We walk.</span></div>
         </div>
-        <p class="dnote">You never write us a cheque before you have written an invoice.</p>
+        <p class="dnote">Not a percentage of your contract. Not a retainer you pay whether the phone rings or not.</p>
       </div>
     </div>
 
@@ -863,15 +875,23 @@ textarea.finput{resize:vertical;min-height:84px}
     <div class="faq">
       <details>
         <summary>So what does it cost once it works?</summary>
-        <p>$2,500 to $20,000 per signed project, banded by contract size, and the full table is above. Not a percentage of your contract, because at 3 to 8 percent net margin a percentage eats your profit. Not a retainer you pay whether the phone rings or not. Price it into a bid like any other cost of sale.</p>
+        <p>$5,000 to build it, $3,000 a month to run it, and $2,500 to $20,000 when you sign a job we found, banded by contract size. The full table is above. Never a percentage of your contract, because at 3 to 8 percent net margin a percentage eats your profit. Price the success fee into a bid like any other cost of sale.</p>
       </details>
       <details>
         <summary>What is the catch?</summary>
-        <p>You fund the ads and answer the calls we book. That is it. If it produces nothing, we eat the setup cost.</p>
+        <p>You fund the ads and answer the calls we book. That is it. If you have no qualified inquiry inside 14 days, the $5,000 comes back and you keep the page, the campaigns, the answering system and the bid desk.</p>
       </details>
       <details>
         <summary>How much ad spend?</summary>
         <p>Sized from your scorecard answers, your sector and your area. You set the ceiling, you pay Google and Meta direct. We never touch it or take a cut.</p>
+      </details>
+      <details>
+        <summary>What counts as a qualified inquiry?</summary>
+        <p>A commercial project in your sector, inside your service area, at or above the minimum project size you set on the kickoff call, from an owner or tenant who has decided to build, with budget range and timeline captured. Not a price shopper, not a residential job, not someone three years out. If it does not meet that bar it does not count, and the guarantee stands.</p>
+      </details>
+      <details>
+        <summary>Why not just do it free until it works?</summary>
+        <p>Because free work gets treated like free work. The setup fee buys you a team that is paid to be fast, and it buys us the right to say no to firms that were never going to answer the phone. The risk is still ours: miss the 14 days and you get it all back and keep the build.</p>
       </details>
       <details>
         <summary>How do you know a job came from you?</summary>
