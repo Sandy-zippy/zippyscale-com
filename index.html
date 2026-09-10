@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://www.zippyscale.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.zippyscale.com/" />
-<meta property="og:title" content="You did not lose that lead. You called back second." />
+<meta property="og:title" content="You didn't lose that lead. You called back second." />
 <meta property="og:description" content="We run the ads, the follow up and the five minute callback, inside your own accounts. No retainer. We are paid out of the closings." />
 <meta property="og:site_name" content="ZippyScale" />
 <meta property="og:image" content="https://www.zippyscale.com/assets/img/table.jpg" />
@@ -44,15 +44,18 @@ src="https://www.facebook.com/tr?id=961643772929674&ev=PageView&noscript=1" /></
 @font-face{font-family:'Figtree';src:url('fonts/figtree-800.woff2') format('woff2');font-weight:800;font-display:swap}
 
 :root{
-  --white:#FFFFFF; --ink:#0B1220; --body:#4A5568; --muted:#68707E;
-  --line:#E6E9EF; --line-2:#D3D9E2; --surface:#F6F8FB;
-  --lime:#D5EB4B; --lime-hover:#C6DE3C; --on-lime:#161A0B; --lime-ink:#5C6A0C;
-  --live:#12B76A; --live-ink:#067647; --warn:#B54708;
+  /* neutrals tinted toward the lime hue, never pure white or black */
+  --white:#FCFCF7; --paper:#F4F5EA; --ink:#12160C; --body:#4B5140; --muted:#6A705F;
+  --line:#E3E5D6; --line-2:#CFD2BE; --surface:#F4F5EA;
+  --lime:#D5EB4B; --lime-hover:#C6DE3C; --on-lime:#12160C; --lime-ink:#525C15;
+  --lime-deep:#B9D02F; --lime-line:#B3C93C;
+  --live:#12B76A; --live-ink:#0A6B41; --warn:#8A3A0B;
   --sh-sm:0 1px 2px rgba(11,18,32,.06),0 1px 3px rgba(11,18,32,.04);
   --sh-md:0 10px 30px -12px rgba(11,18,32,.16),0 2px 6px rgba(11,18,32,.05);
   --sh-lg:0 30px 70px -28px rgba(11,18,32,.32),0 4px 12px rgba(11,18,32,.06);
   --exp:cubic-bezier(.16,1,.3,1);
-  --t-xs:13px; --t-sm:14px; --t-base:17px; --t-md:19px; --t-lg:23px; --t-xl:30px;
+  /* 1.26 modular scale */
+  --t-xs:13px; --t-sm:16px; --t-base:17px; --t-md:20px; --t-lg:26px; --t-xl:33px; --t-2xl:41px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -66,7 +69,9 @@ h3{font-size:var(--t-lg);letter-spacing:-.022em}
 a{color:inherit}
 img,svg{max-width:100%;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
-section{padding:clamp(74px,8vw,112px) 0}
+section{padding:clamp(72px,7vw,104px) 0}
+section.tall{padding:clamp(104px,11vw,164px) 0}
+section.tight{padding:clamp(52px,5vw,72px) 0}
 .eyebrow{display:block;font-size:var(--t-xs);font-weight:800;letter-spacing:.11em;
   text-transform:uppercase;color:var(--lime-ink);margin-bottom:16px}
 .lede{margin-top:18px;font-size:var(--t-md);color:var(--body);max-width:46ch}
@@ -132,18 +137,21 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .dots i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bob 1.1s infinite}
 .dots i:nth-child(2){animation-delay:.14s}.dots i:nth-child(3){animation-delay:.28s}
 @keyframes bob{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
-.booked{display:flex;align-items:center;gap:9px;margin-top:4px;padding:12px 14px;background:var(--white);
-  border:1px solid var(--line);border-left:3px solid var(--live);border-radius:12px;
-  font-size:var(--t-sm);font-weight:700;color:var(--ink);opacity:0;transform:translateY(8px)}
+.booked{display:flex;align-items:center;gap:9px;margin-top:4px;padding:13px 15px;background:#E8F6EE;
+  border:1px solid #BFE3CF;border-radius:12px;
+  font-size:var(--t-sm);font-weight:700;color:#0A3D26;opacity:0;transform:translateY(8px)}
 .booked.in{opacity:1;transform:none;transition:opacity .4s var(--exp),transform .4s var(--exp)}
-.booked svg{width:16px;height:16px;color:var(--live-ink);flex:none}
+.booked svg{width:17px;height:17px;color:#0A6B41;flex:none}
 
 /* numbers strip */
-.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);padding:0}
-.strip-in{display:grid;gap:24px;padding:30px 0}
-@media(min-width:760px){.strip-in{grid-template-columns:repeat(3,1fr);gap:40px}}
-.stat b{display:block;font-size:var(--t-xl);font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
-.stat span{display:block;font-size:var(--t-sm);color:var(--body);margin-top:7px;max-width:30ch}
+/* a sentence you read, not a metric card */
+.strip{background:var(--ink);color:#C9CEBB}
+.strip-in{padding:clamp(38px,4.4vw,58px) 0;display:grid;gap:14px}
+.claim{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.42;font-weight:600;color:#EDF0E0;max-width:34ch;
+  letter-spacing:-.016em}
+.claim b{color:var(--lime);font-weight:800}
+@media(min-width:900px){.strip-in{grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:56px;align-items:end}}
+.claim-note{font-size:var(--t-sm);color:#8E9580;max-width:42ch;padding-bottom:4px}
 
 /* leak: image + list */
 .split{display:grid;gap:40px;align-items:center}
@@ -159,6 +167,23 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .four span{display:block;font-size:var(--t-base);color:var(--body);margin-top:3px;max-width:52ch}
 .srcline{margin-top:22px;font-size:var(--t-xs);color:var(--muted);max-width:70ch}
 
+
+/* lime carries the surface, not a 3% accent */
+.limeblock{background:var(--lime);color:var(--on-lime)}
+.limeblock h2,.limeblock h3{color:var(--on-lime)}
+.limeblock .eyebrow{color:var(--lime-ink)}
+.limeblock .lede,.limeblock p{color:#2C3319}
+.limeblock .btn{background:var(--ink);color:var(--lime)}
+@media(hover:hover) and (pointer:fine){.limeblock .btn:hover{background:#242B16}}
+.limeblock .cta small{color:#4A5330}
+.limeblock .next li{border-top-color:var(--on-lime)}
+.limeblock .next b{color:var(--on-lime)}
+.limeblock .next span{color:#3A4222}
+.limeblock .quiz .btn{background:var(--lime);color:var(--on-lime)}
+.limeblock .qt,.limeblock .quiz h3{color:var(--ink)}
+.limeblock .quiz p{color:var(--body)}
+.limeblock .qo button{color:var(--ink)}
+
 /* dark */
 .dark{background:var(--ink);color:#C7CEDA}
 .dark h2,.dark h3{color:#fff}
@@ -166,17 +191,19 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .dark .lede{color:#C7CEDA}
 
 /* steps */
-.steps{position:relative;display:grid;gap:20px;margin-top:46px}
-@media(min-width:880px){.steps{grid-template-columns:repeat(3,1fr);gap:24px}
-  .steps:before{content:"";position:absolute;top:41px;left:14%;right:14%;height:2px;background:var(--lime);
-    opacity:.35;transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--exp) .25s}
-  .steps.rv-in:before{transform:scaleX(1)}}
-.step{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);
-  border-radius:18px;padding:26px}
-.step em{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;
-  background:var(--lime);color:var(--on-lime);font-size:var(--t-sm);font-weight:800;margin-bottom:16px}
-.step b{display:block;font-size:var(--t-md);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:6px}
-.step p{font-size:var(--t-base);color:#C7CEDA}
+/* asymmetric rows, no cards, the numeral is the structure */
+.steps{margin-top:clamp(38px,5vw,64px);display:grid;gap:0}
+.step{display:grid;gap:6px 30px;padding:clamp(26px,3vw,38px) 0;border-top:1px solid var(--lime-line)}
+.step:last-child{border-bottom:1px solid var(--lime-line)}
+@media(min-width:840px){
+  .step{grid-template-columns:96px minmax(0,26ch) minmax(0,1fr);align-items:start}
+  .step:nth-child(2){padding-left:clamp(0px,4vw,64px)}
+  .step:nth-child(3){padding-left:clamp(0px,8vw,128px)}
+}
+.step em{font-style:normal;font-size:clamp(2.6rem,4.4vw,3.6rem);font-weight:800;line-height:.82;
+  color:var(--on-lime);opacity:.42;letter-spacing:-.05em}
+.step b{font-size:var(--t-lg);font-weight:800;color:var(--on-lime);letter-spacing:-.026em;line-height:1.12}
+.step p{font-size:var(--t-base);color:#2C3319;max-width:46ch}
 
 /* people */
 .people{list-style:none;display:grid;gap:0;margin-top:42px;border-top:1px solid var(--line)}
@@ -188,10 +215,29 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .pnote{display:block;font-size:var(--t-xs);color:var(--lime-ink);font-weight:700;margin-top:10px}
 .peoplefoot{margin-top:30px;font-size:var(--t-sm);color:var(--muted);max-width:58ch}
 
+/* full bleed band, deliberately outside the 1180 container */
+.band{position:relative;height:clamp(280px,34vw,460px);overflow:hidden;background:var(--ink)}
+.band img{width:100%;height:100%;object-fit:cover}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 28px;
+  background:linear-gradient(transparent,rgba(18,22,12,.82));color:#EDF0E0;
+  font-size:var(--t-md);font-weight:700;letter-spacing:-.018em}
+.band span{display:block;max-width:1124px;margin:0 auto}
+
 /* price */
 .pricegrid{display:grid;gap:34px;margin-top:44px;align-items:start}
 @media(min-width:940px){.pricegrid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px}}
 .price{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:10px 28px;box-shadow:var(--sh-md)}
+.dark .price{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.14);box-shadow:none}
+.dark .prow{border-top-color:rgba(255,255,255,.13)}
+.dark .prow dt{color:#C9CEBB}
+.dark .prow dd{color:#fff}
+.dark .prow.hi dd{color:var(--lime)}
+.dark .anchor{color:#C9CEBB}
+.dark .anchor b{color:#fff}
+.dark .fence{border-top-color:rgba(255,255,255,.13)}
+.dark .fence li{border-bottom-color:rgba(255,255,255,.13);color:#C9CEBB}
+.dark .fence svg{color:var(--lime)}
+.dark .finelabel{color:#8E9580}
 @media(min-width:820px){.price{padding:12px 36px}}
 .prow{display:grid;grid-template-columns:1fr auto;gap:20px;padding:19px 0;border-top:1px solid var(--line);align-items:baseline}
 .prow:first-child{border-top:0}
@@ -224,8 +270,8 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .next span{display:block;font-size:var(--t-sm);color:var(--body);margin-top:4px}
 
 /* quiz */
-.quiz{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:20px;
-  padding:30px;box-shadow:var(--sh-md)}
+.quiz{margin-top:40px;background:var(--white);border:1px solid var(--lime-line);border-radius:20px;
+  padding:30px;box-shadow:0 24px 60px -28px rgba(18,22,12,.42)}
 #q-run,#q-result{min-height:330px}
 @media(min-width:820px){.quiz{padding:44px}}
 .qp{display:none}.qp.on{display:block}
@@ -311,11 +357,11 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
   <div class="wrap hero-grid">
     <div>
       <span class="tag"><i></i> For agents closing 6 to 20 a year. US and Canada.</span>
-      <h1>You did not lose that lead. You called <em>back second.</em></h1>
-      <p class="sub">We run the ads, the follow up and the five minute callback, inside your own accounts. No retainer. We are paid when a deal closes.</p>
+      <h1>You didn't lose that lead. You called <em>back second.</em></h1>
+      <p class="sub">We run the ads, the follow up and the five minute callback, inside your own accounts. No retainer. We're paid when a deal closes.</p>
       <div class="cta">
         <a class="btn" href="#apply" data-book>Get my competitor ad sheet</a>
-        <small>Ten desks, that is the cap. 90 seconds, no email until the end.</small>
+        <small>Ten desks, that's the cap. 90 seconds, no email until the end.</small>
       </div>
     </div>
 
@@ -337,13 +383,12 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
 
 <div class="strip">
   <div class="wrap strip-in">
-    <div class="stat" data-rv><b>$0</b><span>Retainer. We are paid out of the closings, not the effort</span></div>
-    <div class="stat" data-rv style="--d:90ms"><b>860</b><span>Appointments booked for a coaching brand, not an individual agent</span></div>
-    <div class="stat" data-rv style="--d:180ms"><b>5 min</b><span>Every enquiry answered by a person, seven days a week</span></div>
+    <p class="claim" data-rv>No retainer. You pay us <b>when a deal closes</b>, which means an empty calendar is our problem before it's yours.</p>
+    <p class="claim-note" data-rv style="--d:120ms">We booked 860 appointments for a realtor coaching brand between December 2024 and August 2026. That was a coaching company, not an individual agent, and we say so.</p>
   </div>
 </div>
 
-<section id="leak">
+<section id="leak" class="tight">
   <div class="wrap split">
     <div class="shot" data-rv><picture>
       <source srcset="assets/img/counter.webp" type="image/webp" />
@@ -353,7 +398,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
       <span class="eyebrow" data-rv>Why it happens</span>
       <h2 data-rv style="--d:60ms">Four ways the lead is gone before you call back.</h2>
       <ul class="four">
-        <li data-rv style="--d:120ms"><em>01</em><div><b>You are buying contacts, not conversations.</b><span>Around $795 a month before ad spend, and their own reviewers report 50 to 70 leads per closing.</span></div></li>
+        <li data-rv style="--d:120ms"><em>01</em><div><b>You're buying contacts, not conversations.</b><span>Around $795 a month before ad spend, and their own reviewers report 50 to 70 leads per closing.</span></div></li>
         <li data-rv style="--d:180ms"><em>02</em><div><b>Five agents send the same text.</b><span>Same platform, same template. Nothing about it sounds like a person.</span></div></li>
         <li data-rv style="--d:240ms"><em>03</em><div><b>2pm enquiry, 7pm callback.</b><span>They filled in two more forms while they waited.</span></div></li>
         <li data-rv style="--d:300ms"><em>04</em><div><b>They sign before they tour now.</b><span>So you need a committed buyer, which means qualifying happens before your calendar, not on it.</span></div></li>
@@ -363,7 +408,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
   </div>
 </section>
 
-<section id="how" class="dark">
+<section id="how" class="limeblock tall">
   <div class="wrap">
     <span class="eyebrow" data-rv>What we run</span>
     <h2 data-rv style="--d:60ms">The whole thing, built in your name.</h2>
@@ -379,7 +424,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
 <section id="people">
   <div class="wrap">
     <span class="eyebrow" data-rv>Who we have done this for</span>
-    <h2 data-rv style="--d:60ms">Real estate is not a side project here.</h2>
+    <h2 data-rv style="--d:60ms">Real estate isn't a side project here.</h2>
     <ul class="people">
       <li data-rv style="--d:120ms"><b>Sami Ahmad</b><i>Scale Your Results</i><span class="pnote">860 appointments, 627 agents</span></li>
       <li data-rv style="--d:170ms"><b>Cody Sturges</b><i>Agent Lions Den</i><span class="pnote">VSL, deck, sequences, ads</span></li>
@@ -391,10 +436,18 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
   </div>
 </section>
 
-<section id="cost">
+<figure class="band" data-rv>
+  <picture>
+    <source srcset="assets/img/table.webp" type="image/webp" />
+    <img src="assets/img/table.jpg" alt="Two people sitting at a dining table with paperwork between them" width="1800" height="1200" loading="lazy" decoding="async" />
+  </picture>
+  <figcaption><span>The only meeting that moves a listing forward.</span></figcaption>
+</figure>
+
+<section id="cost" class="dark tall">
   <div class="wrap">
     <span class="eyebrow" data-rv>The number</span>
-    <h2 data-rv style="--d:60ms">We do not get paid until you do.</h2>
+    <h2 data-rv style="--d:60ms">We don't get paid until you do.</h2>
     <div class="pricegrid">
       <dl class="price" data-rv style="--d:120ms">
         <div class="prow"><dt>Build, once</dt><dd>$2,000</dd></div>
@@ -417,7 +470,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
   </div>
 </section>
 
-<section id="fit">
+<section id="fit" class="tight">
   <div class="wrap">
     <span class="eyebrow" data-rv>Fit</span>
     <h2 data-rv style="--d:60ms">Ten desks at a time.</h2>
@@ -438,14 +491,14 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
   </div>
 </section>
 
-<section id="apply">
+<section id="apply" class="limeblock">
   <div class="wrap">
     <span class="eyebrow" data-rv>Start here</span>
     <h2 data-rv style="--d:60ms">Where are your enquiries leaking?</h2>
     <ul class="next">
       <li data-rv style="--d:120ms"><b>The ad sheet, one business day</b><span>Every ad the other agents in your postal code are running. Yours whether we speak or not.</span></li>
-      <li data-rv style="--d:170ms"><b>Sandy reads your answers</b><span>Not a setter. If we cannot help, you get an email saying so.</span></li>
-      <li data-rv style="--d:220ms"><b>One email asking for twenty minutes</b><span>You pick the time. No reply, nothing else happens.</span></li>
+      <li data-rv style="--d:170ms"><b>Sandy reads your answers</b><span>Not a setter. If we can't help, you get an email saying so.</span></li>
+      <li data-rv style="--d:220ms"><b>One email asking for twenty minutes</b><span>You pick the time. If you don't reply, nothing else happens.</span></li>
     </ul>
 
     <div class="quiz" data-rv style="--d:260ms">
@@ -492,18 +545,18 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
 </section>
 <iframe name="zs-sink" title="form sink" style="display:none;width:0;height:0;border:0" aria-hidden="true"></iframe>
 
-<section id="faq">
+<section id="faq" class="tight">
   <div class="wrap">
     <span class="eyebrow" data-rv>Before you start</span>
     <h2 data-rv style="--d:60ms">The questions worth asking.</h2>
     <div class="faq" data-rv style="--d:120ms">
       <details><summary>How is the 15% invoiced?</summary><p>As a marketing services fee on commission you have already been paid. Not a commission split. No brokerage pays us, and we take no part in showing, negotiating or representing.</p></details>
-      <details><summary>How do you decide a deal came from you?</summary><p>The CRM stamps every enquiry on arrival and again when the desk books it. If the closed file traces to a stamp, it counts. If not, it does not, and you see both columns at day 90.</p></details>
-      <details><summary>What happens to the CRM if we stop?</summary><p>You keep it. Everything is built inside your accounts, in your name, from day one.</p></details>
+      <details><summary>How do you decide a deal came from you?</summary><p>The CRM stamps every enquiry on arrival and again when the desk books it. If the closed file traces to a stamp, it counts. If not, it doesn't, and you see both columns at day 90.</p></details>
+      <details><summary>What happens to the CRM if we stop?</summary><p>You keep it. It's all built inside your accounts, in your name, from day one.</p></details>
       <details><summary>Who is actually calling my leads?</summary><p>Our desk, under your name, to a script you approve. They qualify and they book. No advice on a property, no negotiating.</p></details>
-      <details><summary>What if the appointments are junk?</summary><p>An appointment counts when the person shows. No-shows do not count, and every booking carries confirmation, reminder and recovery.</p></details>
-      <details><summary>I already pay for leads. Why is this different?</summary><p>You are buying contacts and doing the conversion yourself. Here the conversion is the product. Same ad spend, pointed at the part that leaks.</p></details>
-      <details><summary>Do you work with another agent in my area?</summary><p>No. One desk, one agent per market.</p></details>
+      <details><summary>What if the appointments are junk?</summary><p>An appointment counts when the person shows. No-shows don't count, and every booking carries confirmation, reminder and recovery.</p></details>
+      <details><summary>I already pay for leads. Why is this different?</summary><p>You're buying contacts and doing the conversion yourself. Here the conversion is the product. Same ad spend, pointed at the part that leaks.</p></details>
+      <details><summary>Do you work with another agent in my area?</summary><p>No. One desk, one agent per market. If we're working with someone in your postal code, we'll tell you.</p></details>
       <details><summary>How fast does it start?</summary><p>Campaigns live in seven days. The desk answers from the day the first ad runs.</p></details>
     </div>
   </div>
