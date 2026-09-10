@@ -313,6 +313,8 @@ input:focus{border-color:var(--ink);outline:none}
 .faq summary{list-style:none;cursor:pointer;padding:20px 44px 20px 0;position:relative;
   font-weight:800;color:var(--ink);font-size:var(--t-md);letter-spacing:-.018em}
 .faq summary::-webkit-details-marker{display:none}
+.faq summary{transition:color .16s ease}
+.faq summary:active{color:var(--lime-ink)}
 .faq summary:after{content:"";position:absolute;right:8px;top:27px;width:9px;height:9px;
   border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .25s var(--exp)}
 .faq details[open] summary:after{transform:rotate(225deg);top:31px}
@@ -332,12 +334,15 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
 @media(hover:hover) and (pointer:fine){.foot a:hover{color:var(--ink)}}
 
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  [data-rv]{opacity:1;transform:none}
-  .msg,.booked{opacity:1;transform:none}
-  h1 em:after{transform:scaleX(1)}
-  .steps:before{transform:scaleX(1)}
+  /* fewer and gentler, not zero. Opacity aids comprehension and stays; movement goes */
   html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+  [data-rv],.msg,.booked{transform:none!important}
+  .rv-in,.msg.in,.booked.in{transition:opacity .28s linear!important}
+  h1 em:after{transform:scaleX(1)}
+  .steps:before{transform:scaleX(1);transition:none}
+  .btn:active,.qo button:active{transform:none}
+  .rfill,.qbar i{transition:none}
 }
 </style>
 </head>
@@ -589,6 +594,29 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* attribution: capture the click context on arrival and keep it for the session */
+  var ATTR = (function(){
+    var keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','msclkid'];
+    var store = {};
+    try { store = JSON.parse(sessionStorage.getItem('zs_attr') || '{}'); } catch(e) { store = {}; }
+    var qs = new URLSearchParams(location.search), fresh = false;
+    keys.forEach(function(k){ var v = qs.get(k); if (v) { store[k] = v.slice(0,180); fresh = true; } });
+    if (fresh || !store.landed) {
+      store.landed = store.landed || new Date().toISOString();
+      store.landing_path = store.landing_path || (location.pathname + location.search).slice(0,300);
+      store.referrer = store.referrer || (document.referrer || '').slice(0,300);
+    }
+    try { sessionStorage.setItem('zs_attr', JSON.stringify(store)); } catch(e) {}
+    return store;
+  })();
+  function attrString(){
+    return Object.keys(ATTR).map(function(k){ return k + '=' + ATTR[k]; }).join('; ');
+  }
+  function newEventId(){
+    try { return crypto.randomUUID(); }
+    catch(e) { return 'zs-' + Date.now() + '-' + Math.random().toString(16).slice(2,10); }
+  }
+
   /* sticky header */
   var hdr = document.querySelector('header'), t = false;
   function hs(){ t = false; hdr.classList.toggle('stuck', window.pageYOffset > 12); }
@@ -718,6 +746,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
     document.getElementById('rgt').textContent = g[0];
     document.getElementById('rgb').textContent = g[1];
 
+    var eventId = newEventId();
     if (POST) {
       var row = {
         name: document.getElementById('g-name').value,
@@ -729,7 +758,10 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
         score: String(pct),
         grade: grade,
         weakest: worst || '',
-        answers: Q.map(function(q){ return q.t + ' :: ' + (ans[q.t] || ''); }).join(' | ')
+        answers: Q.map(function(q){ return q.t + ' :: ' + (ans[q.t] || ''); }).join(' | '),
+        attribution: attrString(),
+        event_id: eventId,
+        page: location.href.split('#')[0]
       };
       var f = document.createElement('form');
       f.action = POST; f.method = 'POST'; f.target = 'zs-sink'; f.style.display = 'none';
@@ -737,8 +769,11 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:var(--t-sm);col
         var x = document.createElement('input'); x.type = 'hidden'; x.name = k; x.value = row[k]; f.appendChild(x);
       });
       document.body.appendChild(f); f.submit();
-      if (window.fbq) fbq('track','Lead',{content_name:'scorecard',value:pct});
-      if (window.gtag) gtag('event','generate_lead',{method:'scorecard',score:pct});
+      if (window.fbq) fbq('track','Lead',{content_name:'scorecard',value:pct}, {eventID:eventId});
+      if (window.gtag) gtag('event','generate_lead',{
+        method:'scorecard', score:pct, transaction_id:eventId,
+        campaign_source:ATTR.utm_source||'', campaign_name:ATTR.utm_campaign||''
+      });
     }
     panel('res');
     document.getElementById('apply').scrollIntoView({behavior:'smooth',block:'start'});
