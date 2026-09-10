@@ -176,6 +176,16 @@ h1 em:after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.24em;h
 .four span{display:block;font-size:var(--t-base);color:var(--body);margin-top:3px;max-width:52ch}
 .srcline{margin-top:22px;font-size:var(--t-xs);color:var(--muted);max-width:70ch}
 
+
+/* the straight talk block */
+.straight{max-width:64ch}
+.st-k{font-size:var(--t-xs);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--warn);margin-bottom:14px}
+.st-b{font-size:clamp(1.25rem,2.3vw,1.7rem);font-weight:800;color:var(--ink);letter-spacing:-.026em;line-height:1.24}
+.st-c{margin-top:14px;font-size:var(--t-md);color:var(--body)}
+.straight ul{list-style:none;margin-top:26px;border-top:1px solid var(--line)}
+.straight li{padding:16px 0;border-bottom:1px solid var(--line);font-size:var(--t-base);color:var(--body)}
+.straight b{color:var(--ink);font-weight:800}
+
 /* grounds */
 .dark{background:var(--ink);color:#C9CEBB}
 .dark h2,.dark h3{color:#F1F3E6}
@@ -389,10 +399,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
     <div>
       <p class="icp" data-rv>
         <span class="icp-k">Built for one person</span>
-        <span class="icp-v">A residential agent who closed <b>6 or more deals</b> in the last twelve months, has an <b>ad budget</b>, and wants listings instead of a folder of unanswered contacts.</span>
+        <span class="icp-v">Closed <b>6 or more deals</b> last year. Has an <b>ad budget</b>. Wants listings, not more contacts.</span>
       </p>
       <h1>Ten held appointments in 45 days. Or the desk keeps <em>running free.</em></h1>
-      <p class="sub">We build the ads. Our desk calls every enquiry inside five minutes and books it. You pay $2,000 once, then nothing until a deal closes.</p>
+      <p class="sub">We build the ads. A person calls every enquiry in five minutes and books it. $2,000 once, then nothing until a deal closes.</p>
       <div class="cta">
         <a class="btn btn-lg" href="#apply" data-book>Apply for a desk</a>
         <small>Ten desks at a time. That's the whole capacity.</small>
@@ -419,9 +429,9 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
   <div class="wrap">
     <p class="strip-lead" data-rv>Real estate is most of what we do.</p>
     <div class="strip-in">
-      <div class="pnum" data-rv style="--d:80ms"><b>$2M</b><i></i><span>In commission we can trace, for one commercial realtor over two years, on $5k to $10k a month of ad spend</span></div>
-      <div class="pnum" data-rv style="--d:160ms"><b>$250 to $70</b><i></i><span>Cost per qualified sales appointment, for a realtor coaching company in Vancouver</span></div>
-      <div class="pnum" data-rv style="--d:240ms"><b>$40k</b><i></i><span>Monthly revenue reached by a realtor coaching brand as we took spend from $1k to $10k</span></div>
+      <div class="pnum" data-rv style="--d:80ms"><b>$2M</b><i></i><span>Traced commission for one realtor, on $5k to $10k a month</span></div>
+      <div class="pnum" data-rv style="--d:160ms"><b>$250 to $70</b><i></i><span>Per qualified appointment, realtor coaching company</span></div>
+      <div class="pnum" data-rv style="--d:240ms"><b>$40k</b><i></i><span>Monthly revenue, as we took spend from $1k to $10k</span></div>
     </div>
   </div>
 </div>
@@ -433,15 +443,29 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
       <img src="assets/img/counter.jpg" alt="A phone lighting up on a kitchen counter at night" width="1800" height="1018" loading="lazy" decoding="async" />
     </picture></div>
     <div>
-      <span class="eyebrow" data-rv>Why the lead dies</span>
+      <span class="eyebrow" data-rv>What they actually say</span>
       <h2 data-rv style="--d:60ms">You didn't lose it. You called back second.</h2>
       <ul class="four">
-        <li data-rv style="--d:120ms"><em>01</em><div><b>You're buying contacts, not conversations.</b><span>Around $795 a month before ad spend. Their own reviewers report 50 to 70 leads per closing.</span></div></li>
-        <li data-rv style="--d:180ms"><em>02</em><div><b>Five agents send the same text.</b><span>Same platform, same template. None of it sounds like a person.</span></div></li>
-        <li data-rv style="--d:240ms"><em>03</em><div><b>2pm enquiry, 7pm callback.</b><span>They filled in two more forms while they waited.</span></div></li>
-        <li data-rv style="--d:300ms"><em>04</em><div><b>They sign before they tour now.</b><span>So the qualifying has to happen before your calendar, not on it.</span></div></li>
+        <li data-rv style="--d:120ms"><em>01</em><div><b>"Leads have become an expensive commodity."</b><span>$795 a month. 50 to 70 of them per closing.</span></div></li>
+        <li data-rv style="--d:180ms"><em>02</em><div><b>One family deal closes, then the panic starts.</b><span>Referrals are the best lead you get and the one you cannot turn up.</span></div></li>
+        <li data-rv style="--d:240ms"><em>03</em><div><b>The leads you already paid for never got called.</b><span>Not once, in a lot of cases. They are still sitting there.</span></div></li>
+        <li data-rv style="--d:300ms"><em>04</em><div><b>"We get these stupid pay per close emails all the time."</b><span>"Most seem like a scam." We know. Read the next bit.</span></div></li>
       </ul>
-      <p class="srcline" data-rv style="--d:360ms">Platform pricing and lead quality from public vendor pages and published reviews, 2026. Written buyer agreement rule in force since August 2024.</p>
+    </div>
+  </div>
+</section>
+
+<section id="straight" class="tight">
+  <div class="wrap">
+    <div class="straight" data-rv>
+      <p class="st-k">Straight up</p>
+      <p class="st-b">Yes, this is a pay per close offer with an upfront fee. That is the same shape as the emails you delete.</p>
+      <p class="st-c">Here is the difference, and you can check all three before you pay us anything.</p>
+      <ul>
+        <li><b>The $2,000 buys an asset, not access.</b> Campaigns, CRM and sequences, built in your accounts. Walk on day 46 and you keep them.</li>
+        <li><b>We never touch your money.</b> You fund your own ad account. Nothing routes through us.</li>
+        <li><b>No guaranteed leads.</b> We count held appointments, and you see the count every Monday.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -449,14 +473,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 <section id="how" class="limeblock tall">
   <div class="wrap">
     <span class="eyebrow" data-rv>How it works</span>
-    <h2 data-rv style="--d:60ms">Enquiry to booked, in under five minutes.</h2>
-    <p class="lede" data-rv style="--d:110ms">Four stages. You're only involved in the last one.</p>
+    <h2 data-rv style="--d:60ms">Enquiry to booked in five minutes.</h2>
+    <p class="lede" data-rv style="--d:110ms">You're only in the last one.</p>
 
     <ol class="flow" id="flow" data-rv style="--d:160ms">
-      <li><span class="fdot"></span><b>The ad runs</b><i>Meta and Google, on your listings and your postal codes. Live in seven days.</i></li>
-      <li><span class="fdot"></span><b>The enquiry lands</b><i>Straight into the CRM in your name. Stamped on arrival.</i></li>
-      <li><span class="fdot"></span><b>A person calls</b><i>Inside five minutes, seven days a week, until nine at night. Four questions.</i></li>
-      <li><span class="fdot"></span><b>It hits your calendar</b><i>Confirmed, reminded, and chased if they no-show. You just turn up.</i></li>
+      <li><span class="fdot"></span><b>The ad runs</b><i>Meta and Google. Live in seven days.</i></li>
+      <li><span class="fdot"></span><b>The enquiry lands</b><i>Into a CRM in your name, stamped.</i></li>
+      <li><span class="fdot"></span><b>A person calls</b><i>Four questions. Seven days a week, until nine.</i></li>
+      <li><span class="fdot"></span><b>It hits your calendar</b><i>Confirmed, reminded, chased. You turn up.</i></li>
     </ol>
 
     <div class="cta" data-rv style="--d:220ms"><a class="btn" href="#apply" data-book>Apply for a desk</a></div>
@@ -466,14 +490,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 <section id="stack">
   <div class="wrap">
     <span class="eyebrow" data-rv>What gets built</span>
-    <h2 data-rv style="--d:60ms">Six pieces. You keep all of them.</h2>
+    <h2 data-rv style="--d:60ms">Six pieces. You keep them.</h2>
     <ul class="stackgrid">
-      <li data-rv style="--d:100ms"><b>The Appointment Engine</b><span>Meta and Google campaigns, creative, targeting and tracking.</span><i>Live by day 7</i></li>
-      <li data-rv style="--d:150ms"><b>The 5 Minute Desk</b><span>Every enquiry called, qualified and booked by a person.</span><i>7 days a week</i></li>
-      <li data-rv style="--d:200ms"><b>The No Show Kill Switch</b><span>Confirmation, reminder and recovery on every booking.</span><i>3 touches each</i></li>
-      <li data-rv style="--d:250ms"><b>The Pipeline You Keep</b><span>CRM, stages and automations, installed in your own account.</span><i>Yours if we part</i></li>
-      <li data-rv style="--d:300ms"><b>The Agreement Pack</b><span>Buyer representation and listing pre-fills, post NAR.</span><i>6 documents</i></li>
-      <li data-rv style="--d:350ms"><b>The Count</b><span>One page a week of appointments held. It's also the invoice.</span><i>Every Monday</i></li>
+      <li data-rv style="--d:100ms"><b>The Appointment Engine</b><span>Campaigns, creative, targeting, tracking.</span><i>Live by day 7</i></li>
+      <li data-rv style="--d:150ms"><b>The 5 Minute Desk</b><span>A person calls, qualifies, books.</span><i>7 days a week</i></li>
+      <li data-rv style="--d:200ms"><b>The No Show Kill Switch</b><span>Confirm, remind, recover.</span><i>3 touches each</i></li>
+      <li data-rv style="--d:250ms"><b>The Pipeline You Keep</b><span>Installed in your own account.</span><i>Yours if we part</i></li>
+      <li data-rv style="--d:300ms"><b>The Agreement Pack</b><span>Buyer rep and listing pre-fills.</span><i>6 documents</i></li>
+      <li data-rv style="--d:350ms"><b>The Count</b><span>Appointments held. Also the invoice.</span><i>Every Monday</i></li>
     </ul>
   </div>
 </section>
@@ -481,30 +505,25 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 <section id="proof" class="dark tall">
   <div class="wrap">
     <span class="eyebrow" data-rv>Case studies</span>
-    <h2 data-rv style="--d:60ms">Three we can put numbers on.</h2>
+    <h2 data-rv style="--d:60ms">Three with numbers.</h2>
 
     <article class="cs" data-rv style="--d:120ms">
       <div class="cs-who"><b>A commercial realtor</b><span>Vancouver, two year engagement</span><em>Paid media and content</em></div>
-      <div class="cs-num"><b>$2M</b><span>In commission we can trace, over two years</span></div>
-      <p class="cs-note">On $5,000 to $10,000 a month of ad spend. An individual agent, not a brokerage and not a coaching brand.</p>
+      <div class="cs-num"><b>$2M</b><span>Traced commission, two years</span></div>
     </article>
 
     <article class="cs" data-rv style="--d:180ms">
       <div class="cs-who"><b>A realtor coaching company</b><span>Vancouver, from late 2024</span><em>Paid, funnel and qualification</em></div>
       <div class="cs-num cs-bar">
-        <b>$250 <span class="arw">to</span> $70</b><span>Cost per qualified sales appointment</span>
+        <b>$250 <span class="arw">to</span> $70</b><span>Per qualified appointment</span>
         <div class="bar"><i class="bar-a"></i><i class="bar-b"></i></div>
       </div>
-      <p class="cs-note">Monthly revenue held around $20,000 on $2,000 of ad spend, then scaled to roughly $30,000 a month in spend.</p>
     </article>
 
     <article class="cs" data-rv style="--d:240ms">
       <div class="cs-who"><b>A realtor coaching brand</b><span>Toronto, full funnel build</span><em>Deck, page, sequences, ads</em></div>
-      <div class="cs-num"><b>$1k to $10k</b><span>Monthly ad spend, revenue to about $40k a month</span></div>
-      <p class="cs-note">Pitch deck, landing page, five part introduction sequence, broadcast sequences and ad copy.</p>
+      <div class="cs-num"><b>$1k to $10k</b><span>Ad spend. Revenue to $40k a month</span></div>
     </article>
-
-    <p class="cs-foot" data-rv style="--d:300ms">Two of the three are coaching companies whose buyers are agents. The first is an individual agent. We say which is which because the difference matters. Names are held under NDA, and we will introduce you to a reference on a call rather than publish one.</p>
   </div>
 </section>
 
@@ -529,9 +548,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
         <div class="prow"><dt>Retainer</dt><dd>None</dd></div>
       </dl>
       <div data-rv style="--d:180ms">
-        <p class="anchor">Pay at close networks take <b>20 to 40%</b> and hand you a lead. We take <b>15%</b> and hand you the campaign, the desk, the CRM and the booked appointment.</p>
-        <p class="anchor" style="margin-top:16px">The $2,000 builds an asset in your own accounts. If we part ways on day 46, you keep the campaigns, the CRM and the sequences.</p>
-        <p class="finelabel">Invoiced by us to you as a marketing services fee, calculated on commission you've already been paid. Not a commission split. Nothing goes through your brokerage.</p>
+        <p class="anchor">Pay at close networks take <b>20 to 40%</b> and hand you a lead.<br />We take <b>15%</b> and hand you the appointment.</p>
       </div>
     </div>
   </div>
@@ -540,14 +557,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 <section id="bonus" class="limeblock">
   <div class="wrap">
     <span class="eyebrow" data-rv>Included, not upsold</span>
-    <h2 data-rv style="--d:60ms">Four things you get on day one.</h2>
+    <h2 data-rv style="--d:60ms">Four things on day one.</h2>
     <ul class="bonuses">
-      <li data-rv style="--d:110ms"><b>The Competitor Ad Sheet</b><span>Every ad the other agents in your postal code are running right now, pulled from the public libraries.</span></li>
-      <li data-rv style="--d:160ms"><b>The Dead Lead Revival</b><span>A one time campaign across the leads you already paid for and never called.</span></li>
-      <li data-rv style="--d:210ms"><b>The Agreement Pack</b><span>Six buyer representation and listing pre fills, written for the rules in force since August 2024.</span></li>
-      <li data-rv style="--d:260ms"><b>The Objection Card</b><span>The twelve questions buyers now arrive with after asking ChatGPT, with answers you can cite.</span></li>
+      <li data-rv style="--d:110ms"><b>The Competitor Ad Sheet</b><span>Every ad your competitors are running right now.</span></li>
+      <li data-rv style="--d:160ms"><b>The Dead Lead Revival</b><span>One campaign across the leads you never called.</span></li>
+      <li data-rv style="--d:210ms"><b>The Agreement Pack</b><span>Six documents, current with the 2024 rules.</span></li>
+      <li data-rv style="--d:260ms"><b>The Objection Card</b><span>Twelve questions buyers bring from ChatGPT, answered.</span></li>
     </ul>
-    <p class="bonusfoot" data-rv style="--d:310ms">All four land before the first ad goes live. The ad sheet is yours whether we work together or not.</p>
   </div>
 </section>
 
@@ -575,18 +591,17 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
   <div class="wrap">
     <span class="eyebrow" data-rv>Why ten</span>
     <h2 data-rv style="--d:60ms">One desk covers ten agents.</h2>
-    <p class="lede" data-rv style="--d:110ms">Past ten, the answer time slips past five minutes and the whole thing stops working. The number is the delivery plan, not a countdown.</p>
+    <p class="lede" data-rv style="--d:110ms">Past ten, five minutes becomes twenty. That is the whole reason for the cap.</p>
     <div class="seats" data-rv style="--d:160ms" aria-hidden="true">
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
-    <p class="seatnote" data-rv style="--d:220ms">Campaigns built now produce appointments through the spring window. An agent who starts in February is buying into the busiest and most expensive ad market of the year.</p>
   </div>
 </section>
 
 <section id="fit" class="tight">
   <div class="wrap">
     <span class="eyebrow" data-rv>Fit</span>
-    <h2 data-rv style="--d:60ms">Who this is and isn't for.</h2>
+    <h2 data-rv style="--d:60ms">Who this is for.</h2>
     <div class="fit">
       <div class="fitcol" data-rv style="--d:120ms"><h3>Right fit</h3><ul>
         <li>Six or more closings in twelve months</li>
@@ -607,8 +622,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 <section id="apply" class="limeblock">
   <div class="wrap">
     <span class="eyebrow" data-rv>Apply</span>
-    <h2 data-rv style="--d:60ms">Nine questions. Then Sandy reads it.</h2>
-    <p class="lede" data-rv style="--d:110ms">Not a setter, not a chatbot. If we can't help you, you get an email saying so.</p>
+    <h2 data-rv style="--d:60ms">Sandy reads every one.</h2>
+    <p class="lede" data-rv style="--d:110ms">Not a setter. You hear back either way.</p>
 
     <form class="app" id="app" data-rv style="--d:160ms" novalidate>
       <div class="fgrid">
@@ -640,7 +655,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 
     <div class="thanks" id="thanks" hidden>
       <h3>That's in.</h3>
-      <p>Your Competitor Ad Sheet lands inside one business day, whether or not we end up working together. If you're a fit, the next email asks for twenty minutes and you pick the time.</p>
+      <p>Your ad sheet lands inside one business day, fit or not. If you are one, the next email asks for twenty minutes.</p>
     </div>
   </div>
 </section>
@@ -648,17 +663,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;font-size:var(--t-sm);col
 
 <section id="faq" class="tight">
   <div class="wrap">
-    <span class="eyebrow" data-rv>Before you apply</span>
-    <h2 data-rv style="--d:60ms">The questions worth asking.</h2>
+    <span class="eyebrow" data-rv>FAQ</span>
+    <h2 data-rv style="--d:60ms">Before you apply.</h2>
     <div class="faq" data-rv style="--d:120ms">
-      <details><summary>How is the 15% invoiced?</summary><p>As a marketing services fee on commission you've already been paid. It isn't a commission split. No brokerage pays us, and we take no part in showing, negotiating or representing.</p></details>
-      <details><summary>How do you decide a deal came from you?</summary><p>The CRM stamps every enquiry on arrival and again when the desk books it. If the closed file traces to a stamp, it counts. If not, it doesn't, and you see both columns at day 90.</p></details>
-      <details><summary>What counts as a held appointment?</summary><p>The person shows up. No shows don't count toward the ten, and every booking carries a confirmation, a reminder and a recovery attempt.</p></details>
-      <details><summary>What happens to the CRM if we stop?</summary><p>You keep it. It's all built inside your accounts, in your name, from day one.</p></details>
-      <details><summary>Who is actually calling my leads?</summary><p>Our desk, under your name, to a script you approve. They qualify and they book. No advice on a property, no negotiating.</p></details>
-      <details><summary>I already pay for leads. Why is this different?</summary><p>You're buying contacts and doing the conversion yourself. Here the conversion is the product. Same ad spend, pointed at the part that leaks.</p></details>
-      <details><summary>Do you work with another agent in my area?</summary><p>No. One desk, one agent per market. If we're already working with someone in your postal code, we'll tell you.</p></details>
-      <details><summary>Why only ten?</summary><p>One desk covers about ten agents before the five minute answer time slips. When the eleventh would break the promise, we stop taking people.</p></details>
+      <details><summary>How do you decide a deal came from you?</summary><p>The CRM stamps it on arrival and again when we book it. Traces to a stamp, it counts. If not, it does not.</p></details>
+      <details><summary>What counts as a held appointment?</summary><p>They show up. No shows do not count toward the ten.</p></details>
+      <details><summary>What happens to the CRM if we stop?</summary><p>You keep it. Built in your accounts from day one.</p></details>
+      <details><summary>Do you work with another agent in my area?</summary><p>No. One agent per market, and we will tell you.</p></details>
+      <details><summary>Why only ten?</summary><p>One desk covers ten agents before five minutes slips.</p></details>
     </div>
   </div>
 </section>
