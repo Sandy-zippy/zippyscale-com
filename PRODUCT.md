@@ -84,13 +84,30 @@ Framed from strength, never from need. We are paid out of closings, so an empty 
 ## The claim ledger, as of 10 September 2026
 
 **Provable and on the page:**
-- 860 booked sales appointments, 627 unique agents, December 2024 to August 2026, for Scale Your Results (Sami Ahmad), a realtor coaching company. We ran the ad account and the lead flow.
-- Agent Lions Den (Cody Sturges), realtor coaching, Toronto. Full funnel: VSL, pitch deck, email sequences, ad copy.
-- Aroson (Saheb), realtor brand, Surrey BC, June 2024 to April 2026.
-- Jas Oberoi, commercial realtor, Vancouver.
-- Pranshu, RE/MAX, June 2025 to March 2026.
+- 860 booked sales appointments, 627 unique agents, December 2024 to August 2026, for a realtor coaching company (name under NDA), a realtor coaching company. We ran the ad account and the lead flow.
+- a realtor coaching brand (name under NDA), realtor coaching, Toronto. Full funnel: VSL, pitch deck, email sequences, ad copy.
+- a realtor brand (name under NDA), realtor brand, Surrey BC, June 2024 to April 2026.
+- a commercial realtor, commercial realtor, Vancouver.
+- a RE/MAX agent, RE/MAX, June 2025 to March 2026.
 - Competitor pricing and lead-quality figures, cited, 2026.
 
 **Not provable, therefore absent from the page in every draft:**
 - Listing appointments produced for an individual agent. The first ten seats exist to create this. Until one closes, no sentence on this site may imply it.
 - Any named United States result.
+
+## NDA rule, added 10 September 2026
+
+**No client is named on this site, in the repo, or in any meta tag.** Sandy holds NDAs with the
+realtor clients whose figures this page uses. The figures may be published; the identities may not.
+
+This repo is **public**. PRODUCT.md and DESIGN.md are readable at
+github.com/Sandy-zippy/zippyscale-com, so a name in a markdown file is a published name, not an
+internal note. Names were removed from all three files on 10 September.
+
+Photographs of those clients are equally out, and not only because of the NDA. Pulling a headshot
+off someone's Instagram and placing it on a commercial sales page is using their likeness in
+advertising without their permission. Proof on this page is numbers plus an offer of a live
+reference on a call.
+
+Describe clients by category and city instead: "a commercial realtor, Vancouver", "a realtor
+coaching company, Toronto".

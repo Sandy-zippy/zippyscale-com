@@ -60,7 +60,7 @@ No side-stripe borders. No gradient text. No decorative glass. No hero-metric te
 ## Amendment, 10 September 2026 — typeface and ground replaced
 
 Sandy's instruction: "kill zippy scale typography though will redo it", benchmarked against
-Scale Your Results. The realtor page no longer uses the house type or the cream ground.
+a realtor coaching company. The realtor page no longer uses the house type or the cream ground.
 
 | Was | Now |
 |---|---|
