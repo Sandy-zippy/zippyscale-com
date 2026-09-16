@@ -23,20 +23,20 @@
 <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* v3, 16 Sep 2026. Built from site-rebuild/copy-deck-v2.md + audit/design-audit.md (type/space tokens, 12-col grid) + audit/visual-motion-audit.md (partner artefacts, 4 motions).
+/* v3.1, 16 Sep 2026. v3 + fixes from site-rebuild/qa/pass3/qa-report.md (4 HIGH, 10 MEDIUM). Overlap gate: site-rebuild/qa/overlap.py.
    Component sources, all re-implemented by hand in vanilla HTML/CSS/JS (no React, Tailwind or framer at runtime):
-   hero collage : 21st.dev ruixen.ui SocialPostCard + kokonutd Social Card (post anatomy), 21st.dev designali-in Book (3D cover, CSS rebuild),
-                  Aceternity card-stack registry (offset/scale math only, autoplay dropped)
-   problem week : static planner; line objects drawn in SVG (HyperUI static-markup approach)
-   different    : 21st.dev hirael Comparison 03 registry (before/after panels) + 7ovr comparison-2 (us vs them anatomy)
-   how board    : 21st.dev haydenbleasel Kanban (column anatomy, static) + Motion Primitives in-view (once-only trigger, ported to one IntersectionObserver); travel = WAAPI keyframes
-   calendar     : 21st.dev sean0205 ReUI Event Calendar + shadcnspace Calendar With Event List (week/agenda anatomy)
-   results      : Aceternity 3d-card registry (hover tilt, ported to a CSS transform); designali-in Book again for the guide
+   hero collage : 21st.dev ruixen.ui SocialPostCard (post anatomy) + 21st.dev shugar Book (typographic cover, id 3715), laid out as a 2-column grid so no card covers another
+   proof        : trust row moved into the hero left column (HyperUI stats static markup)
+   problem week : static planner; line objects drawn in SVG (HyperUI static-markup approach); 3 + 2 between 961 and 1199
+   different    : 21st.dev hirael Comparison 03 registry (before/after panels), rows paired
+   how board    : 21st.dev haydenbleasel Kanban (column anatomy) + tool-ui Message Draft (id 20077, follow-up note anatomy); travel = WAAPI, desktop only
+   calendar     : 21st.dev shadcnspace Calendar With Event List (id 25353) + ravikatiyar Event Scheduler Card (id 7483) for the answers card
+   results      : shugar Book anatomy for the guide spread; contents titles from the real guide (Drive 1L9reFty...); ledger rows, no frames
    pay          : 21st.dev originui Stepper (numbered, neutral states)
-   city map     : Magic UI dotted-map registry (svg-dotted-map 2.0.1, generated once at build time, inlined) + 21st.dev Mazyar kawa Location Map (pin pattern)
+   city map     : Magic UI dotted-map registry (svg-dotted-map 2.0.1, inlined) + a neutral "your city" pin
    quiz         : 21st.dev ddoemonn Wizard Steps (direction-aware panels)
    Motion budget (page level, 4, each once, <=2.5s, final state is the CSS default, reduced motion = final state):
-   1 hero collage settles on load (1.6s)  2 buyer card travels the how board (2.4s)  3 the week fills top to bottom (1.4s)  4 city pin drops (1.8s).
+   1 hero collage settles on load (1.1s)  2 buyer card travels the how board, desktop only (2.4s)  3 the week fills top to bottom (1.05s)  4 a neutral "your city" pin drops (0.6s).
    Everything else: quiz screen transitions, hover and press feedback. */
 @font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-700.woff2') format('woff2');font-weight:300 700;font-display:swap}
 @font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:100 900;font-display:swap}
@@ -106,7 +106,7 @@ button{font:inherit;color:inherit}
 
 .wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
 .sec{padding-block:var(--section-y)}
-.sec-head .sub{margin-top:var(--gap-h2-sub);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub)}
+.sec-head .sub{text-wrap:pretty;margin-top:var(--gap-h2-sub);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub)}
 .sec-head + *{margin-top:var(--gap-head-visual)}
 .split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap-cols);align-items:start}
 .split > :first-child{grid-column:1 / 6}
@@ -144,49 +144,54 @@ button{font:inherit;color:inherit}
 .hero-head h1,.hero-head .icp{max-width:none}
 .hero .split{margin-top:var(--gap-h1-lede);align-items:start}
 .hero .br{display:none}
-@media (min-width:1024px){.hero .br{display:inline}}
+@media (min-width:1024px),(max-width:429px){.hero .br{display:inline}}
+@media (max-width:389px){:root{--fs-h1:36px}}
 .icp{font:600 var(--fs-icp)/var(--lh-icp) var(--display);letter-spacing:var(--ls-icp);color:var(--head);text-wrap:balance;max-width:26ch}
 .icp mark{background:var(--lime);color:var(--charcoal);padding-inline:var(--s-4);border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .hero h1{margin-top:var(--gap-icp-h1)}
-.lede{font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub)}
+.lede{font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub);text-wrap:pretty}
 .cta{margin-top:var(--gap-lede-cta)}
 
-/* collage: your ad, your guide, your calendar */
-.collage{position:relative;height:440px;max-width:540px;width:100%;margin-left:auto}
-.collage > .tag{position:absolute;left:0;top:0;z-index:5}
-.book{position:absolute;perspective:1200px}
-.cover{position:relative;width:100%;height:100%;border-radius:4px 10px 10px 4px;background:var(--paper);border:1px solid var(--line-2);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;box-shadow:0 30px 60px -30px rgba(42,42,53,.45);transform:rotateY(-14deg);transform-origin:left center}
-.cover::before{content:"";position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(42,42,53,.22),rgba(42,42,53,0));z-index:1}
-.cover-top{padding:var(--s-16) var(--s-16) var(--s-12) var(--s-24)}
-.cover-top b{display:block;font:700 var(--fs-card)/1.1 var(--display);letter-spacing:var(--ls-card);color:var(--head)}
-.cover-top > span{display:block;margin-top:var(--s-4);color:var(--lime-text)}
-.cover svg{width:100%;height:100%;object-fit:cover}
-.byline{padding:var(--s-8) var(--s-16) var(--s-8) var(--s-24);background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
-.hero .book{left:var(--s-32);top:var(--s-32);width:220px;height:292px;transform:rotate(var(--rot,-5deg));z-index:1}
+/* hero split: copy + trust row left, collage right (grid areas, nothing overlaps) */
+.hero .split{grid-template-rows:auto 1fr}
+.hero .split > .hero-copy{grid-column:1 / 6;grid-row:1}
+.hero .split > .proof{grid-column:1 / 6;grid-row:2;margin-top:var(--gap-block)}
+.hero .split > .collage{grid-column:7 / 13;grid-row:1 / 3}
 
-.ad{position:absolute;right:0;top:0;width:312px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -40px rgba(42,42,53,.5);overflow:hidden;z-index:2}
+/* collage: your ad, your guide, your calendar. A 2-column grid, so no card can sit on another card */
+.collage{position:relative;display:grid;grid-template-columns:minmax(0,11fr) minmax(0,9fr);grid-template-rows:auto 1fr;gap:var(--s-24);max-width:544px;width:100%;margin-left:auto}
+.collage > .tag{position:absolute;right:0;top:0}
+.collage .ad{grid-column:1;grid-row:1 / 3;align-self:start}
+.collage .book{grid-column:2;grid-row:1;justify-self:center;margin-top:var(--s-40)}
+.collage .day-card{grid-column:2;grid-row:2;align-self:end}
+.book{width:176px;aspect-ratio:3 / 4;perspective:1200px;transform:rotate(var(--rot,-3deg))}
+.cover{position:relative;height:100%;border-radius:4px 10px 10px 4px;background:var(--paper);border:1px solid var(--line-2);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;box-shadow:0 30px 60px -30px rgba(42,42,53,.45);transform:rotateY(-8deg);transform-origin:left center}
+.cover::before{content:"";position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(42,42,53,.22),rgba(42,42,53,0));z-index:1}
+.cover .band{width:100%;height:auto;aspect-ratio:2 / 1}
+.cover-top{display:grid;align-content:start;gap:var(--s-4);padding:var(--s-12) var(--s-12) 0 var(--s-24)}
+.cover-top b{font:700 var(--fs-card)/1.1 var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.cover-top .t-label{color:var(--lime-text)}
+.byline{padding:var(--s-8) var(--s-12) var(--s-12) var(--s-24);border-top:1px solid var(--line);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
+
+.ad{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -40px rgba(42,42,53,.5);overflow:hidden}
 .ad-head{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-12) var(--s-16)}
 .avatar{width:36px;height:36px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--head);flex:none}
 .avatar svg{width:20px;height:20px}
 .ad-who b{display:block;font:600 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
 .ad-who span{display:block;font:400 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
-.ad-text{padding:0 var(--s-16) var(--s-12);font:400 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
-.ad-img{aspect-ratio:16/10;background:var(--sand-2)}
+.ad-text{padding:0 var(--s-16) var(--s-12);font:400 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head);text-wrap:pretty}
+.ad-img{aspect-ratio:4 / 3;background:var(--sand-2)}
 .ad-img svg{width:100%;height:100%}
 .ad-foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s-12);padding:var(--s-12) var(--s-16);background:var(--sand);border-top:1px solid var(--line)}
-.ad-foot .mini-cover{width:28px;height:36px;border-radius:2px 4px 4px 2px;background:var(--paper);border:1px solid var(--line-2);display:grid;align-items:end;overflow:hidden}
-.ad-foot .mini-cover i{display:block;height:8px;background:var(--charcoal)}
 .ad-foot .go{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--charcoal);color:var(--cream)}
 .ad-foot .go .ico{width:16px;height:16px;stroke-width:2.25}
 .ad-foot .icons{display:flex;gap:var(--s-12);color:var(--muted)}
 .ad-foot .icons .ico{width:18px;height:18px}
 
-.day-card{position:absolute;left:0;bottom:0;width:272px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:var(--s-12) var(--s-16) var(--s-16);box-shadow:0 30px 60px -30px rgba(42,42,53,.45);z-index:3}
-.day-card .dh{display:flex;align-items:center;gap:var(--s-8);padding-bottom:var(--s-8);border-bottom:1px solid var(--line);color:var(--head)}
+.day-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:var(--s-12);box-shadow:0 30px 60px -30px rgba(42,42,53,.45)}
+.day-card .dh{display:flex;align-items:center;gap:var(--s-8);padding:0 var(--s-4) var(--s-8);color:var(--head)}
 .day-card .dh .ico{width:18px;height:18px;color:var(--lime-text)}
-.hours{position:relative;padding-top:var(--s-12)}
-.hours i{display:block;height:16px;border-top:1px dashed var(--line)}
-.event{border-radius:10px;padding:var(--s-8) var(--s-12);background:var(--lime);color:var(--charcoal);display:flex;align-items:center;justify-content:space-between;gap:var(--s-8);margin-block:var(--s-4)}
+.event{border-radius:10px;padding:var(--s-8) var(--s-12);background:var(--lime);color:var(--charcoal);display:flex;align-items:center;justify-content:space-between;gap:var(--s-8)}
 .event b{display:block;font:700 var(--fs-ui)/var(--lh-ui) var(--display)}
 .event span{display:block;font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
 .event svg{width:22px;height:22px;flex:none}
@@ -195,19 +200,18 @@ button{font:inherit;color:inherit}
 /* motion 1: hero collage settles once on load (JS adds .play; default is the final frame) */
 .collage.play .ad{animation:settle .5s var(--ease-out) both}
 .collage.play .book{animation:slide-out .6s var(--ease-move) .2s both}
-.collage.play .event{animation:wipe .6s var(--ease-out) .8s both}
-.collage.play .tick path{animation:tick .3s var(--ease-out) 1.3s both}
+.collage.play .event{animation:wipe .6s var(--ease-out) .3s both}
+.collage.play .tick path{animation:tick .3s var(--ease-out) .8s both}
 @keyframes settle{from{transform:translateY(12px)}to{transform:none}}
-@keyframes slide-out{from{transform:translateX(24px) rotate(-2deg)}to{transform:rotate(var(--rot,-5deg))}}
+@keyframes slide-out{from{transform:translateX(16px) rotate(0deg)}to{transform:rotate(var(--rot,-3deg))}}
 @keyframes wipe{from{clip-path:inset(0 100% 0 0 round 10px)}to{clip-path:inset(0 0 0 0 round 10px)}}
 @keyframes tick{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
 
-/* ---------- proof ---------- */
-.proof{border-block:1px solid var(--line);background:var(--paper)}
-.proof ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.proof li{padding:var(--s-32) var(--s-24);display:grid;gap:var(--s-4);align-content:start}
-.proof li+li{border-left:1px solid var(--line)}
-.proof b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
+/* ---------- proof: trust row inside the hero ---------- */
+.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s-24)}
+.proof::before{content:"";grid-column:1 / -1;border-top:1px solid var(--line);margin-bottom:var(--s-24)}
+.proof li{display:grid;gap:var(--s-4);align-content:start}
+.proof b{font:700 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head);font-variant-numeric:tabular-nums}
 .proof span{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
 
 /* ---------- problem: your week ---------- */
@@ -215,8 +219,8 @@ button{font:inherit;color:inherit}
 .day{display:grid;grid-template-rows:auto auto auto 1fr;align-content:start;padding:var(--s-24);gap:var(--s-12)}
 .day + .day{border-left:1px solid var(--line)}
 .day .t-label{color:var(--muted);padding-bottom:var(--s-12);border-bottom:1px solid var(--line)}
-.day svg{width:120px;height:72px;margin-block:var(--s-8)}
-.day p{color:var(--body)}
+.day svg{width:96px;height:58px;margin-block:var(--s-8)}
+.day p{color:var(--body);text-wrap:pretty}
 
 /* ---------- different ---------- */
 .vs{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap-cols);align-items:stretch}
@@ -238,37 +242,47 @@ button{font:inherit;color:inherit}
 .thumb{width:40px;height:40px;border-radius:10px;background:var(--sand);border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--head)}
 .thumb svg{width:24px;height:24px}
 
-/* ---------- how: the campaign board ---------- */
-.board-foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
-.who-key{display:flex;gap:var(--s-8);flex-wrap:wrap}
+/* ---------- how: the campaign board, each stop a real artefact ---------- */
+.board-head{display:flex;justify-content:flex-end;margin-bottom:var(--s-16)}
 .steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:auto auto auto auto;column-gap:var(--gap-cols);row-gap:var(--s-12);padding-bottom:var(--s-80)}
 .step{display:grid;grid-row:span 4;grid-template-rows:subgrid;position:relative}
 .who{justify-self:start;padding:var(--s-4) var(--s-8);border-radius:999px;font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase}
 .who.we{background:var(--card-dark);color:var(--lime);border:1px solid var(--border-dark)}
 .who.they{background:var(--cream);color:var(--charcoal)}
 .who.you{background:transparent;color:var(--cream);border:1px solid var(--body-dark)}
-.art{height:148px;border-radius:14px;background:var(--cream);border:1px solid var(--border-dark);padding:var(--s-12);display:grid;align-content:center;justify-items:center;gap:var(--s-8);color:var(--head);transition:box-shadow .3s var(--ease-out)}
+.art{height:164px;border-radius:14px;background:var(--sand);border:1px solid var(--border-dark);padding:var(--s-12);display:grid;place-items:center;color:var(--head);overflow:hidden;transition:box-shadow .3s var(--ease-out)}
 .art.lit{box-shadow:0 0 0 2px var(--lime)}
-.art .mini-book{width:84px;height:112px;border-radius:2px 6px 6px 2px;background:var(--paper);border:1px solid var(--line-2);display:grid;grid-template-rows:1fr auto;overflow:hidden;box-shadow:0 12px 24px -16px rgba(0,0,0,.6)}
-.art .mini-book svg{width:100%;height:100%}
-.art .mini-book span{padding:var(--s-4);background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/1 var(--sans);text-align:center}
-.art .mini-ad{width:100%;max-width:150px;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.art .mini-ad .h{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8);font:600 var(--fs-ui-sm)/1 var(--sans)}
-.art .mini-ad .h i{width:20px;height:20px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2)}
-.art .mini-ad svg{width:100%;height:64px}
-.art .q{font:600 var(--fs-ui)/var(--lh-ui) var(--sans);text-align:center;max-width:18ch}
-.art .pill{padding:var(--s-4) var(--s-12);border-radius:999px;background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
-.art .checks{display:grid;gap:var(--s-8);justify-self:stretch;padding-inline:var(--s-8)}
-.art .checks span{display:flex;align-items:center;gap:var(--s-8);font:500 var(--fs-ui)/var(--lh-ui) var(--sans);padding-bottom:var(--s-8);border-bottom:1px dashed var(--line-2)}
-.art .checks .ico{width:18px;height:18px;color:var(--lime-text);stroke-width:2.25}
-.art .slot{justify-self:stretch;border-radius:10px;border:1.5px solid var(--charcoal);background:var(--paper);padding:var(--s-8) var(--s-12);display:flex;align-items:center;gap:var(--s-8)}
-.art .slot .ico{color:var(--lime-text)}
-.art .slot b{font:700 var(--fs-ui)/var(--lh-ui) var(--display)}
-.art .confirmed{display:grid;justify-items:center;gap:var(--s-8);font:600 var(--fs-ui)/var(--lh-ui) var(--sans)}
-.art .confirmed svg{width:40px;height:40px}
-.art .mini-cal{display:grid;grid-template-columns:repeat(4,24px);gap:var(--s-8)}
-.art .mini-cal span{height:24px;border-radius:6px;border:1px solid var(--line-2);background:var(--paper)}
-.art .mini-cal .on{background:var(--charcoal);border-color:var(--charcoal);box-shadow:0 0 0 3px var(--lime)}
+.art .mk{width:100%;max-width:152px;background:var(--paper);border:1px solid var(--line-2);border-radius:10px;overflow:hidden;text-align:left;box-shadow:0 12px 24px -16px rgba(0,0,0,.5)}
+.mk b{display:block;font:700 var(--fs-ui-sm)/1.25 var(--display);color:var(--head)}
+.mk span,.mk p{font:500 var(--fs-ui-sm)/1.25 var(--sans);color:var(--head)}
+/* 1 guide cover */
+.art .m-cover{width:112px;max-width:none;border-radius:2px 6px 6px 2px;display:grid}
+.m-cover svg{width:100%;height:40px}
+.m-cover b{padding:var(--s-8) var(--s-8) 0}
+.m-cover span{padding:var(--s-4) var(--s-8) var(--s-8);color:var(--muted)}
+/* 2 ad */
+.m-ad .h{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8)}
+.m-ad .h i{width:16px;height:16px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2);flex:none}
+.m-ad svg{width:100%;height:56px}
+.m-ad .c{display:block;margin:var(--s-8);padding:var(--s-4) var(--s-8);border-radius:6px;background:var(--charcoal);color:var(--cream);text-align:center}
+/* 3 guide page with the first question */
+.m-page{display:grid;gap:var(--s-8);padding-bottom:var(--s-8)}
+.m-page .bar{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-4) var(--s-8);background:var(--charcoal);color:var(--cream)}
+.m-page .bar i{width:8px;height:8px;border-radius:50%;background:var(--lime);flex:none}
+.m-page b{padding-inline:var(--s-8)}
+.m-page .o{margin-inline:var(--s-8);padding:var(--s-4) var(--s-8);border-radius:6px;border:1px solid var(--line-2)}
+.m-page .o.on{background:var(--lime);border-color:var(--charcoal)}
+/* 4 follow-up note */
+.m-note{display:grid;gap:var(--s-8);padding:var(--s-8) var(--s-12) var(--s-12)}
+.m-note .from{display:flex;align-items:center;gap:var(--s-8);padding-bottom:var(--s-8);border-bottom:1px solid var(--line);color:var(--muted)}
+.m-note .from i{width:16px;height:16px;border-radius:4px;background:var(--lime);flex:none}
+.m-note .ln{display:block;height:4px;border-radius:2px;background:var(--sand-2)}
+.m-note .ln.s{width:64%}
+/* 5 the realtor's day */
+.m-day{display:grid;gap:var(--s-4);padding:var(--s-8)}
+.m-day .dh{padding-bottom:var(--s-4);border-bottom:1px solid var(--line);font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted)}
+.m-day i{display:block;height:16px;border-bottom:1px dashed var(--line-2)}
+.m-day .slot{display:grid;padding:var(--s-4) var(--s-8);border-radius:6px;background:var(--lime)}
 .stop{position:relative;height:16px}
 .stop::before{content:"";position:absolute;top:7px;left:0;right:calc(var(--gap-cols) * -1);height:2px;background:var(--border-dark)}
 .step:first-child .stop::before{left:50%}
@@ -278,85 +292,67 @@ button{font:inherit;color:inherit}
 .buyer{position:absolute;left:50%;top:calc(100% + var(--s-12));translate:-50% 0;z-index:2;display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-12) var(--s-8) var(--s-8);border-radius:999px;background:var(--paper);color:var(--head);white-space:nowrap;box-shadow:0 16px 32px -16px rgba(0,0,0,.7)}
 .buyer .avatar{width:28px;height:28px}
 .buyer .avatar svg{width:16px;height:16px}
-.buyer b{font:600 var(--fs-ui)/1 var(--sans)}
 .buyer .badge{padding:var(--s-4) var(--s-8);border-radius:999px;background:var(--lime);color:var(--charcoal);font:700 var(--fs-ui-sm)/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.chips{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-chip)}
-.chips li{padding:var(--s-8) var(--s-12);border-radius:999px;border:1px solid var(--border-dark);color:var(--body-dark);font-size:var(--fs-small);line-height:1}
-.chips .ico{width:18px;height:18px;color:var(--lime)}
 
-/* ---------- calendar: report + your week ---------- */
-.report-card{margin-top:var(--gap-block);max-width:360px;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(42,42,53,.4)}
-.report-card .rh{padding:var(--s-16);background:var(--paper);color:var(--head);border-bottom:1px solid var(--line)}
-.report-card .rh b{display:block;font:700 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card)}
-.report-card .rh span{display:block;margin-top:var(--s-4);font:400 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
-.report-card ul{padding:var(--s-8) var(--s-16)}
-.report-card li{display:flex;align-items:center;gap:var(--s-12);padding-block:var(--s-8);font:500 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
-.report-card li + li{border-top:1px solid var(--line)}
-.report-card li .ico{width:18px;height:18px;color:var(--lime-text)}
+/* ---------- calendar: what you know before the call + your week ---------- */
+.report-card{margin-top:var(--gap-block);max-width:400px;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(42,42,53,.4)}
+.report-card .rh{display:flex;align-items:center;gap:var(--s-12);padding:var(--s-16);border-bottom:1px solid var(--line)}
+.report-card .rh .avatar{width:40px;height:40px;background:var(--lime);border-color:rgba(42,42,53,.2)}
+.report-card .rh b{display:block;font:700 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.report-card .rh span span{display:block;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
+.report-card .rh .tag{margin-left:auto}
+.report-card dl{display:grid;grid-template-columns:auto minmax(0,1fr);padding:var(--s-4) var(--s-16) var(--s-8)}
+.report-card dl div{display:contents}
+.report-card dt,.report-card dd{padding-block:var(--s-8);border-top:1px solid var(--line)}
+.report-card dl div:first-child dt,.report-card dl div:first-child dd{border-top:0}
+.report-card dt{padding-right:var(--s-16);font:700 var(--fs-label)/var(--lh-small) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);padding-top:calc(var(--s-8) + var(--s-4))}
+.report-card dd{font:500 var(--fs-body)/var(--lh-card) var(--sans);color:var(--head)}
 .cal{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -50px rgba(42,42,53,.45)}
 .cal-h{display:flex;align-items:center;gap:var(--s-12);padding:var(--s-16) var(--s-24);border-bottom:1px solid var(--line)}
 .cal-h .ico{color:var(--lime-text)}
-.cal-h b{font:600 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
 .cal-h .tag{margin-left:auto}
 .cal ol{display:grid}
 .cal li{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:var(--s-16);align-items:start;padding:var(--s-12) var(--s-24);min-height:56px}
 .cal li + li{border-top:1px solid var(--line)}
 .cal .d{padding-top:var(--s-4);color:var(--muted)}
-.ev{grid-column:2;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--s-12);row-gap:var(--s-4);padding:var(--s-12) var(--s-16);border-radius:12px;background:var(--sand);border:1px solid var(--line-2)}
+.ev{grid-column:2;display:grid;row-gap:var(--s-4);padding:var(--s-12) var(--s-16);border-radius:12px;background:var(--sand);border:1px solid var(--line-2)}
 .ev.hot{background:var(--lime);border-color:rgba(42,42,53,.2)}
 .ev b{font:600 var(--fs-body)/var(--lh-card) var(--sans);color:var(--head)}
-.ev .meta{grid-column:1 / -1;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head)}
-.meta > span + span::before{content:"·";margin-inline:var(--s-4) var(--s-8);color:var(--muted)}
-.ev .ok{display:flex;align-items:center;gap:var(--s-4);font-size:var(--fs-small);line-height:var(--lh-small);font-weight:600;color:var(--head)}
-.ev .ok .ico{width:16px;height:16px;stroke-width:2.5}
-.remind{grid-column:2;justify-self:end;margin-top:var(--s-8);max-width:260px;padding:var(--s-8) var(--s-12);border-radius:16px 16px 4px 16px;background:var(--charcoal);color:var(--cream);font:400 var(--fs-ui)/var(--lh-ui) var(--sans)}
-
-
-.art .lp{display:grid;grid-template-columns:56px minmax(0,1fr);gap:var(--s-8);width:100%;max-width:170px;align-items:center}
-.art .lp-cover{height:76px;border-radius:2px 6px 6px 2px;overflow:hidden;border:1px solid var(--line-2)}
-.art .lp-cover svg{width:100%;height:100%}
-.art .lp-form{display:grid;gap:var(--s-8)}
-.art .lp-form .in{display:flex;align-items:center;height:24px;padding-inline:var(--s-8);border-radius:6px;border:1px solid var(--line-2);background:var(--paper);color:var(--muted)}
-.art .lp-form .in .ico{width:14px;height:14px}
-.art .lp-form .go{display:grid;place-items:center;height:24px;border-radius:6px;background:var(--charcoal);color:var(--cream)}
-.art .lp-form .go .ico{width:14px;height:14px}
-.art .mini-ad .h .ico{width:14px;height:14px;margin-left:auto;color:var(--muted)}
-.art .mini-book{grid-template-rows:1fr 12px}
-.report-card .r-body{position:relative;height:132px;background:var(--sand-2)}
-.report-card .r-body > svg{width:100%;height:100%}
-.report-card .r-icons{position:absolute;left:var(--s-16);bottom:var(--s-16);display:flex;gap:var(--s-8)}
-.report-card .r-icons .ico{width:32px;height:32px;padding:var(--s-8);border-radius:50%;background:var(--paper);color:var(--lime-text);stroke-width:2}
+.ev .meta{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head)}
 /* motion 3: the week fills top to bottom once */
 .cal.play .ev{animation:fill-in .45s var(--ease-out) calc(var(--i) * 300ms) both}
-.cal.play .remind{animation:fill-in .35s var(--ease-out) .6s both}
 @keyframes fill-in{from{clip-path:inset(0 0 100% 0 round 12px);transform:translateY(6px)}to{clip-path:inset(0 0 0 0 round 12px);transform:none}}
 
-/* ---------- results: work we've run ---------- */
-.results .split{align-items:stretch}
-.guide-feature{display:grid;align-content:start;gap:var(--s-24)}
-.stage{position:relative;height:420px;border-radius:20px;background:var(--sand);border:1px solid var(--line);overflow:hidden}
-.page{position:absolute;top:var(--s-48);width:190px;height:250px;background:var(--paper);border:1px solid var(--line-2);border-radius:4px;box-shadow:0 20px 40px -24px rgba(42,42,53,.35);padding:var(--s-16)}
-.page svg{width:100%;height:100%}
-.page.p1{right:var(--s-24);transform:rotate(6deg)}
-.page.p2{right:var(--s-80);top:var(--s-80);transform:rotate(-3deg)}
-.stage .book{left:var(--s-32);top:var(--s-64);width:228px;height:304px}
-.stage .cover{transform:rotateY(-10deg);grid-template-rows:auto 1fr}
+/* ---------- results: the guide we wrote + what the work did ---------- */
+.results .split{align-items:start}
+.guide-feature{display:grid;gap:var(--s-16)}
+.stage{height:360px;border-radius:20px;background:var(--sand);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;container-type:inline-size}
+.spread{display:grid;grid-template-columns:repeat(2,200px);transform:rotate(-2deg);filter:drop-shadow(0 24px 24px rgba(42,42,53,.18))}
+.pg{height:268px;background:var(--paper);border:1px solid var(--line-2);display:grid;align-content:start;gap:var(--s-8);overflow:hidden}
+.pg-cover{border-radius:8px 2px 2px 8px;padding-bottom:var(--s-16)}
+.pg-cover svg{width:100%;height:96px}
+.pg-cover b{padding-inline:var(--s-16);font:700 18px/1.15 var(--display);letter-spacing:-.01em;color:var(--head)}
+.pg-cover span{padding-inline:var(--s-16);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
+.pg-toc{border-left:0;border-radius:2px 8px 8px 2px;padding:var(--s-32) var(--s-16) var(--s-24);background:linear-gradient(90deg,rgba(42,42,53,.06),rgba(42,42,53,0) 16px),var(--paper);counter-reset:toc;align-content:start}
+.pg-toc .t-label{color:var(--lime-text);padding-bottom:var(--s-8)}
+.pg-toc li{counter-increment:toc;display:grid;grid-template-columns:24px minmax(0,1fr);padding-block:var(--s-8);border-top:1px solid var(--line);font:600 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--head)}
+.pg-toc li::before{content:counter(toc, decimal-leading-zero);font:700 var(--fs-ui-sm)/var(--lh-ui) var(--mono);color:var(--muted)}
+.pg-toc .ln{display:block;height:4px;border-radius:2px;background:var(--sand-2);margin-top:var(--s-4)}
+.pg-toc .ln.s{width:64%}
+@container (max-width:430px){.spread{zoom:.9}}
+@container (max-width:380px){.spread{zoom:.8}}
+@container (max-width:340px){.spread{zoom:.7}}
 .nw{white-space:nowrap}
 .guide-cap b{display:block;font-weight:600;color:var(--head)}
 .guide-cap span{display:block;margin-top:var(--s-4)}
-.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-cols);align-content:start;position:relative}
-.work > .tag{position:absolute;right:0;top:calc(var(--s-32) * -1 - var(--s-8))}
-.piece{display:grid;align-content:start;gap:var(--s-12)}
-.piece .frame{height:168px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sand);transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
-.piece .frame svg{width:100%;height:100%}
-.piece .frame.dk{background:var(--charcoal)}
-@media (hover:hover) and (pointer:fine){.piece:hover .frame{transform:perspective(800px) rotateX(3deg) translateY(-4px);box-shadow:0 24px 40px -28px rgba(42,42,53,.5)}}
-.piece b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
-.piece p{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--body);text-wrap:pretty}
+.ledger{border-top:1px solid var(--line)}
+.ledger li{display:grid;gap:var(--s-4);padding-block:var(--s-24);border-bottom:1px solid var(--line)}
+.ledger b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
+.ledger p{color:var(--body);text-wrap:pretty}
 
 /* ---------- pay ---------- */
 .stages{counter-reset:st;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-cols)}
-.stage-i{position:relative;display:grid;gap:var(--s-4);padding-top:var(--s-64)}
+.stage-i{position:relative;display:grid;align-content:start;gap:var(--s-4);padding-top:var(--s-64)}
 .stage-i::before{content:"";position:absolute;top:19px;left:0;right:calc(var(--gap-cols) * -1);height:2px;background:var(--line-2)}
 .stage-i:last-child::before{display:none}
 .num{position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1.5px solid var(--charcoal);color:var(--head);font:700 var(--fs-small)/1 var(--mono)}
@@ -373,20 +369,13 @@ button{font:inherit;color:inherit}
 .map{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:var(--pad-card)}
 .map-dots{position:relative}
 .map-dots > svg{width:100%;height:auto}
-.pin{position:absolute;left:39.7%;top:53.6%;width:0;height:0}
+.pin{position:absolute;left:50%;top:52%;width:0;height:0}
 .pin .dot{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--lime);border:2px solid var(--charcoal)}
-.pin .ring{position:absolute;left:-16px;top:-16px;width:32px;height:32px;border-radius:50%;border:2px solid var(--lime-text);opacity:0}
-.pin .call{position:absolute;left:0;translate:-50% 0;bottom:var(--s-16);display:flex;align-items:center;gap:var(--s-8);white-space:nowrap;padding:var(--s-8) var(--s-12);border-radius:12px;background:var(--charcoal);color:var(--cream);box-shadow:0 14px 30px -16px rgba(42,42,53,.6)}
-.pin .call svg{width:20px;height:20px;max-width:none;color:var(--lime)}
-.pin .call .tag{padding:var(--s-4) var(--s-8)}
-.map-label{display:flex;align-items:center;gap:var(--s-8);margin-top:var(--s-16);font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head);font-weight:500}
-.map-label .ico{width:18px;height:18px;color:var(--lime-text)}
-/* motion 4: pin drops once, two ring pulses, then still */
+.pin .call{position:absolute;left:0;translate:-50% 0;bottom:var(--s-16);display:flex;align-items:center;gap:var(--s-8);white-space:nowrap;padding:var(--s-4) var(--s-4) var(--s-4) var(--s-12);border-radius:999px;background:var(--paper);border:1px solid var(--line-2);color:var(--head);font:600 var(--fs-ui)/var(--lh-ui) var(--sans);box-shadow:0 14px 30px -16px rgba(42,42,53,.5)}
+/* motion 4: a neutral "your city" pin drops once, then still */
 .map.play .pin .dot{animation:drop .4s var(--ease-out) both}
-.map.play .pin .ring{animation:ring .7s var(--ease-out) .4s 2}
-.map.play .pin .call{animation:rise .3s var(--ease-out) .4s both}
+.map.play .pin .call{animation:rise .3s var(--ease-out) .3s both}
 @keyframes drop{from{transform:translateY(-16px)}to{transform:none}}
-@keyframes ring{from{transform:scale(.6);opacity:.5}to{transform:scale(1.8);opacity:0}}
 @keyframes rise{from{transform:translateY(6px)}to{transform:none}}
 
 /* ---------- faq ---------- */
@@ -470,13 +459,33 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 
 /* ---------- tablet ---------- */
 @media (min-width:961px) and (max-width:1199px){
-  .hero .book{left:0;width:196px;height:264px}
-  .ad{width:262px}
+  .week{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .day{grid-column:span 2}
+  .day:nth-child(n+4){grid-column:span 3;border-top:1px solid var(--line)}
+  .day:nth-child(4){border-left:0}
+  .proof{grid-template-columns:minmax(0,1fr);row-gap:var(--s-8)}
+  .proof::before{margin-bottom:var(--s-8)}
+  .proof li{display:flex;align-items:baseline;gap:var(--s-8)}
+}
+/* how: below 1024 each step is a row, artefact on the right, no travelling pill */
+@media (max-width:1023px){
+  .steps{position:relative;grid-template-columns:minmax(0,1fr);grid-template-rows:none;row-gap:var(--s-16);padding-bottom:0}
+  .steps::before{content:"";position:absolute;left:11px;top:72px;bottom:72px;width:2px;background:var(--border-dark)}
+  .step{grid-row:auto;grid-template-columns:24px minmax(0,1fr) 200px;grid-template-rows:1fr 1fr;column-gap:var(--s-16);row-gap:var(--s-8)}
+  .stop{grid-column:1;grid-row:1 / 3;align-self:center}
+  .stop::before{display:none}
+  .who{grid-column:2;grid-row:1;align-self:end}
+  .step h3{grid-column:2;grid-row:2;align-self:start}
+  .art{grid-column:3;grid-row:1 / 3;height:144px}
+  .buyer{display:none}
 }
 @media (max-width:960px){
   .split{grid-template-columns:minmax(0,1fr);row-gap:var(--gap-split)}
   .split > :first-child,.split > :last-child{grid-column:auto}
-  .collage{margin-inline:auto}
+  .hero .split{grid-template-rows:none;row-gap:0}
+  .hero .split > .hero-copy,.hero .split > .proof,.hero .split > .collage{grid-column:auto;grid-row:auto}
+  .hero .split > .collage{margin-top:var(--gap-split)}
+  .collage{margin-left:0}
   .week{grid-template-columns:repeat(2,minmax(0,1fr))}
   .day + .day{border-left:0}
   .day{border-top:1px solid var(--line)}
@@ -486,23 +495,6 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .vs{grid-template-columns:minmax(0,1fr);row-gap:var(--gap-cols)}
   .vs-col.them,.vs-col.us{grid-column:auto}
   .faq .sec-head{position:static}
-  .guide-feature{max-width:560px}
-}
-@media (max-width:860px){
-  .steps{grid-template-columns:minmax(0,1fr);row-gap:0;padding-bottom:0}
-  .steps{grid-template-rows:none}
-  .step{grid-row:auto;grid-template-columns:24px minmax(0,1fr);grid-template-rows:none;column-gap:var(--s-16);row-gap:var(--s-12);padding-bottom:var(--s-40)}
-  .step > *{grid-column:2}
-  .who{grid-row:1}
-  .step::before{content:"";position:absolute;left:11px;top:12px;bottom:0;width:2px;background:var(--border-dark)}
-  .step:last-child{padding-bottom:0}
-  .step:last-child::before{display:none}
-  .art{justify-self:stretch;width:100%}
-  .stop{grid-column:1 / -1;grid-row:1;height:24px}
-  .stop::before{display:none}
-  .stop::after{left:12px;top:4px}
-  .buyer{left:auto;right:0;top:50%;translate:0 -50%}
-  .board-foot{margin-top:var(--s-40)}
 }
 /* ---------- phone ---------- */
 @media (max-width:640px){
@@ -510,21 +502,23 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .logo img{height:24px}
   .hero .btn{width:100%}
   .hero .micro{text-align:center}
-  .collage{height:480px;max-width:360px}
-  .collage > .tag{left:auto;right:0}
-  .hero .day-card{left:0;right:0;top:var(--s-40);bottom:auto;width:auto;display:flex;align-items:center;gap:var(--s-12);padding:var(--s-8) var(--s-8) var(--s-8) var(--s-16)}
-  .hero .day-card .dh{border-bottom:0;padding-bottom:0}
-  .hero .day-card .hours{display:none}
-  .hero .day-card .event{flex:1;margin-block:0}
-  .hero .ad{left:0;right:auto;top:var(--s-104);width:240px}
-  .ad-text{padding-bottom:var(--s-8)}
-  .ad-foot{padding-block:var(--s-8)}
-  .hero .book{left:auto;right:0;top:auto;bottom:var(--s-32);width:128px;height:172px;--rot:5deg;z-index:3}
-  .cover-top{padding:var(--s-12) var(--s-12) var(--s-8) var(--s-16)}
-  .byline{padding-inline:var(--s-16)}
-  .proof ul{grid-template-columns:minmax(0,1fr)}
-  .proof li{padding:var(--s-16) 0}
-  .proof li+li{border-left:0;border-top:1px solid var(--line)}
+  .collage{grid-template-columns:minmax(0,11fr) minmax(0,8fr);gap:var(--s-16);max-width:none}
+  .collage .ad{grid-row:1}
+  .collage .book{grid-row:1;width:100%;max-width:128px}
+  .collage .day-card{grid-column:1 / -1;grid-row:2;display:flex;align-items:center;gap:var(--s-12);padding:var(--s-8) var(--s-8) var(--s-8) var(--s-16)}
+  .day-card .dh{padding:0}
+  .day-card .event{flex:1}
+  .ad-head{padding:var(--s-8) var(--s-12)}
+  .avatar{width:28px;height:28px}
+  .avatar svg{width:16px;height:16px}
+  .ad-text{padding:0 var(--s-12) var(--s-8)}
+  .ad-foot{padding:var(--s-8) var(--s-12)}
+  .cover-top{padding:var(--s-8) var(--s-8) 0 var(--s-16)}
+  .cover-top b{font-size:var(--fs-ui)}
+  .byline{padding:var(--s-8) var(--s-8) var(--s-8) var(--s-16)}
+  .proof{grid-template-columns:minmax(0,1fr);row-gap:var(--s-8)}
+  .proof::before{margin-bottom:var(--s-8)}
+  .proof li{display:flex;align-items:baseline;gap:var(--s-8)}
   .week{grid-template-columns:minmax(0,1fr)}
   .day,.day:nth-child(even){grid-template-columns:96px minmax(0,1fr);grid-template-rows:none;column-gap:var(--s-16);row-gap:var(--s-8);padding:var(--s-16);border-left:0;border-top:1px solid var(--line)}
   .day:first-child{border-top:0}
@@ -534,20 +528,13 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .day .t-label{border-bottom:0;padding-bottom:0}
   .day svg{grid-column:1;grid-row:1 / span 3;width:96px;height:58px;margin-block:0}
   .vs li{min-height:56px;gap:var(--s-12)}
+  .step{grid-template-columns:24px minmax(0,1fr) 136px;column-gap:var(--s-12)}
+  .steps::before{top:60px;bottom:60px}
+  .art{height:120px;padding:var(--s-4)}
+  .art > *{zoom:.8}
   .cal li{grid-template-columns:40px minmax(0,1fr);padding-inline:var(--s-16);column-gap:var(--s-12)}
   .cal-h{padding-inline:var(--s-16)}
-  .ev{grid-template-columns:minmax(0,1fr)}
-  .ev .ok{grid-row:auto}
-  .ev .meta{display:flex;flex-wrap:wrap;gap:var(--s-4)}
-  .meta > span{padding:0 var(--s-8);border-radius:999px;border:1px solid rgba(42,42,53,.18)}
-  .meta > span + span::before{content:none}
-  .stage{height:340px}
-  .stage .book{left:var(--s-16);top:var(--s-40);width:176px;height:236px}
-  .page{width:150px;height:200px}
-  .page.p1{right:var(--s-12)}
-  .page.p2{right:var(--s-48);top:var(--s-64)}
-  .work{grid-template-columns:minmax(0,1fr);margin-top:var(--s-32)}
-  .work > .tag{top:calc(var(--s-32) * -1)}
+  .stage{height:280px}
   .stages{grid-template-columns:minmax(0,1fr);row-gap:var(--s-32)}
   .stage-i{padding-top:0;padding-left:var(--s-64);min-height:40px}
   .stage-i::before{top:40px;bottom:calc(var(--s-32) * -1);left:19px;right:auto;width:2px;height:auto}
@@ -558,7 +545,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important}
-  .btn,.opt,.opt-d,.piece .frame{transition-property:background-color,border-color,color,box-shadow!important}
+  .btn,.opt,.opt-d{transition-property:background-color,border-color,color,box-shadow!important}
 }
 </style>
 </head>
@@ -586,7 +573,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <symbol id="t-ad" viewBox="0 0 24 24"><rect x="3" y="2.5" width="18" height="19" rx="2.5"/><circle cx="7" cy="6.5" r="1.6"/><rect x="5.5" y="10" width="13" height="7" rx="1" fill="currentColor" fill-opacity=".18"/></symbol>
   <symbol id="t-report" viewBox="0 0 24 24"><path d="M14 2.5H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.5z"/><path d="M14 2.5v6h6"/><path d="m8.5 15 2.5 2.5 4.5-5"/></symbol>
 
-  <!-- illustrations (drawn, no photos) -->
+  <!-- cover bands: pattern, not a scene -->
+  <symbol id="band" viewBox="0 0 176 88" preserveAspectRatio="xMidYMid slice"><rect width="176" height="88" fill="#2A2A35"/><g fill="none" stroke="#D5EB4B" stroke-width="1.5" stroke-opacity=".7"><path d="M0 88a44 44 0 0 1 88 0M88 88a44 44 0 0 1 88 0M0 0a44 44 0 0 0 88 0M88 0a44 44 0 0 0 88 0"/><path d="M44 88V44M132 88V44"/></g><circle cx="132" cy="44" r="12" fill="#D5EB4B"/></symbol>
+  <symbol id="band-lime" viewBox="0 0 200 96" preserveAspectRatio="xMidYMid slice"><rect width="200" height="96" fill="#D5EB4B"/><g fill="none" stroke="#2A2A35" stroke-width="1.25" stroke-opacity=".55"><path d="M-10 70c30-18 60 10 96-6s62-30 124-8"/><path d="M-10 52c34-16 58 8 94-8s66-26 126-6"/><path d="M-10 34c30-14 62 6 98-8s62-22 122-4"/><path d="M-10 16c34-12 60 6 96-6s64-18 124-2"/><path d="M-10 88c32-18 64 10 98-4s64-28 122-10"/></g><path d="M124 40c0 8-8 14-8 14s-8-6-8-14a8 8 0 0 1 16 0z" fill="#2A2A35"/><circle cx="116" cy="40" r="3" fill="#D5EB4B"/></symbol>
+  <!-- illustrations (drawn, no photos): each used once -->
   <symbol id="art-condo" viewBox="0 0 240 150" preserveAspectRatio="xMidYMid slice">
     <rect width="240" height="150" fill="#EFEBDD"/>
     <circle cx="192" cy="34" r="14" fill="#FFFDF7"/>
@@ -635,48 +625,42 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       </div>
     </div>
 
+    <ul class="proof" data-s="proof" aria-label="Track record">
+      <li><b>Since 2023</b><span>in real estate</span></li>
+      <li><b>$130k+</b><span>ad spend managed</span></li>
+      <li><b>$2M+</b><span>realtor GCI tracked</span></li>
+    </ul>
+
     <figure class="collage" aria-label="Example of the work: your ad, your guide and a booked call on your calendar">
       <span class="tag">Example</span>
-      <div class="book">
-        <div class="cover">
-          <div class="cover-top"><b>First Condo Guide</b><span class="t-label">Burnaby 2026</span></div>
-          <svg aria-hidden="true"><use href="#art-condo"/></svg>
-          <p class="byline">Your name</p>
-        </div>
-      </div>
       <article class="ad">
         <div class="ad-head">
           <span class="avatar" aria-hidden="true"><svg class="ico"><use href="#i-person"/></svg></span>
           <p class="ad-who"><b>Your name, REALTOR®</b><span>Sponsored</span></p>
         </div>
-        <p class="ad-text">First condo in Burnaby? Get my free 2026 guide.</p>
+        <p class="ad-text">First condo in Burnaby? Get my free&nbsp;guide.</p>
         <div class="ad-img"><svg aria-hidden="true"><use href="#art-condo"/></svg></div>
         <div class="ad-foot" aria-hidden="true">
           <span class="icons"><svg class="ico"><use href="#i-heart"/></svg><svg class="ico"><use href="#i-msg"/></svg></span>
           <span class="go"><svg class="ico"><use href="#i-arrow"/></svg></span>
         </div>
       </article>
+      <div class="book">
+        <div class="cover">
+          <svg class="band" aria-hidden="true"><use href="#band"/></svg>
+          <p class="cover-top"><span class="t-label">Burnaby 2026</span><b>First condo guide</b></p>
+          <p class="byline">by Your name</p>
+        </div>
+      </div>
       <div class="day-card">
         <p class="dh"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="t-label">Thu</span></p>
-        <div class="hours" aria-hidden="true"><i></i></div>
         <div class="event">
           <p><b>10:30 Buyer call</b><span>Priya S.</span></p>
           <svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2A2A35"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#D5EB4B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="hours" aria-hidden="true"><i></i></div>
       </div>
     </figure>
     </div>
-  </div>
-</section>
-
-<section class="proof" data-s="proof" aria-label="Track record">
-  <div class="wrap">
-    <ul>
-      <li><b>Since 2023</b><span>in real estate marketing</span></li>
-      <li><b>$130k+</b><span>real estate ad spend managed</span></li>
-      <li><b>$2M+</b><span>realtor GCI tracked</span></li>
-    </ul>
   </div>
 </section>
 
@@ -688,7 +672,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <span class="t-label">Mon</span>
         <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><path d="M28 30h64l12 22H16z" fill="#F5F2E8"/><path d="M16 52h88v12H16z" fill="#EFEBDD"/><path d="M34 30V14h52v16" stroke-dasharray="4 4" stroke="#8A8577"/></svg>
         <h3>Your sphere went quiet</h3>
-        <p>You did the <span class="nw">pop-bys</span>. Your past clients aren't moving this year.</p>
+        <p>You did the <span class="nw">pop-bys</span>. Past clients aren't moving this year.</p>
       </li>
       <li class="day">
         <span class="t-label">Tue</span>
@@ -700,7 +684,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <span class="t-label">Wed</span>
         <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><path d="M14 22h30l6 6h56v40H14z" fill="#F5F2E8"/><rect x="60" y="4" width="40" height="40" rx="2" fill="#EEF6BE" transform="rotate(6 80 24)"/><path d="M75 18a6 6 0 1 1 8.5 5.5c-2 .9-2.5 2-2.5 4.5" stroke-width="2" stroke-linecap="round"/><circle cx="81" cy="34" r="1.2" fill="#1A1A2E"/></svg>
         <h3>Post every day, they said</h3>
-        <p>Your broker wants a post a day. You've got showings all evening.</p>
+        <p>Your broker wants daily posts. You have showings all&nbsp;evening.</p>
       </li>
       <li class="day">
         <span class="t-label">Thu</span>
@@ -723,12 +707,11 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div class="sec-head"><h2>Stop chasing internet forms</h2></div>
     <div class="vs">
       <div class="vs-col them">
-        <h3 class="vs-h">Buying leads</h3>
+        <h3 class="vs-h">Leads you're handed</h3>
         <ul>
           <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Sold to other realtors too</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>A name and a phone number</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>You chase them for days</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>You make the content</li>
         </ul>
       </div>
       <div class="vs-col us">
@@ -737,10 +720,9 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
           <h3>Your ZippyScale team</h3>
         </div>
         <ul>
-          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-ad"/></svg></span>Your name on every ad</li>
-          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-report"/></svg></span><span>Their timeline and <span class="nw">pre-approval</span></span></li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span>Only you get them in your city</li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-report"/></svg></span>Their timeline before you call</li>
           <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg></span>We follow up until they book</li>
-          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-book"/></svg></span>We write your guides and ads</li>
         </ul>
       </div>
     </div>
@@ -751,47 +733,42 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap">
     <div class="sec-head">
       <h2>How new people find you</h2>
-      <p class="sub">Live within 7 days of signing.</p>
+      <p class="sub">Your ads run within 7 days of signing.</p>
     </div>
     <div class="board">
+      <p class="board-head"><span class="tag">Example</span></p>
       <ol class="steps">
         <li class="step">
           <span class="who we">We</span>
           <h3>Write your city guide</h3>
-          <div class="art" aria-hidden="true"><div class="mini-book"><svg><use href="#art-condo"/></svg><span></span></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-cover"><svg><use href="#band"/></svg><b>First condo guide</b><span>by Your name</span></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
           <span class="who we">We</span>
           <h3>Run ads in your name</h3>
-          <div class="art" aria-hidden="true"><div class="mini-ad"><p class="h"><i></i><svg class="ico"><use href="#i-heart"/></svg></p><svg><use href="#art-condo"/></svg></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-ad"><p class="h"><i></i><b>Your name</b></p><svg><use href="#art-house"/></svg><span class="c">Get the guide</span></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
           <span class="who they">They</span>
           <h3>Ask for your guide</h3>
-          <div class="art" aria-hidden="true"><div class="lp"><div class="lp-cover"><svg><use href="#art-house"/></svg></div><div class="lp-form"><span class="in"><svg class="ico"><use href="#i-person"/></svg></span><span class="in"><svg class="ico"><use href="#i-clock"/></svg></span><span class="go"><svg class="ico"><use href="#i-arrow"/></svg></span></div></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-page"><p class="bar"><i></i>Your name</p><b>When are you moving?</b><span class="o on">Within 90 days</span><span class="o">Later</span></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
           <span class="who we">We</span>
           <h3>Follow up until they book</h3>
-          <div class="art"><p class="confirmed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2A2A35"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#D5EB4B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed</p></div>
+          <div class="art" aria-hidden="true"><div class="mk m-note"><p class="from"><i></i>Your ZippyScale team</p><b>Priya, here's your guide</b><i class="ln"></i><i class="ln s"></i></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
           <span class="who you">You</span>
           <h3>Take the call</h3>
-          <div class="art" aria-hidden="true"><div class="mini-cal"><span></span><span></span><span></span><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-day"><p class="dh">Thu</p><i></i><p class="slot"><b>10:30 Priya S.</b><span>Buyer</span></p><i></i></div></div>
           <span class="stop"><span class="buyer" role="group" aria-label="A buyer, booked"><span class="avatar" aria-hidden="true"><svg class="ico"><use href="#i-person"/></svg></span><span class="badge">Booked</span></span></span>
         </li>
       </ol>
-      <div class="board-foot">
-        <ul class="chips" aria-label="Guides we write">
-          <li>Relocation</li><li>Presale</li><li>Market snapshot</li><li>Home evaluation</li>
-        </ul>
-        <span class="tag">Example</span>
-      </div>
     </div>
   </div>
 </section>
@@ -801,25 +778,28 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div>
       <div class="sec-head">
         <h2>Moving within 90 days</h2>
-        <p class="sub">Every booking comes with their answers.</p>
+        <p class="sub">You see their answers before you call.</p>
       </div>
-      <div class="report-card" role="group" aria-label="Example report a buyer receives">
-        <p class="rh"><b>Burnaby report</b><span>Your name</span></p>
-        <div class="r-body" aria-hidden="true"><svg><use href="#art-condo"/></svg><span class="r-icons"><svg class="ico"><use href="#i-home"/></svg><svg class="ico"><use href="#i-clock"/></svg><svg class="ico"><use href="#i-shield"/></svg></span></div>
+      <div class="report-card" role="group" aria-label="Example: what you know before the call">
+        <p class="rh"><span class="avatar" aria-hidden="true"><svg class="ico"><use href="#i-person"/></svg></span><span><b>Priya S.</b><span>First-time buyer</span></span><span class="tag">Example</span></p>
+        <dl>
+          <div><dt>Area</dt><dd>Metrotown, Burnaby</dd></div>
+          <div><dt>Moving</dt><dd>Within 90 days</dd></div>
+          <div><dt>Budget</dt><dd>600k to 700k</dd></div>
+          <div><dt>Mortgage</dt><dd>Pre-approved</dd></div>
+          <div><dt>Wants</dt><dd>2 bed near SkyTrain</dd></div>
+        </dl>
       </div>
     </div>
     <figure class="cal" aria-label="Example week of booked calls in Burnaby">
       <figcaption class="cal-h"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="tag">Example</span></figcaption>
       <ol>
-        <li><span class="d t-label">Mon</span></li>
         <li><span class="d t-label">Tue</span>
-          <div class="ev" style="--i:0"><b>Seller</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>downsizing</span> <span>home evaluation</span> <span>90 days</span></p></div></li>
-        <li><span class="d t-label">Wed</span></li>
+          <div class="ev" style="--i:0"><b>2:00 Seller</b><p class="meta">Home evaluation</p></div></li>
         <li><span class="d t-label">Thu</span>
-          <div class="ev hot" style="--i:1"><b>First-time buyer</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>Metrotown condo</span> <span>90 days</span> <span>pre-approved</span></p></div>
-          <p class="remind">Reminder: Thu 10:30</p></li>
+          <div class="ev hot" style="--i:1"><b>10:30 Priya S.</b></div></li>
         <li><span class="d t-label">Fri</span>
-          <div class="ev" style="--i:3"><b>Move-up buyer</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>condo to townhouse</span> <span>60 days</span> <span>pre-approved</span></p></div></li>
+          <div class="ev" style="--i:2"><b>4:30 Move-up buyer</b><p class="meta">Condo to townhouse</p></div></li>
       </ol>
     </figure>
   </div>
@@ -829,42 +809,21 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap">
     <div class="sec-head"><h2>Real estate marketing since 2023</h2></div>
     <div class="split">
-      <div class="guide-feature">
+      <figure class="guide-feature">
         <div class="stage" aria-hidden="true">
-          <div class="page p1"><svg viewBox="0 0 150 200" fill="none" stroke="#2A2A35" stroke-width="3" stroke-linecap="square"><path d="M8 8h134v184H8z"/><path d="M8 92h58M92 92h50M66 8v48M66 76v16M92 92v58M92 172v20M8 140h40" stroke-width="2.5"/><path d="M66 56a20 20 0 0 1 20 20" stroke-width="1.5" stroke="#8A8577"/><path d="M92 150a22 22 0 0 1 22 22" stroke-width="1.5" stroke="#8A8577"/><rect x="100" y="16" width="34" height="22" rx="3" stroke-width="1.5" stroke="#8A8577"/><rect x="16" y="104" width="28" height="28" rx="14" stroke-width="1.5" stroke="#8A8577"/><path d="M112 60h22v24h-22z" fill="#EFEBDD" stroke-width="1.5" stroke="#8A8577"/></svg></div>
-          <div class="page p2"><svg viewBox="0 0 150 200" fill="none"><rect width="150" height="200" fill="#F5F2E8"/><path d="M0 60 150 40M0 130l150-30M40 0l20 200M104 0l-10 200" stroke="#FFFFFF" stroke-width="8"/><path d="M0 170c40-10 80 10 150-6" stroke="#D6D1C1" stroke-width="10"/><g stroke="#2A2A35" stroke-width="1.5"><path d="M76 92c0 12-12 22-12 22s-12-10-12-22a12 12 0 0 1 24 0z" fill="#2A2A35"/><circle cx="64" cy="92" r="4" fill="#F5F2E8"/><path d="M120 58c0 9-9 16-9 16s-9-7-9-16a9 9 0 0 1 18 0z" fill="#FFFFFF"/><path d="M34 138c0 9-9 16-9 16s-9-7-9-16a9 9 0 0 1 18 0z" fill="#FFFFFF"/></g></svg></div>
-          <div class="book">
-            <div class="cover">
-              <div class="cover-top"><b><span class="nw">Pre-Construction</span> Buyer's Guide</b></div>
-              <svg><use href="#art-house"/></svg>
-            </div>
+          <div class="spread">
+            <div class="pg pg-cover"><svg><use href="#band-lime"/></svg><b>Pre-construction in the Fraser Valley</b></div>
+            <div class="pg pg-toc"><ol><li>How presales work</li><li>Deposits and timelines</li><li>Questions to ask</li></ol><i class="ln"></i><i class="ln"></i><i class="ln s"></i></div>
           </div>
         </div>
-        <p class="guide-cap small"><b>A pre-construction buyer's guide we wrote</b><span>Client names kept private.</span></p>
-      </div>
-      <div class="work">
-        <span class="tag">Example</span>
-        <article class="piece">
-          <div class="frame dk" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#2A2A35"/><rect x="40" y="36" width="96" height="112" fill="#4A4A58"/><rect x="40" y="36" width="96" height="112" fill="url(#p-win)"/><rect x="136" y="72" width="64" height="76" fill="#6B6B78"/><rect x="146" y="112" width="44" height="36" fill="#EFEBDD"/><rect x="0" y="148" width="240" height="20" fill="#33333F"/><circle cx="120" cy="84" r="22" fill="#FFFDF7"/><path d="m114 73 18 11-18 11z" fill="#2A2A35"/><rect x="16" y="156" width="208" height="4" rx="2" fill="#44444F"/><rect x="16" y="156" width="92" height="4" rx="2" fill="#D5EB4B"/></svg></div>
-          <b>$25 leads</b>
-          <p>Two years of ads and content for a Vancouver commercial realtor.</p>
-        </article>
-        <article class="piece">
-          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><rect x="48" y="12" width="144" height="156" rx="10" fill="#FFFFFF" stroke="#E7E3D6"/><circle cx="66" cy="30" r="8" fill="#EFEBDD" stroke="#D6D1C1"/><use href="#art-house" x="48" y="46" width="144" height="88"/><rect x="60" y="142" width="120" height="16" rx="8" fill="#2A2A35"/></svg></div>
-          <b>$250 to $70</b>
-          <p>Cost per qualified appointment, real estate client, Metro Vancouver.</p>
-        </article>
-        <article class="piece">
-          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><rect x="36" y="16" width="168" height="140" rx="10" fill="#FFFFFF" stroke="#E7E3D6"/><rect x="36" y="16" width="168" height="26" rx="10" fill="#2A2A35"/><rect x="36" y="32" width="168" height="10" fill="#2A2A35"/><g fill="#EFEBDD"><circle cx="58" cy="60" r="7"/><circle cx="84" cy="60" r="7"/><circle cx="110" cy="60" r="7"/><circle cx="136" cy="60" r="7"/><circle cx="162" cy="60" r="7"/><circle cx="188" cy="60" r="7"/><circle cx="58" cy="84" r="7"/><circle cx="84" cy="84" r="7"/><circle cx="110" cy="84" r="7"/><circle cx="136" cy="84" r="7"/><circle cx="162" cy="84" r="7"/><circle cx="188" cy="84" r="7"/><circle cx="58" cy="108" r="7"/><circle cx="84" cy="108" r="7"/><circle cx="110" cy="108" r="7"/><circle cx="136" cy="108" r="7"/><circle cx="162" cy="108" r="7"/><circle cx="188" cy="108" r="7"/><circle cx="58" cy="132" r="7"/><circle cx="84" cy="132" r="7"/><circle cx="110" cy="132" r="7"/></g><g fill="#4A4A58"><circle cx="84" cy="60" r="4"/><circle cx="136" cy="60" r="4"/><circle cx="162" cy="60" r="4"/><circle cx="58" cy="84" r="4"/><circle cx="110" cy="84" r="4"/><circle cx="188" cy="84" r="4"/><circle cx="84" cy="108" r="4"/><circle cx="136" cy="108" r="4"/><circle cx="162" cy="108" r="4"/><circle cx="58" cy="132" r="4"/><circle cx="110" cy="132" r="4"/></g></svg></div>
-          <b>Hundreds of realtors</b>
-          <p>Booked onto sales calls for real estate coaching programs we ran ads for.</p>
-        </article>
-        <article class="piece">
-          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><path d="M72 8v34M100 8v34" stroke="#8A8577" stroke-width="2"/><rect x="44" y="40" width="84" height="112" rx="10" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><rect x="44" y="40" width="84" height="30" rx="10" fill="#2A2A35"/><rect x="44" y="60" width="84" height="10" fill="#2A2A35"/><circle cx="86" cy="100" r="16" fill="#EFEBDD" stroke="#D6D1C1"/><path d="M74 132a12 12 0 0 1 24 0" stroke="#8A8577" stroke-width="1.5" fill="none"/><rect x="140" y="72" width="80" height="54" rx="12" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><path d="m140 126 0 14 14-14" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><path d="m156 88 24 16 24-16" stroke="#4A4A58" stroke-width="2" fill="none"/><rect x="156" y="88" width="48" height="28" rx="3" stroke="#4A4A58" stroke-width="2" fill="none"/></svg></div>
-          <b>Events and LinkedIn</b>
-          <p>Realtor events, plus LinkedIn outreach for a commercial realtor.</p>
-        </article>
-      </div>
+        <figcaption class="guide-cap small"><b>A buyer's guide we wrote</b><span>Client names kept private.</span></figcaption>
+      </figure>
+      <ul class="ledger">
+        <li class="piece"><b>$25 leads</b><p>Ads and content, Vancouver commercial realtor.</p></li>
+        <li class="piece"><b>$250 to $70</b><p>Cost per booked sales call, real estate company, Metro Vancouver.</p></li>
+        <li class="piece"><b>Hundreds of realtors</b><p>Booked onto sales calls, Toronto real estate brand.</p></li>
+        <li class="piece"><b>Events and LinkedIn</b><p>Realtor events. LinkedIn outreach for a commercial realtor.</p></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -873,12 +832,12 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap">
     <div class="sec-head">
       <h2>Close to nothing upfront</h2>
-      <p class="sub">You fund your own ads. Most of our fee comes after qualified appointments show up.</p>
+      <p class="sub">You fund your own ads.</p>
     </div>
     <ol class="stages">
       <li class="stage-i"><span class="num" aria-hidden="true"></span><b>You start</b><span>A small first payment</span></li>
       <li class="stage-i"><span class="num" aria-hidden="true"></span><b>Appointments show up</b><span>Most of our fee</span></li>
-      <li class="stage-i"><span class="num" aria-hidden="true"></span><b>Your ads grow</b><span>Then we earn more</span></li>
+      <li class="stage-i"><span class="num" aria-hidden="true"></span><b>Your ads grow</b><span>We only earn more when you choose to spend more</span></li>
     </ol>
     <p class="micro">The call walks through the numbers.</p>
   </div>
@@ -889,7 +848,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div>
       <div class="sec-head">
         <h2>One realtor per city</h2>
-        <p class="sub">10 realtors, September to December. First come, first served.</p>
+        <p class="sub">10 realtors, September to December. Any city in North America.</p>
       </div>
       <ul class="fit">
         <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Solo realtor</li>
@@ -900,9 +859,8 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div class="map">
       <div class="map-dots">
         <svg viewBox="0 0 680 562" aria-hidden="true" overflow="visible"><path d="M300 20.1h0M310 20.1h0M320 20.1h0M330 20.1h0M340 20.1h0M350 20.1h0M360 20.1h0M420 20.1h0M430 20.1h0M440 20.1h0M460 20.1h0M470 20.1h0M480 20.1h0M490 20.1h0M500 20.1h0M510 20.1h0M520 20.1h0M530 20.1h0M540 20.1h0M550 20.1h0M300 30.1h0M310 30.1h0M320 30.1h0M330 30.1h0M340 30.1h0M350 30.1h0M360 30.1h0M420 30.1h0M430 30.1h0M440 30.1h0M480 30.1h0M490 30.1h0M500 30.1h0M510 30.1h0M520 30.1h0M530 30.1h0M540 30.1h0M550 30.1h0M40 30.1h0M50 30.1h0M60 30.1h0M70 30.1h0M230 30.1h0M240 30.1h0M250 30.1h0M40 40.1h0M50 40.1h0M60 40.1h0M70 40.1h0M80 40.1h0M90 40.1h0M100 40.1h0M110 40.1h0M120 40.1h0M130 40.1h0M140 40.1h0M220 40.1h0M230 40.1h0M240 40.1h0M250 40.1h0M260 40.1h0M310 40.1h0M320 40.1h0M330 40.1h0M340 40.1h0M350 40.1h0M360 40.1h0M420 40.1h0M430 40.1h0M440 40.1h0M450 40.1h0M530 40.1h0M540 40.1h0M550 40.1h0M30 50.1h0M40 50.1h0M50 50.1h0M60 50.1h0M70 50.1h0M80 50.1h0M90 50.1h0M100 50.1h0M110 50.1h0M120 50.1h0M130 50.1h0M140 50.1h0M150 50.1h0M160 50.1h0M170 50.1h0M210 50.1h0M220 50.1h0M230 50.1h0M240 50.1h0M250 50.1h0M260 50.1h0M270 50.1h0M280 50.1h0M310 50.1h0M320 50.1h0M330 50.1h0M340 50.1h0M350 50.1h0M360 50.1h0M420 50.1h0M430 50.1h0M440 50.1h0M450 50.1h0M460 50.1h0M540 50.1h0M550 50.1h0M180 50.1h0M190 50.1h0M200 50.1h0M290 50.1h0M30 60.2h0M40 60.2h0M50 60.2h0M60 60.2h0M70 60.2h0M80 60.2h0M90 60.2h0M100 60.2h0M110 60.2h0M120 60.2h0M130 60.2h0M140 60.2h0M150 60.2h0M160 60.2h0M170 60.2h0M180 60.2h0M190 60.2h0M200 60.2h0M210 60.2h0M220 60.2h0M230 60.2h0M240 60.2h0M250 60.2h0M260 60.2h0M270 60.2h0M280 60.2h0M290 60.2h0M300 60.2h0M310 60.2h0M320 60.2h0M420 60.2h0M430 60.2h0M440 60.2h0M450 60.2h0M460 60.2h0M540 60.2h0M550 60.2h0M30 70.2h0M40 70.2h0M50 70.2h0M60 70.2h0M70 70.2h0M80 70.2h0M90 70.2h0M100 70.2h0M110 70.2h0M120 70.2h0M130 70.2h0M140 70.2h0M150 70.2h0M160 70.2h0M170 70.2h0M180 70.2h0M190 70.2h0M200 70.2h0M210 70.2h0M220 70.2h0M230 70.2h0M240 70.2h0M250 70.2h0M260 70.2h0M270 70.2h0M280 70.2h0M290 70.2h0M300 70.2h0M310 70.2h0M320 70.2h0M410 70.2h0M420 70.2h0M430 70.2h0M440 70.2h0M450 70.2h0M460 70.2h0M470 70.2h0M480 70.2h0M550 70.2h0M20 70.2h0M330 70.2h0M340 70.2h0M350 70.2h0M360 70.2h0M370 70.2h0M380 70.2h0M20 80.2h0M30 80.2h0M40 80.2h0M50 80.2h0M60 80.2h0M70 80.2h0M80 80.2h0M90 80.2h0M100 80.2h0M110 80.2h0M120 80.2h0M130 80.2h0M140 80.2h0M150 80.2h0M160 80.2h0M170 80.2h0M180 80.2h0M190 80.2h0M200 80.2h0M210 80.2h0M220 80.2h0M230 80.2h0M240 80.2h0M250 80.2h0M260 80.2h0M270 80.2h0M280 80.2h0M290 80.2h0M300 80.2h0M310 80.2h0M320 80.2h0M330 80.2h0M340 80.2h0M350 80.2h0M360 80.2h0M370 80.2h0M380 80.2h0M390 80.2h0M400 80.2h0M410 80.2h0M420 80.2h0M430 80.2h0M440 80.2h0M450 80.2h0M460 80.2h0M470 80.2h0M480 80.2h0M490 80.2h0M500 80.2h0M10 90.3h0M20 90.3h0M30 90.3h0M40 90.3h0M50 90.3h0M60 90.3h0M70 90.3h0M80 90.3h0M90 90.3h0M100 90.3h0M110 90.3h0M120 90.3h0M130 90.3h0M140 90.3h0M150 90.3h0M160 90.3h0M170 90.3h0M180 90.3h0M190 90.3h0M200 90.3h0M210 90.3h0M220 90.3h0M230 90.3h0M240 90.3h0M250 90.3h0M260 90.3h0M270 90.3h0M280 90.3h0M290 90.3h0M300 90.3h0M310 90.3h0M320 90.3h0M330 90.3h0M340 90.3h0M350 90.3h0M360 90.3h0M370 90.3h0M380 90.3h0M390 90.3h0M400 90.3h0M410 90.3h0M420 90.3h0M430 90.3h0M440 90.3h0M450 90.3h0M460 90.3h0M470 90.3h0M480 90.3h0M490 90.3h0M500 90.3h0M550 90.3h0M10 100.3h0M20 100.3h0M30 100.3h0M40 100.3h0M50 100.3h0M60 100.3h0M70 100.3h0M80 100.3h0M90 100.3h0M100 100.3h0M110 100.3h0M120 100.3h0M130 100.3h0M140 100.3h0M150 100.3h0M160 100.3h0M170 100.3h0M180 100.3h0M190 100.3h0M200 100.3h0M210 100.3h0M220 100.3h0M230 100.3h0M240 100.3h0M250 100.3h0M260 100.3h0M270 100.3h0M280 100.3h0M290 100.3h0M300 100.3h0M310 100.3h0M320 100.3h0M330 100.3h0M340 100.3h0M350 100.3h0M360 100.3h0M370 100.3h0M380 100.3h0M390 100.3h0M400 100.3h0M410 100.3h0M420 100.3h0M430 100.3h0M440 100.3h0M450 100.3h0M460 100.3h0M470 100.3h0M480 100.3h0M490 100.3h0M540 100.3h0M550 100.3h0M10 110.3h0M20 110.3h0M30 110.3h0M40 110.3h0M50 110.3h0M60 110.3h0M70 110.3h0M80 110.3h0M90 110.3h0M100 110.3h0M110 110.3h0M120 110.3h0M130 110.3h0M140 110.3h0M150 110.3h0M160 110.3h0M170 110.3h0M180 110.3h0M190 110.3h0M200 110.3h0M210 110.3h0M220 110.3h0M230 110.3h0M240 110.3h0M250 110.3h0M260 110.3h0M270 110.3h0M280 110.3h0M290 110.3h0M300 110.3h0M310 110.3h0M320 110.3h0M330 110.3h0M340 110.3h0M350 110.3h0M360 110.3h0M370 110.3h0M380 110.3h0M390 110.3h0M400 110.3h0M410 110.3h0M420 110.3h0M430 110.3h0M440 110.3h0M450 110.3h0M460 110.3h0M470 110.3h0M480 110.3h0M540 110.3h0M550 110.3h0M530 110.3h0M10 120.4h0M20 120.4h0M30 120.4h0M40 120.4h0M50 120.4h0M60 120.4h0M70 120.4h0M80 120.4h0M90 120.4h0M100 120.4h0M110 120.4h0M120 120.4h0M130 120.4h0M140 120.4h0M150 120.4h0M160 120.4h0M170 120.4h0M180 120.4h0M190 120.4h0M200 120.4h0M210 120.4h0M220 120.4h0M230 120.4h0M240 120.4h0M250 120.4h0M260 120.4h0M270 120.4h0M280 120.4h0M290 120.4h0M300 120.4h0M310 120.4h0M320 120.4h0M330 120.4h0M340 120.4h0M350 120.4h0M360 120.4h0M370 120.4h0M380 120.4h0M390 120.4h0M400 120.4h0M410 120.4h0M420 120.4h0M430 120.4h0M440 120.4h0M450 120.4h0M460 120.4h0M470 120.4h0M540 120.4h0M550 120.4h0M10 130.4h0M20 130.4h0M30 130.4h0M40 130.4h0M50 130.4h0M60 130.4h0M70 130.4h0M80 130.4h0M90 130.4h0M100 130.4h0M110 130.4h0M120 130.4h0M130 130.4h0M140 130.4h0M150 130.4h0M160 130.4h0M170 130.4h0M180 130.4h0M190 130.4h0M200 130.4h0M210 130.4h0M220 130.4h0M230 130.4h0M240 130.4h0M250 130.4h0M260 130.4h0M270 130.4h0M280 130.4h0M290 130.4h0M300 130.4h0M310 130.4h0M320 130.4h0M330 130.4h0M340 130.4h0M350 130.4h0M360 130.4h0M370 130.4h0M380 130.4h0M390 130.4h0M400 130.4h0M410 130.4h0M420 130.4h0M430 130.4h0M440 130.4h0M450 130.4h0M460 130.4h0M540 130.4h0M550 130.4h0M30 140.4h0M40 140.4h0M50 140.4h0M60 140.4h0M70 140.4h0M80 140.4h0M90 140.4h0M100 140.4h0M110 140.4h0M120 140.4h0M130 140.4h0M140 140.4h0M150 140.4h0M160 140.4h0M170 140.4h0M180 140.4h0M190 140.4h0M200 140.4h0M210 140.4h0M220 140.4h0M230 140.4h0M240 140.4h0M250 140.4h0M260 140.4h0M270 140.4h0M280 140.4h0M290 140.4h0M300 140.4h0M310 140.4h0M320 140.4h0M330 140.4h0M340 140.4h0M350 140.4h0M360 140.4h0M370 140.4h0M380 140.4h0M390 140.4h0M400 140.4h0M410 140.4h0M420 140.4h0M430 140.4h0M440 140.4h0M450 140.4h0M560 140.4h0M570 140.4h0M580 140.4h0M590 140.4h0M600 140.4h0M30 150.4h0M40 150.4h0M50 150.4h0M60 150.4h0M70 150.4h0M80 150.4h0M90 150.4h0M100 150.4h0M110 150.4h0M120 150.4h0M130 150.4h0M140 150.4h0M150 150.4h0M160 150.4h0M170 150.4h0M180 150.4h0M190 150.4h0M200 150.4h0M210 150.4h0M220 150.4h0M230 150.4h0M240 150.4h0M250 150.4h0M260 150.4h0M270 150.4h0M280 150.4h0M290 150.4h0M300 150.4h0M310 150.4h0M320 150.4h0M330 150.4h0M340 150.4h0M350 150.4h0M360 150.4h0M370 150.4h0M380 150.4h0M390 150.4h0M400 150.4h0M410 150.4h0M420 150.4h0M430 150.4h0M440 150.4h0M570 150.4h0M580 150.4h0M590 150.4h0M600 150.4h0M20 150.4h0M550 150.4h0M20 160.5h0M30 160.5h0M40 160.5h0M50 160.5h0M60 160.5h0M70 160.5h0M80 160.5h0M90 160.5h0M100 160.5h0M110 160.5h0M120 160.5h0M130 160.5h0M140 160.5h0M150 160.5h0M160 160.5h0M170 160.5h0M180 160.5h0M190 160.5h0M200 160.5h0M210 160.5h0M220 160.5h0M230 160.5h0M240 160.5h0M250 160.5h0M260 160.5h0M270 160.5h0M280 160.5h0M290 160.5h0M300 160.5h0M310 160.5h0M320 160.5h0M330 160.5h0M340 160.5h0M350 160.5h0M360 160.5h0M370 160.5h0M380 160.5h0M390 160.5h0M400 160.5h0M410 160.5h0M420 160.5h0M430 160.5h0M440 160.5h0M530 160.5h0M540 160.5h0M550 160.5h0M560 160.5h0M570 160.5h0M580 160.5h0M30 170.5h0M40 170.5h0M50 170.5h0M60 170.5h0M70 170.5h0M80 170.5h0M90 170.5h0M100 170.5h0M110 170.5h0M120 170.5h0M130 170.5h0M140 170.5h0M150 170.5h0M160 170.5h0M170 170.5h0M180 170.5h0M190 170.5h0M200 170.5h0M210 170.5h0M220 170.5h0M230 170.5h0M240 170.5h0M250 170.5h0M260 170.5h0M270 170.5h0M280 170.5h0M290 170.5h0M300 170.5h0M310 170.5h0M320 170.5h0M330 170.5h0M340 170.5h0M350 170.5h0M360 170.5h0M370 170.5h0M380 170.5h0M390 170.5h0M400 170.5h0M410 170.5h0M420 170.5h0M430 170.5h0M530 170.5h0M540 170.5h0M550 170.5h0M560 170.5h0M570 170.5h0M580 170.5h0M590 170.5h0M30 180.5h0M40 180.5h0M50 180.5h0M60 180.5h0M70 180.5h0M80 180.5h0M90 180.5h0M100 180.5h0M110 180.5h0M120 180.5h0M130 180.5h0M140 180.5h0M150 180.5h0M160 180.5h0M170 180.5h0M180 180.5h0M190 180.5h0M200 180.5h0M210 180.5h0M220 180.5h0M230 180.5h0M240 180.5h0M250 180.5h0M260 180.5h0M270 180.5h0M280 180.5h0M290 180.5h0M300 180.5h0M310 180.5h0M320 180.5h0M330 180.5h0M340 180.5h0M350 180.5h0M360 180.5h0M370 180.5h0M380 180.5h0M390 180.5h0M400 180.5h0M410 180.5h0M420 180.5h0M430 180.5h0M530 180.5h0M540 180.5h0M550 180.5h0M560 180.5h0M570 180.5h0M580 180.5h0M590 180.5h0M600 180.5h0M50 190.6h0M60 190.6h0M70 190.6h0M80 190.6h0M90 190.6h0M100 190.6h0M180 190.6h0M190 190.6h0M200 190.6h0M210 190.6h0M220 190.6h0M230 190.6h0M240 190.6h0M250 190.6h0M260 190.6h0M270 190.6h0M280 190.6h0M290 190.6h0M300 190.6h0M310 190.6h0M320 190.6h0M330 190.6h0M340 190.6h0M350 190.6h0M360 190.6h0M370 190.6h0M380 190.6h0M390 190.6h0M400 190.6h0M410 190.6h0M420 190.6h0M430 190.6h0M530 190.6h0M540 190.6h0M550 190.6h0M560 190.6h0M570 190.6h0M580 190.6h0M590 190.6h0M600 190.6h0M610 190.6h0M50 200.6h0M60 200.6h0M70 200.6h0M80 200.6h0M90 200.6h0M190 200.6h0M200 200.6h0M210 200.6h0M220 200.6h0M230 200.6h0M240 200.6h0M250 200.6h0M260 200.6h0M270 200.6h0M280 200.6h0M290 200.6h0M300 200.6h0M310 200.6h0M320 200.6h0M330 200.6h0M340 200.6h0M350 200.6h0M360 200.6h0M370 200.6h0M380 200.6h0M390 200.6h0M400 200.6h0M410 200.6h0M420 200.6h0M430 200.6h0M440 200.6h0M530 200.6h0M540 200.6h0M550 200.6h0M560 200.6h0M570 200.6h0M580 200.6h0M590 200.6h0M600 200.6h0M610 200.6h0M620 200.6h0M210 210.6h0M220 210.6h0M230 210.6h0M240 210.6h0M250 210.6h0M260 210.6h0M270 210.6h0M280 210.6h0M290 210.6h0M300 210.6h0M310 210.6h0M320 210.6h0M330 210.6h0M340 210.6h0M350 210.6h0M360 210.6h0M370 210.6h0M380 210.6h0M390 210.6h0M400 210.6h0M410 210.6h0M420 210.6h0M430 210.6h0M440 210.6h0M530 210.6h0M540 210.6h0M550 210.6h0M560 210.6h0M570 210.6h0M580 210.6h0M590 210.6h0M600 210.6h0M610 210.6h0M620 210.6h0M220 220.6h0M230 220.6h0M240 220.6h0M250 220.6h0M260 220.6h0M270 220.6h0M280 220.6h0M290 220.6h0M300 220.6h0M310 220.6h0M320 220.6h0M330 220.6h0M340 220.6h0M350 220.6h0M360 220.6h0M370 220.6h0M380 220.6h0M390 220.6h0M400 220.6h0M410 220.6h0M420 220.6h0M430 220.6h0M440 220.6h0M450 220.6h0M540 220.6h0M550 220.6h0M560 220.6h0M570 220.6h0M580 220.6h0M590 220.6h0M600 220.6h0M610 220.6h0M620 220.6h0M460 220.6h0M230 230.7h0M240 230.7h0M250 230.7h0M260 230.7h0M270 230.7h0M280 230.7h0M290 230.7h0M300 230.7h0M310 230.7h0M320 230.7h0M330 230.7h0M340 230.7h0M350 230.7h0M360 230.7h0M370 230.7h0M380 230.7h0M390 230.7h0M400 230.7h0M410 230.7h0M420 230.7h0M430 230.7h0M440 230.7h0M450 230.7h0M460 230.7h0M470 230.7h0M480 230.7h0M540 230.7h0M550 230.7h0M560 230.7h0M570 230.7h0M580 230.7h0M590 230.7h0M600 230.7h0M610 230.7h0M620 230.7h0M630 230.7h0M230 240.7h0M240 240.7h0M250 240.7h0M260 240.7h0M270 240.7h0M280 240.7h0M290 240.7h0M300 240.7h0M310 240.7h0M320 240.7h0M330 240.7h0M340 240.7h0M350 240.7h0M360 240.7h0M370 240.7h0M380 240.7h0M390 240.7h0M400 240.7h0M410 240.7h0M420 240.7h0M430 240.7h0M440 240.7h0M450 240.7h0M460 240.7h0M470 240.7h0M480 240.7h0M490 240.7h0M500 240.7h0M530 240.7h0M540 240.7h0M550 240.7h0M560 240.7h0M570 240.7h0M580 240.7h0M590 240.7h0M600 240.7h0M610 240.7h0M620 240.7h0M630 240.7h0M520 240.7h0M640 240.7h0M230 250.7h0M240 250.7h0M250 250.7h0M260 250.7h0M270 250.7h0M280 250.7h0M290 250.7h0M300 250.7h0M310 250.7h0M320 250.7h0M330 250.7h0M340 250.7h0M350 250.7h0M360 250.7h0M370 250.7h0M380 250.7h0M390 250.7h0M400 250.7h0M410 250.7h0M420 250.7h0M430 250.7h0M440 250.7h0M450 250.7h0M460 250.7h0M470 250.7h0M480 250.7h0M490 250.7h0M500 250.7h0M520 250.7h0M530 250.7h0M540 250.7h0M550 250.7h0M560 250.7h0M570 250.7h0M580 250.7h0M590 250.7h0M600 250.7h0M610 250.7h0M620 250.7h0M630 250.7h0M640 250.7h0M230 260.8h0M240 260.8h0M250 260.8h0M260 260.8h0M270 260.8h0M280 260.8h0M290 260.8h0M300 260.8h0M310 260.8h0M320 260.8h0M330 260.8h0M340 260.8h0M350 260.8h0M360 260.8h0M370 260.8h0M380 260.8h0M390 260.8h0M400 260.8h0M410 260.8h0M420 260.8h0M430 260.8h0M440 260.8h0M450 260.8h0M460 260.8h0M470 260.8h0M480 260.8h0M490 260.8h0M500 260.8h0M520 260.8h0M530 260.8h0M540 260.8h0M550 260.8h0M560 260.8h0M570 260.8h0M580 260.8h0M590 260.8h0M600 260.8h0M610 260.8h0M620 260.8h0M630 260.8h0M640 260.8h0M510 260.8h0M650 260.8h0M240 270.8h0M250 270.8h0M260 270.8h0M270 270.8h0M280 270.8h0M290 270.8h0M300 270.8h0M310 270.8h0M320 270.8h0M330 270.8h0M340 270.8h0M350 270.8h0M360 270.8h0M370 270.8h0M380 270.8h0M390 270.8h0M400 270.8h0M410 270.8h0M420 270.8h0M430 270.8h0M440 270.8h0M450 270.8h0M460 270.8h0M470 270.8h0M480 270.8h0M490 270.8h0M500 270.8h0M510 270.8h0M520 270.8h0M530 270.8h0M540 270.8h0M550 270.8h0M560 270.8h0M570 270.8h0M580 270.8h0M590 270.8h0M600 270.8h0M610 270.8h0M620 270.8h0M630 270.8h0M640 270.8h0M650 270.8h0M240 280.8h0M250 280.8h0M260 280.8h0M270 280.8h0M280 280.8h0M290 280.8h0M300 280.8h0M310 280.8h0M320 280.8h0M330 280.8h0M340 280.8h0M350 280.8h0M360 280.8h0M370 280.8h0M380 280.8h0M390 280.8h0M400 280.8h0M410 280.8h0M420 280.8h0M430 280.8h0M440 280.8h0M450 280.8h0M460 280.8h0M470 280.8h0M480 280.8h0M490 280.8h0M500 280.8h0M510 280.8h0M520 280.8h0M530 280.8h0M540 280.8h0M550 280.8h0M560 280.8h0M570 280.8h0M580 280.8h0M590 280.8h0M600 280.8h0M610 280.8h0M620 280.8h0M630 280.8h0M640 280.8h0M260 290.8h0M270 290.8h0M280 290.8h0M290 290.8h0M300 290.8h0M310 290.8h0M320 290.8h0M330 290.8h0M340 290.8h0M350 290.8h0M360 290.8h0M370 290.8h0M380 290.8h0M390 290.8h0M400 290.8h0M410 290.8h0M420 290.8h0M430 290.8h0M440 290.8h0M450 290.8h0M460 290.8h0M470 290.8h0M480 290.8h0M490 290.8h0M500 290.8h0M510 290.8h0M520 290.8h0M530 290.8h0M540 290.8h0M550 290.8h0M560 290.8h0M570 290.8h0M580 290.8h0M590 290.8h0M600 290.8h0M610 290.8h0M620 290.8h0M650 290.8h0M660 290.8h0M270 300.9h0M280 300.9h0M290 300.9h0M300 300.9h0M310 300.9h0M320 300.9h0M330 300.9h0M340 300.9h0M350 300.9h0M360 300.9h0M370 300.9h0M380 300.9h0M390 300.9h0M400 300.9h0M410 300.9h0M420 300.9h0M430 300.9h0M440 300.9h0M450 300.9h0M460 300.9h0M470 300.9h0M480 300.9h0M490 300.9h0M500 300.9h0M510 300.9h0M520 300.9h0M530 300.9h0M540 300.9h0M550 300.9h0M560 300.9h0M570 300.9h0M580 300.9h0M590 300.9h0M600 300.9h0M650 300.9h0M660 300.9h0M670 300.9h0M640 300.9h0M260 310.9h0M270 310.9h0M280 310.9h0M290 310.9h0M300 310.9h0M310 310.9h0M320 310.9h0M330 310.9h0M340 310.9h0M350 310.9h0M360 310.9h0M370 310.9h0M380 310.9h0M390 310.9h0M400 310.9h0M410 310.9h0M420 310.9h0M430 310.9h0M440 310.9h0M450 310.9h0M460 310.9h0M470 310.9h0M480 310.9h0M490 310.9h0M500 310.9h0M510 310.9h0M520 310.9h0M530 310.9h0M540 310.9h0M550 310.9h0M560 310.9h0M570 310.9h0M580 310.9h0M590 310.9h0M600 310.9h0M640 310.9h0M650 310.9h0M660 310.9h0M670 310.9h0M260 320.9h0M270 320.9h0M280 320.9h0M290 320.9h0M300 320.9h0M310 320.9h0M320 320.9h0M330 320.9h0M340 320.9h0M350 320.9h0M360 320.9h0M370 320.9h0M380 320.9h0M390 320.9h0M400 320.9h0M410 320.9h0M420 320.9h0M430 320.9h0M440 320.9h0M450 320.9h0M460 320.9h0M470 320.9h0M480 320.9h0M490 320.9h0M500 320.9h0M510 320.9h0M520 320.9h0M530 320.9h0M540 320.9h0M550 320.9h0M560 320.9h0M570 320.9h0M580 320.9h0M590 320.9h0M600 320.9h0M660 320.9h0M670 320.9h0M270 331h0M280 331h0M290 331h0M300 331h0M310 331h0M320 331h0M330 331h0M340 331h0M350 331h0M360 331h0M370 331h0M380 331h0M390 331h0M400 331h0M410 331h0M420 331h0M430 331h0M440 331h0M450 331h0M460 331h0M470 331h0M480 331h0M490 331h0M500 331h0M510 331h0M520 331h0M530 331h0M540 331h0M550 331h0M560 331h0M570 331h0M580 331h0M590 331h0M260 341h0M270 341h0M280 341h0M290 341h0M300 341h0M310 341h0M320 341h0M330 341h0M340 341h0M350 341h0M360 341h0M370 341h0M380 341h0M390 341h0M400 341h0M410 341h0M420 341h0M430 341h0M440 341h0M450 341h0M460 341h0M470 341h0M480 341h0M490 341h0M500 341h0M510 341h0M520 341h0M530 341h0M540 341h0M550 341h0M560 341h0M570 341h0M580 341h0M260 351h0M270 351h0M280 351h0M290 351h0M300 351h0M310 351h0M320 351h0M330 351h0M340 351h0M350 351h0M360 351h0M370 351h0M380 351h0M390 351h0M400 351h0M410 351h0M420 351h0M430 351h0M440 351h0M450 351h0M460 351h0M470 351h0M480 351h0M490 351h0M500 351h0M510 351h0M520 351h0M530 351h0M540 351h0M550 351h0M560 351h0M570 351h0M260 361.1h0M270 361.1h0M280 361.1h0M290 361.1h0M300 361.1h0M310 361.1h0M320 361.1h0M330 361.1h0M340 361.1h0M350 361.1h0M360 361.1h0M370 361.1h0M380 361.1h0M390 361.1h0M400 361.1h0M410 361.1h0M420 361.1h0M430 361.1h0M440 361.1h0M450 361.1h0M460 361.1h0M470 361.1h0M480 361.1h0M490 361.1h0M500 361.1h0M510 361.1h0M520 361.1h0M530 361.1h0M540 361.1h0M550 361.1h0M560 361.1h0M570 361.1h0M260 371.1h0M270 371.1h0M280 371.1h0M290 371.1h0M300 371.1h0M310 371.1h0M320 371.1h0M330 371.1h0M340 371.1h0M350 371.1h0M360 371.1h0M370 371.1h0M380 371.1h0M390 371.1h0M400 371.1h0M410 371.1h0M420 371.1h0M430 371.1h0M440 371.1h0M450 371.1h0M460 371.1h0M470 371.1h0M480 371.1h0M490 371.1h0M500 371.1h0M510 371.1h0M520 371.1h0M530 371.1h0M540 371.1h0M550 371.1h0M270 381.1h0M280 381.1h0M290 381.1h0M300 381.1h0M310 381.1h0M320 381.1h0M330 381.1h0M340 381.1h0M350 381.1h0M360 381.1h0M370 381.1h0M380 381.1h0M390 381.1h0M400 381.1h0M410 381.1h0M420 381.1h0M430 381.1h0M440 381.1h0M450 381.1h0M460 381.1h0M470 381.1h0M480 381.1h0M490 381.1h0M500 381.1h0M510 381.1h0M520 381.1h0M530 381.1h0M540 381.1h0M270 391.1h0M280 391.1h0M290 391.1h0M300 391.1h0M310 391.1h0M320 391.1h0M330 391.1h0M340 391.1h0M350 391.1h0M360 391.1h0M370 391.1h0M380 391.1h0M390 391.1h0M400 391.1h0M410 391.1h0M420 391.1h0M430 391.1h0M440 391.1h0M450 391.1h0M460 391.1h0M470 391.1h0M480 391.1h0M490 391.1h0M500 391.1h0M510 391.1h0M520 391.1h0M530 391.1h0M540 391.1h0M270 401.2h0M280 401.2h0M290 401.2h0M300 401.2h0M310 401.2h0M320 401.2h0M330 401.2h0M340 401.2h0M350 401.2h0M360 401.2h0M370 401.2h0M380 401.2h0M390 401.2h0M400 401.2h0M410 401.2h0M420 401.2h0M430 401.2h0M440 401.2h0M450 401.2h0M460 401.2h0M470 401.2h0M480 401.2h0M490 401.2h0M500 401.2h0M510 401.2h0M520 401.2h0M530 401.2h0M540 401.2h0M280 411.2h0M290 411.2h0M300 411.2h0M310 411.2h0M320 411.2h0M330 411.2h0M340 411.2h0M350 411.2h0M360 411.2h0M370 411.2h0M380 411.2h0M390 411.2h0M400 411.2h0M410 411.2h0M420 411.2h0M430 411.2h0M440 411.2h0M450 411.2h0M460 411.2h0M470 411.2h0M480 411.2h0M490 411.2h0M500 411.2h0M510 411.2h0M520 411.2h0M530 411.2h0M540 411.2h0M290 421.2h0M300 421.2h0M310 421.2h0M320 421.2h0M330 421.2h0M340 421.2h0M350 421.2h0M360 421.2h0M370 421.2h0M380 421.2h0M390 421.2h0M400 421.2h0M410 421.2h0M420 421.2h0M430 421.2h0M440 421.2h0M450 421.2h0M460 421.2h0M470 421.2h0M480 421.2h0M490 421.2h0M500 421.2h0M510 421.2h0M520 421.2h0M300 431.3h0M310 431.3h0M320 431.3h0M330 431.3h0M340 431.3h0M350 431.3h0M360 431.3h0M370 431.3h0M380 431.3h0M390 431.3h0M400 431.3h0M410 431.3h0M420 431.3h0M430 431.3h0M440 431.3h0M450 431.3h0M460 431.3h0M470 431.3h0M480 431.3h0M490 431.3h0M500 431.3h0M510 431.3h0M520 431.3h0M300 441.3h0M310 441.3h0M320 441.3h0M330 441.3h0M340 441.3h0M350 441.3h0M360 441.3h0M370 441.3h0M380 441.3h0M390 441.3h0M400 441.3h0M410 441.3h0M420 441.3h0M430 441.3h0M440 441.3h0M450 441.3h0M460 441.3h0M470 441.3h0M480 441.3h0M490 441.3h0M500 441.3h0M310 451.3h0M320 451.3h0M330 451.3h0M340 451.3h0M350 451.3h0M360 451.3h0M370 451.3h0M380 451.3h0M390 451.3h0M400 451.3h0M410 451.3h0M420 451.3h0M430 451.3h0M440 451.3h0M450 451.3h0M460 451.3h0M470 451.3h0M480 451.3h0M490 451.3h0M500 451.3h0M310 461.3h0M320 461.3h0M330 461.3h0M340 461.3h0M350 461.3h0M360 461.3h0M370 461.3h0M380 461.3h0M390 461.3h0M400 461.3h0M410 461.3h0M420 461.3h0M500 461.3h0M510 461.3h0M320 471.4h0M330 471.4h0M340 471.4h0M350 471.4h0M360 471.4h0M370 471.4h0M380 471.4h0M390 471.4h0M400 471.4h0M410 471.4h0M500 471.4h0M510 471.4h0M350 481.4h0M360 481.4h0M370 481.4h0M380 481.4h0M390 481.4h0M400 481.4h0M410 481.4h0M360 491.4h0M370 491.4h0M380 491.4h0M390 491.4h0M400 491.4h0M410 491.4h0M360 501.5h0M370 501.5h0M380 501.5h0M390 501.5h0M400 501.5h0M410 501.5h0M500 501.5h0M510 501.5h0M520 501.5h0M370 511.5h0M380 511.5h0M390 511.5h0M400 511.5h0M410 511.5h0M520 511.5h0M530 511.5h0M460 511.5h0M470 511.5h0M370 521.5h0M380 521.5h0M390 521.5h0M400 521.5h0M410 521.5h0M420 521.5h0M460 521.5h0M560 521.5h0M570 521.5h0M380 531.5h0M390 531.5h0M400 531.5h0M410 531.5h0M420 531.5h0M440 531.5h0M450 531.5h0M460 531.5h0M560 531.5h0M570 531.5h0M580 531.5h0M430 531.5h0M410 541.6h0M420 541.6h0M430 541.6h0M440 541.6h0M450 541.6h0M460 541.6h0M440 551.6h0M450 551.6h0M460 551.6h0M470 551.6h0M480 551.6h0M490 551.6h0M470 561.6h0M480 561.6h0M490 561.6h0" stroke="#2A2A35" stroke-opacity=".5" stroke-width="5.2" stroke-linecap="round" fill="none"/></svg>
-        <div class="pin"><span class="ring" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span><p class="call" role="img" aria-label="One realtor in Burnaby"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg></p></div>
+        <div class="pin" role="img" aria-label="Example: your city"><span class="dot" aria-hidden="true"></span><p class="call" aria-hidden="true">Your city <span class="tag">Example</span></p></div></div>
       </div>
-      <p class="map-label"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Any city in North America</p>
     </div>
   </div>
 </section>
@@ -911,14 +869,11 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap split">
     <div class="sec-head"><h2>Questions before you book</h2></div>
     <div class="faq-list">
-      <details><summary>Who actually does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Follow-up by text, email and phone starts the minute someone asks for a guide. You approve the ads and take the calls.</p></details>
+      <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Follow-up by text, email and phone starts the minute someone asks for a guide. You approve the ads and take the calls.</p></details>
       <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city planning to buy or sell in the next 60 to 90 days. They've answered our questions and booked a time with you. You'll know on the call.</p></details>
-      <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
-      <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Because this works, and we grow when you grow. Most of our fee comes after appointments show up. So we're careful about who we take on.</p></details>
+      <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Most of our fee comes after appointments show up, so we only take realtors we're sure we can help. We grow when you grow.</p></details>
       <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them, and nobody else in your city gets them.</p></details>
       <details><summary>How is this different from the texts I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The people who book asked for your guide and saw your name on the ad. We do this for one realtor per city, and most of our fee comes after they show.</p></details>
-      <details><summary>What happens on the call?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We look at your market and the first guide we'd build. Then we walk you through the payment plan and the numbers. You decide after that.</p></details>
-      <details><summary>Is my city taken?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We take one realtor per city, anywhere in North America, first come, first served. Tell us your city in the quiz and we'll confirm it on your call.</p></details>
     </div>
   </div>
 </section>
@@ -1010,12 +965,12 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     }
     arts[0].classList.add('lit'); setTimeout(() => arts[0].classList.remove('lit'), 300);
     buyer.animate(frames, { duration: total, fill: 'backwards' });
-    $('.badge', buyer).animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(.6)', opacity: 0, offset: .92 }, { transform: 'none', opacity: 1 }], { duration: total, easing: 'cubic-bezier(0.16,1,0.3,1)' });
+    $('.badge', buyer).animate([{ transform: 'scale(.6)', opacity: .4 }, { transform: 'scale(.6)', opacity: .4, offset: .92 }, { transform: 'none', opacity: 1 }], { duration: total, easing: 'cubic-bezier(0.16,1,0.3,1)' });
   }
 
   if (!reduce && 'IntersectionObserver' in window) {
     const once = (el, fn, opts) => { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); fn(); } }), opts); io.observe(el); };
-    if (buyer.animate) once(stops[stops.length - 1], playBoard, { threshold: 1, rootMargin: '0px 0px -15% 0px' }); // last stop: on phones the card arrives into view and lands on Booked
+    if (buyer.animate && matchMedia('(min-width:1024px)').matches) once(stops[stops.length - 1], playBoard, { threshold: 1, rootMargin: '0px 0px -15% 0px' }); // desktop only: below 1024 the steps are rows and step 5 already shows the booked call
     const cal = $('.cal'); once(cal, () => cal.classList.add('play'), { threshold: 0.35 });   // motion 3
     const map = $('.map'); once(map, () => map.classList.add('play'), { threshold: 0.5 });    // motion 4
   }
