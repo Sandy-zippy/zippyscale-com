@@ -3,562 +3,679 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buyer and seller appointments for realtors | ZippyScale</title>
-<meta name="description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
+<title>Marketing team for solo realtors | ZippyScale</title>
+<meta name="description" content="For solo realtors with 6+ closings a year. We build your city guides, run ads in your name and book buyers and sellers moving in 60 to 90 days.">
 <link rel="canonical" href="https://www.zippyscale.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZippyScale">
 <meta property="og:url" content="https://www.zippyscale.com/">
-<meta property="og:title" content="Buyer and seller appointments for realtors | ZippyScale">
-<meta property="og:description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
-<meta property="og:image" content="https://www.zippyscale.com/assets/icon-256.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buyer and seller appointments for realtors | ZippyScale">
-<meta name="twitter:description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
-<meta name="twitter:image" content="https://www.zippyscale.com/assets/icon-256.png">
+<meta property="og:title" content="Marketing team for solo realtors | ZippyScale">
+<meta property="og:description" content="For solo realtors with 6+ closings a year. We build your city guides, run ads in your name and book buyers and sellers moving in 60 to 90 days.">
+<meta property="og:image" content="https://www.zippyscale.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Marketing team for solo realtors | ZippyScale">
+<meta name="twitter:description" content="For solo realtors with 6+ closings a year. We build your city guides, run ads in your name and book buyers and sellers moving in 60 to 90 days.">
+<meta name="twitter:image" content="https://www.zippyscale.com/assets/og.png">
 <meta name="theme-color" content="#FFFDF7">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js')</script>
+<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Section sources: 21st.dev patterns re-implemented in vanilla HTML/CSS/JS (no React, no Tailwind, no framer-motion, no code copied verbatim).
-   problem  : Animated Beam, multiple outputs (Magic UI, dillionverma)  https://21st.dev/@dillionverma/components/animated-beam
-   different: Comparison 03, before/after panels + mobile toggle (hirael) https://21st.dev/@hirael/components/comparison-03
-   how      : Animated Beam, unidirectional, chained node to node (Magic UI) https://21st.dev/@dillionverma/components/animated-beam
-   calendar : Animated List (Magic UI, dillionverma)                      https://21st.dev/@dillionverma/components/animated-list
-   results  : Feature 10 hairline bento (hirael)                          https://21st.dev/@hirael/components/feature-10
-   pay      : Stepper, titles and descriptions (Origin UI, originui)      https://21st.dev/@originui/components/stepper
-   quiz     : Wizard Steps, direction-aware panels + progress rail (ddoemonn) https://21st.dev/@ddoemonn/components/wizard-steps
-   Motion budget (page level, 4): hero thread, problem beam, how beam, appointment list. Quiz slides and hover/press are interaction feedback.
-   All four play once, end static, and show their final state under prefers-reduced-motion and without JS. */
-/* ponytail: both families ship as variable woff2 files, so one file per family covers every weight */
+/* v3, 16 Sep 2026. Built from site-rebuild/copy-deck-v2.md + audit/design-audit.md (type/space tokens, 12-col grid) + audit/visual-motion-audit.md (partner artefacts, 4 motions).
+   Component sources, all re-implemented by hand in vanilla HTML/CSS/JS (no React, Tailwind or framer at runtime):
+   hero collage : 21st.dev ruixen.ui SocialPostCard + kokonutd Social Card (post anatomy), 21st.dev designali-in Book (3D cover, CSS rebuild),
+                  Aceternity card-stack registry (offset/scale math only, autoplay dropped)
+   problem week : static planner; line objects drawn in SVG (HyperUI static-markup approach)
+   different    : 21st.dev hirael Comparison 03 registry (before/after panels) + 7ovr comparison-2 (us vs them anatomy)
+   how board    : 21st.dev haydenbleasel Kanban (column anatomy, static) + Motion Primitives in-view (once-only trigger, ported to one IntersectionObserver); travel = WAAPI keyframes
+   calendar     : 21st.dev sean0205 ReUI Event Calendar + shadcnspace Calendar With Event List (week/agenda anatomy)
+   results      : Aceternity 3d-card registry (hover tilt, ported to a CSS transform); designali-in Book again for the guide
+   pay          : 21st.dev originui Stepper (numbered, neutral states)
+   city map     : Magic UI dotted-map registry (svg-dotted-map 2.0.1, generated once at build time, inlined) + 21st.dev Mazyar kawa Location Map (pin pattern)
+   quiz         : 21st.dev ddoemonn Wizard Steps (direction-aware panels)
+   Motion budget (page level, 4, each once, <=2.5s, final state is the CSS default, reduced motion = final state):
+   1 hero collage settles on load (1.6s)  2 buyer card travels the how board (2.4s)  3 the week fills top to bottom (1.4s)  4 city pin drops (1.8s).
+   Everything else: quiz screen transitions, hover and press feedback. */
 @font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-700.woff2') format('woff2');font-weight:300 700;font-display:swap}
 @font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:'JetBrains Mono';src:url('fonts/jetbrains-mono-700.woff2') format('woff2');font-weight:700;font-display:swap}
 
 :root{
-  --cream:#FFFDF7; --paper:#FFFFFF; --sand:#F5F2E8; --line:#E7E3D6; --line-2:#D6D1C1; --line-strong:#8A8577;
+  --cream:#FFFDF7; --paper:#FFFFFF; --sand:#F5F2E8; --sand-2:#EFEBDD; --line:#E7E3D6; --line-2:#D6D1C1; --line-strong:#8A8577;
   --charcoal:#2A2A35; --card-dark:#33333F; --border-dark:#44444F;
   --lime:#D5EB4B; --lime-soft:#EEF6BE; --lime-text:#6B7C10;
   --head:#1A1A2E; --body:#4A5568; --muted:#5B6270; --body-dark:#C9CBD6;
   --display:'Space Grotesk',system-ui,sans-serif; --sans:'Inter',system-ui,-apple-system,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-  --gut:24px;
+  --ease-out:cubic-bezier(0.16,1,0.3,1); --ease-move:cubic-bezier(0.77,0,0.175,1);
+
+  /* type roles (design audit 4.1) */
+  --fs-h1:clamp(40px, 26.1px + 3.70vw, 64px);  --lh-h1:1.04; --ls-h1:-.035em;
+  --fs-h2:clamp(32px, 22.75px + 2.47vw, 48px); --lh-h2:1.08; --ls-h2:-.025em;
+  --fs-icp:clamp(20px, 16.5px + 0.93vw, 26px); --lh-icp:1.25; --ls-icp:-.015em;
+  --fs-stat:clamp(28px, 25.7px + 0.62vw, 32px); --lh-stat:1.1; --ls-stat:-.02em;
+  --fs-card:20px; --lh-card:1.3; --ls-card:-.01em;
+  --fs-body-lg:20px; --lh-body-lg:1.5;
+  --fs-body:17px; --lh-body:1.6;
+  --fs-small:14px; --lh-small:1.5;
+  --fs-label:12px; --lh-label:1.3; --ls-label:.1em;
+  --fs-ui:14px; --fs-ui-sm:12px; --lh-ui:1.35;
+
+  /* spacing scale (4/8) */
+  --s-4:4px; --s-8:8px; --s-12:12px; --s-16:16px; --s-24:24px; --s-32:32px; --s-40:40px; --s-48:48px; --s-64:64px; --s-80:80px; --s-104:104px;
+  --section-y:var(--s-104); --hero-y:var(--s-64);
+  --gap-icp-h1:var(--s-16); --gap-h1-lede:var(--s-24); --gap-lede-cta:var(--s-32); --gap-cta-micro:var(--s-12);
+  --gap-h2-sub:var(--s-16); --gap-head-visual:var(--s-64); --gap-block:var(--s-48); --gap-note:var(--s-24); --gap-split:var(--s-64);
+  --pad-card-lg:var(--s-40); --pad-card:var(--s-32); --pad-row:var(--s-16);
+  --gap-list:var(--s-12); --gap-chip:var(--s-8); --gap-cols:var(--s-24);
+  --container:1120px; --gutter:24px; --measure-body:65ch; --measure-sub:44ch; --measure-h2:20ch; --measure-h1:16ch;
 }
+@media (max-width:1023px){
+  :root{ --section-y:var(--s-80); --hero-y:var(--s-48); --gap-head-visual:var(--s-48); --pad-card-lg:var(--s-32); --gap-split:var(--s-48); }
+}
+@media (max-width:640px){
+  :root{
+    --fs-card:18px; --fs-body-lg:18px; --fs-body:16px;
+    --section-y:var(--s-64); --hero-y:var(--s-32);
+    --gap-icp-h1:var(--s-12); --gap-h1-lede:var(--s-16); --gap-lede-cta:var(--s-24);
+    --gap-h2-sub:var(--s-12); --gap-head-visual:var(--s-40); --gap-block:var(--s-32);
+    --gap-note:var(--s-16); --gap-split:var(--s-40);
+    --pad-card-lg:var(--s-24); --pad-card:var(--s-24); --pad-row:var(--s-12);
+    --gutter:20px;
+  }
+}
+
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%}
 html.quiz-open{overflow:hidden}
-body{margin:0;background:var(--cream);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--cream);color:var(--body);font:400 var(--fs-body)/var(--lh-body) var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img,svg{display:block;max-width:100%}
-h1,h2,h3{font-family:var(--display);color:var(--head);font-weight:700;letter-spacing:-0.025em;margin:0;text-wrap:balance}
-p{margin:0}
+h1,h2,h3{margin:0;color:var(--head);font-family:var(--display);text-wrap:balance}
+h1{font-size:var(--fs-h1);line-height:var(--lh-h1);letter-spacing:var(--ls-h1);font-weight:700;max-width:var(--measure-h1)}
+h2{font-size:var(--fs-h2);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);font-weight:700;max-width:var(--measure-h2)}
+h3{font-size:var(--fs-card);line-height:var(--lh-card);letter-spacing:var(--ls-card);font-weight:600}
+p,figure,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--charcoal);outline-offset:3px;border-radius:6px}
-.dark :focus-visible,.quiz .on-dark:focus-visible{outline-color:var(--lime)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.dark :focus-visible{outline-color:var(--lime)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.eyebrow{font:700 12.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime-text)}
-.sec{padding:clamp(80px,10vw,128px) 0}
-.sec-head{max-width:640px}
-.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.06}
-.sec-head .sub{margin-top:14px;font-size:clamp(17px,1.6vw,19px);color:var(--body);max-width:52ch}
+
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.sec{padding-block:var(--section-y)}
+.sec-head .sub{margin-top:var(--gap-h2-sub);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub)}
+.sec-head + *{margin-top:var(--gap-head-visual)}
+.split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap-cols);align-items:start}
+.split > :first-child{grid-column:1 / 6}
+.split > :last-child{grid-column:7 / 13}
+.split > .sec-head + *{margin-top:0}
 .dark{background:var(--charcoal);color:var(--body-dark)}
-.dark h2{color:#FFFDF7}
-.dark .sub{color:var(--body-dark)}
+.dark h2,.dark h3{color:var(--cream)}
+.dark .sec-head .sub{color:var(--body-dark)}
+
+.t-label,.tag{font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase}
+.small{font-size:var(--fs-small);line-height:var(--lh-small)}
+.sep > span + span::before{content:"·";margin-inline:var(--s-4) var(--s-8)}
+.micro{margin-top:var(--gap-cta-micro);font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
+.tag{display:inline-flex;align-items:center;padding:var(--s-4) var(--s-8);border-radius:999px;background:var(--paper);border:1px solid var(--line-2);color:var(--muted)}
+.dark .tag{background:var(--card-dark);border-color:var(--border-dark);color:var(--body-dark)}
+.nojs{display:inline-flex;margin-top:var(--s-8);font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head);text-underline-offset:3px}
+.dark .nojs{color:var(--cream)}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:0;background:var(--lime);color:var(--charcoal);font:600 17px/1 var(--sans);text-decoration:none;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(42,42,53,.16),0 1px 2px rgba(42,42,53,.10);transition:background-color .2s var(--ease),box-shadow .2s var(--ease),transform .12s var(--ease)}
-@media (hover:hover){.btn:hover{background:#CBE237;box-shadow:inset 0 0 0 1px rgba(42,42,53,.28),0 6px 18px -8px rgba(42,42,53,.35)}}
-.btn:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-8);min-height:52px;padding-inline:var(--s-24);border-radius:999px;border:0;background:var(--lime);color:var(--charcoal);font:600 var(--fs-body)/1 var(--sans);text-decoration:none;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(42,42,53,.16),0 1px 2px rgba(42,42,53,.10);transition:background-color .2s var(--ease-out),box-shadow .2s var(--ease-out),transform .16s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.btn:hover{background:#CBE237;box-shadow:inset 0 0 0 1px rgba(42,42,53,.28),0 8px 24px -8px rgba(42,42,53,.35)}}
+.btn:active{transform:scale(.97)}
 .btn .ico{width:18px;height:18px;stroke-width:2}
-.btn-sm{min-height:44px;padding:0 18px;font-size:15px}
-.micro{font-size:14px;color:var(--muted);margin-top:14px}
+.btn-sm{min-height:44px;padding-inline:var(--s-16);font-size:var(--fs-small)}
 
-/* top bar */
-.top{position:sticky;top:0;z-index:20;background:rgba(255,253,247,.96);border-bottom:1px solid transparent;transition:border-color .2s}
+/* top bar: solid, nothing shows through */
+.top{position:sticky;top:0;z-index:20;background:var(--cream);border-bottom:1px solid transparent;transition:border-color .2s ease}
 .top.scrolled{border-bottom-color:var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;min-height:44px;min-width:44px}
 .logo img{height:28px;width:auto}
 
-/* hero */
-.hero{padding:clamp(28px,6vw,72px) 0 clamp(56px,7vw,88px)}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:56px;align-items:center}
-.hero h1{font-size:clamp(2.55rem,5.2vw,3.9rem);line-height:1.02;letter-spacing:-0.035em;margin-top:18px;max-width:15ch;text-wrap:pretty}
-.hero .lede{margin-top:22px;font-size:clamp(18px,1.9vw,21px);line-height:1.5;color:var(--body);max-width:36ch}
-.hero .cta{margin-top:32px}
+/* ---------- hero ---------- */
+.hero{padding-block:var(--hero-y)}
+.hero-head h1,.hero-head .icp{max-width:none}
+.hero .split{margin-top:var(--gap-h1-lede);align-items:start}
+.hero .br{display:none}
+@media (min-width:1024px){.hero .br{display:inline}}
+.icp{font:600 var(--fs-icp)/var(--lh-icp) var(--display);letter-spacing:var(--ls-icp);color:var(--head);text-wrap:balance;max-width:26ch}
+.icp mark{background:var(--lime);color:var(--charcoal);padding-inline:var(--s-4);border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero h1{margin-top:var(--gap-icp-h1)}
+.lede{font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);max-width:var(--measure-sub)}
+.cta{margin-top:var(--gap-lede-cta)}
 
-/* hero mock */
-.mock{position:relative;width:100%;max-width:520px;height:560px;margin-left:auto}
-.tag{position:absolute;top:0;right:0;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:7px 10px}
-.phone{position:absolute;left:0;top:0;width:278px;height:556px;background:var(--charcoal);border-radius:44px;padding:11px;box-shadow:0 40px 80px -40px rgba(42,42,53,.55)}
-.screen{position:relative;height:100%;background:#F7F5EE;border-radius:34px;overflow:hidden;padding:14px 14px 0}
-.notch{width:86px;height:22px;background:var(--charcoal);border-radius:0 0 14px 14px;margin:-14px auto 10px}
-.contact{display:flex;align-items:center;gap:10px;padding:4px 2px 12px;border-bottom:1px solid var(--line)}
-.avatar{width:34px;height:34px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--charcoal)}
-.avatar .ico{width:18px;height:18px}
-.contact .bars{display:grid;gap:5px}
-.contact .bars i{display:block;height:7px;border-radius:4px;background:#DAD6C8;width:84px}
-.contact .bars i+i{width:52px;background:#E6E2D6}
-.thread{display:grid;gap:10px;padding-top:14px}
-.qcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:7px;box-shadow:0 8px 20px -14px rgba(42,42,53,.35)}
-.qcard .row{display:flex;align-items:center;gap:8px;font:500 13.5px/1.25 var(--sans);color:var(--head)}
-.qcard .row .ico{width:16px;height:16px;color:var(--lime-text)}
-.bub{max-width:86%;padding:10px 13px;border-radius:18px;font:400 14px/1.4 var(--sans)}
-.bub.out{justify-self:end;background:var(--charcoal);color:#FFFDF7;border-bottom-right-radius:6px}
-.bub.in{justify-self:start;background:var(--paper);color:var(--head);border:1px solid var(--line);border-bottom-left-radius:6px}
-.inputbar{position:absolute;left:14px;right:14px;bottom:16px;height:36px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
-.cal{position:absolute;right:0;bottom:0;width:296px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px 16px 18px;box-shadow:0 30px 60px -28px rgba(42,42,53,.40)}
-.cal-head{display:flex;align-items:center;gap:8px;color:var(--head);padding-bottom:12px;border-bottom:1px solid var(--line)}
-.cal-head .ico{color:var(--lime-text)}
-.cal-head i{display:block;height:8px;width:70px;border-radius:4px;background:#E3DFD2}
-.cal-head i+i{width:34px;margin-left:auto}
-.agenda{position:relative;margin-top:12px;display:grid;gap:8px}
-.slot-line{height:30px;border-top:1px dashed var(--line);position:relative}
-.busy{position:absolute;left:0;right:30%;top:6px;height:22px;border-radius:8px;background:#EFECE3}
-.event{position:relative;border-radius:12px;padding:10px 12px;background:var(--lime);color:var(--charcoal);display:grid;gap:2px}
-.event b{font:700 15px/1.25 var(--display);letter-spacing:-.01em}
-.event span{font:500 13px/1.35 var(--sans)}
-.event .ok{display:flex;align-items:center;gap:6px;margin-top:4px;font:700 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.event .ok .ico{width:15px;height:15px;stroke-width:2.25}
+/* collage: your ad, your guide, your calendar */
+.collage{position:relative;height:440px;max-width:540px;width:100%;margin-left:auto}
+.collage > .tag{position:absolute;left:0;top:0;z-index:5}
+.book{position:absolute;perspective:1200px}
+.cover{position:relative;width:100%;height:100%;border-radius:4px 10px 10px 4px;background:var(--paper);border:1px solid var(--line-2);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;box-shadow:0 30px 60px -30px rgba(42,42,53,.45);transform:rotateY(-14deg);transform-origin:left center}
+.cover::before{content:"";position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(42,42,53,.22),rgba(42,42,53,0));z-index:1}
+.cover-top{padding:var(--s-16) var(--s-16) var(--s-12) var(--s-24)}
+.cover-top b{display:block;font:700 var(--fs-card)/1.1 var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.cover-top > span{display:block;margin-top:var(--s-4);color:var(--lime-text)}
+.cover svg{width:100%;height:100%;object-fit:cover}
+.byline{padding:var(--s-8) var(--s-16) var(--s-8) var(--s-24);background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
+.hero .book{left:var(--s-32);top:var(--s-32);width:220px;height:292px;transform:rotate(var(--rot,-5deg));z-index:1}
 
-/* one-shot hero sequence (added only by JS, final state is the default) */
-.mock.play .qcard{animation:rise .6s var(--ease) .25s both}
-.mock.play .bub.out{animation:rise .55s var(--ease) 1.05s both}
-.mock.play .bub.in{animation:rise .5s var(--ease) 1.95s both}
-.mock.play .event{animation:fill .7s var(--ease) 2.7s both}
-.mock.play .event .ok{animation:fade .35s var(--ease) 3.35s both}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes fill{from{opacity:.0;transform:scale(.94);clip-path:inset(0 100% 0 0 round 12px)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0 round 12px)}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+.ad{position:absolute;right:0;top:0;width:312px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -40px rgba(42,42,53,.5);overflow:hidden;z-index:2}
+.ad-head{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-12) var(--s-16)}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--head);flex:none}
+.avatar svg{width:20px;height:20px}
+.ad-who b{display:block;font:600 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
+.ad-who span{display:block;font:400 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
+.ad-text{padding:0 var(--s-16) var(--s-12);font:400 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
+.ad-img{aspect-ratio:16/10;background:var(--sand-2)}
+.ad-img svg{width:100%;height:100%}
+.ad-foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s-12);padding:var(--s-12) var(--s-16);background:var(--sand);border-top:1px solid var(--line)}
+.ad-foot .mini-cover{width:28px;height:36px;border-radius:2px 4px 4px 2px;background:var(--paper);border:1px solid var(--line-2);display:grid;align-items:end;overflow:hidden}
+.ad-foot .mini-cover i{display:block;height:8px;background:var(--charcoal)}
+.ad-foot .go{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--charcoal);color:var(--cream)}
+.ad-foot .go .ico{width:16px;height:16px;stroke-width:2.25}
+.ad-foot .icons{display:flex;gap:var(--s-12);color:var(--muted)}
+.ad-foot .icons .ico{width:18px;height:18px}
 
-/* proof bar */
-.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
-.proof ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr)}
-.proof li{padding:28px 24px;display:grid;gap:4px;align-content:start}
-.proof li:first-child{padding-left:0}
+.day-card{position:absolute;left:0;bottom:0;width:272px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:var(--s-12) var(--s-16) var(--s-16);box-shadow:0 30px 60px -30px rgba(42,42,53,.45);z-index:3}
+.day-card .dh{display:flex;align-items:center;gap:var(--s-8);padding-bottom:var(--s-8);border-bottom:1px solid var(--line);color:var(--head)}
+.day-card .dh .ico{width:18px;height:18px;color:var(--lime-text)}
+.hours{position:relative;padding-top:var(--s-12)}
+.hours i{display:block;height:16px;border-top:1px dashed var(--line)}
+.event{border-radius:10px;padding:var(--s-8) var(--s-12);background:var(--lime);color:var(--charcoal);display:flex;align-items:center;justify-content:space-between;gap:var(--s-8);margin-block:var(--s-4)}
+.event b{display:block;font:700 var(--fs-ui)/var(--lh-ui) var(--display)}
+.event span{display:block;font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
+.event svg{width:22px;height:22px;flex:none}
+.tick path{stroke-dasharray:30;stroke-dashoffset:0}
+
+/* motion 1: hero collage settles once on load (JS adds .play; default is the final frame) */
+.collage.play .ad{animation:settle .5s var(--ease-out) both}
+.collage.play .book{animation:slide-out .6s var(--ease-move) .2s both}
+.collage.play .event{animation:wipe .6s var(--ease-out) .8s both}
+.collage.play .tick path{animation:tick .3s var(--ease-out) 1.3s both}
+@keyframes settle{from{transform:translateY(12px)}to{transform:none}}
+@keyframes slide-out{from{transform:translateX(24px) rotate(-2deg)}to{transform:rotate(var(--rot,-5deg))}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0 round 10px)}to{clip-path:inset(0 0 0 0 round 10px)}}
+@keyframes tick{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+
+/* ---------- proof ---------- */
+.proof{border-block:1px solid var(--line);background:var(--paper)}
+.proof ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.proof li{padding:var(--s-32) var(--s-24);display:grid;gap:var(--s-4);align-content:start}
 .proof li+li{border-left:1px solid var(--line)}
-.proof b{font:700 clamp(26px,2.6vw,34px)/1.1 var(--display);color:var(--head);letter-spacing:-.02em}
-.proof b small{font-size:.62em;font-weight:500;color:var(--muted);letter-spacing:0}
-.proof span{font-size:15px;color:var(--muted)}
+.proof b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
+.proof span{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
 
-/* problem: one lead fans out */
-.fan{margin-top:56px;position:relative}
-.lead-node{margin:0 auto;width:max-content;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;background:var(--paper);border:1px solid var(--line-2);font:700 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--head);box-shadow:0 10px 24px -16px rgba(42,42,53,.4)}
-.lead-node .ico{color:var(--lime-text)}
-.phones{list-style:none;margin:0;padding:48px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative}
-.phones::before{content:"";position:absolute;top:0;left:50%;height:24px;border-left:1.5px solid var(--line-2)}
-.phones::after{content:"";position:absolute;top:24px;left:10%;right:10%;border-top:1.5px solid var(--line-2)}
-.mini{position:relative;display:grid;justify-items:center}
-.mini::before{content:"";position:absolute;top:-24px;left:50%;height:24px;border-left:1.5px solid var(--line-2)}
-.mini-phone{width:100%;max-width:168px;height:196px;background:var(--charcoal);border-radius:24px;padding:7px}
-.mini-screen{height:100%;border-radius:18px;background:#F7F5EE;padding:30px 9px 9px;display:grid;align-content:start}
-.mini-screen .bub{max-width:100%;font-size:13px;padding:9px 11px;border-radius:14px;border-bottom-right-radius:4px}
-/* beams (problem + how): SVG overlay drawn by JS. Default styles ARE the final state; .armed/.play only exist with JS and full motion */
-.beams{position:absolute;inset:0;width:100%;height:100%;max-width:none;overflow:visible;pointer-events:none;z-index:0}
-.beams path{fill:none;stroke-linecap:round}
-.b-base{stroke:var(--line-2);stroke-width:1.5}
-.b-trail{stroke:var(--lime-text);stroke-width:1.75;stroke-dasharray:1000;stroke-dashoffset:0}
-.b-head{stroke:var(--lime);stroke-width:6;stroke-dasharray:90 1000;opacity:0}
-.armed .b-trail{stroke-dashoffset:1000}
-.play .b-trail{animation:draw var(--dur,.9s) cubic-bezier(.45,0,.25,1) var(--at,0s) both}
-.play .b-head{animation:pulse var(--dur,.9s) cubic-bezier(.45,0,.25,1) var(--at,0s) both}
-@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
-@keyframes pulse{0%{opacity:1;stroke-dashoffset:90}85%{opacity:1}100%{opacity:0;stroke-dashoffset:-910}}
-.fan.beamed .phones::before,.fan.beamed .phones::after,.fan.beamed .mini::before{display:none}
-.fan.beamed .phones{padding-top:96px}
-.fan .lead-node,.fan .mini{position:relative;z-index:1}
-/* bubbles stay readable before the pulse lands (no opacity dimming, contrast holds); they nudge up as it arrives */
-.fan.play .mini-screen .bub{animation:arrive .45s var(--ease) calc(.8s + var(--i,0) * 70ms) both}
-@keyframes arrive{from{transform:translateY(8px) scale(.97)}to{transform:none}}
-.tiles{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
-.tiles li{display:flex;align-items:center;gap:14px;padding:24px 20px 0 0;font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em}
-.tiles .ico{width:24px;height:24px;color:var(--lime-text)}
+/* ---------- problem: your week ---------- */
+.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.day{display:grid;grid-template-rows:auto auto auto 1fr;align-content:start;padding:var(--s-24);gap:var(--s-12)}
+.day + .day{border-left:1px solid var(--line)}
+.day .t-label{color:var(--muted);padding-bottom:var(--s-12);border-bottom:1px solid var(--line)}
+.day svg{width:120px;height:72px;margin-block:var(--s-8)}
+.day p{color:var(--body)}
 
-/* different: before/after panels on a hairline grid, segmented toggle on phones */
-.seg{display:none}
-.cmp{margin-top:48px;max-width:920px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-.cmp-col{background:var(--cream);padding:28px 32px 12px}
-.cmp-col.us{background:var(--paper)}
-.cmp-h{display:flex;align-items:center;gap:10px;font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.cmp-col.us .cmp-h{color:var(--head)}
-.cmp-h .ico{width:18px;height:18px;stroke-width:2.25}
-.cmp-col.us .cmp-h .ico{color:var(--lime-text)}
-.cmp ul{list-style:none;margin:16px 0 0;padding:0}
-.cmp li{display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.35}
-.cmp .them li{color:var(--body)}
-.cmp .us li{color:var(--head);font-weight:500}
-.cmp li .ico{width:18px;height:18px;stroke-width:2.25}
-.cmp .them li .ico{color:#7A7F8A}
-.cmp .us li .ico{color:var(--lime-text)}
+/* ---------- different ---------- */
+.vs{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap-cols);align-items:stretch}
+.vs-col{border-radius:20px;padding:var(--pad-card)}
+.vs-col.them{grid-column:1 / 6;background:var(--sand);border:1px solid var(--line)}
+.vs-col.us{grid-column:6 / 13;background:var(--paper);border:1px solid var(--line-2);box-shadow:0 30px 60px -40px rgba(42,42,53,.35)}
+.vs-h{display:flex;align-items:center;gap:var(--s-12);min-height:40px}
+.vs-col.them .vs-h{color:var(--body)}
+.team{display:flex}
+.team span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--paper);background:var(--sand);color:var(--head)}
+.team span + span{margin-left:calc(var(--s-8) * -1)}
+.team span:nth-child(2){background:var(--charcoal);color:var(--cream)}
+.team svg{width:18px;height:18px}
+.vs ul{margin-top:var(--s-16)}
+.vs li{display:flex;align-items:center;gap:var(--s-16);min-height:64px;border-top:1px solid var(--line)}
+.vs .them li{color:var(--body)}
+.vs .them li .ico{width:18px;height:18px;color:var(--muted)}
+.vs .us li{color:var(--head);font-weight:500}
+.thumb{width:40px;height:40px;border-radius:10px;background:var(--sand);border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--head)}
+.thumb svg{width:24px;height:24px}
 
-/* how: flow */
-.flow-host{position:relative;margin-top:56px}
-.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
-.flow::before{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;background:var(--border-dark)}
-.flow-host.beamed .flow::before{display:none}
-.dark .b-base{stroke:var(--border-dark);stroke-width:2}
-.dark .b-trail{stroke:var(--lime);stroke-width:2}
-.dark .b-head{stroke:#FFFDF7;stroke-width:4}
-.node{position:relative;z-index:1;display:grid;gap:14px;align-content:start;justify-items:center;text-align:center;transition:opacity .45s var(--ease)}
-.node .dot{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--card-dark);border:1.5px solid var(--lime);color:var(--lime);transition:border-color .45s var(--ease),color .45s var(--ease),background-color .45s var(--ease)}
-.node .dot .ico{width:24px;height:24px}
-.node:last-child .dot{background:var(--lime);color:var(--charcoal)}
-.node b{font:500 18px/1.25 var(--display);color:#FFFDF7;letter-spacing:-.01em;max-width:14ch}
-.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
-.chip-d{font:500 12.5px/1 var(--sans);color:var(--body-dark);border:1px solid var(--border-dark);border-radius:999px;padding:6px 9px}
-.flow-cap{margin-top:48px;display:flex;align-items:center;gap:10px;color:var(--body-dark);font-size:16px}
-.flow-cap .ico{color:var(--lime)}
-.flow.armed .node{opacity:.38}
-.flow.armed .node .dot{border-color:var(--border-dark);color:var(--body-dark)}
-.flow.armed .node:last-child .dot{background:var(--card-dark)}
-.flow.armed.play .node{opacity:1}
-.flow.armed.play .node .dot{border-color:var(--lime);color:var(--lime)}
-.flow.armed.play .node:last-child .dot{background:var(--lime);color:var(--charcoal)}
-.flow.play .node:nth-child(1),.flow.play .node:nth-child(1) .dot{transition-delay:.1s}
-.flow.play .node:nth-child(2),.flow.play .node:nth-child(2) .dot{transition-delay:.55s}
-.flow.play .node:nth-child(3),.flow.play .node:nth-child(3) .dot{transition-delay:1s}
-.flow.play .node:nth-child(4),.flow.play .node:nth-child(4) .dot{transition-delay:1.45s}
-.flow.play .node:nth-child(5),.flow.play .node:nth-child(5) .dot{transition-delay:1.9s}
+/* ---------- how: the campaign board ---------- */
+.board-foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
+.who-key{display:flex;gap:var(--s-8);flex-wrap:wrap}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:auto auto auto auto;column-gap:var(--gap-cols);row-gap:var(--s-12);padding-bottom:var(--s-80)}
+.step{display:grid;grid-row:span 4;grid-template-rows:subgrid;position:relative}
+.who{justify-self:start;padding:var(--s-4) var(--s-8);border-radius:999px;font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase}
+.who.we{background:var(--card-dark);color:var(--lime);border:1px solid var(--border-dark)}
+.who.they{background:var(--cream);color:var(--charcoal)}
+.who.you{background:transparent;color:var(--cream);border:1px solid var(--body-dark)}
+.art{height:148px;border-radius:14px;background:var(--cream);border:1px solid var(--border-dark);padding:var(--s-12);display:grid;align-content:center;justify-items:center;gap:var(--s-8);color:var(--head);transition:box-shadow .3s var(--ease-out)}
+.art.lit{box-shadow:0 0 0 2px var(--lime)}
+.art .mini-book{width:84px;height:112px;border-radius:2px 6px 6px 2px;background:var(--paper);border:1px solid var(--line-2);display:grid;grid-template-rows:1fr auto;overflow:hidden;box-shadow:0 12px 24px -16px rgba(0,0,0,.6)}
+.art .mini-book svg{width:100%;height:100%}
+.art .mini-book span{padding:var(--s-4);background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/1 var(--sans);text-align:center}
+.art .mini-ad{width:100%;max-width:150px;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.art .mini-ad .h{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8);font:600 var(--fs-ui-sm)/1 var(--sans)}
+.art .mini-ad .h i{width:20px;height:20px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2)}
+.art .mini-ad svg{width:100%;height:64px}
+.art .q{font:600 var(--fs-ui)/var(--lh-ui) var(--sans);text-align:center;max-width:18ch}
+.art .pill{padding:var(--s-4) var(--s-12);border-radius:999px;background:var(--charcoal);color:var(--cream);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans)}
+.art .checks{display:grid;gap:var(--s-8);justify-self:stretch;padding-inline:var(--s-8)}
+.art .checks span{display:flex;align-items:center;gap:var(--s-8);font:500 var(--fs-ui)/var(--lh-ui) var(--sans);padding-bottom:var(--s-8);border-bottom:1px dashed var(--line-2)}
+.art .checks .ico{width:18px;height:18px;color:var(--lime-text);stroke-width:2.25}
+.art .slot{justify-self:stretch;border-radius:10px;border:1.5px solid var(--charcoal);background:var(--paper);padding:var(--s-8) var(--s-12);display:flex;align-items:center;gap:var(--s-8)}
+.art .slot .ico{color:var(--lime-text)}
+.art .slot b{font:700 var(--fs-ui)/var(--lh-ui) var(--display)}
+.art .confirmed{display:grid;justify-items:center;gap:var(--s-8);font:600 var(--fs-ui)/var(--lh-ui) var(--sans)}
+.art .confirmed svg{width:40px;height:40px}
+.art .mini-cal{display:grid;grid-template-columns:repeat(4,24px);gap:var(--s-8)}
+.art .mini-cal span{height:24px;border-radius:6px;border:1px solid var(--line-2);background:var(--paper)}
+.art .mini-cal .on{background:var(--charcoal);border-color:var(--charcoal);box-shadow:0 0 0 3px var(--lime)}
+.stop{position:relative;height:16px}
+.stop::before{content:"";position:absolute;top:7px;left:0;right:calc(var(--gap-cols) * -1);height:2px;background:var(--border-dark)}
+.step:first-child .stop::before{left:50%}
+.step:last-child .stop::before{right:50%}
+.stop::after{content:"";position:absolute;left:50%;top:0;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--charcoal);border:2px solid var(--body-dark)}
+.step:last-child .stop::after{border-color:var(--lime);background:var(--lime)}
+.buyer{position:absolute;left:50%;top:calc(100% + var(--s-12));translate:-50% 0;z-index:2;display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-12) var(--s-8) var(--s-8);border-radius:999px;background:var(--paper);color:var(--head);white-space:nowrap;box-shadow:0 16px 32px -16px rgba(0,0,0,.7)}
+.buyer .avatar{width:28px;height:28px}
+.buyer .avatar svg{width:16px;height:16px}
+.buyer b{font:600 var(--fs-ui)/1 var(--sans)}
+.buyer .badge{padding:var(--s-4) var(--s-8);border-radius:999px;background:var(--lime);color:var(--charcoal);font:700 var(--fs-ui-sm)/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-chip)}
+.chips li{padding:var(--s-8) var(--s-12);border-radius:999px;border:1px solid var(--border-dark);color:var(--body-dark);font-size:var(--fs-small);line-height:1}
+.chips .ico{width:18px;height:18px;color:var(--lime)}
 
-/* calendar: animated list, bookings land one by one (newest on top) */
-.split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
-.appts{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:480px;width:100%;justify-self:end}
-.appt{display:grid;grid-template-columns:44px 1fr auto;align-items:center;column-gap:14px;row-gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 18px 14px 14px;box-shadow:0 18px 40px -30px rgba(42,42,53,.45);transform-origin:top center}
-.appt-ico{grid-row:span 2;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--lime);color:var(--charcoal)}
-.appt-ico.alt{background:var(--sand);border:1px solid var(--line-2)}
-.appt-ico .ico{width:20px;height:20px}
-.appt b{font:600 16px/1.3 var(--display);color:var(--head);letter-spacing:-.005em}
-.appt .when{font:700 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime-text);display:flex;align-items:center;gap:6px;justify-self:end}
-.appt .when .ico{width:15px;height:15px;stroke-width:2.25}
-.appt .meta{grid-column:2 / 4;font-size:15px;line-height:1.35;color:var(--body)}
-.appts.armed .appt{opacity:0}
-.appts.play .appt{animation:land .55s var(--ease) calc((3 - var(--i)) * 650ms) both}
-@keyframes land{from{opacity:0;transform:translateY(-10px) scale(.96)}to{opacity:1;transform:none}}
+/* ---------- calendar: report + your week ---------- */
+.report-card{margin-top:var(--gap-block);max-width:360px;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -40px rgba(42,42,53,.4)}
+.report-card .rh{padding:var(--s-16);background:var(--paper);color:var(--head);border-bottom:1px solid var(--line)}
+.report-card .rh b{display:block;font:700 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card)}
+.report-card .rh span{display:block;margin-top:var(--s-4);font:400 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
+.report-card ul{padding:var(--s-8) var(--s-16)}
+.report-card li{display:flex;align-items:center;gap:var(--s-12);padding-block:var(--s-8);font:500 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
+.report-card li + li{border-top:1px solid var(--line)}
+.report-card li .ico{width:18px;height:18px;color:var(--lime-text)}
+.cal{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -50px rgba(42,42,53,.45)}
+.cal-h{display:flex;align-items:center;gap:var(--s-12);padding:var(--s-16) var(--s-24);border-bottom:1px solid var(--line)}
+.cal-h .ico{color:var(--lime-text)}
+.cal-h b{font:600 var(--fs-ui)/var(--lh-ui) var(--sans);color:var(--head)}
+.cal-h .tag{margin-left:auto}
+.cal ol{display:grid}
+.cal li{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:var(--s-16);align-items:start;padding:var(--s-12) var(--s-24);min-height:56px}
+.cal li + li{border-top:1px solid var(--line)}
+.cal .d{padding-top:var(--s-4);color:var(--muted)}
+.ev{grid-column:2;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--s-12);row-gap:var(--s-4);padding:var(--s-12) var(--s-16);border-radius:12px;background:var(--sand);border:1px solid var(--line-2)}
+.ev.hot{background:var(--lime);border-color:rgba(42,42,53,.2)}
+.ev b{font:600 var(--fs-body)/var(--lh-card) var(--sans);color:var(--head)}
+.ev .meta{grid-column:1 / -1;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head)}
+.meta > span + span::before{content:"·";margin-inline:var(--s-4) var(--s-8);color:var(--muted)}
+.ev .ok{display:flex;align-items:center;gap:var(--s-4);font-size:var(--fs-small);line-height:var(--lh-small);font-weight:600;color:var(--head)}
+.ev .ok .ico{width:16px;height:16px;stroke-width:2.5}
+.remind{grid-column:2;justify-self:end;margin-top:var(--s-8);max-width:260px;padding:var(--s-8) var(--s-12);border-radius:16px 16px 4px 16px;background:var(--charcoal);color:var(--cream);font:400 var(--fs-ui)/var(--lh-ui) var(--sans)}
 
-/* results: hairline bento, $2M+ is the large cell */
-.bento{margin-top:48px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
-.b-cell{background:var(--paper);padding:28px;grid-column:span 2;display:grid;gap:10px;align-content:start}
-.b-cell.big{grid-column:span 4;grid-row:span 2;padding:36px 40px;align-content:center;gap:32px;background:var(--cream)}
-.b-cell .n{font:700 clamp(2.2rem,3.6vw,3rem)/1 var(--display);letter-spacing:-.035em;color:var(--head);font-variant-numeric:tabular-nums}
-.b-cell.big .n{font-size:clamp(4.5rem,11vw,9.5rem);letter-spacing:-.05em;line-height:.9}
-.b-cell .l{font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
-.b-cell .l{margin-top:-2px}
-.b-cell.big .l{margin-top:14px}
-.b-cell p.s{font-size:16px;color:var(--body);max-width:44ch}
-.b-cell.big p.s{font:500 clamp(19px,1.8vw,22px)/1.4 var(--display);color:var(--head);letter-spacing:-.01em;max-width:30ch}
-.res-note{margin-top:18px;font-size:14px;color:var(--muted)}
 
-/* pay: static stepper (done / current / next) */
-.stepper{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:1000px}
-.step{position:relative;display:grid;justify-items:center;text-align:center;gap:6px;padding:0 12px}
-.step::after{content:"";position:absolute;top:15px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;border-radius:1px;background:var(--line-2)}
-.step:last-child::after{display:none}
-.step[data-state="done"]::after{background:var(--lime-text)}
-.step[data-state="current"]::after{background:repeating-linear-gradient(90deg,var(--line-strong) 0 6px,transparent 6px 12px)}
-.ind{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;margin-bottom:10px;border:2px solid var(--line-strong);background:var(--paper);color:var(--charcoal)}
-.ind .ico{width:16px;height:16px;stroke-width:2.75}
-.step[data-state="done"] .ind{background:var(--lime);border-color:var(--charcoal)}
-.step[data-state="current"] .ind{background:var(--charcoal);border-color:var(--charcoal);box-shadow:0 0 0 5px var(--lime-soft)}
-.step[data-state="current"] .ind::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--lime)}
-.st-t{font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em}
-.st-d{font-size:16px;color:var(--body)}
-.step[data-state="current"] .st-d{color:var(--head);font-weight:600}
+.art .lp{display:grid;grid-template-columns:56px minmax(0,1fr);gap:var(--s-8);width:100%;max-width:170px;align-items:center}
+.art .lp-cover{height:76px;border-radius:2px 6px 6px 2px;overflow:hidden;border:1px solid var(--line-2)}
+.art .lp-cover svg{width:100%;height:100%}
+.art .lp-form{display:grid;gap:var(--s-8)}
+.art .lp-form .in{display:flex;align-items:center;height:24px;padding-inline:var(--s-8);border-radius:6px;border:1px solid var(--line-2);background:var(--paper);color:var(--muted)}
+.art .lp-form .in .ico{width:14px;height:14px}
+.art .lp-form .go{display:grid;place-items:center;height:24px;border-radius:6px;background:var(--charcoal);color:var(--cream)}
+.art .lp-form .go .ico{width:14px;height:14px}
+.art .mini-ad .h .ico{width:14px;height:14px;margin-left:auto;color:var(--muted)}
+.art .mini-book{grid-template-rows:1fr 12px}
+.report-card .r-body{position:relative;height:132px;background:var(--sand-2)}
+.report-card .r-body > svg{width:100%;height:100%}
+.report-card .r-icons{position:absolute;left:var(--s-16);bottom:var(--s-16);display:flex;gap:var(--s-8)}
+.report-card .r-icons .ico{width:32px;height:32px;padding:var(--s-8);border-radius:50%;background:var(--paper);color:var(--lime-text);stroke-width:2}
+/* motion 3: the week fills top to bottom once */
+.cal.play .ev{animation:fill-in .45s var(--ease-out) calc(var(--i) * 300ms) both}
+.cal.play .remind{animation:fill-in .35s var(--ease-out) .6s both}
+@keyframes fill-in{from{clip-path:inset(0 0 100% 0 round 12px);transform:translateY(6px)}to{clip-path:inset(0 0 0 0 round 12px);transform:none}}
 
-/* city */
-.city-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center}
-.seats{margin-top:32px;display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:420px}
-.seats i{display:block;aspect-ratio:1;border-radius:10px;border:1.5px solid var(--charcoal);background:var(--paper);position:relative}
-.seats i::after{content:"";position:absolute;inset:30%;border-radius:50%;background:var(--lime)}
-.fit{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
-.fit li{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line-2);font:500 15px/1.2 var(--sans);color:var(--head)}
-.fit .ico{width:17px;height:17px;color:var(--lime-text);stroke-width:2.25}
-.map{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px 24px 24px}
-.map svg{width:100%;height:auto}
-.map-label{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;background:var(--charcoal);color:#FFFDF7;border-radius:999px;padding:10px 16px;font:500 15px/1 var(--sans);box-shadow:0 14px 30px -16px rgba(42,42,53,.6)}
-.map-label .ico{width:17px;height:17px;color:var(--lime)}
+/* ---------- results: work we've run ---------- */
+.results .split{align-items:stretch}
+.guide-feature{display:grid;align-content:start;gap:var(--s-24)}
+.stage{position:relative;height:420px;border-radius:20px;background:var(--sand);border:1px solid var(--line);overflow:hidden}
+.page{position:absolute;top:var(--s-48);width:190px;height:250px;background:var(--paper);border:1px solid var(--line-2);border-radius:4px;box-shadow:0 20px 40px -24px rgba(42,42,53,.35);padding:var(--s-16)}
+.page svg{width:100%;height:100%}
+.page.p1{right:var(--s-24);transform:rotate(6deg)}
+.page.p2{right:var(--s-80);top:var(--s-80);transform:rotate(-3deg)}
+.stage .book{left:var(--s-32);top:var(--s-64);width:228px;height:304px}
+.stage .cover{transform:rotateY(-10deg);grid-template-rows:auto 1fr}
+.nw{white-space:nowrap}
+.guide-cap b{display:block;font-weight:600;color:var(--head)}
+.guide-cap span{display:block;margin-top:var(--s-4)}
+.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap-cols);align-content:start;position:relative}
+.work > .tag{position:absolute;right:0;top:calc(var(--s-32) * -1 - var(--s-8))}
+.piece{display:grid;align-content:start;gap:var(--s-12)}
+.piece .frame{height:168px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sand);transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+.piece .frame svg{width:100%;height:100%}
+.piece .frame.dk{background:var(--charcoal)}
+@media (hover:hover) and (pointer:fine){.piece:hover .frame{transform:perspective(800px) rotateX(3deg) translateY(-4px);box-shadow:0 24px 40px -28px rgba(42,42,53,.5)}}
+.piece b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
+.piece p{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--body);text-wrap:pretty}
 
-/* faq */
-.faq-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:56px;align-items:start}
+/* ---------- pay ---------- */
+.stages{counter-reset:st;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-cols)}
+.stage-i{position:relative;display:grid;gap:var(--s-4);padding-top:var(--s-64)}
+.stage-i::before{content:"";position:absolute;top:19px;left:0;right:calc(var(--gap-cols) * -1);height:2px;background:var(--line-2)}
+.stage-i:last-child::before{display:none}
+.num{position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1.5px solid var(--charcoal);color:var(--head);font:700 var(--fs-small)/1 var(--mono)}
+.stage-i{counter-increment:st}
+.num::before{content:counter(st)}
+.stage-i b{font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.stage-i span{color:var(--body)}
+.pay .micro{margin-top:var(--gap-block)}
+
+/* ---------- city ---------- */
+.fit{display:flex;flex-wrap:wrap;gap:var(--gap-chip);margin-top:var(--gap-block)}
+.fit li{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-16);border-radius:999px;background:var(--paper);border:1px solid var(--line-2);font:500 var(--fs-small)/var(--lh-small) var(--sans);color:var(--head)}
+.fit .ico{width:18px;height:18px;color:var(--lime-text);stroke-width:2.25}
+.map{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:var(--pad-card)}
+.map-dots{position:relative}
+.map-dots > svg{width:100%;height:auto}
+.pin{position:absolute;left:39.7%;top:53.6%;width:0;height:0}
+.pin .dot{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--lime);border:2px solid var(--charcoal)}
+.pin .ring{position:absolute;left:-16px;top:-16px;width:32px;height:32px;border-radius:50%;border:2px solid var(--lime-text);opacity:0}
+.pin .call{position:absolute;left:0;translate:-50% 0;bottom:var(--s-16);display:flex;align-items:center;gap:var(--s-8);white-space:nowrap;padding:var(--s-8) var(--s-12);border-radius:12px;background:var(--charcoal);color:var(--cream);box-shadow:0 14px 30px -16px rgba(42,42,53,.6)}
+.pin .call svg{width:20px;height:20px;max-width:none;color:var(--lime)}
+.pin .call .tag{padding:var(--s-4) var(--s-8)}
+.map-label{display:flex;align-items:center;gap:var(--s-8);margin-top:var(--s-16);font-size:var(--fs-small);line-height:var(--lh-small);color:var(--head);font-weight:500}
+.map-label .ico{width:18px;height:18px;color:var(--lime-text)}
+/* motion 4: pin drops once, two ring pulses, then still */
+.map.play .pin .dot{animation:drop .4s var(--ease-out) both}
+.map.play .pin .ring{animation:ring .7s var(--ease-out) .4s 2}
+.map.play .pin .call{animation:rise .3s var(--ease-out) .4s both}
+@keyframes drop{from{transform:translateY(-16px)}to{transform:none}}
+@keyframes ring{from{transform:scale(.6);opacity:.5}to{transform:scale(1.8);opacity:0}}
+@keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+
+/* ---------- faq ---------- */
+.faq .sec-head{position:sticky;top:96px}
 .faq-list{border-top:1px solid var(--line)}
 .faq-list details{border-bottom:1px solid var(--line)}
-.faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;padding:16px 0;font:500 clamp(17px,1.7vw,19px)/1.35 var(--display);color:var(--head);letter-spacing:-.005em}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:var(--s-24);min-height:64px;padding-block:var(--s-16);font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head)}
 .faq-list summary::-webkit-details-marker{display:none}
-.faq-list summary .ico{width:20px;height:20px;transition:transform .2s var(--ease);color:var(--muted)}
+.faq-list summary .ico{transition:transform .2s var(--ease-out);color:var(--muted)}
 .faq-list details[open] summary .ico{transform:rotate(45deg)}
-@media (hover:hover){.faq-list summary:hover{color:var(--lime-text)}}
-.faq-list details p{padding:0 44px 22px 0;color:var(--body);max-width:60ch}
+@media (hover:hover) and (pointer:fine){.faq-list summary:hover{color:var(--lime-text)}}
+.faq-list details p{padding-bottom:var(--s-24);max-width:var(--measure-body)}
 
-/* final */
-.final .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.final h2{font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.02}
-.inline-q{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:24px;padding:28px}
-.inline-q .q{font:500 clamp(20px,2.2vw,24px)/1.3 var(--display);color:#FFFDF7;letter-spacing:-.01em}
-.inline-q .opts{margin-top:20px;display:grid;gap:10px}
-.opt-d{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:58px;padding:0 18px;border-radius:14px;border:1px solid var(--border-dark);background:#2E2E39;color:#FFFDF7;font:500 17px/1.2 var(--sans);text-align:left;cursor:pointer;transition:border-color .2s var(--ease),background-color .2s var(--ease)}
-.opt-d .ico{color:var(--body-dark);transition:transform .2s var(--ease),color .2s}
-@media (hover:hover){
-  .opt-d:hover{border-color:var(--lime);background:#363642}
-  .opt-d:hover .ico{color:var(--lime);transform:translateX(3px)}
-}
-.opt-d:active{transform:translateY(1px)}
-.final .micro{color:var(--body-dark)}
+/* ---------- final ---------- */
+.final .split{align-items:center}
+.inline-q{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:20px;padding:var(--pad-card-lg)}
+.inline-q .q{font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--cream)}
+.inline-q .opts{margin-top:var(--s-24);display:grid;gap:var(--gap-list)}
+.opt-d{display:flex;align-items:center;justify-content:space-between;gap:var(--s-12);width:100%;min-height:56px;padding-inline:var(--s-24);border-radius:14px;border:1px solid var(--border-dark);background:#2E2E39;color:var(--cream);font:500 var(--fs-body)/1.2 var(--sans);text-align:left;cursor:pointer;transition:border-color .2s var(--ease-out),background-color .2s var(--ease-out),transform .16s var(--ease-out)}
+.opt-d .ico{color:var(--body-dark);transition:transform .2s var(--ease-out),color .2s ease}
+@media (hover:hover) and (pointer:fine){.opt-d:hover{border-color:var(--lime);background:#363642}.opt-d:hover .ico{color:var(--lime);transform:translateX(4px)}}
+.opt-d:active{transform:scale(.98)}
+.final .micro{margin-top:var(--gap-note);color:var(--body-dark)}
 
-footer{padding:28px 0}
-footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+footer{padding-block:var(--s-32)}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
 footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;text-underline-offset:3px}
 
-/* quiz overlay */
+/* ---------- quiz overlay ---------- */
 .quiz{position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .quiz[hidden]{display:none}
-.quiz-bar{position:sticky;top:0;z-index:2;background:var(--cream);display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.quiz-bar{position:sticky;top:0;z-index:2;background:var(--cream);display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:var(--s-16);padding:var(--s-8) var(--s-16);border-bottom:1px solid var(--line)}
 .icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;color:var(--head)}
 @media (hover:hover){.icon-btn:hover{background:var(--sand)}}
 .icon-btn[hidden]{display:grid;visibility:hidden}
-.quiz-progress{display:grid;gap:7px;justify-items:center}
-.quiz-count{font:700 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-height:12px}
+.quiz-progress{display:grid;gap:var(--s-8);justify-items:center}
+.quiz-count{font:700 var(--fs-label)/1 var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted);min-height:12px}
 .track{width:100%;max-width:420px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
-.track i{display:block;height:100%;width:100%;background:var(--charcoal);transform:scaleX(0);transform-origin:left center;transition:transform .35s var(--ease)}
-.quiz-body{flex:1;padding:clamp(28px,6vh,72px) 20px 64px}
+.track i{display:block;height:100%;width:100%;background:var(--charcoal);transform:scaleX(0);transform-origin:left center;transition:transform .35s var(--ease-out)}
+.quiz-body{flex:1;padding:var(--s-48) var(--s-24) var(--s-64)}
 .quiz-screen{max-width:580px;margin:0 auto}
 .quiz-screen.wide{max-width:860px}
-.quiz-screen.enter{animation:in-next .22s var(--ease) both}
+.quiz-screen.enter{animation:in-next .22s var(--ease-out) both}
 .quiz-screen.enter.rev{animation-name:in-back}
 @keyframes in-next{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 @keyframes in-back{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
-.quiz h2{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.12}
+.quiz h2{font-size:var(--fs-stat);line-height:var(--lh-stat);letter-spacing:var(--ls-stat);max-width:none}
 .quiz h2:focus{outline:none}
-.quiz .help{margin-top:12px;color:var(--body);font-size:16.5px}
-.quiz .opts{margin-top:28px;display:grid;gap:10px}
-.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:12px 18px;border-radius:14px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:500 17px/1.3 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+.quiz .help{margin-top:var(--s-12);color:var(--body)}
+.quiz .opts{margin-top:var(--s-32);display:grid;gap:var(--gap-list)}
+.opt{display:flex;align-items:center;gap:var(--s-16);width:100%;min-height:56px;padding:var(--s-12) var(--s-16);border-radius:14px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:500 var(--fs-body)/1.3 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s var(--ease-out),background-color .15s var(--ease-out),transform .16s var(--ease-out)}
 @media (hover:hover){.opt:hover{border-color:var(--charcoal)}}
-.opt:active{transform:translateY(1px)}
+.opt:active{transform:scale(.98)}
 .opt[aria-pressed="true"]{border-color:var(--charcoal);background:var(--lime-soft)}
-.opt .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line-strong);display:grid;place-items:center;flex:none;background:var(--paper)}
-.opt .box .ico{width:15px;height:15px;stroke-width:2.75;opacity:0}
+.opt .box{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--line-strong);display:grid;place-items:center;flex:none;background:var(--paper)}
+.opt .box .ico{width:16px;height:16px;stroke-width:2.75;opacity:0}
 .opt[aria-pressed="true"] .box{background:var(--charcoal);border-color:var(--charcoal);color:var(--lime)}
 .opt[aria-pressed="true"] .box .ico{opacity:1}
-.hint{margin-top:10px;font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.actions{margin-top:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.qform{margin-top:28px;display:grid;gap:16px}
-.field{display:grid;gap:7px}
-.field label{font:500 15px/1.3 var(--sans);color:var(--head)}
-.field input{width:100%;min-height:52px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:400 17px/1.2 var(--sans)}
+.hint{margin-top:var(--s-12);font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--muted)}
+.actions{margin-top:var(--s-24);display:flex;align-items:center;gap:var(--s-16);flex-wrap:wrap}
+.qform{margin-top:var(--s-32);display:grid;gap:var(--s-16)}
+.field{display:grid;gap:var(--s-8)}
+.field label{font:500 var(--fs-small)/1.3 var(--sans);color:var(--head)}
+.field input{width:100%;min-height:52px;padding-inline:var(--s-16);border-radius:12px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:400 var(--fs-body)/1.2 var(--sans)}
 .field input:focus{outline:none;border-color:var(--charcoal);box-shadow:0 0 0 3px rgba(42,42,53,.12)}
 .field input:user-invalid{border-color:#B42318}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.consent{font-size:14px;color:var(--muted);line-height:1.5}
-.report{margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:8px 24px}
-.report div{padding:18px 0;display:grid;gap:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-12)}
+.consent{font-size:var(--fs-small);color:var(--muted);line-height:var(--lh-small)}
+.report{margin-top:var(--s-32);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:var(--s-8) var(--s-24)}
+.report div{padding-block:var(--s-16);display:grid;gap:var(--s-8)}
 .report div+div{border-top:1px solid var(--line)}
-.report dt{font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
-.report dd{margin:0;color:var(--head);font-size:17px;line-height:1.5}
-.book{margin-top:36px;font:500 clamp(19px,2vw,22px)/1.35 var(--display);color:var(--head);letter-spacing:-.01em}
-.cal-embed{margin-top:18px;width:100%;min-height:660px;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:auto}
-.reasons{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-.reasons li{display:flex;gap:10px;color:var(--head)}
-.reasons .ico{margin-top:4px;color:var(--muted)}
-.tip{margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:8px}
-.tip b{font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
+.report dt{font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--lime-text)}
+.report dd{color:var(--head)}
+.book-line{margin-top:var(--s-40);font:600 var(--fs-card)/var(--lh-card) var(--display);color:var(--head);letter-spacing:var(--ls-card)}
+.cal-embed{margin-top:var(--s-16);width:100%;min-height:660px;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:auto}
+.reasons{margin-top:var(--s-24);display:grid;gap:var(--s-12)}
+.reasons li{display:flex;gap:var(--s-12);color:var(--head)}
+.reasons .ico{margin-top:var(--s-4);color:var(--muted)}
+.tip{margin-top:var(--s-32);background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:var(--s-24);display:grid;gap:var(--s-8)}
+.tip b{font:700 var(--fs-label)/var(--lh-label) var(--mono);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--lime-text)}
 
-/* tablet */
-@media (max-width:960px){
-  .hero .wrap{grid-template-columns:1fr;gap:48px}
-  .hero h1{max-width:14ch}
-  .mock{margin:0 auto}
-  .split,.city-grid,.faq-grid,.final .wrap{grid-template-columns:1fr;gap:40px}
-  .appts{justify-self:start;max-width:560px}
-  .map{max-width:560px}
-  .b-cell.big{grid-column:span 6;grid-row:auto}
-  .b-cell{grid-column:span 3}
+/* ---------- tablet ---------- */
+@media (min-width:961px) and (max-width:1199px){
+  .hero .book{left:0;width:196px;height:264px}
+  .ad{width:262px}
 }
-/* phone */
+@media (max-width:960px){
+  .split{grid-template-columns:minmax(0,1fr);row-gap:var(--gap-split)}
+  .split > :first-child,.split > :last-child{grid-column:auto}
+  .collage{margin-inline:auto}
+  .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .day + .day{border-left:0}
+  .day{border-top:1px solid var(--line)}
+  .day:nth-child(-n+2){border-top:0}
+  .day:nth-child(even){border-left:1px solid var(--line)}
+  .day:last-child{grid-column:1 / -1}
+  .vs{grid-template-columns:minmax(0,1fr);row-gap:var(--gap-cols)}
+  .vs-col.them,.vs-col.us{grid-column:auto}
+  .faq .sec-head{position:static}
+  .guide-feature{max-width:560px}
+}
+@media (max-width:860px){
+  .steps{grid-template-columns:minmax(0,1fr);row-gap:0;padding-bottom:0}
+  .steps{grid-template-rows:none}
+  .step{grid-row:auto;grid-template-columns:24px minmax(0,1fr);grid-template-rows:none;column-gap:var(--s-16);row-gap:var(--s-12);padding-bottom:var(--s-40)}
+  .step > *{grid-column:2}
+  .who{grid-row:1}
+  .step::before{content:"";position:absolute;left:11px;top:12px;bottom:0;width:2px;background:var(--border-dark)}
+  .step:last-child{padding-bottom:0}
+  .step:last-child::before{display:none}
+  .art{justify-self:stretch;width:100%}
+  .stop{grid-column:1 / -1;grid-row:1;height:24px}
+  .stop::before{display:none}
+  .stop::after{left:12px;top:4px}
+  .buyer{left:auto;right:0;top:50%;translate:0 -50%}
+  .board-foot{margin-top:var(--s-40)}
+}
+/* ---------- phone ---------- */
 @media (max-width:640px){
-  :root{--gut:20px}
-  body{font-size:16.5px}
-  .top .wrap{height:60px}
+  .top .wrap{height:56px}
   .logo img{height:24px}
-  .hero{padding-top:24px}
-  .hero .eyebrow{font-size:11px;letter-spacing:.07em}
-  .hero h1{font-size:clamp(2.35rem,11vw,2.9rem);margin-top:14px}
-  .hero .lede{margin-top:16px;font-size:18px}
-  .hero .cta{margin-top:24px}
   .hero .btn{width:100%}
-  .micro{text-align:center}
-  .mock{height:500px;max-width:340px}
-  .phone{width:232px;height:464px;border-radius:38px;padding:9px}
-  .screen{border-radius:30px;padding:12px 11px 0}
-  .notch{width:70px;height:18px;margin:-12px auto 8px}
-  .bub{font-size:13px;padding:9px 11px}
-  .qcard .row{font-size:12.5px}
-  .cal{width:196px;padding:12px 12px 14px;border-radius:16px}
-  .cal-head{padding-bottom:8px}
-  .cal-head i{width:44px}
-  .agenda{margin-top:8px;gap:6px}
-  .slot-line{height:20px}
-  .busy{height:14px;top:3px}
-  .event{padding:8px 10px}
-  .event b{font-size:14px}
-  .event span{font-size:12px}
-  .proof ul{grid-template-columns:1fr}
-  .proof li{padding:14px 0;gap:0}
+  .hero .micro{text-align:center}
+  .collage{height:480px;max-width:360px}
+  .collage > .tag{left:auto;right:0}
+  .hero .day-card{left:0;right:0;top:var(--s-40);bottom:auto;width:auto;display:flex;align-items:center;gap:var(--s-12);padding:var(--s-8) var(--s-8) var(--s-8) var(--s-16)}
+  .hero .day-card .dh{border-bottom:0;padding-bottom:0}
+  .hero .day-card .hours{display:none}
+  .hero .day-card .event{flex:1;margin-block:0}
+  .hero .ad{left:0;right:auto;top:var(--s-104);width:240px}
+  .ad-text{padding-bottom:var(--s-8)}
+  .ad-foot{padding-block:var(--s-8)}
+  .hero .book{left:auto;right:0;top:auto;bottom:var(--s-32);width:128px;height:172px;--rot:5deg;z-index:3}
+  .cover-top{padding:var(--s-12) var(--s-12) var(--s-8) var(--s-16)}
+  .byline{padding-inline:var(--s-16)}
+  .proof ul{grid-template-columns:minmax(0,1fr)}
+  .proof li{padding:var(--s-16) 0}
   .proof li+li{border-left:0;border-top:1px solid var(--line)}
-  .proof .wrap{padding:0 var(--gut)}
-  /* problem diagram: stacked */
-  .fan{margin-top:40px}
-  .fan.beamed .phones{padding-top:18px}
-  .lead-node{margin:0}
-  .phones{grid-template-columns:1fr;gap:10px;padding:18px 0 0 28px}
-  .phones::before{left:22px;top:0;bottom:30px;height:auto}
-  .phones::after{display:none}
-  .mini{justify-items:start}
-  .mini::before{top:50%;left:-6px;width:14px;height:0;border-left:0;border-top:1.5px solid var(--line-2)}
-  .mini-phone{max-width:none;width:100%;height:auto;border-radius:14px;padding:3px}
-  .mini-screen{border-radius:11px;padding:8px}
-  .mini-screen .bub{justify-self:end;max-width:92%}
-  .tiles{grid-template-columns:1fr;margin-top:40px}
-  .tiles li{padding:18px 0;border-bottom:1px solid var(--line)}
-  /* compare: one panel at a time behind a segmented toggle (JS only; without JS both panels stack) */
-  .js .seg{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sand);border:1px solid var(--line)}
-  .seg button{min-height:44px;border:0;border-radius:10px;background:transparent;font:600 14px/1.2 var(--sans);color:var(--body);cursor:pointer;padding:0 8px}
-  .seg button[aria-pressed="true"]{background:var(--paper);color:var(--head);box-shadow:0 1px 2px rgba(42,42,53,.12),0 0 0 1px var(--line)}
-  .cmp{grid-template-columns:1fr;margin-top:32px}
-  .js .cmp{margin-top:12px}
-  .js .cmp-col:not(.on){display:none}
-  .cmp-col{padding:20px 20px 6px}
-  .cmp li{font-size:16px;min-height:54px}
-  /* how: vertical */
-  .flow-host{margin-top:40px}
-  .flow{grid-template-columns:1fr;gap:28px;padding-left:0}
-  .flow::before{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto}
-  .node{grid-template-columns:56px 1fr;justify-items:start;text-align:left;column-gap:18px;row-gap:10px;align-items:center}
-  .node b{max-width:none}
-  .node .chips{grid-column:2;justify-content:flex-start}
-  .flow-cap{margin-top:36px;align-items:flex-start}
-  /* calendar list */
-  .appts{justify-self:stretch}
-  .appt{grid-template-columns:36px 1fr auto;padding:12px 12px 12px 10px;column-gap:10px}
-  .appt-ico{width:36px;height:36px;border-radius:10px}
-  .appt b{font-size:15px}
-  .appt .meta{font-size:14px}
-  .appt .when{font-size:0;gap:0} /* icon only on phones; the word stays for screen readers */
-  .appt .when .ico{width:18px;height:18px}
-  /* results bento */
-  .bento{grid-template-columns:1fr}
-  .b-cell,.b-cell.big{grid-column:auto;grid-row:auto;padding:24px}
-  .b-cell.big{gap:18px}
-  /* pay stepper: vertical */
-  .stepper{grid-template-columns:1fr;margin-top:40px;row-gap:28px}
-  .step{grid-template-columns:32px 1fr;justify-items:start;text-align:left;column-gap:16px;row-gap:2px;padding:0}
-  .ind{grid-row:span 2;margin:0}
-  .step::after{top:40px;bottom:-22px;left:15px;right:auto;width:2px;height:auto}
-  .step[data-state="current"]::after{background:repeating-linear-gradient(180deg,var(--line-strong) 0 6px,transparent 6px 12px)}
-  .st-t{padding-top:4px}
-  .seats{gap:5px}
-  .seats i{border-radius:7px}
-  .map{padding:18px 14px}
-  .map-label{font-size:14px;padding:9px 13px}
-  .faq-list details p{padding-right:0}
-  .inline-q{padding:20px}
+  .week{grid-template-columns:minmax(0,1fr)}
+  .day,.day:nth-child(even){grid-template-columns:96px minmax(0,1fr);grid-template-rows:none;column-gap:var(--s-16);row-gap:var(--s-8);padding:var(--s-16);border-left:0;border-top:1px solid var(--line)}
+  .day:first-child{border-top:0}
+  .day:nth-child(2){border-top:1px solid var(--line)}
+  .day:last-child{grid-column:auto}
+  .day > *{grid-column:2}
+  .day .t-label{border-bottom:0;padding-bottom:0}
+  .day svg{grid-column:1;grid-row:1 / span 3;width:96px;height:58px;margin-block:0}
+  .vs li{min-height:56px;gap:var(--s-12)}
+  .cal li{grid-template-columns:40px minmax(0,1fr);padding-inline:var(--s-16);column-gap:var(--s-12)}
+  .cal-h{padding-inline:var(--s-16)}
+  .ev{grid-template-columns:minmax(0,1fr)}
+  .ev .ok{grid-row:auto}
+  .ev .meta{display:flex;flex-wrap:wrap;gap:var(--s-4)}
+  .meta > span{padding:0 var(--s-8);border-radius:999px;border:1px solid rgba(42,42,53,.18)}
+  .meta > span + span::before{content:none}
+  .stage{height:340px}
+  .stage .book{left:var(--s-16);top:var(--s-40);width:176px;height:236px}
+  .page{width:150px;height:200px}
+  .page.p1{right:var(--s-12)}
+  .page.p2{right:var(--s-48);top:var(--s-64)}
+  .work{grid-template-columns:minmax(0,1fr);margin-top:var(--s-32)}
+  .work > .tag{top:calc(var(--s-32) * -1)}
+  .stages{grid-template-columns:minmax(0,1fr);row-gap:var(--s-32)}
+  .stage-i{padding-top:0;padding-left:var(--s-64);min-height:40px}
+  .stage-i::before{top:40px;bottom:calc(var(--s-32) * -1);left:19px;right:auto;width:2px;height:auto}
+  .stage-i:last-child::before{display:none}
   .two{grid-template-columns:1fr}
-  .report{padding:4px 18px}
+  .report{padding:var(--s-4) var(--s-16)}
+  .quiz-body{padding-inline:var(--s-16)}
 }
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
+  *,*::before,*::after{animation:none!important}
+  .btn,.opt,.opt-d,.piece .frame{transition-property:background-color,border-color,color,box-shadow!important}
 }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="p-win" width="10" height="12" patternUnits="userSpaceOnUse"><rect x="2" y="3" width="5" height="6" fill="#FFFDF7" opacity=".6"/></pattern>
+    <pattern id="p-win2" width="8" height="10" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="4" height="5" fill="#2A2A35" opacity=".22"/></pattern>
+  </defs>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
-  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
-  <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
-  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
-  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
-  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5.6 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
-  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></symbol>
-  <symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M12 9 5 15v6M12 9l7 6v6M12 9v12"/></symbol>
-  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/></symbol>
-  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+  <!-- thumbnails for the team column -->
+  <symbol id="t-ad" viewBox="0 0 24 24"><rect x="3" y="2.5" width="18" height="19" rx="2.5"/><circle cx="7" cy="6.5" r="1.6"/><rect x="5.5" y="10" width="13" height="7" rx="1" fill="currentColor" fill-opacity=".18"/></symbol>
+  <symbol id="t-report" viewBox="0 0 24 24"><path d="M14 2.5H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.5z"/><path d="M14 2.5v6h6"/><path d="m8.5 15 2.5 2.5 4.5-5"/></symbol>
+
+  <!-- illustrations (drawn, no photos) -->
+  <symbol id="art-condo" viewBox="0 0 240 150" preserveAspectRatio="xMidYMid slice">
+    <rect width="240" height="150" fill="#EFEBDD"/>
+    <circle cx="192" cy="34" r="14" fill="#FFFDF7"/>
+    <path d="M0 100 40 72l30 16 40-30 40 26 40-20 50 28v58H0z" fill="#E2DDCC"/>
+    <rect x="28" y="56" width="42" height="94" fill="#4A4A58"/><rect x="28" y="56" width="42" height="94" fill="url(#p-win)"/>
+    <rect x="80" y="26" width="52" height="124" fill="#2A2A35"/><rect x="80" y="26" width="52" height="124" fill="url(#p-win)"/>
+    <rect x="142" y="62" width="40" height="88" fill="#6B6B78"/><rect x="142" y="62" width="40" height="88" fill="url(#p-win)"/>
+    <rect x="190" y="88" width="30" height="62" fill="#8A8577"/><rect x="190" y="88" width="30" height="62" fill="url(#p-win)"/>
+    <circle cx="16" cy="134" r="12" fill="#B9B39F"/><circle cx="226" cy="136" r="10" fill="#B9B39F"/>
+    <rect y="140" width="240" height="10" fill="#D6D1C1"/>
+  </symbol>
+  <symbol id="art-house" viewBox="0 0 240 150" preserveAspectRatio="xMidYMid slice">
+    <rect width="240" height="150" fill="#EFEBDD"/>
+    <circle cx="44" cy="36" r="12" fill="#FFFDF7"/>
+    <path d="M60 78 120 36l60 42z" fill="#2A2A35"/>
+    <rect x="70" y="76" width="100" height="64" fill="#FFFDF7"/>
+    <rect x="110" y="104" width="20" height="36" fill="#4A4A58"/>
+    <rect x="80" y="90" width="20" height="18" fill="#D6D1C1"/><rect x="140" y="90" width="20" height="18" fill="#D6D1C1"/>
+    <circle cx="200" cy="112" r="20" fill="#B9B39F"/><rect x="198" y="120" width="4" height="22" fill="#8A8577"/>
+    <rect y="140" width="240" height="10" fill="#D6D1C1"/>
+  </symbol>
 </svg>
 
 <div id="page">
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/" aria-label="ZippyScale home"><img src="assets/logo-light.png" alt="ZippyScale" width="98" height="28"></a>
-    <a class="btn btn-sm" href="#fit" data-open-quiz>See if you qualify</a>
+    <div><a class="btn btn-sm" href="#fit" data-open-quiz>See if you qualify</a><noscript><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript></div>
   </div>
 </header>
 
 <main>
 <section class="hero" data-s="hero">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">For solo realtors with 6+ closings a year</p>
-      <h1>Buyers and sellers, booked on your calendar</h1>
-      <p class="lede">People in your city planning to buy or sell in 60&nbsp;to&nbsp;90&nbsp;days. You take the call.</p>
+    <div class="hero-head">
+      <p class="icp">For solo realtors with <mark>6+ closings</mark> a year</p>
+      <h1>We're your marketing team.<br class="br"> You meet the buyers and sellers.</h1>
+    </div>
+    <div class="split">
+    <div class="hero-copy">
+      <p class="lede">We build your city guides and run ads in your name. People moving in 60&nbsp;to&nbsp;90&nbsp;days book a call on your calendar.</p>
       <div class="cta">
         <a class="btn" href="#fit" data-open-quiz>See if you qualify <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <p class="micro">2 minutes · one realtor per city</p>
+        <noscript><br><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript>
+        <p class="micro sep"><span>2 minutes</span> <span>one realtor per city</span></p>
       </div>
     </div>
 
-    <figure class="mock" style="margin-block:0">
+    <figure class="collage" aria-label="Example of the work: your ad, your guide and a booked call on your calendar">
       <span class="tag">Example</span>
-      <div class="phone">
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="contact" aria-hidden="true">
-            <span class="avatar"><svg class="ico"><use href="#i-user"/></svg></span>
-            <span class="bars"><i></i><i></i></span>
-          </div>
-          <div class="thread">
-            <div class="qcard">
-              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>First condo</span>
-              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>60 to 90 days</span>
-              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>Pre-approved</span>
-            </div>
-            <p class="bub out">Hi Priya, your Burnaby condo guide is ready. Chat Thursday at 10:30?</p>
-            <p class="bub in">Thursday works.</p>
-          </div>
-          <div class="inputbar" aria-hidden="true"></div>
+      <div class="book">
+        <div class="cover">
+          <div class="cover-top"><b>First Condo Guide</b><span class="t-label">Burnaby 2026</span></div>
+          <svg aria-hidden="true"><use href="#art-condo"/></svg>
+          <p class="byline">Your name</p>
         </div>
       </div>
-      <div class="cal">
-        <div class="cal-head" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg><i></i><i></i></div>
-        <div class="agenda">
-          <div class="slot-line" aria-hidden="true"><span class="busy"></span></div>
-          <div class="event">
-            <b>Thu 10:30</b>
-            <span>Buyer call · Priya S.</span>
-            <span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
-          </div>
-          <div class="slot-line" aria-hidden="true"></div>
+      <article class="ad">
+        <div class="ad-head">
+          <span class="avatar" aria-hidden="true"><svg class="ico"><use href="#i-person"/></svg></span>
+          <p class="ad-who"><b>Your name, REALTOR®</b><span>Sponsored</span></p>
         </div>
+        <p class="ad-text">First condo in Burnaby? Get my free 2026 guide.</p>
+        <div class="ad-img"><svg aria-hidden="true"><use href="#art-condo"/></svg></div>
+        <div class="ad-foot" aria-hidden="true">
+          <span class="icons"><svg class="ico"><use href="#i-heart"/></svg><svg class="ico"><use href="#i-msg"/></svg></span>
+          <span class="go"><svg class="ico"><use href="#i-arrow"/></svg></span>
+        </div>
+      </article>
+      <div class="day-card">
+        <p class="dh"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="t-label">Thu</span></p>
+        <div class="hours" aria-hidden="true"><i></i></div>
+        <div class="event">
+          <p><b>10:30 Buyer call</b><span>Priya S.</span></p>
+          <svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2A2A35"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#D5EB4B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hours" aria-hidden="true"><i></i></div>
       </div>
     </figure>
+    </div>
   </div>
 </section>
 
 <section class="proof" data-s="proof" aria-label="Track record">
   <div class="wrap">
     <ul>
-      <li><b>Since 2023</b><span>in real estate</span></li>
+      <li><b>Since 2023</b><span>in real estate marketing</span></li>
       <li><b>$130k+</b><span>real estate ad spend managed</span></li>
-      <li><b>$250 <small>to</small> $70</b><span>per qualified appointment, coaching client</span></li>
+      <li><b>$2M+</b><span>realtor GCI tracked</span></li>
     </ul>
   </div>
 </section>
@@ -566,50 +683,64 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 <section class="sec" data-s="problem">
   <div class="wrap">
     <div class="sec-head"><h2>Referrals worked until this year</h2></div>
-    <div class="fan">
-      <p class="lead-node"><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>New lead · 11:04 pm</p>
-      <ul class="phones">
-        <li class="mini" style="--i:0"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini" style="--i:1"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini" style="--i:2"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini" style="--i:3"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini" style="--i:4"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-      </ul>
-    </div>
-    <ul class="tiles">
-      <li><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg>Your sphere went quiet</li>
-      <li><svg class="ico" aria-hidden="true"><use href="#i-split"/></svg>One lead, five realtors</li>
-      <li><svg class="ico" aria-hidden="true"><use href="#i-video"/></svg>Content that goes nowhere</li>
-    </ul>
+    <ol class="week">
+      <li class="day">
+        <span class="t-label">Mon</span>
+        <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><path d="M28 30h64l12 22H16z" fill="#F5F2E8"/><path d="M16 52h88v12H16z" fill="#EFEBDD"/><path d="M34 30V14h52v16" stroke-dasharray="4 4" stroke="#8A8577"/></svg>
+        <h3>Your sphere went quiet</h3>
+        <p>You did the <span class="nw">pop-bys</span>. Your past clients aren't moving this year.</p>
+      </li>
+      <li class="day">
+        <span class="t-label">Tue</span>
+        <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><rect x="36" y="6" width="48" height="62" rx="2" fill="#FFFFFF"/><circle cx="60" cy="24" r="7" fill="#EFEBDD"/><path d="M50 40a10 10 0 0 1 20 0"/><g fill="#F5F2E8"><rect x="12" y="38" width="34" height="22" rx="2" transform="rotate(-18 29 49)"/><rect x="24" y="44" width="34" height="22" rx="2" transform="rotate(-8 41 55)"/><rect x="43" y="46" width="34" height="22" rx="2"/><rect x="62" y="44" width="34" height="22" rx="2" transform="rotate(8 79 55)"/><rect x="74" y="38" width="34" height="22" rx="2" transform="rotate(18 91 49)"/></g></svg>
+        <h3>One lead, five realtors</h3>
+        <p>You call the brokerage lead at 8am. Four realtors got there first.</p>
+      </li>
+      <li class="day">
+        <span class="t-label">Wed</span>
+        <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><path d="M14 22h30l6 6h56v40H14z" fill="#F5F2E8"/><rect x="60" y="4" width="40" height="40" rx="2" fill="#EEF6BE" transform="rotate(6 80 24)"/><path d="M75 18a6 6 0 1 1 8.5 5.5c-2 .9-2.5 2-2.5 4.5" stroke-width="2" stroke-linecap="round"/><circle cx="81" cy="34" r="1.2" fill="#1A1A2E"/></svg>
+        <h3>Post every day, they said</h3>
+        <p>Your broker wants a post a day. You've got showings all evening.</p>
+      </li>
+      <li class="day">
+        <span class="t-label">Thu</span>
+        <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><path d="M16 6h44v60l-5.5-4-5.5 4-5.5-4-5.5 4-5.5-4-5.5 4-5.5-4-5.5 4z" fill="#FFFFFF"/><circle cx="38" cy="30" r="12" stroke="#6B7C10" stroke-width="2"/><path d="m32 30 4 4 8-8" stroke="#6B7C10" stroke-width="2" stroke-linecap="round"/><rect x="72" y="14" width="32" height="52" rx="6" fill="#2A2A35"/><rect x="77" y="20" width="22" height="36" rx="2" fill="#4A4A58" stroke="none"/></svg>
+        <h3>Paid for, never answered</h3>
+        <p>You paid for the lead. They don't remember filling out the form.</p>
+      </li>
+      <li class="day">
+        <span class="t-label">Fri</span>
+        <svg viewBox="0 0 120 72" aria-hidden="true" fill="none" stroke="#1A1A2E" stroke-width="1.5" stroke-linejoin="round"><rect x="34" y="6" width="60" height="38" rx="2" fill="#EFEBDD" transform="rotate(-6 64 25)"/><rect x="26" y="16" width="60" height="38" rx="2" fill="#F5F2E8" transform="rotate(4 56 35)"/><rect x="30" y="28" width="60" height="38" rx="2" fill="#FFFFFF"/><path d="m30 28 30 22 30-22"/></svg>
+        <h3>Ten pitches a day</h3>
+        <p>Every one promises leads. None of them know your city.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<section class="sec" data-s="different" style="padding-top:0">
+<section class="sec" data-s="different">
   <div class="wrap">
-    <div class="sec-head"><h2>Qualified before your phone rings</h2></div>
-    <div class="seg" role="group" aria-label="Compare">
-      <button type="button" aria-pressed="false" aria-controls="cmp-them" data-side="them">Leads you're handed</button>
-      <button type="button" aria-pressed="true" aria-controls="cmp-us" data-side="us">With ZippyScale</button>
-    </div>
-    <div class="cmp">
-      <div class="cmp-col them" id="cmp-them">
-        <h3 class="cmp-h"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Leads you're handed</h3>
+    <div class="sec-head"><h2>Stop chasing internet forms</h2></div>
+    <div class="vs">
+      <div class="vs-col them">
+        <h3 class="vs-h">Buying leads</h3>
         <ul>
-          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Sent to several realtors</li>
-          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Filled out at 11pm, forgotten</li>
-          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You chase them for days</li>
-          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Post content every day</li>
-          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You pay for every form</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Sold to other realtors too</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>A name and a phone number</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>You chase them for days</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>You make the content</li>
         </ul>
       </div>
-      <div class="cmp-col us on" id="cmp-us">
-        <h3 class="cmp-h"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>With ZippyScale</h3>
+      <div class="vs-col us">
+        <div class="vs-h">
+          <span class="team" aria-hidden="true"><span><svg class="ico"><use href="#i-person"/></svg></span><span><svg class="ico"><use href="#i-person"/></svg></span><span><svg class="ico"><use href="#i-person"/></svg></span></span>
+          <h3>Your ZippyScale team</h3>
+        </div>
         <ul>
-          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>One realtor per city</li>
-          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Answered qualifying questions first</li>
-          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>They book a time</li>
-          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>We make guides and ads</li>
-          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Mostly paid after they show</li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-ad"/></svg></span>Your name on every ad</li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-report"/></svg></span><span>Their timeline and <span class="nw">pre-approval</span></span></li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg></span>We follow up until they book</li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-book"/></svg></span>We write your guides and ads</li>
         </ul>
       </div>
     </div>
@@ -622,131 +753,178 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <h2>How new people find you</h2>
       <p class="sub">Live within 7 days of signing.</p>
     </div>
-    <div class="flow-host">
-    <ol class="flow">
-      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-book"/></svg></span><b>Your city's guide</b>
-        <span class="chips"><span class="chip-d">Relocation</span><span class="chip-d">Presale</span><span class="chip-d">Market snapshot</span><span class="chip-d">Home evaluation</span></span></li>
-      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-megaphone"/></svg></span><b>Ads with you teaching</b></li>
-      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-quiz"/></svg></span><b>Quiz and personal report</b></li>
-      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-msg"/></svg></span><b>Text, email, AI call</b></li>
-      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg></span><b>On your calendar</b></li>
-    </ol>
+    <div class="board">
+      <ol class="steps">
+        <li class="step">
+          <span class="who we">We</span>
+          <h3>Write your city guide</h3>
+          <div class="art" aria-hidden="true"><div class="mini-book"><svg><use href="#art-condo"/></svg><span></span></div></div>
+          <span class="stop" aria-hidden="true"></span>
+        </li>
+        <li class="step">
+          <span class="who we">We</span>
+          <h3>Run ads in your name</h3>
+          <div class="art" aria-hidden="true"><div class="mini-ad"><p class="h"><i></i><svg class="ico"><use href="#i-heart"/></svg></p><svg><use href="#art-condo"/></svg></div></div>
+          <span class="stop" aria-hidden="true"></span>
+        </li>
+        <li class="step">
+          <span class="who they">They</span>
+          <h3>Ask for your guide</h3>
+          <div class="art" aria-hidden="true"><div class="lp"><div class="lp-cover"><svg><use href="#art-house"/></svg></div><div class="lp-form"><span class="in"><svg class="ico"><use href="#i-person"/></svg></span><span class="in"><svg class="ico"><use href="#i-clock"/></svg></span><span class="go"><svg class="ico"><use href="#i-arrow"/></svg></span></div></div></div>
+          <span class="stop" aria-hidden="true"></span>
+        </li>
+        <li class="step">
+          <span class="who we">We</span>
+          <h3>Follow up until they book</h3>
+          <div class="art"><p class="confirmed"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2A2A35"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#D5EB4B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed</p></div>
+          <span class="stop" aria-hidden="true"></span>
+        </li>
+        <li class="step">
+          <span class="who you">You</span>
+          <h3>Take the call</h3>
+          <div class="art" aria-hidden="true"><div class="mini-cal"><span></span><span></span><span></span><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+          <span class="stop"><span class="buyer" role="group" aria-label="A buyer, booked"><span class="avatar" aria-hidden="true"><svg class="ico"><use href="#i-person"/></svg></span><span class="badge">Booked</span></span></span>
+        </li>
+      </ol>
+      <div class="board-foot">
+        <ul class="chips" aria-label="Guides we write">
+          <li>Relocation</li><li>Presale</li><li>Market snapshot</li><li>Home evaluation</li>
+        </ul>
+        <span class="tag">Example</span>
+      </div>
     </div>
-    <p class="flow-cap"><svg class="ico" aria-hidden="true"><use href="#i-sheet"/></svg>Every lead lands in a Google Sheet you both see.</p>
   </div>
 </section>
 
 <section class="sec" data-s="calendar">
   <div class="wrap split">
-    <div class="sec-head">
-      <h2>Moving within 90 days</h2>
-      <p class="sub">Their answers come with every booking.</p>
+    <div>
+      <div class="sec-head">
+        <h2>Moving within 90 days</h2>
+        <p class="sub">Every booking comes with their answers.</p>
+      </div>
+      <div class="report-card" role="group" aria-label="Example report a buyer receives">
+        <p class="rh"><b>Burnaby report</b><span>Your name</span></p>
+        <div class="r-body" aria-hidden="true"><svg><use href="#art-condo"/></svg><span class="r-icons"><svg class="ico"><use href="#i-home"/></svg><svg class="ico"><use href="#i-clock"/></svg><svg class="ico"><use href="#i-shield"/></svg></span></div>
+      </div>
     </div>
-    <ul class="appts" aria-label="Booked appointments, example">
-      <li class="appt" style="--i:0">
-        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
-        <b>First-time buyer</b>
-        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
-        <span class="meta">Burnaby, 60 to 90 days, pre-approved</span>
-      </li>
-      <li class="appt" style="--i:1">
-        <span class="appt-ico alt" aria-hidden="true"><svg class="ico"><use href="#i-note"/></svg></span>
-        <b>Seller, home evaluation</b>
-        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
-        <span class="meta">Richmond downsizer, 90 days</span>
-      </li>
-      <li class="appt" style="--i:2">
-        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
-        <b>Move-up buyer</b>
-        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
-        <span class="meta">Surrey, 60 days, pre-approved</span>
-      </li>
-      <li class="appt" style="--i:3">
-        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
-        <b>Presale buyer</b>
-        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
-        <span class="meta">Coquitlam, 90 days, pre-approved</span>
-      </li>
-    </ul>
+    <figure class="cal" aria-label="Example week of booked calls in Burnaby">
+      <figcaption class="cal-h"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="tag">Example</span></figcaption>
+      <ol>
+        <li><span class="d t-label">Mon</span></li>
+        <li><span class="d t-label">Tue</span>
+          <div class="ev" style="--i:0"><b>Seller</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>downsizing</span> <span>home evaluation</span> <span>90 days</span></p></div></li>
+        <li><span class="d t-label">Wed</span></li>
+        <li><span class="d t-label">Thu</span>
+          <div class="ev hot" style="--i:1"><b>First-time buyer</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>Metrotown condo</span> <span>90 days</span> <span>pre-approved</span></p></div>
+          <p class="remind">Reminder: Thu 10:30</p></li>
+        <li><span class="d t-label">Fri</span>
+          <div class="ev" style="--i:3"><b>Move-up buyer</b><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span><p class="meta"><span>condo to townhouse</span> <span>60 days</span> <span>pre-approved</span></p></div></li>
+      </ol>
+    </figure>
   </div>
 </section>
 
-<section class="sec" data-s="results" style="padding-top:0">
+<section class="sec results" data-s="results">
   <div class="wrap">
-    <div class="sec-head"><h2>Real estate ads since 2023</h2></div>
-    <div class="bento">
-      <article class="b-cell big">
-        <div><p class="n">$2M+</p><p class="l">GCI tracked</p></div>
-        <p class="s">A Vancouver commercial realtor. Ads and content for about two years. $25 leads.</p>
-      </article>
-      <article class="b-cell">
-        <p class="n">$1k to $10k</p>
-        <p class="l">monthly ad spend</p>
-        <p class="s">A Toronto real estate coaching brand. Revenue to $40k a month.</p>
-      </article>
-      <article class="b-cell">
-        <p class="n">Hundreds</p>
-        <p class="l">of realtors</p>
-        <p class="s">Our ads ran for them through real estate coaching programs. Plus realtor events and LinkedIn outreach.</p>
-      </article>
+    <div class="sec-head"><h2>Real estate marketing since 2023</h2></div>
+    <div class="split">
+      <div class="guide-feature">
+        <div class="stage" aria-hidden="true">
+          <div class="page p1"><svg viewBox="0 0 150 200" fill="none" stroke="#2A2A35" stroke-width="3" stroke-linecap="square"><path d="M8 8h134v184H8z"/><path d="M8 92h58M92 92h50M66 8v48M66 76v16M92 92v58M92 172v20M8 140h40" stroke-width="2.5"/><path d="M66 56a20 20 0 0 1 20 20" stroke-width="1.5" stroke="#8A8577"/><path d="M92 150a22 22 0 0 1 22 22" stroke-width="1.5" stroke="#8A8577"/><rect x="100" y="16" width="34" height="22" rx="3" stroke-width="1.5" stroke="#8A8577"/><rect x="16" y="104" width="28" height="28" rx="14" stroke-width="1.5" stroke="#8A8577"/><path d="M112 60h22v24h-22z" fill="#EFEBDD" stroke-width="1.5" stroke="#8A8577"/></svg></div>
+          <div class="page p2"><svg viewBox="0 0 150 200" fill="none"><rect width="150" height="200" fill="#F5F2E8"/><path d="M0 60 150 40M0 130l150-30M40 0l20 200M104 0l-10 200" stroke="#FFFFFF" stroke-width="8"/><path d="M0 170c40-10 80 10 150-6" stroke="#D6D1C1" stroke-width="10"/><g stroke="#2A2A35" stroke-width="1.5"><path d="M76 92c0 12-12 22-12 22s-12-10-12-22a12 12 0 0 1 24 0z" fill="#2A2A35"/><circle cx="64" cy="92" r="4" fill="#F5F2E8"/><path d="M120 58c0 9-9 16-9 16s-9-7-9-16a9 9 0 0 1 18 0z" fill="#FFFFFF"/><path d="M34 138c0 9-9 16-9 16s-9-7-9-16a9 9 0 0 1 18 0z" fill="#FFFFFF"/></g></svg></div>
+          <div class="book">
+            <div class="cover">
+              <div class="cover-top"><b><span class="nw">Pre-Construction</span> Buyer's Guide</b></div>
+              <svg><use href="#art-house"/></svg>
+            </div>
+          </div>
+        </div>
+        <p class="guide-cap small"><b>A pre-construction buyer's guide we wrote</b><span>Client names kept private.</span></p>
+      </div>
+      <div class="work">
+        <span class="tag">Example</span>
+        <article class="piece">
+          <div class="frame dk" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#2A2A35"/><rect x="40" y="36" width="96" height="112" fill="#4A4A58"/><rect x="40" y="36" width="96" height="112" fill="url(#p-win)"/><rect x="136" y="72" width="64" height="76" fill="#6B6B78"/><rect x="146" y="112" width="44" height="36" fill="#EFEBDD"/><rect x="0" y="148" width="240" height="20" fill="#33333F"/><circle cx="120" cy="84" r="22" fill="#FFFDF7"/><path d="m114 73 18 11-18 11z" fill="#2A2A35"/><rect x="16" y="156" width="208" height="4" rx="2" fill="#44444F"/><rect x="16" y="156" width="92" height="4" rx="2" fill="#D5EB4B"/></svg></div>
+          <b>$25 leads</b>
+          <p>Two years of ads and content for a Vancouver commercial realtor.</p>
+        </article>
+        <article class="piece">
+          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><rect x="48" y="12" width="144" height="156" rx="10" fill="#FFFFFF" stroke="#E7E3D6"/><circle cx="66" cy="30" r="8" fill="#EFEBDD" stroke="#D6D1C1"/><use href="#art-house" x="48" y="46" width="144" height="88"/><rect x="60" y="142" width="120" height="16" rx="8" fill="#2A2A35"/></svg></div>
+          <b>$250 to $70</b>
+          <p>Cost per qualified appointment, real estate client, Metro Vancouver.</p>
+        </article>
+        <article class="piece">
+          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><rect x="36" y="16" width="168" height="140" rx="10" fill="#FFFFFF" stroke="#E7E3D6"/><rect x="36" y="16" width="168" height="26" rx="10" fill="#2A2A35"/><rect x="36" y="32" width="168" height="10" fill="#2A2A35"/><g fill="#EFEBDD"><circle cx="58" cy="60" r="7"/><circle cx="84" cy="60" r="7"/><circle cx="110" cy="60" r="7"/><circle cx="136" cy="60" r="7"/><circle cx="162" cy="60" r="7"/><circle cx="188" cy="60" r="7"/><circle cx="58" cy="84" r="7"/><circle cx="84" cy="84" r="7"/><circle cx="110" cy="84" r="7"/><circle cx="136" cy="84" r="7"/><circle cx="162" cy="84" r="7"/><circle cx="188" cy="84" r="7"/><circle cx="58" cy="108" r="7"/><circle cx="84" cy="108" r="7"/><circle cx="110" cy="108" r="7"/><circle cx="136" cy="108" r="7"/><circle cx="162" cy="108" r="7"/><circle cx="188" cy="108" r="7"/><circle cx="58" cy="132" r="7"/><circle cx="84" cy="132" r="7"/><circle cx="110" cy="132" r="7"/></g><g fill="#4A4A58"><circle cx="84" cy="60" r="4"/><circle cx="136" cy="60" r="4"/><circle cx="162" cy="60" r="4"/><circle cx="58" cy="84" r="4"/><circle cx="110" cy="84" r="4"/><circle cx="188" cy="84" r="4"/><circle cx="84" cy="108" r="4"/><circle cx="136" cy="108" r="4"/><circle cx="162" cy="108" r="4"/><circle cx="58" cy="132" r="4"/><circle cx="110" cy="132" r="4"/></g></svg></div>
+          <b>Hundreds of realtors</b>
+          <p>Booked onto sales calls for real estate coaching programs we ran ads for.</p>
+        </article>
+        <article class="piece">
+          <div class="frame" aria-hidden="true"><svg viewBox="0 0 240 168" preserveAspectRatio="xMidYMid meet"><rect width="240" height="168" fill="#F5F2E8"/><path d="M72 8v34M100 8v34" stroke="#8A8577" stroke-width="2"/><rect x="44" y="40" width="84" height="112" rx="10" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><rect x="44" y="40" width="84" height="30" rx="10" fill="#2A2A35"/><rect x="44" y="60" width="84" height="10" fill="#2A2A35"/><circle cx="86" cy="100" r="16" fill="#EFEBDD" stroke="#D6D1C1"/><path d="M74 132a12 12 0 0 1 24 0" stroke="#8A8577" stroke-width="1.5" fill="none"/><rect x="140" y="72" width="80" height="54" rx="12" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><path d="m140 126 0 14 14-14" fill="#FFFFFF" stroke="#D6D1C1" stroke-width="1.5"/><path d="m156 88 24 16 24-16" stroke="#4A4A58" stroke-width="2" fill="none"/><rect x="156" y="88" width="48" height="28" rx="3" stroke="#4A4A58" stroke-width="2" fill="none"/></svg></div>
+          <b>Events and LinkedIn</b>
+          <p>Realtor events, plus LinkedIn outreach for a commercial realtor.</p>
+        </article>
+      </div>
     </div>
-    <p class="res-note">Client names kept private.</p>
   </div>
 </section>
 
-<section class="sec" data-s="pay" style="padding-top:0">
+<section class="sec pay" data-s="pay">
   <div class="wrap">
     <div class="sec-head">
       <h2>Close to nothing upfront</h2>
-      <p class="sub">Most of our fee comes after qualified appointments show up. Details on the call.</p>
+      <p class="sub">You fund your own ads. Most of our fee comes after qualified appointments show up.</p>
     </div>
-    <ol class="stepper">
-      <li class="step" data-state="done"><span class="ind" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></span><span class="st-t">You sign</span><span class="st-d">Small start</span></li>
-      <li class="step" data-state="current" aria-current="step"><span class="ind" aria-hidden="true"></span><span class="st-t">Appointments show up</span><span class="st-d">Most of our fee</span></li>
-      <li class="step" data-state="next"><span class="ind" aria-hidden="true"></span><span class="st-t">You scale ads</span><span class="st-d">Only then we earn more</span></li>
+    <ol class="stages">
+      <li class="stage-i"><span class="num" aria-hidden="true"></span><b>You start</b><span>A small first payment</span></li>
+      <li class="stage-i"><span class="num" aria-hidden="true"></span><b>Appointments show up</b><span>Most of our fee</span></li>
+      <li class="stage-i"><span class="num" aria-hidden="true"></span><b>Your ads grow</b><span>Then we earn more</span></li>
     </ol>
+    <p class="micro">The call walks through the numbers.</p>
   </div>
 </section>
 
-<section class="sec" data-s="city" style="padding-top:0">
-  <div class="wrap city-grid">
+<section class="sec" data-s="city">
+  <div class="wrap split">
     <div>
       <div class="sec-head">
         <h2>One realtor per city</h2>
         <p class="sub">10 realtors, September to December. First come, first served.</p>
       </div>
-      <div class="seats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <ul class="fit">
         <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Solo realtor</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>6+ closings, past year</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ready to fund your ads</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>6+ closings in 12 months</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ready to fund your own ads</li>
       </ul>
     </div>
     <div class="map">
-      <svg viewBox="0 0 660 570" aria-hidden="true"><path d="M115 15h0M125 15h0M135 15h0M145 15h0M85 25h0M95 25h0M115 25h0M125 25h0M135 25h0M145 25h0M155 25h0M85 35h0M95 35h0M115 35h0M125 35h0M135 35h0M145 35h0M155 35h0M165 35h0M95 45h0M105 45h0M115 45h0M125 45h0M135 45h0M145 45h0M155 45h0M165 45h0M175 45h0M65 55h0M75 55h0M85 55h0M95 55h0M105 55h0M115 55h0M125 55h0M135 55h0M145 55h0M155 55h0M165 55h0M175 55h0M185 55h0M45 65h0M55 65h0M65 65h0M75 65h0M85 65h0M95 65h0M105 65h0M115 65h0M125 65h0M135 65h0M145 65h0M155 65h0M165 65h0M175 65h0M185 65h0M195 65h0M55 75h0M65 75h0M75 75h0M85 75h0M95 75h0M105 75h0M115 75h0M125 75h0M135 75h0M145 75h0M155 75h0M165 75h0M175 75h0M185 75h0M195 75h0M455 75h0M465 75h0M65 85h0M75 85h0M85 85h0M95 85h0M105 85h0M115 85h0M125 85h0M135 85h0M145 85h0M155 85h0M165 85h0M175 85h0M185 85h0M195 85h0M205 85h0M215 85h0M225 85h0M235 85h0M245 85h0M425 85h0M435 85h0M445 85h0M455 85h0M465 85h0M475 85h0M65 95h0M75 95h0M85 95h0M95 95h0M105 95h0M115 95h0M125 95h0M135 95h0M145 95h0M155 95h0M165 95h0M175 95h0M185 95h0M195 95h0M205 95h0M215 95h0M225 95h0M235 95h0M245 95h0M255 95h0M265 95h0M305 95h0M315 95h0M325 95h0M335 95h0M365 95h0M375 95h0M395 95h0M405 95h0M415 95h0M425 95h0M445 95h0M455 95h0M465 95h0M475 95h0M485 95h0M495 95h0M65 105h0M75 105h0M85 105h0M95 105h0M105 105h0M115 105h0M125 105h0M135 105h0M145 105h0M155 105h0M165 105h0M175 105h0M185 105h0M195 105h0M205 105h0M215 105h0M225 105h0M235 105h0M245 105h0M255 105h0M265 105h0M275 105h0M295 105h0M305 105h0M315 105h0M325 105h0M335 105h0M345 105h0M375 105h0M385 105h0M415 105h0M425 105h0M465 105h0M475 105h0M485 105h0M495 105h0M505 105h0M15 115h0M25 115h0M65 115h0M75 115h0M85 115h0M105 115h0M115 115h0M125 115h0M135 115h0M145 115h0M155 115h0M165 115h0M175 115h0M185 115h0M195 115h0M205 115h0M215 115h0M225 115h0M235 115h0M245 115h0M255 115h0M265 115h0M275 115h0M285 115h0M325 115h0M375 115h0M385 115h0M395 115h0M415 115h0M425 115h0M465 115h0M475 115h0M485 115h0M95 125h0M105 125h0M115 125h0M125 125h0M135 125h0M145 125h0M155 125h0M165 125h0M175 125h0M185 125h0M195 125h0M205 125h0M215 125h0M225 125h0M235 125h0M245 125h0M255 125h0M265 125h0M275 125h0M285 125h0M295 125h0M305 125h0M315 125h0M325 125h0M335 125h0M355 125h0M365 125h0M375 125h0M385 125h0M395 125h0M405 125h0M415 125h0M425 125h0M465 125h0M475 125h0M485 125h0M495 125h0M505 125h0M75 135h0M135 135h0M145 135h0M155 135h0M165 135h0M175 135h0M185 135h0M195 135h0M205 135h0M215 135h0M225 135h0M235 135h0M245 135h0M255 135h0M265 135h0M275 135h0M285 135h0M295 135h0M305 135h0M315 135h0M325 135h0M335 135h0M345 135h0M355 135h0M365 135h0M375 135h0M385 135h0M395 135h0M405 135h0M455 135h0M465 135h0M475 135h0M485 135h0M495 135h0M505 135h0M145 145h0M155 145h0M165 145h0M175 145h0M185 145h0M195 145h0M205 145h0M215 145h0M225 145h0M235 145h0M245 145h0M255 145h0M265 145h0M275 145h0M285 145h0M295 145h0M305 145h0M315 145h0M325 145h0M335 145h0M345 145h0M355 145h0M365 145h0M375 145h0M385 145h0M395 145h0M405 145h0M415 145h0M455 145h0M485 145h0M495 145h0M505 145h0M155 155h0M165 155h0M175 155h0M185 155h0M195 155h0M205 155h0M215 155h0M225 155h0M235 155h0M245 155h0M255 155h0M265 155h0M275 155h0M285 155h0M295 155h0M305 155h0M315 155h0M325 155h0M335 155h0M345 155h0M355 155h0M365 155h0M375 155h0M385 155h0M395 155h0M405 155h0M415 155h0M425 155h0M435 155h0M155 165h0M165 165h0M175 165h0M185 165h0M195 165h0M205 165h0M215 165h0M225 165h0M235 165h0M245 165h0M255 165h0M265 165h0M275 165h0M285 165h0M295 165h0M305 165h0M315 165h0M325 165h0M335 165h0M345 165h0M355 165h0M365 165h0M375 165h0M385 165h0M465 165h0M475 165h0M485 165h0M155 175h0M165 175h0M175 175h0M185 175h0M195 175h0M205 175h0M215 175h0M225 175h0M235 175h0M245 175h0M255 175h0M265 175h0M275 175h0M285 175h0M295 175h0M305 175h0M315 175h0M325 175h0M335 175h0M345 175h0M355 175h0M365 175h0M375 175h0M385 175h0M465 175h0M475 175h0M485 175h0M495 175h0M505 175h0M535 175h0M545 175h0M175 185h0M185 185h0M195 185h0M205 185h0M215 185h0M225 185h0M235 185h0M245 185h0M255 185h0M265 185h0M275 185h0M285 185h0M295 185h0M305 185h0M315 185h0M325 185h0M335 185h0M345 185h0M355 185h0M365 185h0M375 185h0M475 185h0M485 185h0M495 185h0M505 185h0M515 185h0M525 185h0M535 185h0M545 185h0M555 185h0M175 195h0M185 195h0M195 195h0M205 195h0M215 195h0M225 195h0M235 195h0M245 195h0M255 195h0M265 195h0M275 195h0M285 195h0M295 195h0M305 195h0M315 195h0M325 195h0M335 195h0M345 195h0M355 195h0M365 195h0M375 195h0M475 195h0M485 195h0M495 195h0M505 195h0M515 195h0M525 195h0M535 195h0M545 195h0M555 195h0M565 195h0M575 195h0M585 195h0M175 205h0M185 205h0M195 205h0M205 205h0M215 205h0M225 205h0M235 205h0M245 205h0M255 205h0M265 205h0M275 205h0M285 205h0M295 205h0M305 205h0M315 205h0M325 205h0M335 205h0M345 205h0M355 205h0M365 205h0M375 205h0M475 205h0M485 205h0M495 205h0M505 205h0M515 205h0M525 205h0M535 205h0M545 205h0M555 205h0M565 205h0M575 205h0M585 205h0M595 205h0M605 205h0M175 215h0M185 215h0M195 215h0M205 215h0M215 215h0M225 215h0M235 215h0M245 215h0M255 215h0M265 215h0M275 215h0M285 215h0M295 215h0M305 215h0M315 215h0M325 215h0M335 215h0M345 215h0M355 215h0M365 215h0M375 215h0M485 215h0M495 215h0M505 215h0M515 215h0M525 215h0M535 215h0M545 215h0M555 215h0M565 215h0M575 215h0M585 215h0M595 215h0M605 215h0M615 215h0M175 225h0M185 225h0M195 225h0M205 225h0M215 225h0M225 225h0M235 225h0M245 225h0M255 225h0M265 225h0M275 225h0M285 225h0M295 225h0M305 225h0M315 225h0M325 225h0M335 225h0M345 225h0M355 225h0M365 225h0M375 225h0M385 225h0M485 225h0M495 225h0M505 225h0M515 225h0M525 225h0M535 225h0M545 225h0M555 225h0M565 225h0M575 225h0M585 225h0M595 225h0M605 225h0M155 235h0M175 235h0M185 235h0M195 235h0M205 235h0M215 235h0M225 235h0M235 235h0M245 235h0M255 235h0M265 235h0M275 235h0M285 235h0M295 235h0M305 235h0M315 235h0M325 235h0M335 235h0M345 235h0M355 235h0M365 235h0M375 235h0M385 235h0M395 235h0M405 235h0M485 235h0M495 235h0M505 235h0M515 235h0M525 235h0M535 235h0M545 235h0M555 235h0M565 235h0M575 235h0M585 235h0M595 235h0M605 235h0M625 235h0M635 235h0M645 235h0M155 245h0M175 245h0M185 245h0M195 245h0M205 245h0M215 245h0M225 245h0M235 245h0M245 245h0M255 245h0M265 245h0M275 245h0M285 245h0M295 245h0M305 245h0M315 245h0M325 245h0M335 245h0M345 245h0M355 245h0M365 245h0M375 245h0M385 245h0M395 245h0M405 245h0M415 245h0M425 245h0M475 245h0M485 245h0M495 245h0M505 245h0M515 245h0M525 245h0M535 245h0M545 245h0M555 245h0M565 245h0M575 245h0M585 245h0M595 245h0M625 245h0M635 245h0M645 245h0M655 245h0M185 255h0M195 255h0M205 255h0M215 255h0M225 255h0M235 255h0M245 255h0M255 255h0M265 255h0M275 255h0M285 255h0M295 255h0M305 255h0M315 255h0M325 255h0M335 255h0M345 255h0M355 255h0M365 255h0M375 255h0M385 255h0M395 255h0M405 255h0M415 255h0M425 255h0M435 255h0M445 255h0M455 255h0M485 255h0M495 255h0M505 255h0M515 255h0M525 255h0M535 255h0M545 255h0M555 255h0M565 255h0M575 255h0M625 255h0M635 255h0M185 265h0M195 265h0M205 265h0M215 265h0M225 265h0M235 265h0M245 265h0M255 265h0M265 265h0M275 265h0M285 265h0M295 265h0M305 265h0M315 265h0M325 265h0M335 265h0M345 265h0M355 265h0M365 265h0M375 265h0M385 265h0M395 265h0M405 265h0M415 265h0M425 265h0M435 265h0M445 265h0M455 265h0M485 265h0M495 265h0M505 265h0M515 265h0M525 265h0M535 265h0M545 265h0M555 265h0M565 265h0M185 275h0M195 275h0M205 275h0M215 275h0M225 275h0M235 275h0M245 275h0M255 275h0M265 275h0M275 275h0M285 275h0M295 275h0M305 275h0M315 275h0M325 275h0M335 275h0M345 275h0M355 275h0M365 275h0M375 275h0M385 275h0M395 275h0M405 275h0M415 275h0M425 275h0M435 275h0M445 275h0M455 275h0M465 275h0M485 275h0M495 275h0M505 275h0M515 275h0M525 275h0M535 275h0M545 275h0M555 275h0M575 275h0M585 275h0M175 285h0M195 285h0M205 285h0M215 285h0M225 285h0M235 285h0M245 285h0M255 285h0M265 285h0M275 285h0M285 285h0M295 285h0M305 285h0M315 285h0M325 285h0M335 285h0M345 285h0M355 285h0M365 285h0M375 285h0M385 285h0M395 285h0M405 285h0M415 285h0M425 285h0M435 285h0M445 285h0M455 285h0M465 285h0M475 285h0M485 285h0M495 285h0M505 285h0M515 285h0M525 285h0M535 285h0M545 285h0M555 285h0M565 285h0M575 285h0M585 285h0M625 285h0M185 295h0M195 295h0M205 295h0M215 295h0M225 295h0M235 295h0M245 295h0M255 295h0M265 295h0M275 295h0M285 295h0M295 295h0M305 295h0M315 295h0M325 295h0M335 295h0M345 295h0M355 295h0M365 295h0M375 295h0M385 295h0M395 295h0M405 295h0M415 295h0M425 295h0M435 295h0M445 295h0M455 295h0M465 295h0M475 295h0M485 295h0M495 295h0M505 295h0M515 295h0M525 295h0M535 295h0M545 295h0M555 295h0M565 295h0M575 295h0M585 295h0M595 295h0M615 295h0M185 305h0M205 305h0M215 305h0M225 305h0M235 305h0M245 305h0M255 305h0M265 305h0M275 305h0M285 305h0M295 305h0M305 305h0M315 305h0M325 305h0M335 305h0M345 305h0M355 305h0M365 305h0M375 305h0M385 305h0M395 305h0M405 305h0M415 305h0M425 305h0M435 305h0M445 305h0M455 305h0M465 305h0M475 305h0M485 305h0M495 305h0M505 305h0M515 305h0M525 305h0M535 305h0M545 305h0M565 305h0M575 305h0M585 305h0M595 305h0M605 305h0M185 315h0M205 315h0M215 315h0M225 315h0M235 315h0M245 315h0M255 315h0M265 315h0M275 315h0M285 315h0M295 315h0M305 315h0M315 315h0M325 315h0M335 315h0M345 315h0M355 315h0M365 315h0M375 315h0M385 315h0M395 315h0M405 315h0M415 315h0M425 315h0M435 315h0M445 315h0M455 315h0M465 315h0M475 315h0M485 315h0M495 315h0M505 315h0M515 315h0M525 315h0M535 315h0M545 315h0M555 315h0M565 315h0M575 315h0M605 315h0M185 325h0M195 325h0M205 325h0M215 325h0M225 325h0M235 325h0M245 325h0M255 325h0M265 325h0M275 325h0M285 325h0M295 325h0M305 325h0M315 325h0M325 325h0M335 325h0M345 325h0M355 325h0M365 325h0M375 325h0M385 325h0M395 325h0M405 325h0M415 325h0M425 325h0M435 325h0M445 325h0M455 325h0M465 325h0M475 325h0M485 325h0M495 325h0M505 325h0M515 325h0M525 325h0M535 325h0M545 325h0M555 325h0M565 325h0M575 325h0M185 335h0M195 335h0M205 335h0M215 335h0M225 335h0M235 335h0M245 335h0M255 335h0M265 335h0M275 335h0M285 335h0M295 335h0M305 335h0M315 335h0M325 335h0M335 335h0M345 335h0M355 335h0M365 335h0M375 335h0M385 335h0M395 335h0M405 335h0M415 335h0M425 335h0M435 335h0M445 335h0M455 335h0M465 335h0M475 335h0M485 335h0M495 335h0M505 335h0M515 335h0M525 335h0M535 335h0M545 335h0M555 335h0M565 335h0M185 345h0M195 345h0M205 345h0M215 345h0M225 345h0M235 345h0M245 345h0M255 345h0M265 345h0M275 345h0M285 345h0M295 345h0M305 345h0M315 345h0M325 345h0M335 345h0M345 345h0M355 345h0M365 345h0M375 345h0M385 345h0M395 345h0M405 345h0M415 345h0M425 345h0M435 345h0M445 345h0M455 345h0M465 345h0M475 345h0M485 345h0M495 345h0M505 345h0M515 345h0M525 345h0M535 345h0M545 345h0M555 345h0M565 345h0M175 355h0M185 355h0M195 355h0M205 355h0M215 355h0M225 355h0M235 355h0M245 355h0M255 355h0M265 355h0M275 355h0M285 355h0M295 355h0M305 355h0M315 355h0M325 355h0M335 355h0M345 355h0M355 355h0M365 355h0M375 355h0M385 355h0M395 355h0M405 355h0M415 355h0M425 355h0M435 355h0M445 355h0M455 355h0M465 355h0M475 355h0M485 355h0M495 355h0M505 355h0M515 355h0M525 355h0M535 355h0M545 355h0M555 355h0M565 355h0M175 365h0M185 365h0M195 365h0M205 365h0M215 365h0M225 365h0M235 365h0M245 365h0M255 365h0M265 365h0M275 365h0M285 365h0M295 365h0M305 365h0M315 365h0M325 365h0M335 365h0M345 365h0M355 365h0M365 365h0M375 365h0M385 365h0M395 365h0M405 365h0M415 365h0M425 365h0M435 365h0M445 365h0M455 365h0M465 365h0M475 365h0M485 365h0M495 365h0M505 365h0M515 365h0M525 365h0M535 365h0M545 365h0M555 365h0M565 365h0M165 375h0M175 375h0M185 375h0M195 375h0M205 375h0M215 375h0M225 375h0M235 375h0M245 375h0M255 375h0M265 375h0M275 375h0M285 375h0M295 375h0M305 375h0M315 375h0M325 375h0M335 375h0M345 375h0M355 375h0M365 375h0M375 375h0M385 375h0M395 375h0M405 375h0M415 375h0M425 375h0M435 375h0M445 375h0M455 375h0M465 375h0M475 375h0M485 375h0M495 375h0M505 375h0M515 375h0M525 375h0M535 375h0M545 375h0M555 375h0M165 385h0M175 385h0M185 385h0M195 385h0M205 385h0M215 385h0M225 385h0M235 385h0M245 385h0M255 385h0M265 385h0M275 385h0M285 385h0M295 385h0M305 385h0M315 385h0M325 385h0M335 385h0M345 385h0M355 385h0M365 385h0M375 385h0M385 385h0M395 385h0M405 385h0M415 385h0M425 385h0M435 385h0M445 385h0M455 385h0M465 385h0M475 385h0M485 385h0M495 385h0M505 385h0M515 385h0M525 385h0M535 385h0M545 385h0M555 385h0M165 395h0M175 395h0M185 395h0M195 395h0M205 395h0M215 395h0M225 395h0M235 395h0M245 395h0M255 395h0M265 395h0M275 395h0M285 395h0M295 395h0M305 395h0M315 395h0M325 395h0M335 395h0M345 395h0M355 395h0M365 395h0M375 395h0M385 395h0M395 395h0M405 395h0M415 395h0M425 395h0M435 395h0M445 395h0M455 395h0M465 395h0M475 395h0M485 395h0M495 395h0M505 395h0M515 395h0M525 395h0M535 395h0M545 395h0M165 405h0M175 405h0M185 405h0M195 405h0M205 405h0M215 405h0M225 405h0M235 405h0M245 405h0M255 405h0M265 405h0M275 405h0M285 405h0M295 405h0M305 405h0M315 405h0M325 405h0M335 405h0M345 405h0M355 405h0M365 405h0M375 405h0M385 405h0M395 405h0M405 405h0M415 405h0M425 405h0M435 405h0M445 405h0M455 405h0M465 405h0M475 405h0M485 405h0M495 405h0M505 405h0M515 405h0M525 405h0M535 405h0M545 405h0M165 415h0M175 415h0M185 415h0M195 415h0M205 415h0M215 415h0M225 415h0M235 415h0M245 415h0M255 415h0M265 415h0M275 415h0M285 415h0M295 415h0M305 415h0M315 415h0M325 415h0M335 415h0M345 415h0M355 415h0M365 415h0M375 415h0M385 415h0M395 415h0M405 415h0M415 415h0M425 415h0M435 415h0M445 415h0M455 415h0M465 415h0M475 415h0M485 415h0M495 415h0M505 415h0M515 415h0M525 415h0M535 415h0M545 415h0M165 425h0M175 425h0M185 425h0M195 425h0M205 425h0M215 425h0M225 425h0M235 425h0M245 425h0M255 425h0M265 425h0M275 425h0M285 425h0M295 425h0M305 425h0M315 425h0M325 425h0M335 425h0M345 425h0M355 425h0M365 425h0M375 425h0M385 425h0M395 425h0M405 425h0M415 425h0M425 425h0M435 425h0M445 425h0M455 425h0M465 425h0M475 425h0M485 425h0M495 425h0M505 425h0M515 425h0M525 425h0M535 425h0M545 425h0M175 435h0M185 435h0M195 435h0M205 435h0M215 435h0M225 435h0M235 435h0M245 435h0M255 435h0M265 435h0M275 435h0M285 435h0M295 435h0M305 435h0M315 435h0M325 435h0M335 435h0M345 435h0M355 435h0M365 435h0M375 435h0M385 435h0M395 435h0M405 435h0M415 435h0M425 435h0M435 435h0M445 435h0M455 435h0M465 435h0M475 435h0M485 435h0M495 435h0M505 435h0M515 435h0M525 435h0M535 435h0M545 435h0M555 435h0M175 445h0M185 445h0M195 445h0M205 445h0M215 445h0M225 445h0M235 445h0M245 445h0M255 445h0M265 445h0M275 445h0M285 445h0M295 445h0M305 445h0M315 445h0M325 445h0M335 445h0M345 445h0M355 445h0M365 445h0M375 445h0M385 445h0M395 445h0M405 445h0M415 445h0M425 445h0M435 445h0M445 445h0M455 445h0M465 445h0M475 445h0M485 445h0M495 445h0M505 445h0M515 445h0M525 445h0M535 445h0M545 445h0M175 455h0M185 455h0M195 455h0M205 455h0M215 455h0M225 455h0M235 455h0M245 455h0M255 455h0M265 455h0M275 455h0M285 455h0M295 455h0M305 455h0M315 455h0M325 455h0M335 455h0M345 455h0M355 455h0M365 455h0M375 455h0M385 455h0M395 455h0M405 455h0M415 455h0M425 455h0M435 455h0M445 455h0M455 455h0M465 455h0M475 455h0M485 455h0M495 455h0M505 455h0M515 455h0M525 455h0M535 455h0M195 465h0M205 465h0M215 465h0M225 465h0M235 465h0M245 465h0M255 465h0M265 465h0M275 465h0M285 465h0M295 465h0M305 465h0M315 465h0M325 465h0M335 465h0M345 465h0M355 465h0M365 465h0M375 465h0M385 465h0M395 465h0M405 465h0M415 465h0M425 465h0M435 465h0M445 465h0M455 465h0M465 465h0M475 465h0M485 465h0M495 465h0M505 465h0M515 465h0M525 465h0M535 465h0M195 475h0M205 475h0M215 475h0M225 475h0M235 475h0M245 475h0M255 475h0M265 475h0M275 475h0M285 475h0M295 475h0M305 475h0M315 475h0M325 475h0M335 475h0M345 475h0M355 475h0M365 475h0M375 475h0M385 475h0M395 475h0M405 475h0M415 475h0M425 475h0M435 475h0M445 475h0M455 475h0M465 475h0M475 475h0M485 475h0M495 475h0M505 475h0M515 475h0M525 475h0M225 485h0M235 485h0M245 485h0M255 485h0M265 485h0M275 485h0M285 485h0M295 485h0M305 485h0M315 485h0M325 485h0M335 485h0M345 485h0M355 485h0M365 485h0M375 485h0M385 485h0M395 485h0M405 485h0M415 485h0M425 485h0M435 485h0M445 485h0M455 485h0M465 485h0M475 485h0M485 485h0M495 485h0M505 485h0M515 485h0M235 495h0M245 495h0M255 495h0M265 495h0M275 495h0M285 495h0M295 495h0M305 495h0M315 495h0M325 495h0M335 495h0M345 495h0M355 495h0M365 495h0M375 495h0M385 495h0M395 495h0M405 495h0M415 495h0M425 495h0M435 495h0M445 495h0M455 495h0M465 495h0M475 495h0M485 495h0M495 495h0M505 495h0M515 495h0M255 505h0M265 505h0M295 505h0M305 505h0M315 505h0M325 505h0M335 505h0M345 505h0M355 505h0M365 505h0M375 505h0M385 505h0M395 505h0M405 505h0M415 505h0M425 505h0M435 505h0M445 505h0M455 505h0M465 505h0M475 505h0M485 505h0M495 505h0M505 505h0M515 505h0M525 505h0M305 515h0M315 515h0M325 515h0M335 515h0M345 515h0M355 515h0M365 515h0M375 515h0M385 515h0M395 515h0M405 515h0M415 515h0M425 515h0M435 515h0M445 515h0M515 515h0M525 515h0M315 525h0M325 525h0M335 525h0M345 525h0M355 525h0M365 525h0M375 525h0M385 525h0M395 525h0M405 525h0M415 525h0M425 525h0M435 525h0M445 525h0M525 525h0M535 525h0M345 535h0M355 535h0M365 535h0M375 535h0M385 535h0M395 535h0M525 535h0M535 535h0M545 535h0M355 545h0M365 545h0M375 545h0M535 545h0M545 545h0M365 555h0M375 555h0M375 565h0" stroke="#2A2A35" stroke-opacity=".6" stroke-width="5.4" stroke-linecap="round" fill="none"/></svg>
+      <div class="map-dots">
+        <svg viewBox="0 0 680 562" aria-hidden="true" overflow="visible"><path d="M300 20.1h0M310 20.1h0M320 20.1h0M330 20.1h0M340 20.1h0M350 20.1h0M360 20.1h0M420 20.1h0M430 20.1h0M440 20.1h0M460 20.1h0M470 20.1h0M480 20.1h0M490 20.1h0M500 20.1h0M510 20.1h0M520 20.1h0M530 20.1h0M540 20.1h0M550 20.1h0M300 30.1h0M310 30.1h0M320 30.1h0M330 30.1h0M340 30.1h0M350 30.1h0M360 30.1h0M420 30.1h0M430 30.1h0M440 30.1h0M480 30.1h0M490 30.1h0M500 30.1h0M510 30.1h0M520 30.1h0M530 30.1h0M540 30.1h0M550 30.1h0M40 30.1h0M50 30.1h0M60 30.1h0M70 30.1h0M230 30.1h0M240 30.1h0M250 30.1h0M40 40.1h0M50 40.1h0M60 40.1h0M70 40.1h0M80 40.1h0M90 40.1h0M100 40.1h0M110 40.1h0M120 40.1h0M130 40.1h0M140 40.1h0M220 40.1h0M230 40.1h0M240 40.1h0M250 40.1h0M260 40.1h0M310 40.1h0M320 40.1h0M330 40.1h0M340 40.1h0M350 40.1h0M360 40.1h0M420 40.1h0M430 40.1h0M440 40.1h0M450 40.1h0M530 40.1h0M540 40.1h0M550 40.1h0M30 50.1h0M40 50.1h0M50 50.1h0M60 50.1h0M70 50.1h0M80 50.1h0M90 50.1h0M100 50.1h0M110 50.1h0M120 50.1h0M130 50.1h0M140 50.1h0M150 50.1h0M160 50.1h0M170 50.1h0M210 50.1h0M220 50.1h0M230 50.1h0M240 50.1h0M250 50.1h0M260 50.1h0M270 50.1h0M280 50.1h0M310 50.1h0M320 50.1h0M330 50.1h0M340 50.1h0M350 50.1h0M360 50.1h0M420 50.1h0M430 50.1h0M440 50.1h0M450 50.1h0M460 50.1h0M540 50.1h0M550 50.1h0M180 50.1h0M190 50.1h0M200 50.1h0M290 50.1h0M30 60.2h0M40 60.2h0M50 60.2h0M60 60.2h0M70 60.2h0M80 60.2h0M90 60.2h0M100 60.2h0M110 60.2h0M120 60.2h0M130 60.2h0M140 60.2h0M150 60.2h0M160 60.2h0M170 60.2h0M180 60.2h0M190 60.2h0M200 60.2h0M210 60.2h0M220 60.2h0M230 60.2h0M240 60.2h0M250 60.2h0M260 60.2h0M270 60.2h0M280 60.2h0M290 60.2h0M300 60.2h0M310 60.2h0M320 60.2h0M420 60.2h0M430 60.2h0M440 60.2h0M450 60.2h0M460 60.2h0M540 60.2h0M550 60.2h0M30 70.2h0M40 70.2h0M50 70.2h0M60 70.2h0M70 70.2h0M80 70.2h0M90 70.2h0M100 70.2h0M110 70.2h0M120 70.2h0M130 70.2h0M140 70.2h0M150 70.2h0M160 70.2h0M170 70.2h0M180 70.2h0M190 70.2h0M200 70.2h0M210 70.2h0M220 70.2h0M230 70.2h0M240 70.2h0M250 70.2h0M260 70.2h0M270 70.2h0M280 70.2h0M290 70.2h0M300 70.2h0M310 70.2h0M320 70.2h0M410 70.2h0M420 70.2h0M430 70.2h0M440 70.2h0M450 70.2h0M460 70.2h0M470 70.2h0M480 70.2h0M550 70.2h0M20 70.2h0M330 70.2h0M340 70.2h0M350 70.2h0M360 70.2h0M370 70.2h0M380 70.2h0M20 80.2h0M30 80.2h0M40 80.2h0M50 80.2h0M60 80.2h0M70 80.2h0M80 80.2h0M90 80.2h0M100 80.2h0M110 80.2h0M120 80.2h0M130 80.2h0M140 80.2h0M150 80.2h0M160 80.2h0M170 80.2h0M180 80.2h0M190 80.2h0M200 80.2h0M210 80.2h0M220 80.2h0M230 80.2h0M240 80.2h0M250 80.2h0M260 80.2h0M270 80.2h0M280 80.2h0M290 80.2h0M300 80.2h0M310 80.2h0M320 80.2h0M330 80.2h0M340 80.2h0M350 80.2h0M360 80.2h0M370 80.2h0M380 80.2h0M390 80.2h0M400 80.2h0M410 80.2h0M420 80.2h0M430 80.2h0M440 80.2h0M450 80.2h0M460 80.2h0M470 80.2h0M480 80.2h0M490 80.2h0M500 80.2h0M10 90.3h0M20 90.3h0M30 90.3h0M40 90.3h0M50 90.3h0M60 90.3h0M70 90.3h0M80 90.3h0M90 90.3h0M100 90.3h0M110 90.3h0M120 90.3h0M130 90.3h0M140 90.3h0M150 90.3h0M160 90.3h0M170 90.3h0M180 90.3h0M190 90.3h0M200 90.3h0M210 90.3h0M220 90.3h0M230 90.3h0M240 90.3h0M250 90.3h0M260 90.3h0M270 90.3h0M280 90.3h0M290 90.3h0M300 90.3h0M310 90.3h0M320 90.3h0M330 90.3h0M340 90.3h0M350 90.3h0M360 90.3h0M370 90.3h0M380 90.3h0M390 90.3h0M400 90.3h0M410 90.3h0M420 90.3h0M430 90.3h0M440 90.3h0M450 90.3h0M460 90.3h0M470 90.3h0M480 90.3h0M490 90.3h0M500 90.3h0M550 90.3h0M10 100.3h0M20 100.3h0M30 100.3h0M40 100.3h0M50 100.3h0M60 100.3h0M70 100.3h0M80 100.3h0M90 100.3h0M100 100.3h0M110 100.3h0M120 100.3h0M130 100.3h0M140 100.3h0M150 100.3h0M160 100.3h0M170 100.3h0M180 100.3h0M190 100.3h0M200 100.3h0M210 100.3h0M220 100.3h0M230 100.3h0M240 100.3h0M250 100.3h0M260 100.3h0M270 100.3h0M280 100.3h0M290 100.3h0M300 100.3h0M310 100.3h0M320 100.3h0M330 100.3h0M340 100.3h0M350 100.3h0M360 100.3h0M370 100.3h0M380 100.3h0M390 100.3h0M400 100.3h0M410 100.3h0M420 100.3h0M430 100.3h0M440 100.3h0M450 100.3h0M460 100.3h0M470 100.3h0M480 100.3h0M490 100.3h0M540 100.3h0M550 100.3h0M10 110.3h0M20 110.3h0M30 110.3h0M40 110.3h0M50 110.3h0M60 110.3h0M70 110.3h0M80 110.3h0M90 110.3h0M100 110.3h0M110 110.3h0M120 110.3h0M130 110.3h0M140 110.3h0M150 110.3h0M160 110.3h0M170 110.3h0M180 110.3h0M190 110.3h0M200 110.3h0M210 110.3h0M220 110.3h0M230 110.3h0M240 110.3h0M250 110.3h0M260 110.3h0M270 110.3h0M280 110.3h0M290 110.3h0M300 110.3h0M310 110.3h0M320 110.3h0M330 110.3h0M340 110.3h0M350 110.3h0M360 110.3h0M370 110.3h0M380 110.3h0M390 110.3h0M400 110.3h0M410 110.3h0M420 110.3h0M430 110.3h0M440 110.3h0M450 110.3h0M460 110.3h0M470 110.3h0M480 110.3h0M540 110.3h0M550 110.3h0M530 110.3h0M10 120.4h0M20 120.4h0M30 120.4h0M40 120.4h0M50 120.4h0M60 120.4h0M70 120.4h0M80 120.4h0M90 120.4h0M100 120.4h0M110 120.4h0M120 120.4h0M130 120.4h0M140 120.4h0M150 120.4h0M160 120.4h0M170 120.4h0M180 120.4h0M190 120.4h0M200 120.4h0M210 120.4h0M220 120.4h0M230 120.4h0M240 120.4h0M250 120.4h0M260 120.4h0M270 120.4h0M280 120.4h0M290 120.4h0M300 120.4h0M310 120.4h0M320 120.4h0M330 120.4h0M340 120.4h0M350 120.4h0M360 120.4h0M370 120.4h0M380 120.4h0M390 120.4h0M400 120.4h0M410 120.4h0M420 120.4h0M430 120.4h0M440 120.4h0M450 120.4h0M460 120.4h0M470 120.4h0M540 120.4h0M550 120.4h0M10 130.4h0M20 130.4h0M30 130.4h0M40 130.4h0M50 130.4h0M60 130.4h0M70 130.4h0M80 130.4h0M90 130.4h0M100 130.4h0M110 130.4h0M120 130.4h0M130 130.4h0M140 130.4h0M150 130.4h0M160 130.4h0M170 130.4h0M180 130.4h0M190 130.4h0M200 130.4h0M210 130.4h0M220 130.4h0M230 130.4h0M240 130.4h0M250 130.4h0M260 130.4h0M270 130.4h0M280 130.4h0M290 130.4h0M300 130.4h0M310 130.4h0M320 130.4h0M330 130.4h0M340 130.4h0M350 130.4h0M360 130.4h0M370 130.4h0M380 130.4h0M390 130.4h0M400 130.4h0M410 130.4h0M420 130.4h0M430 130.4h0M440 130.4h0M450 130.4h0M460 130.4h0M540 130.4h0M550 130.4h0M30 140.4h0M40 140.4h0M50 140.4h0M60 140.4h0M70 140.4h0M80 140.4h0M90 140.4h0M100 140.4h0M110 140.4h0M120 140.4h0M130 140.4h0M140 140.4h0M150 140.4h0M160 140.4h0M170 140.4h0M180 140.4h0M190 140.4h0M200 140.4h0M210 140.4h0M220 140.4h0M230 140.4h0M240 140.4h0M250 140.4h0M260 140.4h0M270 140.4h0M280 140.4h0M290 140.4h0M300 140.4h0M310 140.4h0M320 140.4h0M330 140.4h0M340 140.4h0M350 140.4h0M360 140.4h0M370 140.4h0M380 140.4h0M390 140.4h0M400 140.4h0M410 140.4h0M420 140.4h0M430 140.4h0M440 140.4h0M450 140.4h0M560 140.4h0M570 140.4h0M580 140.4h0M590 140.4h0M600 140.4h0M30 150.4h0M40 150.4h0M50 150.4h0M60 150.4h0M70 150.4h0M80 150.4h0M90 150.4h0M100 150.4h0M110 150.4h0M120 150.4h0M130 150.4h0M140 150.4h0M150 150.4h0M160 150.4h0M170 150.4h0M180 150.4h0M190 150.4h0M200 150.4h0M210 150.4h0M220 150.4h0M230 150.4h0M240 150.4h0M250 150.4h0M260 150.4h0M270 150.4h0M280 150.4h0M290 150.4h0M300 150.4h0M310 150.4h0M320 150.4h0M330 150.4h0M340 150.4h0M350 150.4h0M360 150.4h0M370 150.4h0M380 150.4h0M390 150.4h0M400 150.4h0M410 150.4h0M420 150.4h0M430 150.4h0M440 150.4h0M570 150.4h0M580 150.4h0M590 150.4h0M600 150.4h0M20 150.4h0M550 150.4h0M20 160.5h0M30 160.5h0M40 160.5h0M50 160.5h0M60 160.5h0M70 160.5h0M80 160.5h0M90 160.5h0M100 160.5h0M110 160.5h0M120 160.5h0M130 160.5h0M140 160.5h0M150 160.5h0M160 160.5h0M170 160.5h0M180 160.5h0M190 160.5h0M200 160.5h0M210 160.5h0M220 160.5h0M230 160.5h0M240 160.5h0M250 160.5h0M260 160.5h0M270 160.5h0M280 160.5h0M290 160.5h0M300 160.5h0M310 160.5h0M320 160.5h0M330 160.5h0M340 160.5h0M350 160.5h0M360 160.5h0M370 160.5h0M380 160.5h0M390 160.5h0M400 160.5h0M410 160.5h0M420 160.5h0M430 160.5h0M440 160.5h0M530 160.5h0M540 160.5h0M550 160.5h0M560 160.5h0M570 160.5h0M580 160.5h0M30 170.5h0M40 170.5h0M50 170.5h0M60 170.5h0M70 170.5h0M80 170.5h0M90 170.5h0M100 170.5h0M110 170.5h0M120 170.5h0M130 170.5h0M140 170.5h0M150 170.5h0M160 170.5h0M170 170.5h0M180 170.5h0M190 170.5h0M200 170.5h0M210 170.5h0M220 170.5h0M230 170.5h0M240 170.5h0M250 170.5h0M260 170.5h0M270 170.5h0M280 170.5h0M290 170.5h0M300 170.5h0M310 170.5h0M320 170.5h0M330 170.5h0M340 170.5h0M350 170.5h0M360 170.5h0M370 170.5h0M380 170.5h0M390 170.5h0M400 170.5h0M410 170.5h0M420 170.5h0M430 170.5h0M530 170.5h0M540 170.5h0M550 170.5h0M560 170.5h0M570 170.5h0M580 170.5h0M590 170.5h0M30 180.5h0M40 180.5h0M50 180.5h0M60 180.5h0M70 180.5h0M80 180.5h0M90 180.5h0M100 180.5h0M110 180.5h0M120 180.5h0M130 180.5h0M140 180.5h0M150 180.5h0M160 180.5h0M170 180.5h0M180 180.5h0M190 180.5h0M200 180.5h0M210 180.5h0M220 180.5h0M230 180.5h0M240 180.5h0M250 180.5h0M260 180.5h0M270 180.5h0M280 180.5h0M290 180.5h0M300 180.5h0M310 180.5h0M320 180.5h0M330 180.5h0M340 180.5h0M350 180.5h0M360 180.5h0M370 180.5h0M380 180.5h0M390 180.5h0M400 180.5h0M410 180.5h0M420 180.5h0M430 180.5h0M530 180.5h0M540 180.5h0M550 180.5h0M560 180.5h0M570 180.5h0M580 180.5h0M590 180.5h0M600 180.5h0M50 190.6h0M60 190.6h0M70 190.6h0M80 190.6h0M90 190.6h0M100 190.6h0M180 190.6h0M190 190.6h0M200 190.6h0M210 190.6h0M220 190.6h0M230 190.6h0M240 190.6h0M250 190.6h0M260 190.6h0M270 190.6h0M280 190.6h0M290 190.6h0M300 190.6h0M310 190.6h0M320 190.6h0M330 190.6h0M340 190.6h0M350 190.6h0M360 190.6h0M370 190.6h0M380 190.6h0M390 190.6h0M400 190.6h0M410 190.6h0M420 190.6h0M430 190.6h0M530 190.6h0M540 190.6h0M550 190.6h0M560 190.6h0M570 190.6h0M580 190.6h0M590 190.6h0M600 190.6h0M610 190.6h0M50 200.6h0M60 200.6h0M70 200.6h0M80 200.6h0M90 200.6h0M190 200.6h0M200 200.6h0M210 200.6h0M220 200.6h0M230 200.6h0M240 200.6h0M250 200.6h0M260 200.6h0M270 200.6h0M280 200.6h0M290 200.6h0M300 200.6h0M310 200.6h0M320 200.6h0M330 200.6h0M340 200.6h0M350 200.6h0M360 200.6h0M370 200.6h0M380 200.6h0M390 200.6h0M400 200.6h0M410 200.6h0M420 200.6h0M430 200.6h0M440 200.6h0M530 200.6h0M540 200.6h0M550 200.6h0M560 200.6h0M570 200.6h0M580 200.6h0M590 200.6h0M600 200.6h0M610 200.6h0M620 200.6h0M210 210.6h0M220 210.6h0M230 210.6h0M240 210.6h0M250 210.6h0M260 210.6h0M270 210.6h0M280 210.6h0M290 210.6h0M300 210.6h0M310 210.6h0M320 210.6h0M330 210.6h0M340 210.6h0M350 210.6h0M360 210.6h0M370 210.6h0M380 210.6h0M390 210.6h0M400 210.6h0M410 210.6h0M420 210.6h0M430 210.6h0M440 210.6h0M530 210.6h0M540 210.6h0M550 210.6h0M560 210.6h0M570 210.6h0M580 210.6h0M590 210.6h0M600 210.6h0M610 210.6h0M620 210.6h0M220 220.6h0M230 220.6h0M240 220.6h0M250 220.6h0M260 220.6h0M270 220.6h0M280 220.6h0M290 220.6h0M300 220.6h0M310 220.6h0M320 220.6h0M330 220.6h0M340 220.6h0M350 220.6h0M360 220.6h0M370 220.6h0M380 220.6h0M390 220.6h0M400 220.6h0M410 220.6h0M420 220.6h0M430 220.6h0M440 220.6h0M450 220.6h0M540 220.6h0M550 220.6h0M560 220.6h0M570 220.6h0M580 220.6h0M590 220.6h0M600 220.6h0M610 220.6h0M620 220.6h0M460 220.6h0M230 230.7h0M240 230.7h0M250 230.7h0M260 230.7h0M270 230.7h0M280 230.7h0M290 230.7h0M300 230.7h0M310 230.7h0M320 230.7h0M330 230.7h0M340 230.7h0M350 230.7h0M360 230.7h0M370 230.7h0M380 230.7h0M390 230.7h0M400 230.7h0M410 230.7h0M420 230.7h0M430 230.7h0M440 230.7h0M450 230.7h0M460 230.7h0M470 230.7h0M480 230.7h0M540 230.7h0M550 230.7h0M560 230.7h0M570 230.7h0M580 230.7h0M590 230.7h0M600 230.7h0M610 230.7h0M620 230.7h0M630 230.7h0M230 240.7h0M240 240.7h0M250 240.7h0M260 240.7h0M270 240.7h0M280 240.7h0M290 240.7h0M300 240.7h0M310 240.7h0M320 240.7h0M330 240.7h0M340 240.7h0M350 240.7h0M360 240.7h0M370 240.7h0M380 240.7h0M390 240.7h0M400 240.7h0M410 240.7h0M420 240.7h0M430 240.7h0M440 240.7h0M450 240.7h0M460 240.7h0M470 240.7h0M480 240.7h0M490 240.7h0M500 240.7h0M530 240.7h0M540 240.7h0M550 240.7h0M560 240.7h0M570 240.7h0M580 240.7h0M590 240.7h0M600 240.7h0M610 240.7h0M620 240.7h0M630 240.7h0M520 240.7h0M640 240.7h0M230 250.7h0M240 250.7h0M250 250.7h0M260 250.7h0M270 250.7h0M280 250.7h0M290 250.7h0M300 250.7h0M310 250.7h0M320 250.7h0M330 250.7h0M340 250.7h0M350 250.7h0M360 250.7h0M370 250.7h0M380 250.7h0M390 250.7h0M400 250.7h0M410 250.7h0M420 250.7h0M430 250.7h0M440 250.7h0M450 250.7h0M460 250.7h0M470 250.7h0M480 250.7h0M490 250.7h0M500 250.7h0M520 250.7h0M530 250.7h0M540 250.7h0M550 250.7h0M560 250.7h0M570 250.7h0M580 250.7h0M590 250.7h0M600 250.7h0M610 250.7h0M620 250.7h0M630 250.7h0M640 250.7h0M230 260.8h0M240 260.8h0M250 260.8h0M260 260.8h0M270 260.8h0M280 260.8h0M290 260.8h0M300 260.8h0M310 260.8h0M320 260.8h0M330 260.8h0M340 260.8h0M350 260.8h0M360 260.8h0M370 260.8h0M380 260.8h0M390 260.8h0M400 260.8h0M410 260.8h0M420 260.8h0M430 260.8h0M440 260.8h0M450 260.8h0M460 260.8h0M470 260.8h0M480 260.8h0M490 260.8h0M500 260.8h0M520 260.8h0M530 260.8h0M540 260.8h0M550 260.8h0M560 260.8h0M570 260.8h0M580 260.8h0M590 260.8h0M600 260.8h0M610 260.8h0M620 260.8h0M630 260.8h0M640 260.8h0M510 260.8h0M650 260.8h0M240 270.8h0M250 270.8h0M260 270.8h0M270 270.8h0M280 270.8h0M290 270.8h0M300 270.8h0M310 270.8h0M320 270.8h0M330 270.8h0M340 270.8h0M350 270.8h0M360 270.8h0M370 270.8h0M380 270.8h0M390 270.8h0M400 270.8h0M410 270.8h0M420 270.8h0M430 270.8h0M440 270.8h0M450 270.8h0M460 270.8h0M470 270.8h0M480 270.8h0M490 270.8h0M500 270.8h0M510 270.8h0M520 270.8h0M530 270.8h0M540 270.8h0M550 270.8h0M560 270.8h0M570 270.8h0M580 270.8h0M590 270.8h0M600 270.8h0M610 270.8h0M620 270.8h0M630 270.8h0M640 270.8h0M650 270.8h0M240 280.8h0M250 280.8h0M260 280.8h0M270 280.8h0M280 280.8h0M290 280.8h0M300 280.8h0M310 280.8h0M320 280.8h0M330 280.8h0M340 280.8h0M350 280.8h0M360 280.8h0M370 280.8h0M380 280.8h0M390 280.8h0M400 280.8h0M410 280.8h0M420 280.8h0M430 280.8h0M440 280.8h0M450 280.8h0M460 280.8h0M470 280.8h0M480 280.8h0M490 280.8h0M500 280.8h0M510 280.8h0M520 280.8h0M530 280.8h0M540 280.8h0M550 280.8h0M560 280.8h0M570 280.8h0M580 280.8h0M590 280.8h0M600 280.8h0M610 280.8h0M620 280.8h0M630 280.8h0M640 280.8h0M260 290.8h0M270 290.8h0M280 290.8h0M290 290.8h0M300 290.8h0M310 290.8h0M320 290.8h0M330 290.8h0M340 290.8h0M350 290.8h0M360 290.8h0M370 290.8h0M380 290.8h0M390 290.8h0M400 290.8h0M410 290.8h0M420 290.8h0M430 290.8h0M440 290.8h0M450 290.8h0M460 290.8h0M470 290.8h0M480 290.8h0M490 290.8h0M500 290.8h0M510 290.8h0M520 290.8h0M530 290.8h0M540 290.8h0M550 290.8h0M560 290.8h0M570 290.8h0M580 290.8h0M590 290.8h0M600 290.8h0M610 290.8h0M620 290.8h0M650 290.8h0M660 290.8h0M270 300.9h0M280 300.9h0M290 300.9h0M300 300.9h0M310 300.9h0M320 300.9h0M330 300.9h0M340 300.9h0M350 300.9h0M360 300.9h0M370 300.9h0M380 300.9h0M390 300.9h0M400 300.9h0M410 300.9h0M420 300.9h0M430 300.9h0M440 300.9h0M450 300.9h0M460 300.9h0M470 300.9h0M480 300.9h0M490 300.9h0M500 300.9h0M510 300.9h0M520 300.9h0M530 300.9h0M540 300.9h0M550 300.9h0M560 300.9h0M570 300.9h0M580 300.9h0M590 300.9h0M600 300.9h0M650 300.9h0M660 300.9h0M670 300.9h0M640 300.9h0M260 310.9h0M270 310.9h0M280 310.9h0M290 310.9h0M300 310.9h0M310 310.9h0M320 310.9h0M330 310.9h0M340 310.9h0M350 310.9h0M360 310.9h0M370 310.9h0M380 310.9h0M390 310.9h0M400 310.9h0M410 310.9h0M420 310.9h0M430 310.9h0M440 310.9h0M450 310.9h0M460 310.9h0M470 310.9h0M480 310.9h0M490 310.9h0M500 310.9h0M510 310.9h0M520 310.9h0M530 310.9h0M540 310.9h0M550 310.9h0M560 310.9h0M570 310.9h0M580 310.9h0M590 310.9h0M600 310.9h0M640 310.9h0M650 310.9h0M660 310.9h0M670 310.9h0M260 320.9h0M270 320.9h0M280 320.9h0M290 320.9h0M300 320.9h0M310 320.9h0M320 320.9h0M330 320.9h0M340 320.9h0M350 320.9h0M360 320.9h0M370 320.9h0M380 320.9h0M390 320.9h0M400 320.9h0M410 320.9h0M420 320.9h0M430 320.9h0M440 320.9h0M450 320.9h0M460 320.9h0M470 320.9h0M480 320.9h0M490 320.9h0M500 320.9h0M510 320.9h0M520 320.9h0M530 320.9h0M540 320.9h0M550 320.9h0M560 320.9h0M570 320.9h0M580 320.9h0M590 320.9h0M600 320.9h0M660 320.9h0M670 320.9h0M270 331h0M280 331h0M290 331h0M300 331h0M310 331h0M320 331h0M330 331h0M340 331h0M350 331h0M360 331h0M370 331h0M380 331h0M390 331h0M400 331h0M410 331h0M420 331h0M430 331h0M440 331h0M450 331h0M460 331h0M470 331h0M480 331h0M490 331h0M500 331h0M510 331h0M520 331h0M530 331h0M540 331h0M550 331h0M560 331h0M570 331h0M580 331h0M590 331h0M260 341h0M270 341h0M280 341h0M290 341h0M300 341h0M310 341h0M320 341h0M330 341h0M340 341h0M350 341h0M360 341h0M370 341h0M380 341h0M390 341h0M400 341h0M410 341h0M420 341h0M430 341h0M440 341h0M450 341h0M460 341h0M470 341h0M480 341h0M490 341h0M500 341h0M510 341h0M520 341h0M530 341h0M540 341h0M550 341h0M560 341h0M570 341h0M580 341h0M260 351h0M270 351h0M280 351h0M290 351h0M300 351h0M310 351h0M320 351h0M330 351h0M340 351h0M350 351h0M360 351h0M370 351h0M380 351h0M390 351h0M400 351h0M410 351h0M420 351h0M430 351h0M440 351h0M450 351h0M460 351h0M470 351h0M480 351h0M490 351h0M500 351h0M510 351h0M520 351h0M530 351h0M540 351h0M550 351h0M560 351h0M570 351h0M260 361.1h0M270 361.1h0M280 361.1h0M290 361.1h0M300 361.1h0M310 361.1h0M320 361.1h0M330 361.1h0M340 361.1h0M350 361.1h0M360 361.1h0M370 361.1h0M380 361.1h0M390 361.1h0M400 361.1h0M410 361.1h0M420 361.1h0M430 361.1h0M440 361.1h0M450 361.1h0M460 361.1h0M470 361.1h0M480 361.1h0M490 361.1h0M500 361.1h0M510 361.1h0M520 361.1h0M530 361.1h0M540 361.1h0M550 361.1h0M560 361.1h0M570 361.1h0M260 371.1h0M270 371.1h0M280 371.1h0M290 371.1h0M300 371.1h0M310 371.1h0M320 371.1h0M330 371.1h0M340 371.1h0M350 371.1h0M360 371.1h0M370 371.1h0M380 371.1h0M390 371.1h0M400 371.1h0M410 371.1h0M420 371.1h0M430 371.1h0M440 371.1h0M450 371.1h0M460 371.1h0M470 371.1h0M480 371.1h0M490 371.1h0M500 371.1h0M510 371.1h0M520 371.1h0M530 371.1h0M540 371.1h0M550 371.1h0M270 381.1h0M280 381.1h0M290 381.1h0M300 381.1h0M310 381.1h0M320 381.1h0M330 381.1h0M340 381.1h0M350 381.1h0M360 381.1h0M370 381.1h0M380 381.1h0M390 381.1h0M400 381.1h0M410 381.1h0M420 381.1h0M430 381.1h0M440 381.1h0M450 381.1h0M460 381.1h0M470 381.1h0M480 381.1h0M490 381.1h0M500 381.1h0M510 381.1h0M520 381.1h0M530 381.1h0M540 381.1h0M270 391.1h0M280 391.1h0M290 391.1h0M300 391.1h0M310 391.1h0M320 391.1h0M330 391.1h0M340 391.1h0M350 391.1h0M360 391.1h0M370 391.1h0M380 391.1h0M390 391.1h0M400 391.1h0M410 391.1h0M420 391.1h0M430 391.1h0M440 391.1h0M450 391.1h0M460 391.1h0M470 391.1h0M480 391.1h0M490 391.1h0M500 391.1h0M510 391.1h0M520 391.1h0M530 391.1h0M540 391.1h0M270 401.2h0M280 401.2h0M290 401.2h0M300 401.2h0M310 401.2h0M320 401.2h0M330 401.2h0M340 401.2h0M350 401.2h0M360 401.2h0M370 401.2h0M380 401.2h0M390 401.2h0M400 401.2h0M410 401.2h0M420 401.2h0M430 401.2h0M440 401.2h0M450 401.2h0M460 401.2h0M470 401.2h0M480 401.2h0M490 401.2h0M500 401.2h0M510 401.2h0M520 401.2h0M530 401.2h0M540 401.2h0M280 411.2h0M290 411.2h0M300 411.2h0M310 411.2h0M320 411.2h0M330 411.2h0M340 411.2h0M350 411.2h0M360 411.2h0M370 411.2h0M380 411.2h0M390 411.2h0M400 411.2h0M410 411.2h0M420 411.2h0M430 411.2h0M440 411.2h0M450 411.2h0M460 411.2h0M470 411.2h0M480 411.2h0M490 411.2h0M500 411.2h0M510 411.2h0M520 411.2h0M530 411.2h0M540 411.2h0M290 421.2h0M300 421.2h0M310 421.2h0M320 421.2h0M330 421.2h0M340 421.2h0M350 421.2h0M360 421.2h0M370 421.2h0M380 421.2h0M390 421.2h0M400 421.2h0M410 421.2h0M420 421.2h0M430 421.2h0M440 421.2h0M450 421.2h0M460 421.2h0M470 421.2h0M480 421.2h0M490 421.2h0M500 421.2h0M510 421.2h0M520 421.2h0M300 431.3h0M310 431.3h0M320 431.3h0M330 431.3h0M340 431.3h0M350 431.3h0M360 431.3h0M370 431.3h0M380 431.3h0M390 431.3h0M400 431.3h0M410 431.3h0M420 431.3h0M430 431.3h0M440 431.3h0M450 431.3h0M460 431.3h0M470 431.3h0M480 431.3h0M490 431.3h0M500 431.3h0M510 431.3h0M520 431.3h0M300 441.3h0M310 441.3h0M320 441.3h0M330 441.3h0M340 441.3h0M350 441.3h0M360 441.3h0M370 441.3h0M380 441.3h0M390 441.3h0M400 441.3h0M410 441.3h0M420 441.3h0M430 441.3h0M440 441.3h0M450 441.3h0M460 441.3h0M470 441.3h0M480 441.3h0M490 441.3h0M500 441.3h0M310 451.3h0M320 451.3h0M330 451.3h0M340 451.3h0M350 451.3h0M360 451.3h0M370 451.3h0M380 451.3h0M390 451.3h0M400 451.3h0M410 451.3h0M420 451.3h0M430 451.3h0M440 451.3h0M450 451.3h0M460 451.3h0M470 451.3h0M480 451.3h0M490 451.3h0M500 451.3h0M310 461.3h0M320 461.3h0M330 461.3h0M340 461.3h0M350 461.3h0M360 461.3h0M370 461.3h0M380 461.3h0M390 461.3h0M400 461.3h0M410 461.3h0M420 461.3h0M500 461.3h0M510 461.3h0M320 471.4h0M330 471.4h0M340 471.4h0M350 471.4h0M360 471.4h0M370 471.4h0M380 471.4h0M390 471.4h0M400 471.4h0M410 471.4h0M500 471.4h0M510 471.4h0M350 481.4h0M360 481.4h0M370 481.4h0M380 481.4h0M390 481.4h0M400 481.4h0M410 481.4h0M360 491.4h0M370 491.4h0M380 491.4h0M390 491.4h0M400 491.4h0M410 491.4h0M360 501.5h0M370 501.5h0M380 501.5h0M390 501.5h0M400 501.5h0M410 501.5h0M500 501.5h0M510 501.5h0M520 501.5h0M370 511.5h0M380 511.5h0M390 511.5h0M400 511.5h0M410 511.5h0M520 511.5h0M530 511.5h0M460 511.5h0M470 511.5h0M370 521.5h0M380 521.5h0M390 521.5h0M400 521.5h0M410 521.5h0M420 521.5h0M460 521.5h0M560 521.5h0M570 521.5h0M380 531.5h0M390 531.5h0M400 531.5h0M410 531.5h0M420 531.5h0M440 531.5h0M450 531.5h0M460 531.5h0M560 531.5h0M570 531.5h0M580 531.5h0M430 531.5h0M410 541.6h0M420 541.6h0M430 541.6h0M440 541.6h0M450 541.6h0M460 541.6h0M440 551.6h0M450 551.6h0M460 551.6h0M470 551.6h0M480 551.6h0M490 551.6h0M470 561.6h0M480 561.6h0M490 561.6h0" stroke="#2A2A35" stroke-opacity=".5" stroke-width="5.2" stroke-linecap="round" fill="none"/></svg>
+        <div class="pin"><span class="ring" aria-hidden="true"></span><span class="dot" aria-hidden="true"></span><p class="call" role="img" aria-label="One realtor in Burnaby"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg></p></div>
+      </div>
       <p class="map-label"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Any city in North America</p>
     </div>
   </div>
 </section>
 
-<section class="sec" data-s="faq" style="padding-top:0">
-  <div class="wrap faq-grid">
+<section class="sec faq" data-s="faq">
+  <div class="wrap split">
     <div class="sec-head"><h2>Questions before you book</h2></div>
     <div class="faq-list">
-      <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Because our systems work, and we grow when you grow. Most of our fee comes after appointments show up. So we're careful about who we take on.</p></details>
-      <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city planning to buy or sell in the next 60 to 90 days. They answer our questions, book a time and talk to you. You'll know on the call.</p></details>
-      <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation or presale. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
-      <details><summary>Is my city taken?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We take one realtor per city, anywhere in North America, first come, first served. Tell us your city in the quiz. We'll confirm it on your call.</p></details>
-      <details><summary>What happens on the call?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We look at your market and the guide we'd build first. Then we walk you through the payment plan and the numbers. You decide after that.</p></details>
+      <details><summary>Who actually does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Follow-up by text, email and phone starts the minute someone asks for a guide. You approve the ads and take the calls.</p></details>
+      <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city planning to buy or sell in the next 60 to 90 days. They've answered our questions and booked a time with you. You'll know on the call.</p></details>
+      <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
+      <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Because this works, and we grow when you grow. Most of our fee comes after appointments show up. So we're careful about who we take on.</p></details>
       <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them, and nobody else in your city gets them.</p></details>
-      <details><summary>How is this different from the emails I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>You see the guide, the ads and the quiz before most of our fee is due. The leads come from your own ads, and they book time with you directly.</p></details>
-      <details><summary>Do I have to make content?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. We write the guides and run the ads. Our text, email and call reminders confirm each time. Your part is taking the calls.</p></details>
+      <details><summary>How is this different from the texts I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The people who book asked for your guide and saw your name on the ad. We do this for one realtor per city, and most of our fee comes after they show.</p></details>
+      <details><summary>What happens on the call?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We look at your market and the first guide we'd build. Then we walk you through the payment plan and the numbers. You decide after that.</p></details>
+      <details><summary>Is my city taken?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We take one realtor per city, anywhere in North America, first come, first served. Tell us your city in the quiz and we'll confirm it on your call.</p></details>
     </div>
   </div>
 </section>
 
 <section class="sec dark final" data-s="final">
-  <div class="wrap">
+  <div class="wrap split">
     <div class="sec-head"><h2>Is your city still open?</h2></div>
     <div class="inline-q">
       <p class="q" id="inline-q">Do you work solo or on a team?</p>
@@ -755,7 +933,8 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <button type="button" class="opt-d" data-inline="On a team">On a team<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         <button type="button" class="opt-d" data-inline="Team lead or broker">Team lead or broker<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
-      <p class="micro">2 minutes · one realtor per city</p>
+      <noscript><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript>
+      <p class="micro sep"><span>2 minutes</span> <span>one realtor per city</span></p>
     </div>
   </div>
 </section>
@@ -763,7 +942,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 
 <footer>
   <div class="wrap">
-    <span>ZippyScale · Vancouver, Canada</span>
+    <p class="sep"><span>ZippyScale</span> <span>Real estate marketing</span> <span>Vancouver, Canada</span></p>
     <a href="privacy.html">Privacy policy</a>
   </div>
 </footer>
@@ -807,69 +986,39 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
   }
   track('page_view');
 
-  // motion 1: hero sequence plays once (final state is the default without JS)
-  if (!reduce) $('.mock').classList.add('play');
-
-  // motions 2-4: beams + appointment list. Each plays once when 35% visible; without JS or with reduced motion the final state shows.
-  const NS = 'http://www.w3.org/2000/svg';
-  function beam(host, pairs, shape, timing) {
-    let svg = host.querySelector(':scope > svg.beams');
-    if (!svg) { svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'beams'); svg.setAttribute('aria-hidden', 'true'); host.prepend(svg); }
-    const draw = () => {
-      const box = host.getBoundingClientRect();
-      svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-      const ds = pairs().map(([a, b]) => shape(a.getBoundingClientRect(), b.getBoundingClientRect(), box));
-      if (svg.childElementCount !== ds.length * 3) { // build once; later resizes only move the paths so a played beam never replays
-        svg.replaceChildren();
-        ds.forEach((_, k) => ['b-base', 'b-trail', 'b-head'].forEach((c) => {
-          const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); p.setAttribute('pathLength', '1000');
-          const [at, dur] = timing(k); p.style.setProperty('--at', at + 's'); p.style.setProperty('--dur', dur + 's');
-          svg.append(p);
-        }));
-      }
-      ds.forEach((d, k) => { for (let n = 0; n < 3; n++) svg.children[k * 3 + n].setAttribute('d', d); });
-    };
-    draw(); host.classList.add('beamed');
-    if ('ResizeObserver' in window) new ResizeObserver(draw).observe(host);
+  // ---------- motion (4 page-level elements, each once; CSS default = final frame, so no-JS / reduced motion / screenshots see finished visuals) ----------
+  const collage = $('.collage');
+  if (!reduce) {
+    const playHero = () => collage.classList.add('play'); // motion 1, on load so it never competes with parsing
+    if (document.readyState === 'complete') playHero(); else addEventListener('load', playHero, { once: true });
   }
-  const rel = (r, box) => ({ l: r.left - box.left, r: r.right - box.left, t: r.top - box.top, b: r.bottom - box.top, cx: r.left - box.left + r.width / 2, cy: r.top - box.top + r.height / 2 });
 
-  // problem: one lead node -> 5 phones
-  const fan = $('.fan'), lead = $('.lead-node', fan), minis = [...fan.querySelectorAll('.mini-phone')];
-  beam(fan, () => minis.map((m) => [lead, m]), (A, B, box) => {
-    const a = rel(A, box), b = rel(B, box);
-    const [m0, m1] = minis.map((m) => m.getBoundingClientRect());
-    if (m1.top < m0.bottom) { // phones in a row below: S-curve from the node's bottom to each phone's top
-      const my = (a.b + b.t) / 2;
-      return `M${a.cx},${a.b} C${a.cx},${my} ${b.cx},${my} ${b.cx},${b.t}`;
+  // motion 2: the buyer card travels the board, stop to stop, and lands on "Booked"
+  const board = $('.board'), buyer = $('.buyer', board), stops = [...board.querySelectorAll('.stop')], arts = [...board.querySelectorAll('.art')];
+  function playBoard() {
+    const c = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+    const [lx, ly] = c(stops[stops.length - 1]);
+    const d = stops.map((s) => { const [x, y] = c(s); return [x - lx, y - ly]; });
+    const HOLD = 200, MOVE = 400, DWELL = 150, N = d.length, total = HOLD + (N - 1) * (MOVE + DWELL);
+    const at = (p) => `translate(${p[0]}px, ${p[1]}px)`;
+    const frames = [{ transform: at(d[0]), offset: 0 }, { transform: at(d[0]), offset: HOLD / total, easing: 'cubic-bezier(0.77,0,0.175,1)' }];
+    for (let i = 1; i < N; i++) {
+      const arrive = HOLD + (i - 1) * (MOVE + DWELL) + MOVE;
+      frames.push({ transform: at(d[i]), offset: Math.min(1, arrive / total) });
+      if (i < N - 1) frames.push({ transform: at(d[i]), offset: (arrive + DWELL) / total, easing: 'cubic-bezier(0.77,0,0.175,1)' });
+      setTimeout(() => { arts[i].classList.add('lit'); setTimeout(() => arts[i].classList.remove('lit'), 300); }, arrive);
     }
-    const x = a.l + 16; // phones stacked (phone layout): trunk down the left, rounded elbow into each phone
-    return `M${x},${a.b} L${x},${b.cy - 8} Q${x},${b.cy} ${x + 8},${b.cy} L${b.l},${b.cy}`;
-  }, (k) => [0.1 + k * 0.05, 0.9]);
-
-  // how: pulse travels node to node; each node lights as the pulse arrives
-  const flowHost = $('.flow-host'), flow = $('.flow'), dots = [...flow.querySelectorAll('.dot')];
-  beam(flowHost, () => dots.slice(1).map((d, k) => [dots[k], d]), (A, B, box) => {
-    const a = rel(A, box), b = rel(B, box);
-    return Math.abs(a.cy - b.cy) < 4 ? `M${a.r + 6},${a.cy} L${b.l - 6},${b.cy}` : `M${a.cx},${a.b + 6} L${b.cx},${b.t - 6}`;
-  }, (k) => [0.1 + k * 0.45, 0.45]);
-
-  const appts = $('.appts');
-  if (!reduce && 'IntersectionObserver' in window) {
-    [fan, flow, flowHost, appts].forEach((el) => el.classList.add('armed'));
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('play'); if (e.target === flow) flowHost.classList.add('play');
-      io.unobserve(e.target);
-    }), { threshold: 0.35 });
-    [fan, flow, appts].forEach((el) => io.observe(el));
+    arts[0].classList.add('lit'); setTimeout(() => arts[0].classList.remove('lit'), 300);
+    buyer.animate(frames, { duration: total, fill: 'backwards' });
+    $('.badge', buyer).animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(.6)', opacity: 0, offset: .92 }, { transform: 'none', opacity: 1 }], { duration: total, easing: 'cubic-bezier(0.16,1,0.3,1)' });
   }
 
-  // different: segmented toggle on phones (hirael comparison-03 pattern). Desktop CSS ignores .on and shows both panels.
-  const segBtns = document.querySelectorAll('.seg button');
-  segBtns.forEach((b) => b.addEventListener('click', () => segBtns.forEach((x) => {
-    const on = x === b; x.setAttribute('aria-pressed', String(on)); document.getElementById(x.getAttribute('aria-controls')).classList.toggle('on', on);
-  })));
+  if (!reduce && 'IntersectionObserver' in window) {
+    const once = (el, fn, opts) => { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); fn(); } }), opts); io.observe(el); };
+    if (buyer.animate) once(stops[stops.length - 1], playBoard, { threshold: 1, rootMargin: '0px 0px -15% 0px' }); // last stop: on phones the card arrives into view and lands on Booked
+    const cal = $('.cal'); once(cal, () => cal.classList.add('play'), { threshold: 0.35 });   // motion 3
+    const map = $('.map'); once(map, () => map.classList.add('play'), { threshold: 0.5 });    // motion 4
+  }
 
   // ---------- quiz ----------
   const icon = (id) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('class', 'ico'); s.setAttribute('aria-hidden', 'true'); const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', '#i-' + id); s.append(u); return s; };
@@ -886,12 +1035,13 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     return el;
   }
 
+  // budget bands render without dollar signs (page gate); the stored value is the short form
   const BUDGET = [['Under 2k', 'Under 2k a month'], ['2k to 3k', '2k to 3k a month'], ['3k to 5k', '3k to 5k a month'], ['5k or more', '5k or more a month']];
   const QS = {
     q1: { key: 'solo_or_team', type: 'single', q: 'Do you work solo or on a team?', opts: ['Solo realtor', 'On a team', 'Team lead or broker'] },
     q2: { key: 'transactions_12mo', type: 'single', q: 'How many transactions did you close in the last 12 months?', opts: ['0 to 5', '6 to 10', '11 to 20', '21 or more'] },
     q3: { key: 'city', type: 'city', q: 'Which city do you mainly sell in?' },
-    q4: { key: 'ad_budget', type: 'single', q: 'How much can you put into ads each month?', help: 'This is ad money. It goes to the ad platforms, not to us.', opts: BUDGET },
+    q4: { key: 'ad_budget', type: 'single', q: 'How much can you put into ads each month?', help: 'This is your ad budget. It goes to the ad platforms, not to us.', opts: BUDGET },
     q5: { key: 'lead_sources', type: 'multi', q: 'Where does your business come from now?', opts: ['Sphere and past clients', 'Brokerage leads', 'Portal leads', 'Open houses or farming', 'Social media and content'] },
     q6: { key: 'focus', type: 'single', q: 'Who do you want more of?', opts: ['Mostly buyers', 'Mostly sellers', 'Both'] },
     q7: { key: 'property_types', type: 'multi', q: 'What do you mostly sell?', opts: ['Condos', 'Townhouses', 'Semis or detached homes', 'Presale or pre-construction', 'Investment properties'] },
@@ -969,7 +1119,7 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
       title('See if you qualify'),
       h('p', { class: 'help' }, "8 quick questions about your business. At the end you'll see your report, and a time to talk if you're a fit."),
       h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: () => go('q1') }, 'Start', icon('arrow'))),
-      h('p', { class: 'micro', style: 'text-align:left' }, '2 minutes · one realtor per city'),
+      h('p', { class: 'micro' }, '2 minutes · one realtor per city'),
     ];
     if (id === 'contact') return buildContact();
     if (id === 'result') return buildResult();
@@ -1023,11 +1173,11 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
       f('brokerage', 'Brokerage', { autocomplete: 'organization', value: answers.brokerage || '' }),
       h('p', { class: 'consent' }, "We'll contact you about your report and your call by email, text or phone. You can opt out anytime."),
       h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn' }, 'See my report', icon('arrow'))),
-      h('p', { class: 'micro', style: 'text-align:left;margin-top:0' }, 'Your report shows on the next screen.'));
+      h('p', { class: 'micro' }, 'Your report shows on the next screen.'));
     return [title("Who's this report for?"), form];
   }
 
-  // ---------- fit rule + report (copy-deck section 4) ----------
+  // ---------- fit rule + report (copy-deck-v2 section 4) ----------
   function verdict(a) {
     const r = [];
     if (a.solo_or_team === 'On a team' || a.solo_or_team === 'Team lead or broker') r.push("This quarter we're only working with solo realtors, one per city.");
@@ -1048,9 +1198,9 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     else if (prop.includes('Semis or detached homes')) guide = `A ${city} market snapshot for move-up buyers.`;
     else if (prop.includes('Condos') || prop.includes('Townhouses')) guide = `A ${city} market snapshot for first-time buyers.`;
     else guide = `A Moving to ${city} guide for relocation buyers.`;
-    const speed = a.reply_speed === 'Under 5 minutes' ? 'You already reply fast. Our texts, emails and calls keep that speed at 11pm too.'
-      : a.reply_speed === 'Within an hour' ? 'An hour is a long time after an 11pm form. Our texts, emails and calls go out right away.'
-      : "By the time you call, they've often talked to someone else. Our texts, emails and calls reach them right away and book the time.";
+    const speed = a.reply_speed === 'Under 5 minutes' ? 'You already reply fast. Our follow-up keeps that speed at 11pm too.'
+      : a.reply_speed === 'Within an hour' ? 'An hour is a long time after an 11pm form. Our follow-up starts right away.'
+      : "By the time you call, they've often talked to someone else. Our follow-up reaches them first and books the time.";
     const warm = ['Sphere and past clients', 'Open houses or farming'];
     let source;
     if (src.includes('Brokerage leads') || src.includes('Portal leads')) source = `You're working leads other realtors get too. These come from ads with your name on them, and only you get them in ${city}.`;
@@ -1102,18 +1252,18 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     if (reasons.length) return [
       title(`Not a fit yet, ${first}`),
       h('ul', { class: 'reasons' }, reasons.map((r) => h('li', {}, icon('x'), h('span', {}, r)))),
-      h('p', { class: 'help', style: 'margin-top:20px' }, `We've saved your answers. When that changes, take the quiz again and we'll look at ${city} first.`),
+      h('p', { class: 'help' }, `We've saved your answers. When that changes, take the quiz again and we'll look at ${city} first.`),
       h('div', { class: 'tip' }, h('b', {}, 'One thing that helps right now'), h('p', {}, "Reply to every new lead within 5 minutes, even with a quick text. By the time you call, they've often talked to someone else.")),
-      h('div', { class: 'actions', style: 'margin-top:28px' }, h('button', { type: 'button', class: 'btn', onclick: close }, 'Back to the page')),
+      h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: close }, 'Back to the page')),
     ];
     const box = h('div', { class: 'cal-embed', id: 'cal-realtor-strategy-call' });
     setTimeout(() => loadCal(answers.name, answers.email), 0);
     return [
       title(`${first}, here's your report for ${city}`),
       h('dl', { class: 'report' }, reportLines(answers).map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, v)))),
-      h('p', { class: 'book' }, `Book your call. We'll confirm ${city} is open and walk you through the numbers.`),
+      h('p', { class: 'book-line' }, `Book your call. We'll confirm ${city} is open and walk you through the numbers.`),
       box,
-      h('p', { class: 'micro', style: 'text-align:left' }, "Pick a time that suits you. We'll text you a reminder."),
+      h('p', { class: 'micro' }, "Pick a time that suits you. We'll text you a reminder."),
     ];
   }
 
