@@ -796,7 +796,9 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
   // funnel events -> same Apps Script, Funnel tab. sendBeacon: text/plain, no preflight, survives page unload. No cookies, no storage.
   const SID = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
   const utm = new URLSearchParams(location.search);
+  const LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && !utm.has('track'); // local previews and QA runs stay out of the Funnel tab; add ?track=1 to test
   function track(event, extra) {
+    if (LOCAL) return;
     const body = JSON.stringify(Object.assign({
       event, utm_source: utm.get('utm_source') || '', utm_medium: utm.get('utm_medium') || '', utm_campaign: utm.get('utm_campaign') || '',
       page_url: location.href, ts: new Date().toISOString(), session_id: SID,
