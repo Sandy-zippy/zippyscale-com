@@ -3,45 +3,996 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZippyScale</title>
-<meta name="robots" content="noindex">
-<link rel="icon" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400&display=swap" rel="stylesheet">
+<title>Buyer and seller appointments for realtors | ZippyScale</title>
+<meta name="description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
+<link rel="canonical" href="https://www.zippyscale.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZippyScale">
+<meta property="og:url" content="https://www.zippyscale.com/">
+<meta property="og:title" content="Buyer and seller appointments for realtors | ZippyScale">
+<meta property="og:description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
+<meta property="og:image" content="https://www.zippyscale.com/assets/icon-256.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Buyer and seller appointments for realtors | ZippyScale">
+<meta name="twitter:description" content="For solo realtors with 6+ closings: buyers and sellers in your city, planning to move in 60 to 90 days, booked on your calendar. One realtor per city.">
+<meta name="twitter:image" content="https://www.zippyscale.com/assets/icon-256.png">
+<meta name="theme-color" content="#FFFDF7">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root { --cream:#FFFDF7; --charcoal:#2A2A35; --lime:#D5EB4B; }
-  * { box-sizing:border-box; }
-  body {
-    margin:0; min-height:100vh; background:var(--cream); color:var(--charcoal);
-    font-family:Inter, system-ui, -apple-system, sans-serif;
-    display:flex; align-items:center; justify-content:center; padding:32px 24px;
-  }
-  main { max-width:420px; width:100%; }
-  .mark {
-    font-family:'Space Grotesk', system-ui, sans-serif; font-weight:700;
-    font-size:28px; letter-spacing:-0.02em; margin:0 0 28px;
-  }
-  .mark span { color:var(--lime); -webkit-text-stroke:0.6px var(--charcoal); }
-  .rule { height:3px; width:44px; background:var(--lime); margin:0 0 28px; }
-  h1 {
-    font-family:'Space Grotesk', system-ui, sans-serif; font-weight:500;
-    font-size:20px; line-height:1.45; margin:0 0 16px; letter-spacing:-0.01em;
-  }
-  p { font-size:15px; line-height:1.6; margin:0 0 20px; opacity:0.75; }
-  a { color:var(--charcoal); text-decoration:underline; text-underline-offset:3px; }
-  a:hover { text-decoration-color:var(--lime); }
-  footer { margin-top:36px; font-size:13px; opacity:0.5; }
+@font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/inter-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/inter-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url('fonts/jetbrains-mono-700.woff2') format('woff2');font-weight:700;font-display:swap}
+
+:root{
+  --cream:#FFFDF7; --paper:#FFFFFF; --sand:#F5F2E8; --line:#E7E3D6; --line-2:#D6D1C1;
+  --charcoal:#2A2A35; --card-dark:#33333F; --border-dark:#44444F;
+  --lime:#D5EB4B; --lime-soft:#EEF6BE; --lime-text:#6B7C10;
+  --head:#1A1A2E; --body:#4A5568; --muted:#5B6270; --body-dark:#C9CBD6;
+  --display:'Space Grotesk',system-ui,sans-serif; --sans:'Inter',system-ui,-apple-system,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --gut:24px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.quiz-open{overflow:hidden}
+body{margin:0;background:var(--cream);color:var(--body);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--display);color:var(--head);font-weight:700;letter-spacing:-0.025em;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--charcoal);outline-offset:3px;border-radius:6px}
+.dark :focus-visible,.quiz .on-dark:focus-visible{outline-color:var(--lime)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.eyebrow{font:700 12.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lime-text)}
+.sec{padding:clamp(80px,10vw,128px) 0}
+.sec-head{max-width:640px}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.06}
+.sec-head .sub{margin-top:14px;font-size:clamp(17px,1.6vw,19px);color:var(--body);max-width:52ch}
+.dark{background:var(--charcoal);color:var(--body-dark)}
+.dark h2{color:#FFFDF7}
+.dark .sub{color:var(--body-dark)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:0;background:var(--lime);color:var(--charcoal);font:600 17px/1 var(--sans);text-decoration:none;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(42,42,53,.16),0 1px 2px rgba(42,42,53,.10);transition:background-color .2s var(--ease),box-shadow .2s var(--ease),transform .12s var(--ease)}
+.btn:hover{background:#CBE237;box-shadow:inset 0 0 0 1px rgba(42,42,53,.28),0 6px 18px -8px rgba(42,42,53,.35)}
+.btn:active{transform:translateY(1px)}
+.btn .ico{width:18px;height:18px;stroke-width:2}
+.btn-sm{min-height:44px;padding:0 18px;font-size:15px}
+.micro{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,253,247,.96);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;min-height:44px;min-width:44px}
+.logo img{height:28px;width:auto}
+
+/* hero */
+.hero{padding:clamp(28px,6vw,72px) 0 clamp(56px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.55rem,5.2vw,3.9rem);line-height:1.02;letter-spacing:-0.035em;margin-top:18px;max-width:15ch;text-wrap:pretty}
+.hero .lede{margin-top:22px;font-size:clamp(18px,1.9vw,21px);line-height:1.5;color:var(--body);max-width:36ch}
+.hero .cta{margin-top:32px}
+
+/* hero mock */
+.mock{position:relative;width:100%;max-width:520px;height:560px;margin-left:auto}
+.tag{position:absolute;top:0;right:0;font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:7px 10px}
+.phone{position:absolute;left:0;top:0;width:278px;height:556px;background:var(--charcoal);border-radius:44px;padding:11px;box-shadow:0 40px 80px -40px rgba(42,42,53,.55)}
+.screen{position:relative;height:100%;background:#F7F5EE;border-radius:34px;overflow:hidden;padding:14px 14px 0}
+.notch{width:86px;height:22px;background:var(--charcoal);border-radius:0 0 14px 14px;margin:-14px auto 10px}
+.contact{display:flex;align-items:center;gap:10px;padding:4px 2px 12px;border-bottom:1px solid var(--line)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--charcoal)}
+.avatar .ico{width:18px;height:18px}
+.contact .bars{display:grid;gap:5px}
+.contact .bars i{display:block;height:7px;border-radius:4px;background:#DAD6C8;width:84px}
+.contact .bars i+i{width:52px;background:#E6E2D6}
+.thread{display:grid;gap:10px;padding-top:14px}
+.qcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:7px;box-shadow:0 8px 20px -14px rgba(42,42,53,.35)}
+.qcard .row{display:flex;align-items:center;gap:8px;font:500 13.5px/1.25 var(--sans);color:var(--head)}
+.qcard .row .ico{width:16px;height:16px;color:var(--lime-text)}
+.bub{max-width:86%;padding:10px 13px;border-radius:18px;font:400 14px/1.4 var(--sans)}
+.bub.out{justify-self:end;background:var(--charcoal);color:#FFFDF7;border-bottom-right-radius:6px}
+.bub.in{justify-self:start;background:var(--paper);color:var(--head);border:1px solid var(--line);border-bottom-left-radius:6px}
+.inputbar{position:absolute;left:14px;right:14px;bottom:16px;height:36px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.cal{position:absolute;right:0;bottom:0;width:296px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px 16px 18px;box-shadow:0 30px 60px -28px rgba(42,42,53,.40)}
+.cal-head{display:flex;align-items:center;gap:8px;color:var(--head);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.cal-head .ico{color:var(--lime-text)}
+.cal-head i{display:block;height:8px;width:70px;border-radius:4px;background:#E3DFD2}
+.cal-head i+i{width:34px;margin-left:auto}
+.agenda{position:relative;margin-top:12px;display:grid;gap:8px}
+.slot-line{height:30px;border-top:1px dashed var(--line);position:relative}
+.busy{position:absolute;left:0;right:30%;top:6px;height:22px;border-radius:8px;background:#EFECE3}
+.event{position:relative;border-radius:12px;padding:10px 12px;background:var(--lime);color:var(--charcoal);display:grid;gap:2px}
+.event b{font:700 15px/1.25 var(--display);letter-spacing:-.01em}
+.event span{font:500 13px/1.35 var(--sans)}
+.event .ok{display:flex;align-items:center;gap:6px;margin-top:4px;font:700 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.event .ok .ico{width:15px;height:15px;stroke-width:2.25}
+
+/* one-shot hero sequence (added only by JS, final state is the default) */
+.mock.play .qcard{animation:rise .6s var(--ease) .25s both}
+.mock.play .bub.out{animation:rise .55s var(--ease) 1.05s both}
+.mock.play .bub.in{animation:rise .5s var(--ease) 1.95s both}
+.mock.play .event{animation:fill .7s var(--ease) 2.7s both}
+.mock.play .event .ok{animation:fade .35s var(--ease) 3.35s both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fill{from{opacity:.0;transform:scale(.94);clip-path:inset(0 100% 0 0 round 12px)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0 round 12px)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* proof bar */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+.proof ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr)}
+.proof li{padding:28px 24px;display:grid;gap:4px;align-content:start}
+.proof li+li{border-left:1px solid var(--line)}
+.proof b{font:700 clamp(26px,2.6vw,34px)/1.1 var(--display);color:var(--head);letter-spacing:-.02em}
+.proof b small{font-size:.62em;font-weight:500;color:var(--muted);letter-spacing:0}
+.proof span{font-size:15px;color:var(--muted)}
+
+/* problem: one lead fans out */
+.fan{margin-top:56px;position:relative}
+.lead-node{margin:0 auto;width:max-content;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;background:var(--paper);border:1px solid var(--line-2);font:700 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--head);box-shadow:0 10px 24px -16px rgba(42,42,53,.4)}
+.lead-node .ico{color:var(--lime-text)}
+.phones{list-style:none;margin:0;padding:48px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative}
+.phones::before{content:"";position:absolute;top:0;left:50%;height:24px;border-left:1.5px solid var(--line-2)}
+.phones::after{content:"";position:absolute;top:24px;left:10%;right:10%;border-top:1.5px solid var(--line-2)}
+.mini{position:relative;display:grid;justify-items:center}
+.mini::before{content:"";position:absolute;top:-24px;left:50%;height:24px;border-left:1.5px solid var(--line-2)}
+.mini-phone{width:100%;max-width:168px;height:196px;background:var(--charcoal);border-radius:24px;padding:7px}
+.mini-screen{height:100%;border-radius:18px;background:#F7F5EE;padding:30px 9px 9px;display:grid;align-content:start}
+.mini-screen .bub{max-width:100%;font-size:13px;padding:9px 11px;border-radius:14px;border-bottom-right-radius:4px}
+.tiles{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.tiles li{display:flex;align-items:center;gap:14px;padding:24px 20px 0 0;font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em}
+.tiles .ico{width:24px;height:24px;color:var(--lime-text)}
+
+/* different: comparison table */
+.compare{margin-top:48px;width:100%;max-width:860px;border-collapse:separate;border-spacing:0}
+.compare th,.compare td{text-align:left;vertical-align:middle;padding:16px 20px;font-size:17px;line-height:1.35}
+.compare thead th{font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-top:20px;padding-bottom:14px;color:var(--muted)}
+.compare thead th.us{color:var(--head)}
+.compare tbody td{border-top:1px solid var(--line)}
+.compare td.us,.compare th.us{background:var(--paper);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.compare th.us{border-top:1px solid var(--line);border-radius:16px 16px 0 0}
+.compare tbody tr:last-child td.us{border-bottom:1px solid var(--line);border-radius:0 0 16px 16px}
+.compare td.us{color:var(--head);font-weight:500}
+.compare td .cell{display:flex;align-items:center;gap:12px}
+.compare td .ico{width:18px;height:18px;stroke-width:2.25}
+.compare td.them .ico{color:#7A7F8A}
+.compare td.us .ico{color:var(--lime-text)}
+.compare col.them{width:50%}
+
+/* how: flow */
+.flow{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
+.flow::before{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;background:var(--border-dark)}
+.flow::after{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;background:var(--lime);transform-origin:left center}
+.node{position:relative;z-index:1;display:grid;gap:14px;align-content:start;justify-items:center;text-align:center;transition:opacity .45s var(--ease)}
+.node .dot{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--card-dark);border:1.5px solid var(--lime);color:var(--lime);transition:border-color .45s var(--ease),color .45s var(--ease),background-color .45s var(--ease)}
+.node .dot .ico{width:24px;height:24px}
+.node:last-child .dot{background:var(--lime);color:var(--charcoal)}
+.node b{font:500 18px/1.25 var(--display);color:#FFFDF7;letter-spacing:-.01em;max-width:14ch}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chip-d{font:500 12.5px/1 var(--sans);color:var(--body-dark);border:1px solid var(--border-dark);border-radius:999px;padding:6px 9px}
+.flow-cap{margin-top:48px;display:flex;align-items:center;gap:10px;color:var(--body-dark);font-size:16px}
+.flow-cap .ico{color:var(--lime)}
+.flow.armed::after{transform:scaleX(0)}
+.flow.armed .node{opacity:.38}
+.flow.armed .node .dot{border-color:var(--border-dark);color:var(--body-dark)}
+.flow.armed .node:last-child .dot{background:var(--card-dark)}
+.flow.armed.in::after{transform:none;transition:transform 1.3s var(--ease)}
+.flow.armed.in .node{opacity:1}
+.flow.armed.in .node .dot{border-color:var(--lime);color:var(--lime)}
+.flow.armed.in .node:last-child .dot{background:var(--lime);color:var(--charcoal)}
+.flow.in .node:nth-child(1),.flow.in .node:nth-child(1) .dot{transition-delay:.05s}
+.flow.in .node:nth-child(2),.flow.in .node:nth-child(2) .dot{transition-delay:.3s}
+.flow.in .node:nth-child(3),.flow.in .node:nth-child(3) .dot{transition-delay:.55s}
+.flow.in .node:nth-child(4),.flow.in .node:nth-child(4) .dot{transition-delay:.8s}
+.flow.in .node:nth-child(5),.flow.in .node:nth-child(5) .dot{transition-delay:1.05s}
+
+/* calendar: appointment cards */
+.split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
+.appts{position:relative;min-height:520px}
+.appt{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 60px -36px rgba(42,42,53,.45)}
+.appt.a{position:relative;z-index:2;max-width:440px}
+.appt.b{position:absolute;z-index:1;right:0;bottom:0;width:min(360px,80%);padding:18px 20px;box-shadow:0 20px 40px -30px rgba(42,42,53,.4)}
+.appt-top{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.pill{font:700 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:var(--lime);color:var(--charcoal)}
+.pill.alt{background:var(--sand);color:var(--head);border:1px solid var(--line-2)}
+.blur{display:flex;align-items:center;gap:10px;margin-left:auto}
+.blur i{display:block;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D9D4C4,#ECE8DC);filter:blur(1.5px)}
+.blur s{display:block;width:92px;height:12px;border-radius:6px;background:linear-gradient(90deg,#D9D4C4,#E9E5D9,#D9D4C4);filter:blur(2.5px)}
+.fields{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.fields li{display:flex;align-items:center;gap:12px;font-size:16.5px;color:var(--head)}
+.fields .ico{color:var(--muted)}
+.status{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;font:700 12.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime-text)}
+.status .ico{width:18px;height:18px;stroke-width:2.25}
+.appt.b .fields{margin-top:14px}
+.appt.b .status{margin-top:14px;padding-top:12px}
+
+/* results */
+.results{margin-top:48px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto;gap:16px}
+.res{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;align-content:space-between;gap:24px}
+.res.big{grid-row:span 2;padding:36px}
+.res .n{font:700 clamp(2.6rem,5vw,4rem)/1 var(--display);letter-spacing:-.04em;color:var(--head)}
+.res.big .n{font-size:clamp(3.8rem,9vw,7.5rem)}
+.res .l{margin-top:8px;font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
+.res p{font-size:16.5px;color:var(--body);max-width:42ch}
+.res-note{margin-top:18px;font-size:14px;color:var(--muted)}
+
+/* pay: timeline */
+.pay-line{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:1fr 2.2fr 1.4fr;gap:0;max-width:1000px}
+.stop{position:relative;padding:0 16px 0 0}
+.stop>span{display:block}
+.stop .top-l{font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em;min-height:2.6em;display:flex!important;align-items:flex-end;padding-bottom:16px}
+.stop .bar{position:relative;height:14px;border-radius:0;background:var(--line)}
+.stop:first-child .bar{border-radius:7px 0 0 7px;background:var(--lime-soft)}
+.stop:nth-child(2) .bar{background:var(--lime)}
+.stop:last-child .bar{border-radius:0 7px 7px 0;background:repeating-linear-gradient(90deg,var(--line-2) 0 10px,transparent 10px 16px)}
+.stop .bar::before{content:"";position:absolute;left:0;top:50%;width:18px;height:18px;margin-top:-9px;margin-left:-2px;border-radius:50%;background:var(--paper);border:2px solid var(--charcoal)}
+.stop .bot-l{padding-top:16px;font-size:16px;color:var(--body)}
+
+/* city */
+.city-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.seats{margin-top:32px;display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:420px}
+.seats i{display:block;aspect-ratio:1;border-radius:10px;border:1.5px solid var(--charcoal);background:var(--paper);position:relative}
+.seats i::after{content:"";position:absolute;inset:30%;border-radius:50%;background:var(--lime)}
+.fit{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.fit li{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line-2);font:500 15px/1.2 var(--sans);color:var(--head)}
+.fit .ico{width:17px;height:17px;color:var(--lime-text);stroke-width:2.25}
+.map{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px 24px 24px}
+.map svg{width:100%;height:auto}
+.map-label{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;background:var(--charcoal);color:#FFFDF7;border-radius:999px;padding:10px 16px;font:500 15px/1 var(--sans);box-shadow:0 14px 30px -16px rgba(42,42,53,.6)}
+.map-label .ico{width:17px;height:17px;color:var(--lime)}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px;align-items:start}
+.faq-list{border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;padding:16px 0;font:500 clamp(17px,1.7vw,19px)/1.35 var(--display);color:var(--head);letter-spacing:-.005em}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .ico{width:20px;height:20px;transition:transform .2s var(--ease);color:var(--muted)}
+.faq-list details[open] summary .ico{transform:rotate(45deg)}
+.faq-list summary:hover{color:var(--lime-text)}
+.faq-list details p{padding:0 44px 22px 0;color:var(--body);max-width:60ch}
+
+/* final */
+.final .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.final h2{font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.02}
+.inline-q{background:var(--card-dark);border:1px solid var(--border-dark);border-radius:24px;padding:28px}
+.inline-q .q{font:500 clamp(20px,2.2vw,24px)/1.3 var(--display);color:#FFFDF7;letter-spacing:-.01em}
+.inline-q .opts{margin-top:20px;display:grid;gap:10px}
+.opt-d{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:58px;padding:0 18px;border-radius:14px;border:1px solid var(--border-dark);background:#2E2E39;color:#FFFDF7;font:500 17px/1.2 var(--sans);text-align:left;cursor:pointer;transition:border-color .2s var(--ease),background-color .2s var(--ease)}
+.opt-d .ico{color:var(--body-dark);transition:transform .2s var(--ease),color .2s}
+.opt-d:hover{border-color:var(--lime);background:#363642}
+.opt-d:hover .ico{color:var(--lime);transform:translateX(3px)}
+.opt-d:active{transform:translateY(1px)}
+.final .micro{color:var(--body-dark)}
+
+footer{padding:28px 0}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;text-underline-offset:3px}
+
+/* quiz overlay */
+.quiz{position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.quiz[hidden]{display:none}
+.quiz-bar{position:sticky;top:0;z-index:2;background:var(--cream);display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;color:var(--head)}
+.icon-btn:hover{background:var(--sand)}
+.icon-btn[hidden]{display:grid;visibility:hidden}
+.quiz-progress{display:grid;gap:7px;justify-items:center}
+.quiz-count{font:700 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-height:12px}
+.track{width:100%;max-width:420px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--charcoal);border-radius:3px;transition:width .3s var(--ease)}
+.quiz-body{flex:1;padding:clamp(28px,6vh,72px) 20px 64px}
+.quiz-screen{max-width:580px;margin:0 auto}
+.quiz-screen.wide{max-width:860px}
+.quiz-screen.enter{animation:rise .24s var(--ease) both}
+.quiz h2{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.12}
+.quiz h2:focus{outline:none}
+.quiz .help{margin-top:12px;color:var(--body);font-size:16.5px}
+.quiz .opts{margin-top:28px;display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:12px 18px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--paper);color:var(--head);font:500 17px/1.3 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+.opt:hover{border-color:var(--charcoal)}
+.opt:active{transform:translateY(1px)}
+.opt[aria-pressed="true"]{border-color:var(--charcoal);background:var(--lime-soft)}
+.opt .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line-2);display:grid;place-items:center;flex:none;background:var(--paper)}
+.opt .box .ico{width:15px;height:15px;stroke-width:2.75;opacity:0}
+.opt[aria-pressed="true"] .box{background:var(--charcoal);border-color:var(--charcoal);color:var(--lime)}
+.opt[aria-pressed="true"] .box .ico{opacity:1}
+.hint{margin-top:10px;font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.actions{margin-top:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.qform{margin-top:28px;display:grid;gap:16px}
+.field{display:grid;gap:7px}
+.field label{font:500 15px/1.3 var(--sans);color:var(--head)}
+.field input{width:100%;min-height:52px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line-2);background:var(--paper);color:var(--head);font:400 17px/1.2 var(--sans)}
+.field input:focus{outline:none;border-color:var(--charcoal);box-shadow:0 0 0 3px rgba(42,42,53,.12)}
+.field input:user-invalid{border-color:#B42318}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.consent{font-size:14px;color:var(--muted);line-height:1.5}
+.report{margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:8px 24px}
+.report div{padding:18px 0;display:grid;gap:6px}
+.report div+div{border-top:1px solid var(--line)}
+.report dt{font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
+.report dd{margin:0;color:var(--head);font-size:17px;line-height:1.5}
+.book{margin-top:36px;font:500 clamp(19px,2vw,22px)/1.35 var(--display);color:var(--head);letter-spacing:-.01em}
+.cal-embed{margin-top:18px;width:100%;min-height:660px;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:auto}
+.reasons{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.reasons li{display:flex;gap:10px;color:var(--head)}
+.reasons .ico{margin-top:4px;color:var(--muted)}
+.tip{margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:8px}
+.tip b{font:700 11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
+
+/* tablet */
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:48px}
+  .hero h1{max-width:14ch}
+  .mock{margin:0 auto}
+  .split,.city-grid,.faq-grid,.final .wrap{grid-template-columns:1fr;gap:40px}
+  .appts{max-width:560px}
+}
+/* phone */
+@media (max-width:640px){
+  :root{--gut:20px}
+  body{font-size:16.5px}
+  .top .wrap{height:60px}
+  .logo img{height:24px}
+  .hero{padding-top:24px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.07em}
+  .hero h1{font-size:clamp(2.35rem,11vw,2.9rem);margin-top:14px}
+  .hero .lede{margin-top:16px;font-size:18px}
+  .hero .cta{margin-top:24px}
+  .hero .btn{width:100%}
+  .micro{text-align:center}
+  .mock{height:500px;max-width:340px}
+  .phone{width:232px;height:464px;border-radius:38px;padding:9px}
+  .screen{border-radius:30px;padding:12px 11px 0}
+  .notch{width:70px;height:18px;margin:-12px auto 8px}
+  .bub{font-size:13px;padding:9px 11px}
+  .qcard .row{font-size:12.5px}
+  .cal{width:196px;padding:12px 12px 14px;border-radius:16px}
+  .cal-head{padding-bottom:8px}
+  .cal-head i{width:44px}
+  .agenda{margin-top:8px;gap:6px}
+  .slot-line{height:20px}
+  .busy{height:14px;top:3px}
+  .event{padding:8px 10px}
+  .event b{font-size:14px}
+  .event span{font-size:12px}
+  .proof ul{grid-template-columns:1fr}
+  .proof li{padding:14px 0;gap:0}
+  .proof li+li{border-left:0;border-top:1px solid var(--line)}
+  .proof .wrap{padding:0 var(--gut)}
+  /* problem diagram: stacked */
+  .fan{margin-top:40px}
+  .lead-node{margin:0}
+  .phones{grid-template-columns:1fr;gap:10px;padding:18px 0 0 28px}
+  .phones::before{left:22px;top:0;bottom:30px;height:auto}
+  .phones::after{display:none}
+  .mini{justify-items:start}
+  .mini::before{top:50%;left:-6px;width:14px;height:0;border-left:0;border-top:1.5px solid var(--line-2)}
+  .mini-phone{max-width:none;width:100%;height:auto;border-radius:14px;padding:3px}
+  .mini-screen{border-radius:11px;padding:8px}
+  .mini-screen .bub{justify-self:end;max-width:92%}
+  .tiles{grid-template-columns:1fr;margin-top:40px}
+  .tiles li{padding:18px 0;border-bottom:1px solid var(--line)}
+  /* compare */
+  .compare{margin-top:36px}
+  .compare th,.compare td{padding:14px 10px;font-size:15px}
+  .compare thead th{font-size:11px}
+  .compare td .cell{gap:8px;align-items:flex-start}
+  .compare td .ico{width:16px;height:16px;margin-top:2px}
+  /* how: vertical */
+  .flow{grid-template-columns:1fr;gap:28px;margin-top:40px;padding-left:0}
+  .flow::before,.flow::after{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto}
+  .flow::after{transform-origin:center top}
+  .flow.armed::after{transform:scaleY(0)}
+  .node{grid-template-columns:56px 1fr;justify-items:start;text-align:left;column-gap:18px;row-gap:10px;align-items:center}
+  .node b{max-width:none}
+  .node .chips{grid-column:2;justify-content:flex-start}
+  .flow-cap{margin-top:36px;align-items:flex-start}
+  /* calendar cards */
+  .appts{min-height:0;display:grid;gap:14px}
+  .appt{padding:18px}
+  .appt.b{position:relative;width:auto;margin-left:28px}
+  .fields li{font-size:15.5px}
+  /* results */
+  .results{grid-template-columns:1fr}
+  .res.big{grid-row:auto;padding:28px}
+  .res{padding:24px}
+  /* pay */
+  .pay-line{grid-template-columns:1fr;margin-top:40px;padding-left:8px}
+  .stop{padding:0 0 34px 40px}
+  .stop .bar{position:absolute;left:4px;top:6px;bottom:-6px;width:12px;height:auto}
+  .stop:first-child .bar{border-radius:6px 6px 0 0}
+  .stop:last-child .bar{bottom:0;border-radius:0 0 6px 6px;background:repeating-linear-gradient(180deg,var(--line-2) 0 10px,transparent 10px 16px)}
+  .stop:last-child{padding-bottom:0}
+  .stop .bar::before{left:50%;top:0;margin:-4px 0 0 -9px}
+  .stop .top-l{min-height:0;padding:0;align-items:flex-start}
+  .stop .bot-l{padding-top:4px}
+  .seats{gap:5px}
+  .seats i{border-radius:7px}
+  .map{padding:18px 14px}
+  .map-label{font-size:14px;padding:9px 13px}
+  .faq-list details p{padding-right:0}
+  .inline-q{padding:20px}
+  .two{grid-template-columns:1fr}
+  .report{padding:4px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M12 9 5 15v6M12 9l7 6v6M12 9v12"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+</svg>
+
+<div id="page">
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="ZippyScale home"><img src="assets/logo-light.png" alt="ZippyScale" width="98" height="28"></a>
+    <a class="btn btn-sm" href="#fit" data-open-quiz>See if you qualify</a>
+  </div>
+</header>
+
 <main>
-  <p class="mark">Zippy<span>Scale</span></p>
-  <div class="rule"></div>
-  <h1>This site is being rebuilt.</h1>
-  <p>We are a marketing team working with real estate agents in North America. The site is coming back shortly with what we actually do now.</p>
-  <p>Until then, email <a href="mailto:sandy@zippyscale.com">sandy@zippyscale.com</a>.</p>
-  <footer>ZippyScale &middot; Vancouver, Canada</footer>
+<section class="hero" data-s="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">For solo realtors with 6+ closings a year</p>
+      <h1>Buyers and sellers, booked on your calendar</h1>
+      <p class="lede">People in your city planning to buy or sell in 60 to 90 days. You take the call.</p>
+      <div class="cta">
+        <a class="btn" href="#fit" data-open-quiz>See if you qualify <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <p class="micro">2 minutes · one realtor per city</p>
+      </div>
+    </div>
+
+    <figure class="mock" style="margin-block:0">
+      <span class="tag">Example</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="contact" aria-hidden="true">
+            <span class="avatar"><svg class="ico"><use href="#i-user"/></svg></span>
+            <span class="bars"><i></i><i></i></span>
+          </div>
+          <div class="thread">
+            <div class="qcard">
+              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>First condo</span>
+              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>60 to 90 days</span>
+              <span class="row"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>Pre-approved</span>
+            </div>
+            <p class="bub out">Hi Priya, your Burnaby condo guide is ready. Chat Thursday at 10:30?</p>
+            <p class="bub in">Thursday works.</p>
+          </div>
+          <div class="inputbar" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="cal">
+        <div class="cal-head" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg><i></i><i></i></div>
+        <div class="agenda">
+          <div class="slot-line" aria-hidden="true"><span class="busy"></span></div>
+          <div class="event">
+            <b>Thu 10:30</b>
+            <span>Buyer call · Priya S.</span>
+            <span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
+          </div>
+          <div class="slot-line" aria-hidden="true"></div>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="proof" data-s="proof" aria-label="Track record">
+  <div class="wrap">
+    <ul>
+      <li><b>Since 2023</b><span>in real estate</span></li>
+      <li><b>$130k+</b><span>real estate ad spend managed</span></li>
+      <li><b>$250 <small>to</small> $70</b><span>per qualified appointment, coaching client</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" data-s="problem">
+  <div class="wrap">
+    <div class="sec-head"><h2>Referrals worked until this year</h2></div>
+    <div class="fan">
+      <p class="lead-node"><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>New lead · 11:04 pm</p>
+      <ul class="phones">
+        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+      </ul>
+    </div>
+    <ul class="tiles">
+      <li><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg>Your sphere went quiet</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-split"/></svg>One lead, five realtors</li>
+      <li><svg class="ico" aria-hidden="true"><use href="#i-video"/></svg>Content that goes nowhere</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" data-s="different" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Qualified before your phone rings</h2></div>
+    <table class="compare">
+      <colgroup><col class="them"><col></colgroup>
+      <thead><tr><th scope="col">Leads you're handed</th><th scope="col" class="us">With ZippyScale</th></tr></thead>
+      <tbody>
+        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Sent to several realtors</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>One realtor per city</span></td></tr>
+        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Filled out at 11pm, forgotten</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Answered qualifying questions first</span></td></tr>
+        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You chase them for days</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>They book a time</span></td></tr>
+        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Post content every day</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>We make guides and ads</span></td></tr>
+        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You pay for every form</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Mostly paid after they show</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec dark" data-s="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How new people find you</h2>
+      <p class="sub">Live within 7 days of signing.</p>
+    </div>
+    <ol class="flow">
+      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-book"/></svg></span><b>Your city's guide</b>
+        <span class="chips"><span class="chip-d">Relocation</span><span class="chip-d">Presale</span><span class="chip-d">Market snapshot</span><span class="chip-d">Home evaluation</span></span></li>
+      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-megaphone"/></svg></span><b>Ads with you teaching</b></li>
+      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-quiz"/></svg></span><b>Quiz and personal report</b></li>
+      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-msg"/></svg></span><b>Text, email, AI call</b></li>
+      <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg></span><b>On your calendar</b></li>
+    </ol>
+    <p class="flow-cap"><svg class="ico" aria-hidden="true"><use href="#i-sheet"/></svg>Every lead lands in a Google Sheet you both see.</p>
+  </div>
+</section>
+
+<section class="sec" data-s="calendar">
+  <div class="wrap split">
+    <div class="sec-head">
+      <h2>Moving within 90 days</h2>
+      <p class="sub">Their answers come with every booking.</p>
+    </div>
+    <div class="appts">
+      <article class="appt a">
+        <div class="appt-top"><span class="pill">Buyer</span><span class="blur" aria-hidden="true"><s></s><i></i></span></div>
+        <ul class="fields">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>First-time buyer · Burnaby</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Moving in 60 to 90 days</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>Pre-approved</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>Lease ends in March</li>
+        </ul>
+        <p class="status"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed by text</p>
+      </article>
+      <article class="appt b">
+        <div class="appt-top"><span class="pill alt">Seller</span><span class="blur" aria-hidden="true"><s></s><i></i></span></div>
+        <ul class="fields">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>Downsizer · Richmond · home evaluation</li>
+        </ul>
+        <p class="status"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed by call</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-s="results" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><h2>Real estate ads since 2023</h2></div>
+    <div class="results">
+      <article class="res big">
+        <div><p class="n">$2M+</p><p class="l">GCI tracked</p></div>
+        <p>A Vancouver commercial realtor. Ads and content for about two years. $25 leads.</p>
+      </article>
+      <article class="res">
+        <div><p class="n">$1k to $10k</p><p class="l">monthly ad spend</p></div>
+        <p>A Toronto real estate coaching brand. Revenue to $40k a month.</p>
+      </article>
+      <article class="res">
+        <div><p class="n">Hundreds</p><p class="l">of realtors</p></div>
+        <p>Our ads ran for them through real estate coaching programs. Plus realtor events and LinkedIn outreach.</p>
+      </article>
+    </div>
+    <p class="res-note">Client names kept private.</p>
+  </div>
+</section>
+
+<section class="sec" data-s="pay" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Close to nothing upfront</h2>
+      <p class="sub">Most of our fee comes after qualified appointments show up. Details on the call.</p>
+    </div>
+    <ol class="pay-line">
+      <li class="stop"><span class="top-l">You sign</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Small start</span></li>
+      <li class="stop"><span class="top-l">Appointments show up</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Most of our fee</span></li>
+      <li class="stop"><span class="top-l">You scale ads</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Only then we earn more</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" data-s="city" style="padding-top:0">
+  <div class="wrap city-grid">
+    <div>
+      <div class="sec-head">
+        <h2>One realtor per city</h2>
+        <p class="sub">10 realtors, September to December. First come, first served.</p>
+      </div>
+      <div class="seats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <ul class="fit">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Solo realtor</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>6+ closings, past year</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ready to fund your ads</li>
+      </ul>
+    </div>
+    <div class="map">
+      <svg viewBox="0 0 660 570" aria-hidden="true"><path d="M115 15h0M125 15h0M135 15h0M145 15h0M85 25h0M95 25h0M115 25h0M125 25h0M135 25h0M145 25h0M155 25h0M85 35h0M95 35h0M115 35h0M125 35h0M135 35h0M145 35h0M155 35h0M165 35h0M95 45h0M105 45h0M115 45h0M125 45h0M135 45h0M145 45h0M155 45h0M165 45h0M175 45h0M65 55h0M75 55h0M85 55h0M95 55h0M105 55h0M115 55h0M125 55h0M135 55h0M145 55h0M155 55h0M165 55h0M175 55h0M185 55h0M45 65h0M55 65h0M65 65h0M75 65h0M85 65h0M95 65h0M105 65h0M115 65h0M125 65h0M135 65h0M145 65h0M155 65h0M165 65h0M175 65h0M185 65h0M195 65h0M55 75h0M65 75h0M75 75h0M85 75h0M95 75h0M105 75h0M115 75h0M125 75h0M135 75h0M145 75h0M155 75h0M165 75h0M175 75h0M185 75h0M195 75h0M455 75h0M465 75h0M65 85h0M75 85h0M85 85h0M95 85h0M105 85h0M115 85h0M125 85h0M135 85h0M145 85h0M155 85h0M165 85h0M175 85h0M185 85h0M195 85h0M205 85h0M215 85h0M225 85h0M235 85h0M245 85h0M425 85h0M435 85h0M445 85h0M455 85h0M465 85h0M475 85h0M65 95h0M75 95h0M85 95h0M95 95h0M105 95h0M115 95h0M125 95h0M135 95h0M145 95h0M155 95h0M165 95h0M175 95h0M185 95h0M195 95h0M205 95h0M215 95h0M225 95h0M235 95h0M245 95h0M255 95h0M265 95h0M305 95h0M315 95h0M325 95h0M335 95h0M365 95h0M375 95h0M395 95h0M405 95h0M415 95h0M425 95h0M445 95h0M455 95h0M465 95h0M475 95h0M485 95h0M495 95h0M65 105h0M75 105h0M85 105h0M95 105h0M105 105h0M115 105h0M125 105h0M135 105h0M145 105h0M155 105h0M165 105h0M175 105h0M185 105h0M195 105h0M205 105h0M215 105h0M225 105h0M235 105h0M245 105h0M255 105h0M265 105h0M275 105h0M295 105h0M305 105h0M315 105h0M325 105h0M335 105h0M345 105h0M375 105h0M385 105h0M415 105h0M425 105h0M465 105h0M475 105h0M485 105h0M495 105h0M505 105h0M15 115h0M25 115h0M65 115h0M75 115h0M85 115h0M105 115h0M115 115h0M125 115h0M135 115h0M145 115h0M155 115h0M165 115h0M175 115h0M185 115h0M195 115h0M205 115h0M215 115h0M225 115h0M235 115h0M245 115h0M255 115h0M265 115h0M275 115h0M285 115h0M325 115h0M375 115h0M385 115h0M395 115h0M415 115h0M425 115h0M465 115h0M475 115h0M485 115h0M95 125h0M105 125h0M115 125h0M125 125h0M135 125h0M145 125h0M155 125h0M165 125h0M175 125h0M185 125h0M195 125h0M205 125h0M215 125h0M225 125h0M235 125h0M245 125h0M255 125h0M265 125h0M275 125h0M285 125h0M295 125h0M305 125h0M315 125h0M325 125h0M335 125h0M355 125h0M365 125h0M375 125h0M385 125h0M395 125h0M405 125h0M415 125h0M425 125h0M465 125h0M475 125h0M485 125h0M495 125h0M505 125h0M75 135h0M135 135h0M145 135h0M155 135h0M165 135h0M175 135h0M185 135h0M195 135h0M205 135h0M215 135h0M225 135h0M235 135h0M245 135h0M255 135h0M265 135h0M275 135h0M285 135h0M295 135h0M305 135h0M315 135h0M325 135h0M335 135h0M345 135h0M355 135h0M365 135h0M375 135h0M385 135h0M395 135h0M405 135h0M455 135h0M465 135h0M475 135h0M485 135h0M495 135h0M505 135h0M145 145h0M155 145h0M165 145h0M175 145h0M185 145h0M195 145h0M205 145h0M215 145h0M225 145h0M235 145h0M245 145h0M255 145h0M265 145h0M275 145h0M285 145h0M295 145h0M305 145h0M315 145h0M325 145h0M335 145h0M345 145h0M355 145h0M365 145h0M375 145h0M385 145h0M395 145h0M405 145h0M415 145h0M455 145h0M485 145h0M495 145h0M505 145h0M155 155h0M165 155h0M175 155h0M185 155h0M195 155h0M205 155h0M215 155h0M225 155h0M235 155h0M245 155h0M255 155h0M265 155h0M275 155h0M285 155h0M295 155h0M305 155h0M315 155h0M325 155h0M335 155h0M345 155h0M355 155h0M365 155h0M375 155h0M385 155h0M395 155h0M405 155h0M415 155h0M425 155h0M435 155h0M155 165h0M165 165h0M175 165h0M185 165h0M195 165h0M205 165h0M215 165h0M225 165h0M235 165h0M245 165h0M255 165h0M265 165h0M275 165h0M285 165h0M295 165h0M305 165h0M315 165h0M325 165h0M335 165h0M345 165h0M355 165h0M365 165h0M375 165h0M385 165h0M465 165h0M475 165h0M485 165h0M155 175h0M165 175h0M175 175h0M185 175h0M195 175h0M205 175h0M215 175h0M225 175h0M235 175h0M245 175h0M255 175h0M265 175h0M275 175h0M285 175h0M295 175h0M305 175h0M315 175h0M325 175h0M335 175h0M345 175h0M355 175h0M365 175h0M375 175h0M385 175h0M465 175h0M475 175h0M485 175h0M495 175h0M505 175h0M535 175h0M545 175h0M175 185h0M185 185h0M195 185h0M205 185h0M215 185h0M225 185h0M235 185h0M245 185h0M255 185h0M265 185h0M275 185h0M285 185h0M295 185h0M305 185h0M315 185h0M325 185h0M335 185h0M345 185h0M355 185h0M365 185h0M375 185h0M475 185h0M485 185h0M495 185h0M505 185h0M515 185h0M525 185h0M535 185h0M545 185h0M555 185h0M175 195h0M185 195h0M195 195h0M205 195h0M215 195h0M225 195h0M235 195h0M245 195h0M255 195h0M265 195h0M275 195h0M285 195h0M295 195h0M305 195h0M315 195h0M325 195h0M335 195h0M345 195h0M355 195h0M365 195h0M375 195h0M475 195h0M485 195h0M495 195h0M505 195h0M515 195h0M525 195h0M535 195h0M545 195h0M555 195h0M565 195h0M575 195h0M585 195h0M175 205h0M185 205h0M195 205h0M205 205h0M215 205h0M225 205h0M235 205h0M245 205h0M255 205h0M265 205h0M275 205h0M285 205h0M295 205h0M305 205h0M315 205h0M325 205h0M335 205h0M345 205h0M355 205h0M365 205h0M375 205h0M475 205h0M485 205h0M495 205h0M505 205h0M515 205h0M525 205h0M535 205h0M545 205h0M555 205h0M565 205h0M575 205h0M585 205h0M595 205h0M605 205h0M175 215h0M185 215h0M195 215h0M205 215h0M215 215h0M225 215h0M235 215h0M245 215h0M255 215h0M265 215h0M275 215h0M285 215h0M295 215h0M305 215h0M315 215h0M325 215h0M335 215h0M345 215h0M355 215h0M365 215h0M375 215h0M485 215h0M495 215h0M505 215h0M515 215h0M525 215h0M535 215h0M545 215h0M555 215h0M565 215h0M575 215h0M585 215h0M595 215h0M605 215h0M615 215h0M175 225h0M185 225h0M195 225h0M205 225h0M215 225h0M225 225h0M235 225h0M245 225h0M255 225h0M265 225h0M275 225h0M285 225h0M295 225h0M305 225h0M315 225h0M325 225h0M335 225h0M345 225h0M355 225h0M365 225h0M375 225h0M385 225h0M485 225h0M495 225h0M505 225h0M515 225h0M525 225h0M535 225h0M545 225h0M555 225h0M565 225h0M575 225h0M585 225h0M595 225h0M605 225h0M155 235h0M175 235h0M185 235h0M195 235h0M205 235h0M215 235h0M225 235h0M235 235h0M245 235h0M255 235h0M265 235h0M275 235h0M285 235h0M295 235h0M305 235h0M315 235h0M325 235h0M335 235h0M345 235h0M355 235h0M365 235h0M375 235h0M385 235h0M395 235h0M405 235h0M485 235h0M495 235h0M505 235h0M515 235h0M525 235h0M535 235h0M545 235h0M555 235h0M565 235h0M575 235h0M585 235h0M595 235h0M605 235h0M625 235h0M635 235h0M645 235h0M155 245h0M175 245h0M185 245h0M195 245h0M205 245h0M215 245h0M225 245h0M235 245h0M245 245h0M255 245h0M265 245h0M275 245h0M285 245h0M295 245h0M305 245h0M315 245h0M325 245h0M335 245h0M345 245h0M355 245h0M365 245h0M375 245h0M385 245h0M395 245h0M405 245h0M415 245h0M425 245h0M475 245h0M485 245h0M495 245h0M505 245h0M515 245h0M525 245h0M535 245h0M545 245h0M555 245h0M565 245h0M575 245h0M585 245h0M595 245h0M625 245h0M635 245h0M645 245h0M655 245h0M185 255h0M195 255h0M205 255h0M215 255h0M225 255h0M235 255h0M245 255h0M255 255h0M265 255h0M275 255h0M285 255h0M295 255h0M305 255h0M315 255h0M325 255h0M335 255h0M345 255h0M355 255h0M365 255h0M375 255h0M385 255h0M395 255h0M405 255h0M415 255h0M425 255h0M435 255h0M445 255h0M455 255h0M485 255h0M495 255h0M505 255h0M515 255h0M525 255h0M535 255h0M545 255h0M555 255h0M565 255h0M575 255h0M625 255h0M635 255h0M185 265h0M195 265h0M205 265h0M215 265h0M225 265h0M235 265h0M245 265h0M255 265h0M265 265h0M275 265h0M285 265h0M295 265h0M305 265h0M315 265h0M325 265h0M335 265h0M345 265h0M355 265h0M365 265h0M375 265h0M385 265h0M395 265h0M405 265h0M415 265h0M425 265h0M435 265h0M445 265h0M455 265h0M485 265h0M495 265h0M505 265h0M515 265h0M525 265h0M535 265h0M545 265h0M555 265h0M565 265h0M185 275h0M195 275h0M205 275h0M215 275h0M225 275h0M235 275h0M245 275h0M255 275h0M265 275h0M275 275h0M285 275h0M295 275h0M305 275h0M315 275h0M325 275h0M335 275h0M345 275h0M355 275h0M365 275h0M375 275h0M385 275h0M395 275h0M405 275h0M415 275h0M425 275h0M435 275h0M445 275h0M455 275h0M465 275h0M485 275h0M495 275h0M505 275h0M515 275h0M525 275h0M535 275h0M545 275h0M555 275h0M575 275h0M585 275h0M175 285h0M195 285h0M205 285h0M215 285h0M225 285h0M235 285h0M245 285h0M255 285h0M265 285h0M275 285h0M285 285h0M295 285h0M305 285h0M315 285h0M325 285h0M335 285h0M345 285h0M355 285h0M365 285h0M375 285h0M385 285h0M395 285h0M405 285h0M415 285h0M425 285h0M435 285h0M445 285h0M455 285h0M465 285h0M475 285h0M485 285h0M495 285h0M505 285h0M515 285h0M525 285h0M535 285h0M545 285h0M555 285h0M565 285h0M575 285h0M585 285h0M625 285h0M185 295h0M195 295h0M205 295h0M215 295h0M225 295h0M235 295h0M245 295h0M255 295h0M265 295h0M275 295h0M285 295h0M295 295h0M305 295h0M315 295h0M325 295h0M335 295h0M345 295h0M355 295h0M365 295h0M375 295h0M385 295h0M395 295h0M405 295h0M415 295h0M425 295h0M435 295h0M445 295h0M455 295h0M465 295h0M475 295h0M485 295h0M495 295h0M505 295h0M515 295h0M525 295h0M535 295h0M545 295h0M555 295h0M565 295h0M575 295h0M585 295h0M595 295h0M615 295h0M185 305h0M205 305h0M215 305h0M225 305h0M235 305h0M245 305h0M255 305h0M265 305h0M275 305h0M285 305h0M295 305h0M305 305h0M315 305h0M325 305h0M335 305h0M345 305h0M355 305h0M365 305h0M375 305h0M385 305h0M395 305h0M405 305h0M415 305h0M425 305h0M435 305h0M445 305h0M455 305h0M465 305h0M475 305h0M485 305h0M495 305h0M505 305h0M515 305h0M525 305h0M535 305h0M545 305h0M565 305h0M575 305h0M585 305h0M595 305h0M605 305h0M185 315h0M205 315h0M215 315h0M225 315h0M235 315h0M245 315h0M255 315h0M265 315h0M275 315h0M285 315h0M295 315h0M305 315h0M315 315h0M325 315h0M335 315h0M345 315h0M355 315h0M365 315h0M375 315h0M385 315h0M395 315h0M405 315h0M415 315h0M425 315h0M435 315h0M445 315h0M455 315h0M465 315h0M475 315h0M485 315h0M495 315h0M505 315h0M515 315h0M525 315h0M535 315h0M545 315h0M555 315h0M565 315h0M575 315h0M605 315h0M185 325h0M195 325h0M205 325h0M215 325h0M225 325h0M235 325h0M245 325h0M255 325h0M265 325h0M275 325h0M285 325h0M295 325h0M305 325h0M315 325h0M325 325h0M335 325h0M345 325h0M355 325h0M365 325h0M375 325h0M385 325h0M395 325h0M405 325h0M415 325h0M425 325h0M435 325h0M445 325h0M455 325h0M465 325h0M475 325h0M485 325h0M495 325h0M505 325h0M515 325h0M525 325h0M535 325h0M545 325h0M555 325h0M565 325h0M575 325h0M185 335h0M195 335h0M205 335h0M215 335h0M225 335h0M235 335h0M245 335h0M255 335h0M265 335h0M275 335h0M285 335h0M295 335h0M305 335h0M315 335h0M325 335h0M335 335h0M345 335h0M355 335h0M365 335h0M375 335h0M385 335h0M395 335h0M405 335h0M415 335h0M425 335h0M435 335h0M445 335h0M455 335h0M465 335h0M475 335h0M485 335h0M495 335h0M505 335h0M515 335h0M525 335h0M535 335h0M545 335h0M555 335h0M565 335h0M185 345h0M195 345h0M205 345h0M215 345h0M225 345h0M235 345h0M245 345h0M255 345h0M265 345h0M275 345h0M285 345h0M295 345h0M305 345h0M315 345h0M325 345h0M335 345h0M345 345h0M355 345h0M365 345h0M375 345h0M385 345h0M395 345h0M405 345h0M415 345h0M425 345h0M435 345h0M445 345h0M455 345h0M465 345h0M475 345h0M485 345h0M495 345h0M505 345h0M515 345h0M525 345h0M535 345h0M545 345h0M555 345h0M565 345h0M175 355h0M185 355h0M195 355h0M205 355h0M215 355h0M225 355h0M235 355h0M245 355h0M255 355h0M265 355h0M275 355h0M285 355h0M295 355h0M305 355h0M315 355h0M325 355h0M335 355h0M345 355h0M355 355h0M365 355h0M375 355h0M385 355h0M395 355h0M405 355h0M415 355h0M425 355h0M435 355h0M445 355h0M455 355h0M465 355h0M475 355h0M485 355h0M495 355h0M505 355h0M515 355h0M525 355h0M535 355h0M545 355h0M555 355h0M565 355h0M175 365h0M185 365h0M195 365h0M205 365h0M215 365h0M225 365h0M235 365h0M245 365h0M255 365h0M265 365h0M275 365h0M285 365h0M295 365h0M305 365h0M315 365h0M325 365h0M335 365h0M345 365h0M355 365h0M365 365h0M375 365h0M385 365h0M395 365h0M405 365h0M415 365h0M425 365h0M435 365h0M445 365h0M455 365h0M465 365h0M475 365h0M485 365h0M495 365h0M505 365h0M515 365h0M525 365h0M535 365h0M545 365h0M555 365h0M565 365h0M165 375h0M175 375h0M185 375h0M195 375h0M205 375h0M215 375h0M225 375h0M235 375h0M245 375h0M255 375h0M265 375h0M275 375h0M285 375h0M295 375h0M305 375h0M315 375h0M325 375h0M335 375h0M345 375h0M355 375h0M365 375h0M375 375h0M385 375h0M395 375h0M405 375h0M415 375h0M425 375h0M435 375h0M445 375h0M455 375h0M465 375h0M475 375h0M485 375h0M495 375h0M505 375h0M515 375h0M525 375h0M535 375h0M545 375h0M555 375h0M165 385h0M175 385h0M185 385h0M195 385h0M205 385h0M215 385h0M225 385h0M235 385h0M245 385h0M255 385h0M265 385h0M275 385h0M285 385h0M295 385h0M305 385h0M315 385h0M325 385h0M335 385h0M345 385h0M355 385h0M365 385h0M375 385h0M385 385h0M395 385h0M405 385h0M415 385h0M425 385h0M435 385h0M445 385h0M455 385h0M465 385h0M475 385h0M485 385h0M495 385h0M505 385h0M515 385h0M525 385h0M535 385h0M545 385h0M555 385h0M165 395h0M175 395h0M185 395h0M195 395h0M205 395h0M215 395h0M225 395h0M235 395h0M245 395h0M255 395h0M265 395h0M275 395h0M285 395h0M295 395h0M305 395h0M315 395h0M325 395h0M335 395h0M345 395h0M355 395h0M365 395h0M375 395h0M385 395h0M395 395h0M405 395h0M415 395h0M425 395h0M435 395h0M445 395h0M455 395h0M465 395h0M475 395h0M485 395h0M495 395h0M505 395h0M515 395h0M525 395h0M535 395h0M545 395h0M165 405h0M175 405h0M185 405h0M195 405h0M205 405h0M215 405h0M225 405h0M235 405h0M245 405h0M255 405h0M265 405h0M275 405h0M285 405h0M295 405h0M305 405h0M315 405h0M325 405h0M335 405h0M345 405h0M355 405h0M365 405h0M375 405h0M385 405h0M395 405h0M405 405h0M415 405h0M425 405h0M435 405h0M445 405h0M455 405h0M465 405h0M475 405h0M485 405h0M495 405h0M505 405h0M515 405h0M525 405h0M535 405h0M545 405h0M165 415h0M175 415h0M185 415h0M195 415h0M205 415h0M215 415h0M225 415h0M235 415h0M245 415h0M255 415h0M265 415h0M275 415h0M285 415h0M295 415h0M305 415h0M315 415h0M325 415h0M335 415h0M345 415h0M355 415h0M365 415h0M375 415h0M385 415h0M395 415h0M405 415h0M415 415h0M425 415h0M435 415h0M445 415h0M455 415h0M465 415h0M475 415h0M485 415h0M495 415h0M505 415h0M515 415h0M525 415h0M535 415h0M545 415h0M165 425h0M175 425h0M185 425h0M195 425h0M205 425h0M215 425h0M225 425h0M235 425h0M245 425h0M255 425h0M265 425h0M275 425h0M285 425h0M295 425h0M305 425h0M315 425h0M325 425h0M335 425h0M345 425h0M355 425h0M365 425h0M375 425h0M385 425h0M395 425h0M405 425h0M415 425h0M425 425h0M435 425h0M445 425h0M455 425h0M465 425h0M475 425h0M485 425h0M495 425h0M505 425h0M515 425h0M525 425h0M535 425h0M545 425h0M175 435h0M185 435h0M195 435h0M205 435h0M215 435h0M225 435h0M235 435h0M245 435h0M255 435h0M265 435h0M275 435h0M285 435h0M295 435h0M305 435h0M315 435h0M325 435h0M335 435h0M345 435h0M355 435h0M365 435h0M375 435h0M385 435h0M395 435h0M405 435h0M415 435h0M425 435h0M435 435h0M445 435h0M455 435h0M465 435h0M475 435h0M485 435h0M495 435h0M505 435h0M515 435h0M525 435h0M535 435h0M545 435h0M555 435h0M175 445h0M185 445h0M195 445h0M205 445h0M215 445h0M225 445h0M235 445h0M245 445h0M255 445h0M265 445h0M275 445h0M285 445h0M295 445h0M305 445h0M315 445h0M325 445h0M335 445h0M345 445h0M355 445h0M365 445h0M375 445h0M385 445h0M395 445h0M405 445h0M415 445h0M425 445h0M435 445h0M445 445h0M455 445h0M465 445h0M475 445h0M485 445h0M495 445h0M505 445h0M515 445h0M525 445h0M535 445h0M545 445h0M175 455h0M185 455h0M195 455h0M205 455h0M215 455h0M225 455h0M235 455h0M245 455h0M255 455h0M265 455h0M275 455h0M285 455h0M295 455h0M305 455h0M315 455h0M325 455h0M335 455h0M345 455h0M355 455h0M365 455h0M375 455h0M385 455h0M395 455h0M405 455h0M415 455h0M425 455h0M435 455h0M445 455h0M455 455h0M465 455h0M475 455h0M485 455h0M495 455h0M505 455h0M515 455h0M525 455h0M535 455h0M195 465h0M205 465h0M215 465h0M225 465h0M235 465h0M245 465h0M255 465h0M265 465h0M275 465h0M285 465h0M295 465h0M305 465h0M315 465h0M325 465h0M335 465h0M345 465h0M355 465h0M365 465h0M375 465h0M385 465h0M395 465h0M405 465h0M415 465h0M425 465h0M435 465h0M445 465h0M455 465h0M465 465h0M475 465h0M485 465h0M495 465h0M505 465h0M515 465h0M525 465h0M535 465h0M195 475h0M205 475h0M215 475h0M225 475h0M235 475h0M245 475h0M255 475h0M265 475h0M275 475h0M285 475h0M295 475h0M305 475h0M315 475h0M325 475h0M335 475h0M345 475h0M355 475h0M365 475h0M375 475h0M385 475h0M395 475h0M405 475h0M415 475h0M425 475h0M435 475h0M445 475h0M455 475h0M465 475h0M475 475h0M485 475h0M495 475h0M505 475h0M515 475h0M525 475h0M225 485h0M235 485h0M245 485h0M255 485h0M265 485h0M275 485h0M285 485h0M295 485h0M305 485h0M315 485h0M325 485h0M335 485h0M345 485h0M355 485h0M365 485h0M375 485h0M385 485h0M395 485h0M405 485h0M415 485h0M425 485h0M435 485h0M445 485h0M455 485h0M465 485h0M475 485h0M485 485h0M495 485h0M505 485h0M515 485h0M235 495h0M245 495h0M255 495h0M265 495h0M275 495h0M285 495h0M295 495h0M305 495h0M315 495h0M325 495h0M335 495h0M345 495h0M355 495h0M365 495h0M375 495h0M385 495h0M395 495h0M405 495h0M415 495h0M425 495h0M435 495h0M445 495h0M455 495h0M465 495h0M475 495h0M485 495h0M495 495h0M505 495h0M515 495h0M255 505h0M265 505h0M295 505h0M305 505h0M315 505h0M325 505h0M335 505h0M345 505h0M355 505h0M365 505h0M375 505h0M385 505h0M395 505h0M405 505h0M415 505h0M425 505h0M435 505h0M445 505h0M455 505h0M465 505h0M475 505h0M485 505h0M495 505h0M505 505h0M515 505h0M525 505h0M305 515h0M315 515h0M325 515h0M335 515h0M345 515h0M355 515h0M365 515h0M375 515h0M385 515h0M395 515h0M405 515h0M415 515h0M425 515h0M435 515h0M445 515h0M515 515h0M525 515h0M315 525h0M325 525h0M335 525h0M345 525h0M355 525h0M365 525h0M375 525h0M385 525h0M395 525h0M405 525h0M415 525h0M425 525h0M435 525h0M445 525h0M525 525h0M535 525h0M345 535h0M355 535h0M365 535h0M375 535h0M385 535h0M395 535h0M525 535h0M535 535h0M545 535h0M355 545h0M365 545h0M375 545h0M535 545h0M545 545h0M365 555h0M375 555h0M375 565h0" stroke="#2A2A35" stroke-opacity=".6" stroke-width="5.4" stroke-linecap="round" fill="none"/></svg>
+      <p class="map-label"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Any city in North America</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-s="faq" style="padding-top:0">
+  <div class="wrap faq-grid">
+    <div class="sec-head"><h2>Questions before you book</h2></div>
+    <div class="faq-list">
+      <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Because our systems work, and we grow when you grow. Most of our fee comes after appointments show up. So we're careful about who we take on.</p></details>
+      <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city planning to buy or sell in the next 60 to 90 days. They answer our questions, book a time and talk to you. You'll know on the call.</p></details>
+      <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation or presale. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
+      <details><summary>Is my city taken?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We take one realtor per city, anywhere in North America, first come, first served. Tell us your city in the quiz. We'll confirm it on your call.</p></details>
+      <details><summary>What happens on the call?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We look at your market and the guide we'd build first. Then we walk you through the payment plan and the numbers. You decide after that.</p></details>
+      <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them, and nobody else in your city gets them.</p></details>
+      <details><summary>How is this different from the emails I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>You see the guide, the ads and the quiz before most of our fee is due. The leads come from your own ads, and they book time with you directly.</p></details>
+      <details><summary>Do I have to make content?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. We write the guides and run the ads. Our text, email and call reminders confirm each time. Your part is taking the calls.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark final" data-s="final">
+  <div class="wrap">
+    <div class="sec-head"><h2>Is your city still open?</h2></div>
+    <div class="inline-q">
+      <p class="q" id="inline-q">Do you work solo or on a team?</p>
+      <div class="opts" role="group" aria-labelledby="inline-q">
+        <button type="button" class="opt-d" data-inline="Solo realtor">Solo realtor<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button type="button" class="opt-d" data-inline="On a team">On a team<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button type="button" class="opt-d" data-inline="Team lead or broker">Team lead or broker<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+      <p class="micro">2 minutes · one realtor per city</p>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>ZippyScale · Vancouver, Canada</span>
+    <a href="privacy.html">Privacy policy</a>
+  </div>
+</footer>
+</div>
+
+<div id="quiz" class="quiz" hidden role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+  <div class="quiz-bar">
+    <button type="button" class="icon-btn" data-back aria-label="Back"><svg class="ico" aria-hidden="true"><use href="#i-back"/></svg></button>
+    <div class="quiz-progress"><span class="quiz-count" aria-live="polite"></span><div class="track" aria-hidden="true"><i></i></div></div>
+    <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="quiz-body"><div class="quiz-screen" id="quiz-screen"></div></div>
+</div>
+
+<script>
+// Sheet intake per site-rebuild/wiring.md. Returns 403 until the owner authorises the Apps Script once; the report card never waits on it.
+const QUIZ_ENDPOINT = "https://script.google.com/macros/s/AKfycbyLzuJrbNa7VpGnHOCCiwYgd7RnqOrELo-kLaXbFMlncV179AR6rMhQxtR43Ud85LSpHA/exec";
+const CAL_LINK = "sandy-kadyan/30min";
+
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const html = document.documentElement;
+
+  // top bar hairline
+  const top = $('#top');
+  const onScroll = () => top.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // motion 1: hero sequence plays once (final state is the default without JS)
+  if (!reduce) $('.mock').classList.add('play');
+
+  // motion 2: how-it-works flow draws once on intersect (armed state is dimmed, never hidden)
+  const flow = $('.flow');
+  if (!reduce && 'IntersectionObserver' in window) {
+    flow.classList.add('armed');
+    const io = new IntersectionObserver((es) => {
+      if (es.some((e) => e.isIntersecting)) { flow.classList.add('in'); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(flow);
+  }
+
+  // ---------- quiz ----------
+  const icon = (id) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('class', 'ico'); s.setAttribute('aria-hidden', 'true'); const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', '#i-' + id); s.append(u); return s; };
+  function h(tag, props, ...kids) {
+    const el = document.createElement(tag);
+    for (const k in props || {}) {
+      const v = props[k];
+      if (k === 'class') el.className = v;
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else if (v === true) el.setAttribute(k, '');
+      else if (v !== false && v != null) el.setAttribute(k, v);
+    }
+    for (const c of kids.flat()) if (c != null && c !== false) el.append(c);
+    return el;
+  }
+
+  const BUDGET = [['Under 2k', 'Under 2k a month'], ['2k to 3k', '2k to 3k a month'], ['3k to 5k', '3k to 5k a month'], ['5k or more', '5k or more a month']];
+  const QS = {
+    q1: { key: 'solo_or_team', type: 'single', q: 'Do you work solo or on a team?', opts: ['Solo realtor', 'On a team', 'Team lead or broker'] },
+    q2: { key: 'transactions_12mo', type: 'single', q: 'How many transactions did you close in the last 12 months?', opts: ['0 to 5', '6 to 10', '11 to 20', '21 or more'] },
+    q3: { key: 'city', type: 'city', q: 'Which city do you mainly sell in?' },
+    q4: { key: 'ad_budget', type: 'single', q: 'How much can you put into ads each month?', help: 'This is ad money. It goes to the ad platforms, not to us.', opts: BUDGET },
+    q5: { key: 'lead_sources', type: 'multi', q: 'Where does your business come from now?', opts: ['Sphere and past clients', 'Brokerage leads', 'Portal leads', 'Open houses or farming', 'Social media and content'] },
+    q6: { key: 'focus', type: 'single', q: 'Who do you want more of?', opts: ['Mostly buyers', 'Mostly sellers', 'Both'] },
+    q7: { key: 'property_types', type: 'multi', q: 'What do you mostly sell?', opts: ['Condos', 'Townhouses', 'Semis or detached homes', 'Presale or pre-construction', 'Investment properties'] },
+    q8: { key: 'reply_speed', type: 'single', q: 'When a new lead comes in, how fast do you reply?', help: 'Be honest. It shapes your report.', opts: ['Under 5 minutes', 'Within an hour', 'Same day', 'Next day or later'] },
+  };
+  const ORDER = ['intro', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'contact', 'result'];
+
+  const quiz = $('#quiz'), screen = $('#quiz-screen'), page = $('#page');
+  const backBtn = $('[data-back]', quiz), count = $('.quiz-count', quiz), fill = $('.track i', quiz);
+  let answers = {}, stack = [], cur = 'intro', pushed = false, lastFocus = null, busy = false;
+
+  const next = (id) => ORDER[ORDER.indexOf(id) + 1];
+  function go(id) { stack.push(cur); cur = id; render(); }
+  function back() { if (!stack.length) return close(); cur = stack.pop(); render(); }
+
+  function open(start, preset) {
+    answers = Object.assign({}, preset); cur = start; stack = start === 'q2' ? ['q1'] : [];
+    if (quiz.hidden) lastFocus = document.activeElement;
+    quiz.hidden = false; page.inert = true; html.classList.add('quiz-open');
+    if (location.hash !== '#fit') { history.pushState({ fit: 1 }, '', '#fit'); pushed = true; } else pushed = false;
+    render();
+  }
+  function hide() {
+    quiz.hidden = true; page.inert = false; html.classList.remove('quiz-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  function close() {
+    if (quiz.hidden) return;
+    if (pushed) { pushed = false; history.back(); } // popstate hides it, so the phone back button and the X behave the same
+    else { hide(); history.replaceState(null, '', location.pathname + location.search); }
+  }
+  addEventListener('popstate', () => {
+    if (location.hash === '#fit') { if (quiz.hidden) open('intro'); }
+    else if (!quiz.hidden) { pushed = false; hide(); }
+  });
+
+  document.querySelectorAll('[data-open-quiz]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); open('intro'); }));
+  document.querySelectorAll('[data-inline]').forEach((b) => b.addEventListener('click', () => open('q2', { solo_or_team: b.dataset.inline })));
+  backBtn.addEventListener('click', back);
+  $('[data-close]', quiz).addEventListener('click', close);
+
+  quiz.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = [...quiz.querySelectorAll('button,input,a[href],iframe,[tabindex]:not([tabindex="-1"])')]
+      .filter((x) => !x.disabled && x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !quiz.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  function title(text) { return h('h2', { id: 'quiz-title', tabindex: '-1' }, text); }
+
+  function render() {
+    busy = false;
+    const n = ORDER.indexOf(cur); // q1 = 1 ... q8 = 8
+    if (cur.startsWith('q')) { count.textContent = `Question ${n} of 8`; fill.style.width = (n - 1) / 9 * 100 + '%'; }
+    else if (cur === 'contact') { count.textContent = 'Last step'; fill.style.width = 8 / 9 * 100 + '%'; }
+    else { count.textContent = ''; fill.style.width = cur === 'result' ? '100%' : '0%'; }
+    backBtn.hidden = cur === 'intro' || cur === 'result';
+    screen.className = 'quiz-screen' + (cur === 'result' ? ' wide' : '');
+    screen.replaceChildren(...build(cur).filter(Boolean));
+    if (!reduce) { void screen.offsetWidth; screen.classList.add('enter'); }
+    quiz.scrollTop = 0;
+    const t = $('#quiz-title', screen); if (t) t.focus({ preventScroll: true });
+  }
+
+  function build(id) {
+    if (id === 'intro') return [
+      title('See if you qualify'),
+      h('p', { class: 'help' }, "8 quick questions about your business. At the end you'll see your report, and a time to talk if you're a fit."),
+      h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: () => go('q1') }, 'Start', icon('arrow'))),
+      h('p', { class: 'micro', style: 'text-align:left' }, '2 minutes · one realtor per city'),
+    ];
+    if (id === 'contact') return buildContact();
+    if (id === 'result') return buildResult();
+    const q = QS[id];
+    const head = [title(q.q), q.help && h('p', { class: 'help' }, q.help)];
+    if (q.type === 'single') {
+      return [...head, h('div', { class: 'opts', role: 'group', 'aria-labelledby': 'quiz-title' }, q.opts.map((o) => {
+        const [val, label] = Array.isArray(o) ? o : [o, o];
+        return h('button', { type: 'button', class: 'opt', 'aria-pressed': String(answers[q.key] === val), onclick: (e) => {
+          if (busy) return; busy = true;
+          answers[q.key] = val;
+          e.currentTarget.parentNode.querySelectorAll('.opt').forEach((b) => b.setAttribute('aria-pressed', String(b === e.currentTarget)));
+          setTimeout(() => go(next(id)), reduce ? 0 : 200);
+        } }, label);
+      }))];
+    }
+    if (q.type === 'multi') {
+      const sel = new Set(answers[q.key] || []);
+      return [...head, h('p', { class: 'hint' }, 'Pick all that apply'),
+        h('div', { class: 'opts', role: 'group', 'aria-labelledby': 'quiz-title' }, q.opts.map((o) =>
+          h('button', { type: 'button', class: 'opt', 'aria-pressed': String(sel.has(o)), onclick: (e) => {
+            sel.has(o) ? sel.delete(o) : sel.add(o);
+            e.currentTarget.setAttribute('aria-pressed', String(sel.has(o)));
+            answers[q.key] = q.opts.filter((x) => sel.has(x));
+          } }, h('span', { class: 'box' }, icon('check')), o))),
+        h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: () => { answers[q.key] = q.opts.filter((x) => sel.has(x)); go(next(id)); } }, 'Next', icon('arrow')))];
+    }
+    // city
+    const form = h('form', { class: 'qform', onsubmit: (e) => {
+      e.preventDefault();
+      answers.city_name = form.city.value.trim(); answers.province = form.province.value.trim();
+      go(next(id));
+    } },
+      h('div', { class: 'field' }, h('label', { for: 'f-city' }, 'City'), h('input', { id: 'f-city', name: 'city', required: true, autocomplete: 'address-level2', placeholder: 'City', value: answers.city_name || '' })),
+      h('div', { class: 'field' }, h('label', { for: 'f-prov' }, 'Province or state'), h('input', { id: 'f-prov', name: 'province', autocomplete: 'address-level1', placeholder: 'Province or state', value: answers.province || '' })),
+      h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn' }, 'Next', icon('arrow'))));
+    return [...head, form];
+  }
+
+  function buildContact() {
+    const f = (id, label, attrs) => h('div', { class: 'field' }, h('label', { for: id }, label), h('input', Object.assign({ id, name: id }, attrs)));
+    const form = h('form', { class: 'qform', onsubmit: (e) => {
+      e.preventDefault();
+      Object.assign(answers, { name: form['name'].value.trim(), email: form.email.value.trim(), mobile: form.mobile.value.trim(), brokerage: form.brokerage.value.trim() });
+      submit();
+    } },
+      f('name', 'Full name', { required: true, autocomplete: 'name', value: answers.name || '' }),
+      h('div', { class: 'two' },
+        f('email', 'Email', { type: 'email', required: true, autocomplete: 'email', inputmode: 'email', value: answers.email || '' }),
+        f('mobile', 'Mobile', { type: 'tel', required: true, autocomplete: 'tel', inputmode: 'tel', minlength: '7', value: answers.mobile || '' })),
+      f('brokerage', 'Brokerage', { autocomplete: 'organization', value: answers.brokerage || '' }),
+      h('p', { class: 'consent' }, "We'll contact you about your report and your call by email, text or phone. You can opt out anytime."),
+      h('div', { class: 'actions' }, h('button', { type: 'submit', class: 'btn' }, 'See my report', icon('arrow'))),
+      h('p', { class: 'micro', style: 'text-align:left;margin-top:0' }, 'Your report shows on the next screen.'));
+    return [title("Who's this report for?"), form];
+  }
+
+  // ---------- fit rule + report (copy-deck section 4) ----------
+  function verdict(a) {
+    const r = [];
+    if (a.solo_or_team === 'On a team' || a.solo_or_team === 'Team lead or broker') r.push("This quarter we're only working with solo realtors, one per city.");
+    if (a.transactions_12mo === '0 to 5') r.push("This quarter we're working with realtors who closed 6 or more in the last 12 months.");
+    if (a.ad_budget === 'Under 2k') r.push('Your ad budget is below what this needs to bring steady appointments.');
+    return r;
+  }
+  function reportLines(a) {
+    const city = a.city_name || 'your city';
+    const prop = a.property_types || [], src = a.lead_sources || [];
+    const bc = /^(bc|b\.c\.|british columbia)$/i.test((a.province || '').trim());
+    const presale = bc ? 'presale' : 'pre-construction';
+    let guide;
+    if (a.focus === 'Mostly sellers') guide = `A home evaluation for ${city} homeowners thinking about selling.`;
+    else if (prop.includes('Presale or pre-construction')) guide = `A ${city} ${presale} guide that compares projects on price, layout and completion date.`;
+    else if (prop.includes('Investment properties')) guide = `A ${city} market snapshot for investors, with rents and prices side by side.`;
+    else if (a.focus === 'Both') guide = `A ${city} market snapshot for buyers, plus a home evaluation for sellers.`;
+    else if (prop.includes('Semis or detached homes')) guide = `A ${city} market snapshot for move-up buyers.`;
+    else if (prop.includes('Condos') || prop.includes('Townhouses')) guide = `A ${city} market snapshot for first-time buyers.`;
+    else guide = `A Moving to ${city} guide for relocation buyers.`;
+    const speed = a.reply_speed === 'Under 5 minutes' ? 'You already reply fast. Our texts, emails and calls keep that speed at 11pm too.'
+      : a.reply_speed === 'Within an hour' ? 'An hour is a long time after an 11pm form. Our texts, emails and calls go out right away.'
+      : "By the time you call, they've often talked to someone else. Our texts, emails and calls reach them right away and book the time.";
+    const warm = ['Sphere and past clients', 'Open houses or farming'];
+    let source;
+    if (src.includes('Brokerage leads') || src.includes('Portal leads')) source = `You're working leads other realtors get too. These come from ads with your name on them, and only you get them in ${city}.`;
+    else if (src.length && src.every((s) => warm.includes(s))) source = "Most of your business comes from people who already know you. This brings in buyers and sellers who don't know you yet.";
+    else if (src.includes('Social media and content')) source = "You're already making content. Now it has a guide to send people to and a calendar at the end.";
+    else source = "We'll map where your business comes from on the call.";
+    const numbers = `${a.transactions_12mo} closings in the last 12 months and ${a.ad_budget} a month for ads. That's the range this works in.`;
+    return [['Your first guide', guide], ['Your reply speed', speed], ['Where your business comes from', source], ['Your numbers', numbers]];
+  }
+
+  let lastResult = null;
+  function submit() {
+    const reasons = verdict(answers);
+    lastResult = reasons;
+    const payload = {
+      fit: reasons.length ? 'no' : 'yes',
+      solo_or_team: answers.solo_or_team || '', transactions_12mo: answers.transactions_12mo || '',
+      city: [answers.city_name, answers.province].filter(Boolean).join(', '), ad_budget: answers.ad_budget || '',
+      lead_sources: answers.lead_sources || [], focus: answers.focus || '', property_types: answers.property_types || [],
+      reply_speed: answers.reply_speed || '', name: answers.name, email: answers.email, mobile: answers.mobile, brokerage: answers.brokerage,
+    };
+    sendQuizLead(payload); // not awaited: the report card never waits on the Sheet
+    go('result');
+  }
+
+  function sendQuizLead(answers, attempt = 1) {
+    const q = new URLSearchParams(location.search);
+    const payload = Object.assign({}, answers, {
+      utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '', utm_campaign: q.get('utm_campaign') || '',
+      page_url: location.href, user_agent: navigator.userAgent,
+    });
+    // No headers on purpose: a string body goes as text/plain, a CORS simple request with no preflight (Apps Script cannot answer one).
+    return fetch(QUIZ_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) })
+      .then((r) => r.json())
+      .catch((err) => ({ ok: false, error: String(err) }))
+      .then((res) => {
+        if (res && res.ok) return res;
+        if (attempt < 2) return sendQuizLead(answers, attempt + 1);
+        console.error('[quiz] lead not saved to the Sheet after 2 tries', res);
+        return res;
+      });
+  }
+
+  function buildResult() {
+    const first = (answers.name || '').split(/\s+/)[0] || '';
+    const city = answers.city_name || 'your city';
+    const reasons = lastResult || verdict(answers);
+    if (reasons.length) return [
+      title(`Not a fit yet, ${first}`),
+      h('ul', { class: 'reasons' }, reasons.map((r) => h('li', {}, icon('x'), h('span', {}, r)))),
+      h('p', { class: 'help', style: 'margin-top:20px' }, `We've saved your answers. When that changes, take the quiz again and we'll look at ${city} first.`),
+      h('div', { class: 'tip' }, h('b', {}, 'One thing that helps right now'), h('p', {}, "Reply to every new lead within 5 minutes, even with a quick text. By the time you call, they've often talked to someone else.")),
+      h('div', { class: 'actions', style: 'margin-top:28px' }, h('button', { type: 'button', class: 'btn', onclick: close }, 'Back to the page')),
+    ];
+    const box = h('div', { class: 'cal-embed', id: 'cal-inline' });
+    setTimeout(() => loadCal(answers.name, answers.email), 0);
+    return [
+      title(`${first}, here's your report for ${city}`),
+      h('dl', { class: 'report' }, reportLines(answers).map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, v)))),
+      h('p', { class: 'book' }, `Book your call. We'll confirm ${city} is open and walk you through the numbers.`),
+      box,
+      h('p', { class: 'micro', style: 'text-align:left' }, "Pick a time that suits you. We'll text you a reminder."),
+    ];
+  }
+
+  // cal.com official inline embed (wiring.md), loaded only when a FIT report shows
+  let calReady = false;
+  function loadCal(name, email) {
+    if (!calReady) {
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "30min", { origin: "https://app.cal.com" });
+      Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+      calReady = true;
+    }
+    Cal.ns["30min"]("inline", { elementOrSelector: "#cal-inline", config: { layout: "month_view", name: name || '', email: email || '' }, calLink: CAL_LINK });
+  }
+
+  if (location.hash === '#fit') open('intro');
+})();
+</script>
 </body>
 </html>
