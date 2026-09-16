@@ -19,17 +19,25 @@
 <meta name="theme-color" content="#FFFDF7">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js')</script>
 <style>
-@font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-500.woff2') format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-700.woff2') format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Inter';src:url('fonts/inter-500.woff2') format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Inter';src:url('fonts/inter-700.woff2') format('woff2');font-weight:700;font-display:swap}
+/* Section sources: 21st.dev patterns re-implemented in vanilla HTML/CSS/JS (no React, no Tailwind, no framer-motion, no code copied verbatim).
+   problem  : Animated Beam, multiple outputs (Magic UI, dillionverma)  https://21st.dev/@dillionverma/components/animated-beam
+   different: Comparison 03, before/after panels + mobile toggle (hirael) https://21st.dev/@hirael/components/comparison-03
+   how      : Animated Beam, unidirectional, chained node to node (Magic UI) https://21st.dev/@dillionverma/components/animated-beam
+   calendar : Animated List (Magic UI, dillionverma)                      https://21st.dev/@dillionverma/components/animated-list
+   results  : Feature 10 hairline bento (hirael)                          https://21st.dev/@hirael/components/feature-10
+   pay      : Stepper, titles and descriptions (Origin UI, originui)      https://21st.dev/@originui/components/stepper
+   quiz     : Wizard Steps, direction-aware panels + progress rail (ddoemonn) https://21st.dev/@ddoemonn/components/wizard-steps
+   Motion budget (page level, 4): hero thread, problem beam, how beam, appointment list. Quiz slides and hover/press are interaction feedback.
+   All four play once, end static, and show their final state under prefers-reduced-motion and without JS. */
+/* ponytail: both families ship as variable woff2 files, so one file per family covers every weight */
+@font-face{font-family:'Space Grotesk';src:url('fonts/space-grotesk-700.woff2') format('woff2');font-weight:300 700;font-display:swap}
+@font-face{font-family:'Inter';src:url('fonts/inter-400.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:'JetBrains Mono';src:url('fonts/jetbrains-mono-700.woff2') format('woff2');font-weight:700;font-display:swap}
 
 :root{
-  --cream:#FFFDF7; --paper:#FFFFFF; --sand:#F5F2E8; --line:#E7E3D6; --line-2:#D6D1C1;
+  --cream:#FFFDF7; --paper:#FFFFFF; --sand:#F5F2E8; --line:#E7E3D6; --line-2:#D6D1C1; --line-strong:#8A8577;
   --charcoal:#2A2A35; --card-dark:#33333F; --border-dark:#44444F;
   --lime:#D5EB4B; --lime-soft:#EEF6BE; --lime-text:#6B7C10;
   --head:#1A1A2E; --body:#4A5568; --muted:#5B6270; --body-dark:#C9CBD6;
@@ -61,7 +69,7 @@ button{font:inherit;color:inherit}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:0;background:var(--lime);color:var(--charcoal);font:600 17px/1 var(--sans);text-decoration:none;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(42,42,53,.16),0 1px 2px rgba(42,42,53,.10);transition:background-color .2s var(--ease),box-shadow .2s var(--ease),transform .12s var(--ease)}
-.btn:hover{background:#CBE237;box-shadow:inset 0 0 0 1px rgba(42,42,53,.28),0 6px 18px -8px rgba(42,42,53,.35)}
+@media (hover:hover){.btn:hover{background:#CBE237;box-shadow:inset 0 0 0 1px rgba(42,42,53,.28),0 6px 18px -8px rgba(42,42,53,.35)}}
 .btn:active{transform:translateY(1px)}
 .btn .ico{width:18px;height:18px;stroke-width:2}
 .btn-sm{min-height:44px;padding:0 18px;font-size:15px}
@@ -129,6 +137,7 @@ button{font:inherit;color:inherit}
 .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
 .proof ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr)}
 .proof li{padding:28px 24px;display:grid;gap:4px;align-content:start}
+.proof li:first-child{padding-left:0}
 .proof li+li{border-left:1px solid var(--line)}
 .proof b{font:700 clamp(26px,2.6vw,34px)/1.1 var(--display);color:var(--head);letter-spacing:-.02em}
 .proof b small{font-size:.62em;font-weight:500;color:var(--muted);letter-spacing:0}
@@ -146,30 +155,52 @@ button{font:inherit;color:inherit}
 .mini-phone{width:100%;max-width:168px;height:196px;background:var(--charcoal);border-radius:24px;padding:7px}
 .mini-screen{height:100%;border-radius:18px;background:#F7F5EE;padding:30px 9px 9px;display:grid;align-content:start}
 .mini-screen .bub{max-width:100%;font-size:13px;padding:9px 11px;border-radius:14px;border-bottom-right-radius:4px}
+/* beams (problem + how): SVG overlay drawn by JS. Default styles ARE the final state; .armed/.play only exist with JS and full motion */
+.beams{position:absolute;inset:0;width:100%;height:100%;max-width:none;overflow:visible;pointer-events:none;z-index:0}
+.beams path{fill:none;stroke-linecap:round}
+.b-base{stroke:var(--line-2);stroke-width:1.5}
+.b-trail{stroke:var(--lime-text);stroke-width:1.75;stroke-dasharray:1000;stroke-dashoffset:0}
+.b-head{stroke:var(--lime);stroke-width:6;stroke-dasharray:90 1000;opacity:0}
+.armed .b-trail{stroke-dashoffset:1000}
+.play .b-trail{animation:draw var(--dur,.9s) cubic-bezier(.45,0,.25,1) var(--at,0s) both}
+.play .b-head{animation:pulse var(--dur,.9s) cubic-bezier(.45,0,.25,1) var(--at,0s) both}
+@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+@keyframes pulse{0%{opacity:1;stroke-dashoffset:90}85%{opacity:1}100%{opacity:0;stroke-dashoffset:-910}}
+.fan.beamed .phones::before,.fan.beamed .phones::after,.fan.beamed .mini::before{display:none}
+.fan.beamed .phones{padding-top:96px}
+.fan .lead-node,.fan .mini{position:relative;z-index:1}
+/* bubbles stay readable before the pulse lands (no opacity dimming, contrast holds); they nudge up as it arrives */
+.fan.play .mini-screen .bub{animation:arrive .45s var(--ease) calc(.8s + var(--i,0) * 70ms) both}
+@keyframes arrive{from{transform:translateY(8px) scale(.97)}to{transform:none}}
 .tiles{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
 .tiles li{display:flex;align-items:center;gap:14px;padding:24px 20px 0 0;font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em}
 .tiles .ico{width:24px;height:24px;color:var(--lime-text)}
 
-/* different: comparison table */
-.compare{margin-top:48px;width:100%;max-width:860px;border-collapse:separate;border-spacing:0}
-.compare th,.compare td{text-align:left;vertical-align:middle;padding:16px 20px;font-size:17px;line-height:1.35}
-.compare thead th{font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-top:20px;padding-bottom:14px;color:var(--muted)}
-.compare thead th.us{color:var(--head)}
-.compare tbody td{border-top:1px solid var(--line)}
-.compare td.us,.compare th.us{background:var(--paper);border-left:1px solid var(--line);border-right:1px solid var(--line)}
-.compare th.us{border-top:1px solid var(--line);border-radius:16px 16px 0 0}
-.compare tbody tr:last-child td.us{border-bottom:1px solid var(--line);border-radius:0 0 16px 16px}
-.compare td.us{color:var(--head);font-weight:500}
-.compare td .cell{display:flex;align-items:center;gap:12px}
-.compare td .ico{width:18px;height:18px;stroke-width:2.25}
-.compare td.them .ico{color:#7A7F8A}
-.compare td.us .ico{color:var(--lime-text)}
-.compare col.them{width:50%}
+/* different: before/after panels on a hairline grid, segmented toggle on phones */
+.seg{display:none}
+.cmp{margin-top:48px;max-width:920px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.cmp-col{background:var(--cream);padding:28px 32px 12px}
+.cmp-col.us{background:var(--paper)}
+.cmp-h{display:flex;align-items:center;gap:10px;font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cmp-col.us .cmp-h{color:var(--head)}
+.cmp-h .ico{width:18px;height:18px;stroke-width:2.25}
+.cmp-col.us .cmp-h .ico{color:var(--lime-text)}
+.cmp ul{list-style:none;margin:16px 0 0;padding:0}
+.cmp li{display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.35}
+.cmp .them li{color:var(--body)}
+.cmp .us li{color:var(--head);font-weight:500}
+.cmp li .ico{width:18px;height:18px;stroke-width:2.25}
+.cmp .them li .ico{color:#7A7F8A}
+.cmp .us li .ico{color:var(--lime-text)}
 
 /* how: flow */
-.flow{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
+.flow-host{position:relative;margin-top:56px}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
 .flow::before{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;background:var(--border-dark)}
-.flow::after{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;background:var(--lime);transform-origin:left center}
+.flow-host.beamed .flow::before{display:none}
+.dark .b-base{stroke:var(--border-dark);stroke-width:2}
+.dark .b-trail{stroke:var(--lime);stroke-width:2}
+.dark .b-head{stroke:#FFFDF7;stroke-width:4}
 .node{position:relative;z-index:1;display:grid;gap:14px;align-content:start;justify-items:center;text-align:center;transition:opacity .45s var(--ease)}
 .node .dot{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--card-dark);border:1.5px solid var(--lime);color:var(--lime);transition:border-color .45s var(--ease),color .45s var(--ease),background-color .45s var(--ease)}
 .node .dot .ico{width:24px;height:24px}
@@ -179,61 +210,61 @@ button{font:inherit;color:inherit}
 .chip-d{font:500 12.5px/1 var(--sans);color:var(--body-dark);border:1px solid var(--border-dark);border-radius:999px;padding:6px 9px}
 .flow-cap{margin-top:48px;display:flex;align-items:center;gap:10px;color:var(--body-dark);font-size:16px}
 .flow-cap .ico{color:var(--lime)}
-.flow.armed::after{transform:scaleX(0)}
 .flow.armed .node{opacity:.38}
 .flow.armed .node .dot{border-color:var(--border-dark);color:var(--body-dark)}
 .flow.armed .node:last-child .dot{background:var(--card-dark)}
-.flow.armed.in::after{transform:none;transition:transform 1.3s var(--ease)}
-.flow.armed.in .node{opacity:1}
-.flow.armed.in .node .dot{border-color:var(--lime);color:var(--lime)}
-.flow.armed.in .node:last-child .dot{background:var(--lime);color:var(--charcoal)}
-.flow.in .node:nth-child(1),.flow.in .node:nth-child(1) .dot{transition-delay:.05s}
-.flow.in .node:nth-child(2),.flow.in .node:nth-child(2) .dot{transition-delay:.3s}
-.flow.in .node:nth-child(3),.flow.in .node:nth-child(3) .dot{transition-delay:.55s}
-.flow.in .node:nth-child(4),.flow.in .node:nth-child(4) .dot{transition-delay:.8s}
-.flow.in .node:nth-child(5),.flow.in .node:nth-child(5) .dot{transition-delay:1.05s}
+.flow.armed.play .node{opacity:1}
+.flow.armed.play .node .dot{border-color:var(--lime);color:var(--lime)}
+.flow.armed.play .node:last-child .dot{background:var(--lime);color:var(--charcoal)}
+.flow.play .node:nth-child(1),.flow.play .node:nth-child(1) .dot{transition-delay:.1s}
+.flow.play .node:nth-child(2),.flow.play .node:nth-child(2) .dot{transition-delay:.55s}
+.flow.play .node:nth-child(3),.flow.play .node:nth-child(3) .dot{transition-delay:1s}
+.flow.play .node:nth-child(4),.flow.play .node:nth-child(4) .dot{transition-delay:1.45s}
+.flow.play .node:nth-child(5),.flow.play .node:nth-child(5) .dot{transition-delay:1.9s}
 
-/* calendar: appointment cards */
+/* calendar: animated list, bookings land one by one (newest on top) */
 .split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
-.appts{position:relative;min-height:520px}
-.appt{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 60px -36px rgba(42,42,53,.45)}
-.appt.a{position:relative;z-index:2;max-width:440px}
-.appt.b{position:absolute;z-index:1;right:0;bottom:0;width:min(360px,80%);padding:18px 20px;box-shadow:0 20px 40px -30px rgba(42,42,53,.4)}
-.appt-top{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-.pill{font:700 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:var(--lime);color:var(--charcoal)}
-.pill.alt{background:var(--sand);color:var(--head);border:1px solid var(--line-2)}
-.blur{display:flex;align-items:center;gap:10px;margin-left:auto}
-.blur i{display:block;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D9D4C4,#ECE8DC);filter:blur(1.5px)}
-.blur s{display:block;width:92px;height:12px;border-radius:6px;background:linear-gradient(90deg,#D9D4C4,#E9E5D9,#D9D4C4);filter:blur(2.5px)}
-.fields{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
-.fields li{display:flex;align-items:center;gap:12px;font-size:16.5px;color:var(--head)}
-.fields .ico{color:var(--muted)}
-.status{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;font:700 12.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime-text)}
-.status .ico{width:18px;height:18px;stroke-width:2.25}
-.appt.b .fields{margin-top:14px}
-.appt.b .status{margin-top:14px;padding-top:12px}
+.appts{list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:480px;width:100%;justify-self:end}
+.appt{display:grid;grid-template-columns:44px 1fr auto;align-items:center;column-gap:14px;row-gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 18px 14px 14px;box-shadow:0 18px 40px -30px rgba(42,42,53,.45);transform-origin:top center}
+.appt-ico{grid-row:span 2;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--lime);color:var(--charcoal)}
+.appt-ico.alt{background:var(--sand);border:1px solid var(--line-2)}
+.appt-ico .ico{width:20px;height:20px}
+.appt b{font:600 16px/1.3 var(--display);color:var(--head);letter-spacing:-.005em}
+.appt .when{font:700 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime-text);display:flex;align-items:center;gap:6px;justify-self:end}
+.appt .when .ico{width:15px;height:15px;stroke-width:2.25}
+.appt .meta{grid-column:2 / 4;font-size:15px;line-height:1.35;color:var(--body)}
+.appts.armed .appt{opacity:0}
+.appts.play .appt{animation:land .55s var(--ease) calc((3 - var(--i)) * 650ms) both}
+@keyframes land{from{opacity:0;transform:translateY(-10px) scale(.96)}to{opacity:1;transform:none}}
 
-/* results */
-.results{margin-top:48px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto;gap:16px}
-.res{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;align-content:space-between;gap:24px}
-.res.big{grid-row:span 2;padding:36px}
-.res .n{font:700 clamp(2.6rem,5vw,4rem)/1 var(--display);letter-spacing:-.04em;color:var(--head)}
-.res.big .n{font-size:clamp(3.8rem,9vw,7.5rem)}
-.res .l{margin-top:8px;font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
-.res p{font-size:16.5px;color:var(--body);max-width:42ch}
+/* results: hairline bento, $2M+ is the large cell */
+.bento{margin-top:48px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.b-cell{background:var(--paper);padding:28px;grid-column:span 2;display:grid;gap:10px;align-content:start}
+.b-cell.big{grid-column:span 4;grid-row:span 2;padding:36px 40px;align-content:center;gap:32px;background:var(--cream)}
+.b-cell .n{font:700 clamp(2.2rem,3.6vw,3rem)/1 var(--display);letter-spacing:-.035em;color:var(--head);font-variant-numeric:tabular-nums}
+.b-cell.big .n{font-size:clamp(4.5rem,11vw,9.5rem);letter-spacing:-.05em;line-height:.9}
+.b-cell .l{font:700 12.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--lime-text)}
+.b-cell .l{margin-top:-2px}
+.b-cell.big .l{margin-top:14px}
+.b-cell p.s{font-size:16px;color:var(--body);max-width:44ch}
+.b-cell.big p.s{font:500 clamp(19px,1.8vw,22px)/1.4 var(--display);color:var(--head);letter-spacing:-.01em;max-width:30ch}
 .res-note{margin-top:18px;font-size:14px;color:var(--muted)}
 
-/* pay: timeline */
-.pay-line{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:1fr 2.2fr 1.4fr;gap:0;max-width:1000px}
-.stop{position:relative;padding:0 16px 0 0}
-.stop>span{display:block}
-.stop .top-l{font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em;min-height:2.6em;display:flex!important;align-items:flex-end;padding-bottom:16px}
-.stop .bar{position:relative;height:14px;border-radius:0;background:var(--line)}
-.stop:first-child .bar{border-radius:7px 0 0 7px;background:var(--lime-soft)}
-.stop:nth-child(2) .bar{background:var(--lime)}
-.stop:last-child .bar{border-radius:0 7px 7px 0;background:repeating-linear-gradient(90deg,var(--line-2) 0 10px,transparent 10px 16px)}
-.stop .bar::before{content:"";position:absolute;left:0;top:50%;width:18px;height:18px;margin-top:-9px;margin-left:-2px;border-radius:50%;background:var(--paper);border:2px solid var(--charcoal)}
-.stop .bot-l{padding-top:16px;font-size:16px;color:var(--body)}
+/* pay: static stepper (done / current / next) */
+.stepper{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:1000px}
+.step{position:relative;display:grid;justify-items:center;text-align:center;gap:6px;padding:0 12px}
+.step::after{content:"";position:absolute;top:15px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;border-radius:1px;background:var(--line-2)}
+.step:last-child::after{display:none}
+.step[data-state="done"]::after{background:var(--lime-text)}
+.step[data-state="current"]::after{background:repeating-linear-gradient(90deg,var(--line-strong) 0 6px,transparent 6px 12px)}
+.ind{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;margin-bottom:10px;border:2px solid var(--line-strong);background:var(--paper);color:var(--charcoal)}
+.ind .ico{width:16px;height:16px;stroke-width:2.75}
+.step[data-state="done"] .ind{background:var(--lime);border-color:var(--charcoal)}
+.step[data-state="current"] .ind{background:var(--charcoal);border-color:var(--charcoal);box-shadow:0 0 0 5px var(--lime-soft)}
+.step[data-state="current"] .ind::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--lime)}
+.st-t{font:500 clamp(18px,1.8vw,21px)/1.25 var(--display);color:var(--head);letter-spacing:-.01em}
+.st-d{font-size:16px;color:var(--body)}
+.step[data-state="current"] .st-d{color:var(--head);font-weight:600}
 
 /* city */
 .city-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center}
@@ -249,14 +280,14 @@ button{font:inherit;color:inherit}
 .map-label .ico{width:17px;height:17px;color:var(--lime)}
 
 /* faq */
-.faq-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px;align-items:start}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:56px;align-items:start}
 .faq-list{border-top:1px solid var(--line)}
 .faq-list details{border-bottom:1px solid var(--line)}
 .faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;padding:16px 0;font:500 clamp(17px,1.7vw,19px)/1.35 var(--display);color:var(--head);letter-spacing:-.005em}
 .faq-list summary::-webkit-details-marker{display:none}
 .faq-list summary .ico{width:20px;height:20px;transition:transform .2s var(--ease);color:var(--muted)}
 .faq-list details[open] summary .ico{transform:rotate(45deg)}
-.faq-list summary:hover{color:var(--lime-text)}
+@media (hover:hover){.faq-list summary:hover{color:var(--lime-text)}}
 .faq-list details p{padding:0 44px 22px 0;color:var(--body);max-width:60ch}
 
 /* final */
@@ -267,8 +298,10 @@ button{font:inherit;color:inherit}
 .inline-q .opts{margin-top:20px;display:grid;gap:10px}
 .opt-d{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:58px;padding:0 18px;border-radius:14px;border:1px solid var(--border-dark);background:#2E2E39;color:#FFFDF7;font:500 17px/1.2 var(--sans);text-align:left;cursor:pointer;transition:border-color .2s var(--ease),background-color .2s var(--ease)}
 .opt-d .ico{color:var(--body-dark);transition:transform .2s var(--ease),color .2s}
-.opt-d:hover{border-color:var(--lime);background:#363642}
-.opt-d:hover .ico{color:var(--lime);transform:translateX(3px)}
+@media (hover:hover){
+  .opt-d:hover{border-color:var(--lime);background:#363642}
+  .opt-d:hover .ico{color:var(--lime);transform:translateX(3px)}
+}
 .opt-d:active{transform:translateY(1px)}
 .final .micro{color:var(--body-dark)}
 
@@ -281,25 +314,28 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 .quiz[hidden]{display:none}
 .quiz-bar{position:sticky;top:0;z-index:2;background:var(--cream);display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line)}
 .icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;color:var(--head)}
-.icon-btn:hover{background:var(--sand)}
+@media (hover:hover){.icon-btn:hover{background:var(--sand)}}
 .icon-btn[hidden]{display:grid;visibility:hidden}
 .quiz-progress{display:grid;gap:7px;justify-items:center}
 .quiz-count{font:700 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-height:12px}
 .track{width:100%;max-width:420px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
-.track i{display:block;height:100%;width:0;background:var(--charcoal);border-radius:3px;transition:width .3s var(--ease)}
+.track i{display:block;height:100%;width:100%;background:var(--charcoal);transform:scaleX(0);transform-origin:left center;transition:transform .35s var(--ease)}
 .quiz-body{flex:1;padding:clamp(28px,6vh,72px) 20px 64px}
 .quiz-screen{max-width:580px;margin:0 auto}
 .quiz-screen.wide{max-width:860px}
-.quiz-screen.enter{animation:rise .24s var(--ease) both}
+.quiz-screen.enter{animation:in-next .22s var(--ease) both}
+.quiz-screen.enter.rev{animation-name:in-back}
+@keyframes in-next{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes in-back{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
 .quiz h2{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.12}
 .quiz h2:focus{outline:none}
 .quiz .help{margin-top:12px;color:var(--body);font-size:16.5px}
 .quiz .opts{margin-top:28px;display:grid;gap:10px}
-.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:12px 18px;border-radius:14px;border:1.5px solid var(--line-2);background:var(--paper);color:var(--head);font:500 17px/1.3 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s var(--ease),background-color .15s var(--ease)}
-.opt:hover{border-color:var(--charcoal)}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:58px;padding:12px 18px;border-radius:14px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:500 17px/1.3 var(--sans);text-align:left;cursor:pointer;transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+@media (hover:hover){.opt:hover{border-color:var(--charcoal)}}
 .opt:active{transform:translateY(1px)}
 .opt[aria-pressed="true"]{border-color:var(--charcoal);background:var(--lime-soft)}
-.opt .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line-2);display:grid;place-items:center;flex:none;background:var(--paper)}
+.opt .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line-strong);display:grid;place-items:center;flex:none;background:var(--paper)}
 .opt .box .ico{width:15px;height:15px;stroke-width:2.75;opacity:0}
 .opt[aria-pressed="true"] .box{background:var(--charcoal);border-color:var(--charcoal);color:var(--lime)}
 .opt[aria-pressed="true"] .box .ico{opacity:1}
@@ -308,7 +344,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 .qform{margin-top:28px;display:grid;gap:16px}
 .field{display:grid;gap:7px}
 .field label{font:500 15px/1.3 var(--sans);color:var(--head)}
-.field input{width:100%;min-height:52px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line-2);background:var(--paper);color:var(--head);font:400 17px/1.2 var(--sans)}
+.field input{width:100%;min-height:52px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--head);font:400 17px/1.2 var(--sans)}
 .field input:focus{outline:none;border-color:var(--charcoal);box-shadow:0 0 0 3px rgba(42,42,53,.12)}
 .field input:user-invalid{border-color:#B42318}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -332,7 +368,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .hero h1{max-width:14ch}
   .mock{margin:0 auto}
   .split,.city-grid,.faq-grid,.final .wrap{grid-template-columns:1fr;gap:40px}
-  .appts{max-width:560px}
+  .appts{justify-self:start;max-width:560px}
+  .map{max-width:560px}
+  .b-cell.big{grid-column:span 6;grid-row:auto}
+  .b-cell{grid-column:span 3}
 }
 /* phone */
 @media (max-width:640px){
@@ -368,6 +407,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .proof .wrap{padding:0 var(--gut)}
   /* problem diagram: stacked */
   .fan{margin-top:40px}
+  .fan.beamed .phones{padding-top:18px}
   .lead-node{margin:0}
   .phones{grid-template-columns:1fr;gap:10px;padding:18px 0 0 28px}
   .phones::before{left:22px;top:0;bottom:30px;height:auto}
@@ -379,40 +419,42 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .mini-screen .bub{justify-self:end;max-width:92%}
   .tiles{grid-template-columns:1fr;margin-top:40px}
   .tiles li{padding:18px 0;border-bottom:1px solid var(--line)}
-  /* compare */
-  .compare{margin-top:36px}
-  .compare th,.compare td{padding:14px 10px;font-size:15px}
-  .compare thead th{font-size:11px}
-  .compare td .cell{gap:8px;align-items:flex-start}
-  .compare td .ico{width:16px;height:16px;margin-top:2px}
+  /* compare: one panel at a time behind a segmented toggle (JS only; without JS both panels stack) */
+  .js .seg{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sand);border:1px solid var(--line)}
+  .seg button{min-height:44px;border:0;border-radius:10px;background:transparent;font:600 14px/1.2 var(--sans);color:var(--body);cursor:pointer;padding:0 8px}
+  .seg button[aria-pressed="true"]{background:var(--paper);color:var(--head);box-shadow:0 1px 2px rgba(42,42,53,.12),0 0 0 1px var(--line)}
+  .cmp{grid-template-columns:1fr;margin-top:32px}
+  .js .cmp{margin-top:12px}
+  .js .cmp-col:not(.on){display:none}
+  .cmp-col{padding:20px 20px 6px}
+  .cmp li{font-size:16px;min-height:54px}
   /* how: vertical */
-  .flow{grid-template-columns:1fr;gap:28px;margin-top:40px;padding-left:0}
-  .flow::before,.flow::after{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto}
-  .flow::after{transform-origin:center top}
-  .flow.armed::after{transform:scaleY(0)}
+  .flow-host{margin-top:40px}
+  .flow{grid-template-columns:1fr;gap:28px;padding-left:0}
+  .flow::before{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto}
   .node{grid-template-columns:56px 1fr;justify-items:start;text-align:left;column-gap:18px;row-gap:10px;align-items:center}
   .node b{max-width:none}
   .node .chips{grid-column:2;justify-content:flex-start}
   .flow-cap{margin-top:36px;align-items:flex-start}
-  /* calendar cards */
-  .appts{min-height:0;display:grid;gap:14px}
-  .appt{padding:18px}
-  .appt.b{position:relative;width:auto;margin-left:28px}
-  .fields li{font-size:15.5px}
-  /* results */
-  .results{grid-template-columns:1fr}
-  .res.big{grid-row:auto;padding:28px}
-  .res{padding:24px}
-  /* pay */
-  .pay-line{grid-template-columns:1fr;margin-top:40px;padding-left:8px}
-  .stop{padding:0 0 34px 40px}
-  .stop .bar{position:absolute;left:4px;top:6px;bottom:-6px;width:12px;height:auto}
-  .stop:first-child .bar{border-radius:6px 6px 0 0}
-  .stop:last-child .bar{bottom:0;border-radius:0 0 6px 6px;background:repeating-linear-gradient(180deg,var(--line-2) 0 10px,transparent 10px 16px)}
-  .stop:last-child{padding-bottom:0}
-  .stop .bar::before{left:50%;top:0;margin:-4px 0 0 -9px}
-  .stop .top-l{min-height:0;padding:0;align-items:flex-start}
-  .stop .bot-l{padding-top:4px}
+  /* calendar list */
+  .appts{justify-self:stretch}
+  .appt{grid-template-columns:36px 1fr auto;padding:12px 12px 12px 10px;column-gap:10px}
+  .appt-ico{width:36px;height:36px;border-radius:10px}
+  .appt b{font-size:15px}
+  .appt .meta{font-size:14px}
+  .appt .when{font-size:0;gap:0} /* icon only on phones; the word stays for screen readers */
+  .appt .when .ico{width:18px;height:18px}
+  /* results bento */
+  .bento{grid-template-columns:1fr}
+  .b-cell,.b-cell.big{grid-column:auto;grid-row:auto;padding:24px}
+  .b-cell.big{gap:18px}
+  /* pay stepper: vertical */
+  .stepper{grid-template-columns:1fr;margin-top:40px;row-gap:28px}
+  .step{grid-template-columns:32px 1fr;justify-items:start;text-align:left;column-gap:16px;row-gap:2px;padding:0}
+  .ind{grid-row:span 2;margin:0}
+  .step::after{top:40px;bottom:-22px;left:15px;right:auto;width:2px;height:auto}
+  .step[data-state="current"]::after{background:repeating-linear-gradient(180deg,var(--line-strong) 0 6px,transparent 6px 12px)}
+  .st-t{padding-top:4px}
   .seats{gap:5px}
   .seats i{border-radius:7px}
   .map{padding:18px 14px}
@@ -467,7 +509,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div>
       <p class="eyebrow">For solo realtors with 6+ closings a year</p>
       <h1>Buyers and sellers, booked on your calendar</h1>
-      <p class="lede">People in your city planning to buy or sell in 60 to 90 days. You take the call.</p>
+      <p class="lede">People in your city planning to buy or sell in 60&nbsp;to&nbsp;90&nbsp;days. You take the call.</p>
       <div class="cta">
         <a class="btn" href="#fit" data-open-quiz>See if you qualify <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <p class="micro">2 minutes · one realtor per city</p>
@@ -527,11 +569,11 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
     <div class="fan">
       <p class="lead-node"><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>New lead · 11:04 pm</p>
       <ul class="phones">
-        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
-        <li class="mini"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini" style="--i:0"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini" style="--i:1"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini" style="--i:2"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini" style="--i:3"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
+        <li class="mini" style="--i:4"><div class="mini-phone"><div class="mini-screen"><p class="bub out">Hi, saw you're looking at homes!</p></div></div></li>
       </ul>
     </div>
     <ul class="tiles">
@@ -545,17 +587,32 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 <section class="sec" data-s="different" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head"><h2>Qualified before your phone rings</h2></div>
-    <table class="compare">
-      <colgroup><col class="them"><col></colgroup>
-      <thead><tr><th scope="col">Leads you're handed</th><th scope="col" class="us">With ZippyScale</th></tr></thead>
-      <tbody>
-        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Sent to several realtors</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>One realtor per city</span></td></tr>
-        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Filled out at 11pm, forgotten</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Answered qualifying questions first</span></td></tr>
-        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You chase them for days</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>They book a time</span></td></tr>
-        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Post content every day</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>We make guides and ads</span></td></tr>
-        <tr><td class="them"><span class="cell"><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You pay for every form</span></td><td class="us"><span class="cell"><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Mostly paid after they show</span></td></tr>
-      </tbody>
-    </table>
+    <div class="seg" role="group" aria-label="Compare">
+      <button type="button" aria-pressed="false" aria-controls="cmp-them" data-side="them">Leads you're handed</button>
+      <button type="button" aria-pressed="true" aria-controls="cmp-us" data-side="us">With ZippyScale</button>
+    </div>
+    <div class="cmp">
+      <div class="cmp-col them" id="cmp-them">
+        <h3 class="cmp-h"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Leads you're handed</h3>
+        <ul>
+          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Sent to several realtors</li>
+          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Filled out at 11pm, forgotten</li>
+          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You chase them for days</li>
+          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>Post content every day</li>
+          <li><svg class="ico" aria-label="No" role="img"><use href="#i-x"/></svg>You pay for every form</li>
+        </ul>
+      </div>
+      <div class="cmp-col us on" id="cmp-us">
+        <h3 class="cmp-h"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>With ZippyScale</h3>
+        <ul>
+          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>One realtor per city</li>
+          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Answered qualifying questions first</li>
+          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>They book a time</li>
+          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>We make guides and ads</li>
+          <li><svg class="ico" aria-label="Yes" role="img"><use href="#i-check"/></svg>Mostly paid after they show</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -565,6 +622,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <h2>How new people find you</h2>
       <p class="sub">Live within 7 days of signing.</p>
     </div>
+    <div class="flow-host">
     <ol class="flow">
       <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-book"/></svg></span><b>Your city's guide</b>
         <span class="chips"><span class="chip-d">Relocation</span><span class="chip-d">Presale</span><span class="chip-d">Market snapshot</span><span class="chip-d">Home evaluation</span></span></li>
@@ -573,6 +631,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-msg"/></svg></span><b>Text, email, AI call</b></li>
       <li class="node"><span class="dot"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg></span><b>On your calendar</b></li>
     </ol>
+    </div>
     <p class="flow-cap"><svg class="ico" aria-hidden="true"><use href="#i-sheet"/></svg>Every lead lands in a Google Sheet you both see.</p>
   </div>
 </section>
@@ -583,43 +642,52 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <h2>Moving within 90 days</h2>
       <p class="sub">Their answers come with every booking.</p>
     </div>
-    <div class="appts">
-      <article class="appt a">
-        <div class="appt-top"><span class="pill">Buyer</span><span class="blur" aria-hidden="true"><s></s><i></i></span></div>
-        <ul class="fields">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>First-time buyer · Burnaby</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Moving in 60 to 90 days</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>Pre-approved</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>Lease ends in March</li>
-        </ul>
-        <p class="status"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed by text</p>
-      </article>
-      <article class="appt b">
-        <div class="appt-top"><span class="pill alt">Seller</span><span class="blur" aria-hidden="true"><s></s><i></i></span></div>
-        <ul class="fields">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>Downsizer · Richmond · home evaluation</li>
-        </ul>
-        <p class="status"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed by call</p>
-      </article>
-    </div>
+    <ul class="appts" aria-label="Booked appointments, example">
+      <li class="appt" style="--i:0">
+        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
+        <b>First-time buyer</b>
+        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
+        <span class="meta">Burnaby, 60 to 90 days, pre-approved</span>
+      </li>
+      <li class="appt" style="--i:1">
+        <span class="appt-ico alt" aria-hidden="true"><svg class="ico"><use href="#i-note"/></svg></span>
+        <b>Seller, home evaluation</b>
+        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
+        <span class="meta">Richmond downsizer, 90 days</span>
+      </li>
+      <li class="appt" style="--i:2">
+        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
+        <b>Move-up buyer</b>
+        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
+        <span class="meta">Surrey, 60 days, pre-approved</span>
+      </li>
+      <li class="appt" style="--i:3">
+        <span class="appt-ico" aria-hidden="true"><svg class="ico"><use href="#i-home"/></svg></span>
+        <b>Presale buyer</b>
+        <span class="when"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span>
+        <span class="meta">Coquitlam, 90 days, pre-approved</span>
+      </li>
+    </ul>
   </div>
 </section>
 
 <section class="sec" data-s="results" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head"><h2>Real estate ads since 2023</h2></div>
-    <div class="results">
-      <article class="res big">
+    <div class="bento">
+      <article class="b-cell big">
         <div><p class="n">$2M+</p><p class="l">GCI tracked</p></div>
-        <p>A Vancouver commercial realtor. Ads and content for about two years. $25 leads.</p>
+        <p class="s">A Vancouver commercial realtor. Ads and content for about two years. $25 leads.</p>
       </article>
-      <article class="res">
-        <div><p class="n">$1k to $10k</p><p class="l">monthly ad spend</p></div>
-        <p>A Toronto real estate coaching brand. Revenue to $40k a month.</p>
+      <article class="b-cell">
+        <p class="n">$1k to $10k</p>
+        <p class="l">monthly ad spend</p>
+        <p class="s">A Toronto real estate coaching brand. Revenue to $40k a month.</p>
       </article>
-      <article class="res">
-        <div><p class="n">Hundreds</p><p class="l">of realtors</p></div>
-        <p>Our ads ran for them through real estate coaching programs. Plus realtor events and LinkedIn outreach.</p>
+      <article class="b-cell">
+        <p class="n">Hundreds</p>
+        <p class="l">of realtors</p>
+        <p class="s">Our ads ran for them through real estate coaching programs. Plus realtor events and LinkedIn outreach.</p>
       </article>
     </div>
     <p class="res-note">Client names kept private.</p>
@@ -632,10 +700,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <h2>Close to nothing upfront</h2>
       <p class="sub">Most of our fee comes after qualified appointments show up. Details on the call.</p>
     </div>
-    <ol class="pay-line">
-      <li class="stop"><span class="top-l">You sign</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Small start</span></li>
-      <li class="stop"><span class="top-l">Appointments show up</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Most of our fee</span></li>
-      <li class="stop"><span class="top-l">You scale ads</span><span class="bar" aria-hidden="true"></span><span class="bot-l">Only then we earn more</span></li>
+    <ol class="stepper">
+      <li class="step" data-state="done"><span class="ind" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></span><span class="st-t">You sign</span><span class="st-d">Small start</span></li>
+      <li class="step" data-state="current" aria-current="step"><span class="ind" aria-hidden="true"></span><span class="st-t">Appointments show up</span><span class="st-d">Most of our fee</span></li>
+      <li class="step" data-state="next"><span class="ind" aria-hidden="true"></span><span class="st-t">You scale ads</span><span class="st-d">Only then we earn more</span></li>
     </ol>
   </div>
 </section>
@@ -711,9 +779,9 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 </div>
 
 <script>
-// Sheet intake per site-rebuild/wiring.md. Returns 403 until the owner authorises the Apps Script once; the report card never waits on it.
+// Sheet intake per site-rebuild/wiring.md. Lead rows go to the first tab, funnel events (bodies with an `event` field) to the Funnel tab. The report card never waits on it.
 const QUIZ_ENDPOINT = "https://script.google.com/macros/s/AKfycbyLzuJrbNa7VpGnHOCCiwYgd7RnqOrELo-kLaXbFMlncV179AR6rMhQxtR43Ud85LSpHA/exec";
-const CAL_LINK = "sandy-kadyan/30min";
+const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
 
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -725,18 +793,81 @@ const CAL_LINK = "sandy-kadyan/30min";
   const onScroll = () => top.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+  // funnel events -> same Apps Script, Funnel tab. sendBeacon: text/plain, no preflight, survives page unload. No cookies, no storage.
+  const SID = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  const utm = new URLSearchParams(location.search);
+  function track(event, extra) {
+    const body = JSON.stringify(Object.assign({
+      event, utm_source: utm.get('utm_source') || '', utm_medium: utm.get('utm_medium') || '', utm_campaign: utm.get('utm_campaign') || '',
+      page_url: location.href, ts: new Date().toISOString(), session_id: SID,
+    }, extra));
+    try { if (!(navigator.sendBeacon && navigator.sendBeacon(QUIZ_ENDPOINT, body))) fetch(QUIZ_ENDPOINT, { method: 'POST', body, keepalive: true, mode: 'no-cors' }); } catch (e) { /* never block the page */ }
+  }
+  track('page_view');
+
   // motion 1: hero sequence plays once (final state is the default without JS)
   if (!reduce) $('.mock').classList.add('play');
 
-  // motion 2: how-it-works flow draws once on intersect (armed state is dimmed, never hidden)
-  const flow = $('.flow');
-  if (!reduce && 'IntersectionObserver' in window) {
-    flow.classList.add('armed');
-    const io = new IntersectionObserver((es) => {
-      if (es.some((e) => e.isIntersecting)) { flow.classList.add('in'); io.disconnect(); }
-    }, { threshold: 0.35 });
-    io.observe(flow);
+  // motions 2-4: beams + appointment list. Each plays once when 35% visible; without JS or with reduced motion the final state shows.
+  const NS = 'http://www.w3.org/2000/svg';
+  function beam(host, pairs, shape, timing) {
+    let svg = host.querySelector(':scope > svg.beams');
+    if (!svg) { svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'beams'); svg.setAttribute('aria-hidden', 'true'); host.prepend(svg); }
+    const draw = () => {
+      const box = host.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+      const ds = pairs().map(([a, b]) => shape(a.getBoundingClientRect(), b.getBoundingClientRect(), box));
+      if (svg.childElementCount !== ds.length * 3) { // build once; later resizes only move the paths so a played beam never replays
+        svg.replaceChildren();
+        ds.forEach((_, k) => ['b-base', 'b-trail', 'b-head'].forEach((c) => {
+          const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); p.setAttribute('pathLength', '1000');
+          const [at, dur] = timing(k); p.style.setProperty('--at', at + 's'); p.style.setProperty('--dur', dur + 's');
+          svg.append(p);
+        }));
+      }
+      ds.forEach((d, k) => { for (let n = 0; n < 3; n++) svg.children[k * 3 + n].setAttribute('d', d); });
+    };
+    draw(); host.classList.add('beamed');
+    if ('ResizeObserver' in window) new ResizeObserver(draw).observe(host);
   }
+  const rel = (r, box) => ({ l: r.left - box.left, r: r.right - box.left, t: r.top - box.top, b: r.bottom - box.top, cx: r.left - box.left + r.width / 2, cy: r.top - box.top + r.height / 2 });
+
+  // problem: one lead node -> 5 phones
+  const fan = $('.fan'), lead = $('.lead-node', fan), minis = [...fan.querySelectorAll('.mini-phone')];
+  beam(fan, () => minis.map((m) => [lead, m]), (A, B, box) => {
+    const a = rel(A, box), b = rel(B, box);
+    const [m0, m1] = minis.map((m) => m.getBoundingClientRect());
+    if (m1.top < m0.bottom) { // phones in a row below: S-curve from the node's bottom to each phone's top
+      const my = (a.b + b.t) / 2;
+      return `M${a.cx},${a.b} C${a.cx},${my} ${b.cx},${my} ${b.cx},${b.t}`;
+    }
+    const x = a.l + 16; // phones stacked (phone layout): trunk down the left, rounded elbow into each phone
+    return `M${x},${a.b} L${x},${b.cy - 8} Q${x},${b.cy} ${x + 8},${b.cy} L${b.l},${b.cy}`;
+  }, (k) => [0.1 + k * 0.05, 0.9]);
+
+  // how: pulse travels node to node; each node lights as the pulse arrives
+  const flowHost = $('.flow-host'), flow = $('.flow'), dots = [...flow.querySelectorAll('.dot')];
+  beam(flowHost, () => dots.slice(1).map((d, k) => [dots[k], d]), (A, B, box) => {
+    const a = rel(A, box), b = rel(B, box);
+    return Math.abs(a.cy - b.cy) < 4 ? `M${a.r + 6},${a.cy} L${b.l - 6},${b.cy}` : `M${a.cx},${a.b + 6} L${b.cx},${b.t - 6}`;
+  }, (k) => [0.1 + k * 0.45, 0.45]);
+
+  const appts = $('.appts');
+  if (!reduce && 'IntersectionObserver' in window) {
+    [fan, flow, flowHost, appts].forEach((el) => el.classList.add('armed'));
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('play'); if (e.target === flow) flowHost.classList.add('play');
+      io.unobserve(e.target);
+    }), { threshold: 0.35 });
+    [fan, flow, appts].forEach((el) => io.observe(el));
+  }
+
+  // different: segmented toggle on phones (hirael comparison-03 pattern). Desktop CSS ignores .on and shows both panels.
+  const segBtns = document.querySelectorAll('.seg button');
+  segBtns.forEach((b) => b.addEventListener('click', () => segBtns.forEach((x) => {
+    const on = x === b; x.setAttribute('aria-pressed', String(on)); document.getElementById(x.getAttribute('aria-controls')).classList.toggle('on', on);
+  })));
 
   // ---------- quiz ----------
   const icon = (id) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('class', 'ico'); s.setAttribute('aria-hidden', 'true'); const u = document.createElementNS('http://www.w3.org/2000/svg', 'use'); u.setAttribute('href', '#i-' + id); s.append(u); return s; };
@@ -768,14 +899,16 @@ const CAL_LINK = "sandy-kadyan/30min";
 
   const quiz = $('#quiz'), screen = $('#quiz-screen'), page = $('#page');
   const backBtn = $('[data-back]', quiz), count = $('.quiz-count', quiz), fill = $('.track i', quiz);
-  let answers = {}, stack = [], cur = 'intro', pushed = false, lastFocus = null, busy = false;
+  let answers = {}, stack = [], cur = 'intro', pushed = false, lastFocus = null, busy = false, rev = false;
+  const seenSteps = new Set();
 
   const next = (id) => ORDER[ORDER.indexOf(id) + 1];
-  function go(id) { stack.push(cur); cur = id; render(); }
-  function back() { if (!stack.length) return close(); cur = stack.pop(); render(); }
+  function go(id) { stack.push(cur); cur = id; rev = false; render(); }
+  function back() { if (!stack.length) return close(); cur = stack.pop(); rev = true; render(); }
 
   function open(start, preset) {
-    answers = Object.assign({}, preset); cur = start; stack = start === 'q2' ? ['q1'] : [];
+    answers = Object.assign({}, preset); cur = start; rev = false; stack = start === 'q2' ? ['q1'] : [];
+    track('quiz_start', { step: start === 'q2' ? 'inline' : 'intro' });
     if (quiz.hidden) lastFocus = document.activeElement;
     quiz.hidden = false; page.inert = true; html.classList.add('quiz-open');
     if (location.hash !== '#fit') { history.pushState({ fit: 1 }, '', '#fit'); pushed = true; } else pushed = false;
@@ -816,13 +949,15 @@ const CAL_LINK = "sandy-kadyan/30min";
   function render() {
     busy = false;
     const n = ORDER.indexOf(cur); // q1 = 1 ... q8 = 8
-    if (cur.startsWith('q')) { count.textContent = `Question ${n} of 8`; fill.style.width = (n - 1) / 9 * 100 + '%'; }
-    else if (cur === 'contact') { count.textContent = 'Last step'; fill.style.width = 8 / 9 * 100 + '%'; }
-    else { count.textContent = ''; fill.style.width = cur === 'result' ? '100%' : '0%'; }
+    const rail = (p) => { fill.style.transform = `scaleX(${p})`; };
+    if (cur.startsWith('q')) { count.textContent = `Question ${n} of 8`; rail((n - 1) / 9); }
+    else if (cur === 'contact') { count.textContent = 'Last step'; rail(8 / 9); }
+    else { count.textContent = ''; rail(cur === 'result' ? 1 : 0); }
+    if ((cur.startsWith('q') || cur === 'contact') && !seenSteps.has(cur)) { seenSteps.add(cur); track('quiz_step', { step: cur === 'contact' ? 9 : n }); }
     backBtn.hidden = cur === 'intro' || cur === 'result';
     screen.className = 'quiz-screen' + (cur === 'result' ? ' wide' : '');
     screen.replaceChildren(...build(cur).filter(Boolean));
-    if (!reduce) { void screen.offsetWidth; screen.classList.add('enter'); }
+    if (!reduce) { void screen.offsetWidth; screen.classList.add('enter'); screen.classList.toggle('rev', rev); }
     quiz.scrollTop = 0;
     const t = $('#quiz-title', screen); if (t) t.focus({ preventScroll: true });
   }
@@ -936,6 +1071,7 @@ const CAL_LINK = "sandy-kadyan/30min";
       reply_speed: answers.reply_speed || '', name: answers.name, email: answers.email, mobile: answers.mobile, brokerage: answers.brokerage,
     };
     sendQuizLead(payload); // not awaited: the report card never waits on the Sheet
+    track('quiz_complete', { fit: payload.fit });
     go('result');
   }
 
@@ -968,7 +1104,7 @@ const CAL_LINK = "sandy-kadyan/30min";
       h('div', { class: 'tip' }, h('b', {}, 'One thing that helps right now'), h('p', {}, "Reply to every new lead within 5 minutes, even with a quick text. By the time you call, they've often talked to someone else.")),
       h('div', { class: 'actions', style: 'margin-top:28px' }, h('button', { type: 'button', class: 'btn', onclick: close }, 'Back to the page')),
     ];
-    const box = h('div', { class: 'cal-embed', id: 'cal-inline' });
+    const box = h('div', { class: 'cal-embed', id: 'cal-realtor-strategy-call' });
     setTimeout(() => loadCal(answers.name, answers.email), 0);
     return [
       title(`${first}, here's your report for ${city}`),
@@ -984,11 +1120,15 @@ const CAL_LINK = "sandy-kadyan/30min";
   function loadCal(name, email) {
     if (!calReady) {
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "30min", { origin: "https://app.cal.com" });
-      Cal.ns["30min"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+      Cal("init", "realtor-strategy-call", { origin: "https://app.cal.com" });
+      Cal.ns["realtor-strategy-call"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+      let booked = false; // cal.com fires the V2 event on current embeds and the legacy one on older ones: count one booking once
+      const onBooked = () => { if (!booked) { booked = true; track('cal_booked'); } };
+      Cal.ns["realtor-strategy-call"]("on", { action: "bookingSuccessfulV2", callback: onBooked });
+      Cal.ns["realtor-strategy-call"]("on", { action: "bookingSuccessful", callback: onBooked });
       calReady = true;
     }
-    Cal.ns["30min"]("inline", { elementOrSelector: "#cal-inline", config: { layout: "month_view", name: name || '', email: email || '' }, calLink: CAL_LINK });
+    Cal.ns["realtor-strategy-call"]("inline", { elementOrSelector: "#cal-realtor-strategy-call", config: { layout: "month_view", name: name || '', email: email || '' }, calLink: CAL_LINK });
   }
 
   if (location.hash === '#fit') open('intro');
