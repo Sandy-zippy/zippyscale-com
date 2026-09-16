@@ -193,6 +193,7 @@ button,input{font:inherit;color:inherit}
 .avatar svg{width:20px;height:20px}
 .ad-who b{display:block;font:600 var(--fs-small)/var(--lh-label) var(--sans);color:var(--head)}
 .ad-who span{display:block;font:400 var(--fs-label)/var(--lh-label) var(--sans);color:var(--muted)}
+.ad-who .spons{display:inline}
 .ad-text{padding:0 var(--s-16) var(--s-12);font:400 var(--fs-small)/var(--lh-small) var(--sans);color:var(--head);text-wrap:pretty}
 .ad-img{width:100%;height:auto;aspect-ratio:4 / 3;object-fit:cover;background:var(--sand-2)}
 .ad-foot{display:flex;align-items:center;justify-content:flex-end;gap:var(--s-12);padding:var(--s-12) var(--s-16);background:var(--sand);border-top:1px solid var(--line)}
@@ -399,7 +400,8 @@ button,input{font:inherit;color:inherit}
 .plan-steps b{font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head)}
 .plan-steps span{color:var(--body);text-wrap:pretty}
 .plan-steps .key{display:none}
-.pay .micro{margin-top:var(--gap-block);text-align:center}
+.pay .micro{margin-top:var(--gap-block);text-align:center;text-wrap:balance}
+.vs .us li > span:first-child{text-wrap:balance}
 /* motion 4 (armed only below the fold) */
 .plan.armed:not(.play) .pb-appts .fill{transform:scaleX(0)}
 .plan.armed:not(.play) .pb-appts .ap{opacity:0;scale:.6}
@@ -430,7 +432,7 @@ button,input{font:inherit;color:inherit}
 .faq-list summary .ico{transition:transform .2s var(--ease-out);color:var(--muted)}
 .faq-list details[open] summary .ico{transform:rotate(45deg)}
 @media (hover:hover) and (pointer:fine){.faq-list summary:hover{color:var(--lime-text)}}
-.faq-list details p{padding-bottom:var(--s-24);max-width:var(--measure-body)}
+.faq-list details p{padding-bottom:var(--s-24);max-width:var(--measure-body);text-wrap:pretty}
 /* open/close height transition where supported; older engines snap, which is fine */
 .faq-list details::details-content{block-size:0;overflow:hidden;transition:block-size .3s var(--ease-out),content-visibility .3s allow-discrete}
 .faq-list details[open]::details-content{block-size:auto}
@@ -449,6 +451,9 @@ button,input{font:inherit;color:inherit}
 footer{padding-block:var(--s-32)}
 footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
 footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;text-underline-offset:3px}
+/* every item carries its dot; the dot of whichever item starts a line sits in the clipped gutter, so no line ever starts with "·" */
+footer .sep{display:flex;flex-wrap:wrap;margin-left:calc(-1 * var(--s-16));clip-path:inset(0 0 0 var(--s-16))}
+footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);margin-inline:0;text-align:center}
 
 /* ---------- quiz overlay ---------- */
 .quiz{position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -679,7 +684,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
           </div>
           <p class="ad-text">First condo in Burnaby? Get my free&nbsp;guide.</p>
           <img class="ad-img" src="assets/img/condo-400.webp" srcset="assets/img/condo-400.webp 400w, assets/img/condo-800.webp 800w" sizes="(max-width:640px) 55vw, 320px" width="400" height="300" alt="">
-          <div class="ad-foot"><span class="go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span></div>
+          <div class="ad-foot"><b>Get the free guide</b><span class="go" aria-hidden="true"><svg class="ico"><use href="#i-arrow"/></svg></span></div>
         </article>
         <div class="book">
           <div class="cover">
@@ -771,7 +776,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 <section class="sec dark" data-s="how">
   <div class="wrap">
     <div class="sec-head center">
-      <h2>People who don't know you</h2>
+      <h2>They don't know you yet</h2>
       <p class="sub">Your ads run within 7 days of signing.</p>
     </div>
     <div class="board">
@@ -869,7 +874,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap">
     <div class="sec-head center">
       <h2>Close to nothing upfront</h2>
-      <p class="sub">The rest of the setup waits until your first 3 qualified appointments show&nbsp;up.</p>
+      <p class="sub">You pay the rest of the setup after your first 3 qualified appointments show&nbsp;up.</p>
     </div>
     <div class="plan">
       <div class="plan-bar" aria-hidden="true">
@@ -914,14 +919,13 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   <div class="wrap split">
     <div class="sec-head"><h2>The catch, and other questions</h2></div>
     <div class="faq-list">
-      <details><summary>What's the catch?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The rest of the setup waits until your first 3 qualified appointments show up. So we only take realtors we're sure we can help. We grow when you grow.</p></details>
+      <details><summary>What's the catch?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>You pay the rest of the setup after your first 3 qualified appointments show up. So we only take realtors we're sure we can help. We grow when you grow.</p></details>
       <details><summary>How soon do appointments start?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Your ads run within 7 days of signing. How fast calls come depends on your city and budget. We'll show you what's realistic for your city on the call.</p></details>
       <details><summary>What about no-shows?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No-shows don't count toward your first 3 qualified appointments.</p></details>
-      <details><summary>Am I locked in?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The call walks you through the terms and the payment plan. You decide after that.</p></details>
       <details><summary>Who will I talk to?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The ZippyScale team, on a 30-minute call. We look at your market and the first guide we'd build. You pick a time after the quiz.</p></details>
       <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city who plans to buy or sell in the next 90 days. They answered our questions and booked a time with you. You confirm it by talking to them.</p></details>
-      <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Follow-up starts the same day. You don't make content. You see the ads before they run, and you take the calls.</p></details>
-      <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them. We work with one realtor per city.</p></details>
+      <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Texts and emails go out automatically when someone asks for your guide. You don't make content. You see the ads before they run, and you take the calls.</p></details>
+      <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a shared sheet you can open anytime. They answered ads with your name on them. We work with one realtor per city.</p></details>
       <details><summary>Do the ads follow brokerage rules?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Your ads show your name and your brokerage. You see every ad before it runs.</p></details>
       <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
     </div>
@@ -1244,15 +1248,15 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     if (a.ad_budget === 'Under 2k') r.push('Your ad budget is below what this needs to bring steady appointments.');
     return r;
   }
-  const CA_PROV = /^(bc|b\.c\.|british columbia|ab|alta|alberta|sk|sask|saskatchewan|mb|man|manitoba|on|ont|ontario|qc|que|quebec|québec|ns|nova scotia|nb|new brunswick|pe|pei|prince edward island|nl|newfoundland|newfoundland and labrador|yt|yukon|nt|northwest territories|nu|nunavut)$/i;
-  const BC_PROV = /^(bc|b\.c\.|british columbia)$/i;
+  const CA_PROV = /^(canada|bc|b\.?c\.?|british columbia|ab|alta|alberta|sk|sask|saskatchewan|mb|man|manitoba|on|ont|ontario|qc|que|quebec|québec|ns|nova scotia|nb|new brunswick|pe|pei|prince edward island|nl|newfoundland|newfoundland and labrador|yt|yukon|nt|northwest territories|nu|nunavut)$/i;
+  const BC_PROV = /^(b\.?c\.?|british columbia)$/i;
   const BC_CITY = /^(vancouver|north vancouver|west vancouver|burnaby|surrey|richmond|coquitlam|port coquitlam|port moody|new westminster|delta|langley|white rock|maple ridge|pitt meadows|abbotsford|chilliwack|mission|squamish|whistler|victoria|saanich|langford|nanaimo|kelowna|west kelowna|kamloops|vernon|penticton|prince george|tsawwassen|ladner)$/i;
   function reportLines(a) {
     const city = a.city_name || 'your city';
     const prov = (a.province || '').trim();
     const prop = a.property_types || [], src = a.lead_sources || [];
-    const bc = BC_PROV.test(prov) || (!prov && BC_CITY.test(city));
-    const us = !!prov && !CA_PROV.test(prov); // a state was typed: American terms
+    const bc = BC_PROV.test(prov) || ((!prov || /^(canada|ca)$/i.test(prov)) && BC_CITY.test(city));
+    const us = !!prov && !CA_PROV.test(prov) && !/^ca$/i.test(prov); // a state was typed: American terms (bare "CA" could be Canada)
     const presale = bc ? 'presale' : 'pre-construction';
     const evaluation = us ? 'home value report' : 'home evaluation page';
     let guide, cover;
@@ -1264,11 +1268,11 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     else if (prop.includes('Condos') || prop.includes('Townhouses')) { guide = `A ${city} market snapshot for first-time buyers.`; cover = 'First-home snapshot'; }
     else { guide = `A "Moving to ${city}" guide for relocation buyers.`; cover = `Moving to ${city}`; }
     const speed = {
-      'Under 5 minutes': "You already reply fast. We keep following up while you're at showings, until they book.",
-      'Within an hour': 'An hour is a long wait after a guide request at 11pm. Our follow-up starts the same day.',
-      'Same day': "Same-day replies lose people to faster realtors. We follow up that day and keep going until they book.",
-      'Next day or later': 'People who ask for a guide at night often call another realtor by morning. Our follow-up starts the same day.',
-    }[a.reply_speed] || 'Our follow-up starts the same day and keeps going until they book.';
+      'Under 5 minutes': "You already reply fast. While you're at showings, our texts and emails keep each lead warm until you call.",
+      'Within an hour': "An hour is a long wait when someone asks for your guide at 11pm. Texts and emails go out automatically when they ask, so nobody's left waiting.",
+      'Same day': "Same-day replies lose people to faster realtors. Texts and emails go out automatically when they ask for your guide, so nobody's left waiting.",
+      'Next day or later': "People who ask for a guide at night often call another realtor by morning. Texts and emails go out automatically when they ask, so nobody's left waiting.",
+    }[a.reply_speed] || "Texts and emails go out automatically when someone asks for your guide, so nobody's left waiting.";
     const warm = ['Sphere and past clients', 'Open houses or farming'];
     let source;
     if (src.includes('Brokerage leads') || src.includes('Portal leads')) source = "You're working leads other realtors get too. These people asked for your guide and saw your name on the ad.";
@@ -1318,9 +1322,10 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     const reasons = lastResult || verdict(answers);
     if (reasons.length) {
       const team = answers.solo_or_team === 'On a team' || answers.solo_or_team === 'Team lead or broker';
+      const shown = team ? reasons.slice(1) : reasons; // the team title already gives the solo reason
       return [
         title(team ? "We're only working with solo realtors right now" : `Not a fit yet${first ? ', ' + first : ''}`),
-        h('ul', { class: 'reasons' }, reasons.map((r) => h('li', {}, icon('x'), h('span', {}, r)))),
+        shown.length > 0 && h('ul', { class: 'reasons' }, shown.map((r) => h('li', {}, icon('x'), h('span', {}, r)))),
         h('p', { class: 'help' }, `We've saved your answers. When that changes, take the quiz again and we'll look at ${city} first.`),
         answers.reply_speed !== 'Under 5 minutes' && h('div', { class: 'tip' }, h('b', {}, 'One thing that helps right now'), h('p', {}, "Reply to every new lead within 5 minutes, even with a quick text. By the time you call, they've often talked to someone else.")),
         h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn', onclick: close }, 'Back to the page')),
@@ -1339,7 +1344,7 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
           h('p', { class: 'cover-top' }, h('span', { class: 't-label' }, `${city} ${new Date().getFullYear()}`), h('b', {}, cover)),
           h('p', { class: 'byline' }, `by ${titleCase(answers.name) || 'Your name'}`)),
         h('dl', { class: 'report' }, rows.map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, v))))),
-      h('p', { class: 'book-line' }, `Book your call. We'll confirm ${city} is open and walk you through the payment plan.`),
+      h('p', { class: 'book-line' }, "Book your 30-minute call. We'll walk you through the payment plan."),
       box,
       h('p', { class: 'micro' }, "Pick a time that suits you. You'll get a confirmation email."),
     ];

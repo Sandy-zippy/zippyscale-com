@@ -25,12 +25,12 @@ Locked visual system (details in DESIGN.md): cream #FFFDF7, charcoal #2A2A35, li
 
 ## The offer, as the page may state it
 
-- What we do: city guides, ads in the realtor's name, same-day follow-up until they book, qualified appointments on the realtor's calendar. Ads run within 7 days of signing.
+- What we do: city guides, ads in the realtor's name, automated texts and emails that go out when someone asks for a guide, then follow-up until they book, qualified appointments on the realtor's calendar. Ads run within 7 days of signing.
 - Qualified appointment: a booked call with someone in the realtor's city who plans to buy or sell in the next 90 days; the realtor confirms it by talking to them. No-shows don't count.
-- Payment structure, never amounts: a first payment builds the guides, ads, quiz and follow-up; the rest of the setup waits until the first 3 qualified appointments show up; after that we earn more only if the realtor chooses to raise their ad budget. The ad budget goes to the ad platforms, not to us. The call walks through the terms and the payment plan.
-- Leads go into a Google Sheet the realtor can open anytime.
+- Payment structure, never amounts: a first payment builds the guides, ads, quiz and follow-up; the realtor pays the rest of the setup after the first 3 qualified appointments show up; after that we earn more only if the realtor chooses to raise their ad budget. The ad budget goes to the ad platforms, not to us. The call walks through the terms and the payment plan.
+- Leads go into a shared sheet the realtor can open anytime. Ads show the realtor's name and brokerage.
 
-**Never on the page:** any fee, price, percentage or dollar ad budget; contract terms (none have been stated); a date for the first appointment; "exclusive leads", "setup fee", "pay per close", "guaranteed", "desk", "agents" on its own, AI as a headline; "Hyderabad".
+**Never on the page:** any fee, price, percentage or dollar ad budget; contract terms (none have been stated, so no "locked in" FAQ); any follow-up timing beyond "texts and emails go out automatically when someone asks for your guide"; a date for the first appointment; "exclusive leads", "setup fee", "pay per close", "guaranteed", "desk", "agents" on its own, AI as a headline; "Hyderabad".
 
 ## Proof the page may use (owner-authorised)
 
