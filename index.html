@@ -284,8 +284,7 @@ button,input{font:inherit;color:inherit}
 /* 1 guide cover */
 .art .m-cover{width:148px;border-radius:var(--r-book);display:grid}
 .m-cover img{width:100%;height:auto;aspect-ratio:2 / 1;object-fit:cover}
-.m-cover b{padding:var(--s-8) var(--s-12) 0}
-.m-cover span{padding:var(--s-4) var(--s-12) var(--s-12);color:var(--muted)}
+.m-cover b{padding:var(--s-8) var(--s-12) var(--s-12)}
 /* 2 ad */
 .m-ad .h{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-12)}
 .m-ad .h i{width:20px;height:20px;border-radius:50%;background:var(--sand);border:1px solid var(--line-2);flex:none}
@@ -344,7 +343,7 @@ button,input{font:inherit;color:inherit}
 .cal ol{display:grid}
 .cal li{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:var(--s-16);align-items:start;padding:var(--s-12) var(--s-24);min-height:56px}
 .cal li + li{border-top:1px solid var(--line)}
-.cal .d{padding-top:var(--s-12);color:var(--muted)}
+.cal .d{padding-top:var(--s-12);color:var(--muted);white-space:nowrap}
 .ev{grid-column:2;display:grid;row-gap:var(--s-4);padding:var(--s-12) var(--s-16);border-radius:var(--r-inner);background:var(--sand);border:1px solid var(--line-2)}
 .ev.hot{background:var(--lime);border-color:rgba(42,42,53,.2)}
 .ev b{font:600 var(--fs-body)/var(--lh-card) var(--sans);color:var(--head)}
@@ -355,6 +354,7 @@ button,input{font:inherit;color:inherit}
 @keyframes fill-in{from{clip-path:inset(0 0 100% 0 round 12px);translate:0 6px}to{clip-path:inset(0 0 0 0 round 12px);translate:0 0}}
 
 /* ---------- results ---------- */
+.results .split{align-items:center}
 .guide-feature{display:grid;gap:var(--s-16)}
 .guide-stage{min-height:360px;padding:var(--s-40) var(--s-16);border-radius:var(--r-card);background:var(--sand);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;container-type:inline-size}
 .spread{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,400px);border-radius:var(--r-inner);overflow:hidden;border:1px solid var(--line-2);transform:rotate(-1deg);backface-visibility:hidden;box-shadow:var(--sh-float)}
@@ -364,7 +364,7 @@ button,input{font:inherit;color:inherit}
 .pg-cover svg{width:100%;height:100%}
 .pg-cover .pc{display:grid;align-content:start;gap:var(--s-4);padding:var(--s-16) var(--s-16) var(--s-12)}
 .pg-cover .pc b{font:600 var(--fs-body)/1.2 var(--display);letter-spacing:-.01em;color:var(--head);text-wrap:balance}
-.pg-cover .pc span:last-child{font:400 var(--fs-label)/var(--lh-label) var(--sans);color:var(--muted)}
+.pg-cover .pc .st{font:400 var(--fs-label)/var(--lh-label) var(--sans);color:var(--muted)}
 .pg-cover .byline{padding:var(--s-8) var(--s-16)}
 .pg-toc{align-content:start;border-left:1px solid var(--line);padding:var(--s-24) var(--s-16) var(--s-16);background:linear-gradient(90deg,rgba(42,42,53,.06),rgba(42,42,53,0) 16px),var(--paper)}
 .pg-toc .t-label{padding-bottom:var(--s-8)}
@@ -531,7 +531,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .stop::before{display:none}
   .who{grid-column:2;grid-row:1;align-self:end}
   .step h3{grid-column:2;grid-row:2;align-self:start}
-  .art{grid-column:3;grid-row:1 / 3;height:180px}
+  .art{grid-column:3;grid-row:1 / 3;height:auto;min-height:180px}
   .buyer{display:none}
 }
 @media (max-width:960px){
@@ -591,13 +591,12 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .mini{width:auto;min-width:176px}
   .step{grid-template-columns:24px minmax(0,1fr) 164px;column-gap:var(--s-8)}
   .steps::before{top:60px;bottom:60px}
-  .art{height:156px;padding:var(--s-8)}
+  .art{min-height:156px;padding:var(--s-8)}
   .art .mk{max-width:none}
   .art .m-cover{width:112px}
   .m-cover img{aspect-ratio:3 / 1}
-  .m-cover span{display:none}
   .m-page .o:not(.on),.m-note p,.m-ad .c{display:none}
-  .cal li{grid-template-columns:48px minmax(0,1fr);padding-inline:var(--s-16);column-gap:var(--s-12)}
+  .cal li{grid-template-columns:56px minmax(0,1fr);padding-inline:var(--s-16);column-gap:var(--s-12)}
   .cal-h{padding-inline:var(--s-16)}
   .plan-bar{grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr)}
   .plan-steps{grid-template-columns:minmax(0,1fr);row-gap:var(--s-16)}
@@ -663,7 +662,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <p class="lede">We build your city guides and run ads in your name. Buyers and sellers moving in the next 90&nbsp;days book a call on your calendar.</p>
         <div class="cta">
           <a class="btn hero-btn" href="#fit" data-open-quiz>See if you qualify <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <noscript><br><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript>
+          <noscript><br><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us your city</a></noscript>
           <p class="micro sep"><span>2 minutes</span> <span>one realtor per city</span></p>
         </div>
       </div>
@@ -779,7 +778,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <li class="step">
           <span class="who we">We</span>
           <h3>Write your city guide</h3>
-          <div class="art" aria-hidden="true"><div class="mk m-cover"><img src="assets/img/burnaby-360.webp" width="360" height="180" alt="" loading="lazy"><b>Burnaby <span class="nw">first-condo</span> guide</b></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-cover"><img src="assets/img/burnaby-360.webp" width="360" height="180" alt="" loading="lazy"><b><span class="nw">First-condo</span> guide</b></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
@@ -850,7 +849,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <figure class="guide-feature">
         <div class="guide-stage" aria-hidden="true">
           <div class="spread">
-            <div class="pg pg-cover"><svg><use href="#band"/></svg><p class="pc"><span class="t-label">Fraser Valley</span><b><span class="nw">Pre-construction</span> buyer's guide</b><span>From concept to keys</span></p><p class="byline">by Your name</p></div>
+            <div class="pg pg-cover"><svg><use href="#band"/></svg><p class="pc"><span class="t-label">Fraser Valley</span><b><span class="nw">Pre-construction</span> buyer's guide</b><span class="st">From concept to keys</span></p><p class="byline">by Your name</p></div>
             <div class="pg pg-toc"><p class="t-label">Contents</p><ol><li>What a presale is<span>1</span></li><li>How presales work<span>2</span></li><li>Deposit structure<span>16</span></li><li>Getting pre-approved<span>19</span></li></ol></div>
           </div>
         </div>
@@ -921,7 +920,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city who plans to buy or sell in the next 90 days. They answered our questions and booked a time with you. You confirm it by talking to them.</p></details>
       <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Follow-up starts the same day. You don't make content. You see the ads before they run, and you take the calls.</p></details>
       <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them. We work with one realtor per city.</p></details>
-      <details><summary>Does it follow brokerage rules?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Your ads show your name and your brokerage. You see every ad before it runs.</p></details>
+      <details><summary>Do the ads follow brokerage rules?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Your ads show your name and your brokerage. You see every ad before it runs.</p></details>
       <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
     </div>
   </div>
@@ -937,7 +936,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <button type="submit" class="btn">Check my city <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
       <p class="err" id="inline-err" hidden>Type your city to check it.</p>
-      <noscript><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript>
+      <noscript><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us your city</a></noscript>
       <p class="micro sep"><span>2 minutes</span> <span>one realtor per city</span></p>
     </form>
   </div>
