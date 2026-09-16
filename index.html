@@ -416,7 +416,7 @@ button,input{font:inherit;color:inherit}
 .map-dots{position:relative}
 .map-dots > svg{width:100%;height:auto}
 .pin{position:absolute;left:39%;top:53%;width:0;height:0}
-.pin .dot{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--charcoal);box-shadow:0 0 0 4px rgba(42,42,53,.18)}
+.pin .dot{position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:var(--charcoal);border:4px solid rgba(42,42,53,.18);background-clip:padding-box}
 .pin .call{position:absolute;left:0;translate:-50% 0;bottom:var(--s-16);display:flex;align-items:center;gap:var(--s-8);white-space:nowrap;padding:var(--s-4) var(--s-4) var(--s-4) var(--s-12);border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line-2);color:var(--head);font:600 var(--fs-small)/var(--lh-label) var(--sans);box-shadow:var(--sh-card)}
 
 /* ---------- faq ---------- */
@@ -551,6 +551,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .faq .sec-head{position:static}
 }
 /* ---------- phone ---------- */
+@media (max-width:359px){:root{--fs-h1:32px}}
 @media (max-width:640px){
   .top .wrap{height:56px}
   .logo img{height:24px}
@@ -603,7 +604,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .plan-steps li{grid-template-columns:16px minmax(0,1fr);column-gap:var(--s-12);padding-right:0}
   .plan-steps .key{display:block;grid-row:span 2;width:16px;height:16px;margin-top:var(--s-4);border-radius:50%}
   .plan-steps li:nth-child(1) .key{background:var(--charcoal)}
-  .plan-steps li:nth-child(2) .key{background:var(--lime);box-shadow:inset 0 0 0 1px rgba(42,42,53,.3)}
+  .plan-steps li:nth-child(2) .key{background:var(--lime);border:1px solid rgba(42,42,53,.3)}
   .plan-steps li:nth-child(3) .key{border:2px dashed var(--line-strong)}
   .pb-appts .ap{width:24px;height:24px}
   .inline-row{grid-template-columns:minmax(0,1fr)}

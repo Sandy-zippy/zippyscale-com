@@ -1,89 +1,72 @@
-# DESIGN.md — ZippyScale
+# DESIGN.md: ZippyScale realtor page
 
-Single-file build: `index.html`, inline CSS and JS, self-hosted fonts in `fonts/`, PNG logos in `assets/` (`logo-light.png` on cream, `logo-dark.png` on charcoal), generated imagery in `assets/img/`. No build step, no framework, GitHub Pages serving `main` at repo root. A push to `main` is the deploy.
+Single-file build: `index.html` with inline CSS and JS, self-hosted fonts in `fonts/`, logos and icons in `assets/`, photos in `assets/img/` (credits in `assets/img/CREDITS.md`). No build step, no framework. GitHub Pages serves `main`. Rewritten 17 Sep 2026 to describe the v4 page; every value below is a CSS custom property in `index.html` `:root`.
 
 ## Color
 
-Brand-locked hex values are canonical (they exist across decks, invoices and the India site), OKLCH equivalents noted for judging lightness and chroma moves.
+| Token | Hex | Use |
+|---|---|---|
+| `--cream` | #FFFDF7 | Page ground, most sections |
+| `--paper` | #FFFFFF | Cards on cream; results and pay sections |
+| `--sand` / `--sand-2` | #F5F2E8 / #EFEBDD | City section band, inner tiles, mock grounds |
+| `--line` / `--line-2` | #E7E3D6 / #D6D1C1 | `--line` for every card border; `--line-2` for controls and tags |
+| `--line-strong` | #8A8577 | Input borders, strike-through, dashed pay segment |
+| `--charcoal` | #2A2A35 | Dark sections (how, final), buttons in mocks |
+| `--card-dark` / `--border-dark` | #33333F / #44444F | Cards and hairlines on charcoal |
+| `--lime` | #D5EB4B | Accent |
+| `--lime-text` | #6B7C10 | Accent text on light grounds (4.57:1) |
+| `--head` / `--body` / `--muted` | #1A1A2E / #4A5568 / #5B6270 | Text on light |
+| `--body-dark` | #C9CBD6 | Text on charcoal |
 
-| Role | Hex | OKLCH | Use |
-|---|---|---|---|
-| Cream | #FFFDF7 | oklch(99.3% 0.011 95) | Light sections |
-| White | #FFFFFF | oklch(100% 0 0) | Raised surfaces on cream |
-| Charcoal | #2A2A35 | oklch(28.5% 0.017 285) | Dark sections, footer, page background |
-| Card dark | #33333F | oklch(33.5% 0.018 285) | Cards on charcoal |
-| Border dark | #3E3E48 | oklch(38.8% 0.015 285) | Hairlines on charcoal |
-| Lime | #D5EB4B | oklch(89.5% 0.166 111) | CTA fill, accents on dark, motion trails |
-| Lime text | #6B7C10 | oklch(52.4% 0.121 116) | Accent text on cream (4.57:1). #B8CF2E fails at 1.72:1, never use it for text |
-| Head | #1A1A2E | oklch(22.6% 0.028 285) | Headings on light |
-| Body | #4A5568 | oklch(45.9% 0.036 264) | Body on light |
-| Body dark | #C9CBD6 | oklch(83.6% 0.011 285) | Body on charcoal |
-
-Strategy: **committed, light-dominant since 10 Sep 2026.** Charcoal is punctuation, not half the page: at most two dark moments on a page, used where a claim is made rather than explained. Lime is the single accent and appears only on the CTA, on active motion states, and on the accent word in a heading. Never two accent colours. No gradients on text, ever.
-
-**Override, 10 Sep 2026, Sandy's ruling.** The market this page sells into converts on faces, brokerage logos, video and a repeated identical CTA. The nearest comparable page, a former client's, runs 143 images, 2 videos and the same button eight times. The editorial charcoal treatment reads as a design agency to a working agent. So: the palette and the three typefaces stay locked, the surface ratio does not. Light ground carries the page, real faces of real people we have worked with carry the proof, and the CTA repeats.
-
-Theme reasoning: an agent reads this on a phone, outdoors, between showings. So the reading surface is light cream, and charcoal is used as punctuation, for the sections that make a claim rather than explain one.
+Strategy: restrained, light-dominant. Section grounds run cream (hero, problem, different), charcoal (how), cream (calendar), white (results, pay), sand (city), cream (FAQ), charcoal (final). Lime is spent only on buttons, the ICP highlight, the booked-call states (hero event, one calendar event, step 5 slot, Booked badge), the pay appointments segment and quiz selection. Never gradient text.
 
 ## Type
 
-- Space Grotesk 700 for headings, clamp scale, tracking -0.02em.
-- Inter 400/500/700 for body at 17px base, 1.65 line height, 68ch max measure.
-- JetBrains Mono 700 for eyebrows, day markers, counters, chip labels, all uppercase with 0.12em to 0.16em tracking. Mono is the signal that a number is real.
-- Scale ratio at least 1.25 between steps.
+Space Grotesk (headings, card titles, stats), Inter with a metric-matched Arial fallback (body, UI), JetBrains Mono 700 uppercase (labels, tags, dates only).
+
+| Role | Token | Size at 1440 (phone) | Weight |
+|---|---|---|---|
+| H1 | `--fs-h1` | 64 (40) | 700 |
+| H2 | `--fs-h2` | 48 (32) | 700 |
+| ICP callout | `--fs-icp` | 28 (20) | 600 |
+| Proof stat, hero and results | `--fs-stat` | 28 (24) | 700 |
+| Card, step, day and plan titles | `--fs-card` | 22 (18) | 600 |
+| Lede, section subs, FAQ questions (Inter) | `--fs-body-lg` | 20 (18) | 400 / 600 |
+| Body | `--fs-body` | 17 (16) | 400 |
+| Small: captions, chips, mock text | `--fs-small` | 14 | 400 to 600 |
+| Label (mono) | `--fs-label` | 12 | 700 |
+
+No text renders under 12px. Mock artefacts reuse these sizes; they never introduce their own.
 
 ## Space and layout
 
-- One container: max-width 1120px, 24px gutters.
-- Section padding 96px, tightened to 64px via `.tight` when two sections are a continuous idea.
-- Rhythm is intentionally uneven: full-bleed diagram sections sit against tight editorial blocks.
-- No uniform three-across card grids. When items are peers, they are laid out as a diagram, a numbered ladder or an asymmetric split, never as identical boxes.
-
-## Bans carried from the skill
-
-No side-stripe borders. No gradient text. No decorative glass. No hero-metric template. No identical card grids. No modals.
-
-## Motion
-
-- Curve: ease-out-expo `cubic-bezier(0.16, 1, 0.3, 1)` for entrances, 500 to 900ms. Never bounce.
-- Never animate layout properties. Transform and opacity only, plus `stroke-dashoffset` for diagram draw-on.
-- Motion must mean something: an enquiry arriving, a clock running to the answer, an appointment landing on a week, time advancing across the 45 days.
-- Scroll-linked movement uses a single rAF loop reading one `getBoundingClientRect` batch, not one observer per element.
-- `prefers-reduced-motion` collapses every animation to its final state, including diagram draws and counters.
+- 4/8 spacing scale: 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 104. Every padding, margin and gap uses a token.
+- One container: 1200px max, 24px gutters (20px on phones). 12-column grid, 24px column gap.
+- Section padding 104 (80 under 1024, 64 on phones). `.tight` (64 / 48 / 40 top) where a section continues the previous idea: different after problem, pay after results.
+- H2 measure 28ch. Problem, how and pay heads are centred; the rest are left-aligned splits.
+- Surfaces: `--r-card` 20 for outer cards, `--r-inner` 12 for anything inside a card, `--r-pill` 999 for pills and buttons, `--r-book` for book covers. Two shadows: `--sh-card` for cards, `--sh-float` for artefacts that sit on a ground (hero, guide spread, Booked pill).
 
 ## Imagery
 
-- Photographic images are generated on-brand (GPT Image 2 via the higgsfield-generate skill) and used only where a real scene helps: a phone lighting up on a kitchen counter, an open-house sign-in sheet, a listing appointment at a dining table. Every image is desaturated toward the charcoal and cream palette so it never fights the lime.
-- Diagrams are hand-authored SVG, stroke 1.5, lime for the active path, muted for the inert path.
-- No stock-photo handshakes, no drone hero video, no fake dashboard screenshots showing invented numbers.
+- Three Unsplash photos (condo, craftsman house, Burnaby skyline), cropped, lightly desaturated, WebP at 1x/2x, each under 45KB. Used only inside mocks tagged Example. No people's faces.
+- Line icons: Lucide-style stroke icons at 1.75 stroke in one sprite. No emoji, no clip-art illustrations.
+- Real logo files only (`assets/logo-light@3x.png`, favicon tile from `assets/icon-256.png`).
 
-## Amendment, 10 September 2026 — typeface and ground replaced
+## Motion
 
-Sandy's instruction: "kill zippy scale typography though will redo it", benchmarked against
-a realtor coaching company. The realtor page no longer uses the house type or the cream ground.
+Four page-level elements, each plays once, final state is the CSS default, no-JS and `prefers-reduced-motion` show the final state:
 
-| Was | Now |
-|---|---|
-| Space Grotesk 700 / Inter / JetBrains Mono | **Figtree 400 / 600 / 800**, self-hosted, one family for everything |
-| Cream #FFFDF7 ground, charcoal punctuation | **White #FFFFFF ground**, ink **#0B1220**, surface **#F6F8FB** |
-| Accent text #6B7C10 on cream | Accent text **#5C6A0C** (5.96:1 on white, 5.6:1 on surface) |
-| Wordmark PNG in the nav | **Favicon tile only.** `assets/icon-256.png` at 24px inside a 42px ink tile, radius 11px |
+1. Hero: the ad, the guide and the booked call blur-fade in order, joined by a beam path drawn between them (about 2.3s). The motion class is set in `<head>`, so the first paint is the first frame.
+2. How board (1024px and up): the rail fills stop to stop, each artefact lifts as it is reached, and the buyer pill travels from stop 1 to Booked (2.4s). Pauses when scrolled out of view.
+3. Calendar: bookings fill top to bottom (1.05s).
+4. Pay: the appointments segment fills and its three dots land (1.1s).
 
-Lime #D5EB4B is unchanged and still the only accent. It is spent in exactly three places:
-buttons, the headline highlight behind "back second.", and the step numbers in the dark block.
+Motions 2 to 4 arm only when their section starts below the fold, so nothing already on screen can vanish and redraw. Interaction feedback outside the budget: button press scale, FAQ open and close height, quiz screen slides. Easing `cubic-bezier(0.16,1,0.3,1)`; movement `cubic-bezier(0.77,0,0.175,1)`. Only transform, opacity, clip-path and filter animate.
 
-Contrast corrections made at the same time: `--muted` #8A93A3 (2.91:1 on surface, failed) is now
-**#68707E** (4.69:1). The "LIVE" label and the booked tick use **#067647**, not #12B76A (2.47:1).
-The #12B76A green survives only as the pulsing dot, which carries no information.
+## Bans
 
-Type ramp is px tokens, not rem, because the previous build had a 17px body against a 16px root
-and produced 37 distinct rendered sizes. `--t-xs:13 · --t-sm:14 · --t-base:17 · --t-md:19 ·
---t-lg:23 · --t-xl:30`, headings on clamp().
+No side-stripe borders, gradient text, glassmorphism, hero-metric templates, identical icon card grids, modals (the quiz is a full-screen step flow), fake dashboards or AI-generated imagery.
 
-Motion budget, five items, each one justified:
-1. Hero message thread, plays once on load. It **is** the service, demonstrated.
-2. Headline highlight swipe, 850ms, once.
-3. Live dot pulse on the ICP callout.
-4. Scroll reveals, fade plus 14px, 600ms, unobserved after firing, with a 4s reveal-everything backstop.
-5. The lime rule that draws across the three steps in the dark block.
-Everything collapses to its final state under `prefers-reduced-motion`.
+## Gates
+
+`site-rebuild/qa/overlap.py` (nothing covers text inside visuals), `site-rebuild/qa/minfont.py` (no text under 12px), `site-rebuild/audit/design/recheck.py` (type sizes, radii, shadows and spacing stay on these tokens), `site-rebuild/qa/probe.py` (640 visible words).

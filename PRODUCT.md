@@ -1,113 +1,57 @@
-# PRODUCT.md — ZippyScale (zippyscale.com)
+# PRODUCT.md: ZippyScale (zippyscale.com)
 
 **register: brand**
 
 ## What this is
 
-A single-page site that sells one offer: **The Listing Appointment Desk**. Ten held appointments in 45 days for a real estate agent who already closes six or more deals a year. We build the campaigns, our desk answers every enquiry inside five minutes and books it, and we are paid out of the closings rather than a retainer.
+A single landing page for one offer: ZippyScale is the marketing team for solo realtors. We build the realtor's city guides, run ads in their name, follow up with the people who ask for a guide, and book buyers and sellers moving in the next 90 days onto the realtor's calendar. The realtor sees the ads before they run and takes the calls.
 
-An agent lands here, understands in under a minute that we run two things (ads that bring enquiries, and a desk that answers them before the lead goes cold), sees that we do not get paid until they do, and claims the Competitor Ad Sheet for their postal code.
+The page has one job: get a realtor who clicked through from a LinkedIn message to take the fit quiz and book a 30-minute call. The quiz ends in a report card and, for a fit, a cal.com booking calendar. There is no second page apart from `privacy.html`.
 
-The page is the pitch. There is no second page, no blog, no services grid. Every section exists to move one reader one step.
-
-**This replaced the commercial contractor offer on 10 September 2026.** The GC and design-build positioning, the bid desk, and the Medico and Riarh case studies are retired. They live in git history, not on the site.
+Rewritten 17 Sep 2026 for the v4 page. Everything from earlier versions (the contractor offer, the rejected "desk" positioning, published prices, the competitor sheet) is retired and lives only in git history.
 
 ## Users
 
-Residential real estate agents in Canada first, the United States next. The profile we are built for:
-
-- Closed **six or more deals in the last twelve months**, wants thirty
-- Has an ad budget, or is already spending on leads and getting a folder of nothing
-- Solo or a small team, not a brokerage
-- GTA, Vancouver, Calgary to start, because that is where our list is
-
-They have bought leads before. They know what fifty unanswered contacts in a CRM feels like, and they have been told by a platform that it takes fifty to seventy of them to get one closing. They have watched five agents in their own market send the identical automated text. Post-NAR they now need a buyer who will sign a representation agreement before a showing, which means a committed buyer, not a curious one.
-
-They read on a phone, between showings. They think in appointments, listings taken, and GCI. Their year is a listing season, not a quarter.
-
-Their buyer is a homeowner deciding to sell, or a buyer deciding to commit. Our job is to reach that person and get them onto the agent's calendar while they are still deciding.
+- Solo realtors (not teams, not brokers) with 6+ closings in the last 12 months, able to fund their own ad budget.
+- Canada first, any city in North America. One realtor per city, 10 realtors for September to December.
+- They come from LinkedIn outreach, read on a phone between showings, and have been burned by lead vendors: shared portal leads, "exclusive leads", pay-at-close pitches. They say realtor, closings, sphere, presale (BC) or pre-construction (ON), home evaluation, buyer consultation.
+- Their buyers and sellers: first-time buyers, move-up buyers, downsizers, investors, relocation buyers, presale or pre-construction buyers, and sellers.
 
 ## Brand
 
-ZippyScale. Attribution-first growth. The house voice is direct, numerate, and allergic to marketing theatre. We say only what we can prove. We never publish our gaps: no competitor does, and it reads as amateur. Omission is not dishonesty; invention is.
+ZippyScale, a real estate marketing team based in Vancouver, Canada. Brand as the ZippyScale team, never as one person. Voice: plain, short sentences in the realtor's own words, contractions, no marketese, no em dashes.
 
-Locked visual system (do not renegotiate):
-- Cream #FFFDF7, charcoal #2A2A35, lime #D5EB4B. Accent text on cream is #6B7C10 (4.57:1). Never #B8CF2E on cream, it computes 1.72:1.
-- Space Grotesk (headings), Inter (body), JetBrains Mono (numbers, labels, timestamps).
-- Light-dominant rhythm. Charcoal is punctuation, at most two dark moments per page (overridden 10 Sep 2026, see DESIGN.md).
-- Line icons only, no emoji, real logo files only.
+Locked visual system (details in DESIGN.md): cream #FFFDF7, charcoal #2A2A35, lime #D5EB4B; Space Grotesk headings, Inter body, JetBrains Mono labels; real logo files only.
 
-## Tone
+## The offer, as the page may state it
 
-Plain sentences. Numbers where numbers exist. No em dashes. Half the words. Never "revolutionise", "unlock", "seamless", "empower". A sentence that would embarrass us in front of a sceptical top producer gets cut.
+- What we do: city guides, ads in the realtor's name, same-day follow-up until they book, qualified appointments on the realtor's calendar. Ads run within 7 days of signing.
+- Qualified appointment: a booked call with someone in the realtor's city who plans to buy or sell in the next 90 days; the realtor confirms it by talking to them. No-shows don't count.
+- Payment structure, never amounts: a first payment builds the guides, ads, quiz and follow-up; the rest of the setup waits until the first 3 qualified appointments show up; after that we earn more only if the realtor chooses to raise their ad budget. The ad budget goes to the ad platforms, not to us. The call walks through the terms and the payment plan.
+- Leads go into a Google Sheet the realtor can open anytime.
 
-The single most distinctive move: naming what we refuse to do. We do not rebuild their website, we do not run their social media, we do not staff an ISA team inside their business, and we do not take an agent under six closings a year. Declining scope is what makes the two things we do claim credible.
+**Never on the page:** any fee, price, percentage or dollar ad budget; contract terms (none have been stated); a date for the first appointment; "exclusive leads", "setup fee", "pay per close", "guaranteed", "desk", "agents" on its own, AI as a headline; "Hyderabad".
 
-Never sell the outcome on its own. Every agent already wants more listings. What buys attention is the mechanism, stated specifically enough that they learn something from reading it.
+## Proof the page may use (owner-authorised)
 
-## The offer, stated exactly
+- In real estate since 2023. $130k+ ad spend managed. $2M+ client GCI tracked.
+- $250 to $70 a booked call: sales calls for a Vancouver company that sells to realtors; hundreds of realtors booked.
+- $25 leads: a Vancouver commercial realtor, two years of ads and content.
+- A real buyer's guide we wrote (Fraser Valley pre-construction guide), shown with client names removed.
 
-| Component | Amount |
-|---|---|
-| Build fee, one time | $2,000. They keep the campaigns, the CRM and the sequences |
-| Ad spend | $1,500 to $3,000 a month, paid direct to the platform, never through us |
-| Management | 15% of ad spend |
-| Performance | 15% of gross commission income on deals attributed to appointments we booked |
-| Retainer | None |
-| Seats | Ten, because one desk covers ten agents before response time slips past five minutes |
-
-The performance fee is a **marketing services fee calculated as a percentage of GCI on attributed transactions**. It is not a commission split and no brokerage pays us. Attribution runs off the CRM: an appointment we booked, stamped, and traceable to the closed file.
-
-## Risk position
-
-There is **no refund and no guarantee anywhere on this site**. That language was cut on 28 July 2026 and its removal is a standing rule, not a preference. The risk reversal is structural instead: they pay for a build they keep, and after that we are paid out of closings. If ten held appointments have not landed inside 45 days, the desk keeps running at our cost.
-
-Framed from strength, never from need. We are paid out of closings, so an empty calendar is our problem before it is theirs. The page never says we are looking for case studies.
+No client is named anywhere on the site, in this repo or in meta tags (NDA; the repo is public). No client faces or likenesses. The page must not imply we've booked buyer or seller appointments for a solo residential realtor before one exists.
 
 ## Anti-references
 
-- Agency sites that open with a full-bleed stock photo of a handshake and the word "growth".
-- SaaS landing-page template: hero metric row, three identical feature cards, purple gradient, testimonial carousel.
-- Realtor marketing sites at their worst: a smiling headshot against a sunset skyline, "your trusted partner", a services grid nobody reads. **Note the boundary, added 10 Sep 2026:** the objection is to the emptiness, not to the faces. Real faces of real named people, with their firm, are the best-evidenced proof device available and they belong on this page.
-- Lead vendors: "exclusive leads in your area", a countdown timer, a stock photo of a couple holding keys.
-- Anything that implies results we have not recorded. No fake dashboards showing invented GCI.
-- Dark neon "AI startup" aesthetic. We use AI, we do not cosplay it.
+- Lead-vendor pages: "exclusive leads in your area", countdown timers, stock couples holding keys.
+- Anything that reads as appointment-setting or messaging software (phone text threads as the hero, "AI calls", dashboards).
+- SaaS template clichés: hero metric row with gradient accents, identical icon card grids, testimonial carousels.
+- Invented results, fake dashboards, AI-generated images. Photography is real Unsplash imagery only, tagged Example.
 
 ## Strategic principles
 
-1. **One CTA everywhere: the Competitor Ad Sheet.** Ten questions, ninety seconds, no email until the last step. The postal code is the one field that cannot be optional, because it is what the sheet is built from. Never a second competing action.
-2. **Explain the mechanism visually.** An agent should be able to point at the page and say "so the enquiry lands here, your desk calls it here, and it hits my calendar here".
-3. **Scarcity is real, not decorative.** Ten seats because one desk covers ten agents at a five-minute response time. The number comes from the delivery plan, and if the delivery plan changes the number changes with it.
-4. **Every claim traces to the documented ledger.** If it is not in the ledger, it does not appear. No invented case studies, results or testimonials, ever.
-5. **Motion carries meaning:** an enquiry arriving, a clock running to the answer, an appointment landing on a week. Decoration that moves for its own sake gets removed.
-
-## The claim ledger, as of 10 September 2026
-
-**Provable and on the page:**
-- 860 booked sales appointments, 627 unique agents, December 2024 to August 2026, for a realtor coaching company (name under NDA), a realtor coaching company. We ran the ad account and the lead flow.
-- a realtor coaching brand (name under NDA), realtor coaching, Toronto. Full funnel: VSL, pitch deck, email sequences, ad copy.
-- a realtor brand (name under NDA), realtor brand, Surrey BC, June 2024 to April 2026.
-- a commercial realtor, commercial realtor, Vancouver.
-- a RE/MAX agent, RE/MAX, June 2025 to March 2026.
-- Competitor pricing and lead-quality figures, cited, 2026.
-
-**Not provable, therefore absent from the page in every draft:**
-- Listing appointments produced for an individual agent. The first ten seats exist to create this. Until one closes, no sentence on this site may imply it.
-- Any named United States result.
-
-## NDA rule, added 10 September 2026
-
-**No client is named on this site, in the repo, or in any meta tag.** Sandy holds NDAs with the
-realtor clients whose figures this page uses. The figures may be published; the identities may not.
-
-This repo is **public**. PRODUCT.md and DESIGN.md are readable at
-github.com/Sandy-zippy/zippyscale-com, so a name in a markdown file is a published name, not an
-internal note. Names were removed from all three files on 10 September.
-
-Photographs of those clients are equally out, and not only because of the NDA. Pulling a headshot
-off someone's Instagram and placing it on a commercial sales page is using their likeness in
-advertising without their permission. Proof on this page is numbers plus an offer of a live
-reference on a call.
-
-Describe clients by category and city instead: "a commercial realtor, Vancouver", "a realtor
-coaching company, Toronto".
+1. One CTA everywhere: "See if you qualify" (2 minutes, one realtor per city). The final section asks for the city first.
+2. Show the work instead of describing it: the ad, the guide, the booked call, the report card.
+3. Scarcity is structural: one realtor per city, 10 realtors this quarter.
+4. Every claim traces to the owner's stated facts; anything unconfirmed stays off the page.
+5. Motion explains a sequence (ad to guide to booked call, the campaign board, bookings filling, appointments unlocking the rest of the setup) and never hides content.
