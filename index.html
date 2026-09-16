@@ -617,7 +617,9 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
   .inline-row .btn{width:100%}
   .two{grid-template-columns:1fr}
   .report{padding:var(--s-4) var(--s-16)}
-  .report-wrap{grid-template-columns:minmax(0,1fr)}
+  .report-wrap{grid-template-columns:minmax(0,1fr);gap:var(--s-16)}
+  .gmini{width:100%;aspect-ratio:auto;grid-template-rows:48px auto auto}
+  .gmini .cover-top{padding-bottom:var(--s-8)}
   .quiz-body{padding:var(--s-32) var(--s-16) var(--s-48)}
 }
 @media (min-width:641px) and (max-width:960px){
@@ -924,7 +926,7 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
       <details><summary>What about no-shows?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No-shows don't count toward your first 3 qualified appointments.</p></details>
       <details><summary>Who will I talk to?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The ZippyScale team, on a 30-minute call. We look at your market and the first guide we'd build. You pick a time after the quiz.</p></details>
       <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city who plans to buy or sell in the next 90 days. They answered our questions and booked a time with you. You confirm it by talking to them.</p></details>
-      <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. Texts and emails go out automatically when someone asks for your guide. You don't make content. You see the ads before they run, and you take the calls.</p></details>
+      <details><summary>Who does the work?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Our team writes your guides and runs your ads. We text and email everyone who asks for your guide. You don't make content. You see the ads before they run, and you take the calls.</p></details>
       <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a shared sheet you can open anytime. They answered ads with your name on them. We work with one realtor per city.</p></details>
       <details><summary>Do the ads follow brokerage rules?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Your ads show your name and your brokerage. You see every ad before it runs.</p></details>
       <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
@@ -1256,7 +1258,8 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     const prov = (a.province || '').trim();
     const prop = a.property_types || [], src = a.lead_sources || [];
     const bc = BC_PROV.test(prov) || ((!prov || /^(canada|ca)$/i.test(prov)) && BC_CITY.test(city));
-    const us = !!prov && !CA_PROV.test(prov) && !/^ca$/i.test(prov); // a state was typed: American terms (bare "CA" could be Canada)
+    const CA_CITY = /^(toronto|mississauga|brampton|vaughan|markham|oakville|hamilton|ottawa|calgary|edmonton|winnipeg|montreal|montréal|halifax|regina|saskatoon)$/i;
+    const us = !!prov && !CA_PROV.test(prov) && !(/^ca$/i.test(prov) && (BC_CITY.test(city) || CA_CITY.test(city))); // a state was typed: American terms; bare "CA" is Canada only with a Canadian city
     const presale = bc ? 'presale' : 'pre-construction';
     const evaluation = us ? 'home value report' : 'home evaluation page';
     let guide, cover;
@@ -1268,11 +1271,11 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     else if (prop.includes('Condos') || prop.includes('Townhouses')) { guide = `A ${city} market snapshot for first-time buyers.`; cover = 'First-home snapshot'; }
     else { guide = `A "Moving to ${city}" guide for relocation buyers.`; cover = `Moving to ${city}`; }
     const speed = {
-      'Under 5 minutes': "You already reply fast. While you're at showings, our texts and emails keep each lead warm until you call.",
-      'Within an hour': "An hour is a long wait when someone asks for your guide at 11pm. Texts and emails go out automatically when they ask, so nobody's left waiting.",
-      'Same day': "Same-day replies lose people to faster realtors. Texts and emails go out automatically when they ask for your guide, so nobody's left waiting.",
-      'Next day or later': "People who ask for a guide at night often call another realtor by morning. Texts and emails go out automatically when they ask, so nobody's left waiting.",
-    }[a.reply_speed] || "Texts and emails go out automatically when someone asks for your guide, so nobody's left waiting.";
+      'Under 5 minutes': "You already reply fast. While you're at showings, our texts and emails keep each lead warm until they book.",
+      'Within an hour': "An hour is a long wait when someone asks for your guide at 11pm. We text and email them when they ask, so nobody's left waiting.",
+      'Same day': "Same-day replies lose people to faster realtors. We text and email them when they ask for your guide, so nobody's left waiting.",
+      'Next day or later': "People who ask for a guide at night often call another realtor by morning. We text and email them when they ask, so nobody's left waiting.",
+    }[a.reply_speed] || "We text and email everyone who asks for your guide, so nobody's left waiting.";
     const warm = ['Sphere and past clients', 'Open houses or farming'];
     let source;
     if (src.includes('Brokerage leads') || src.includes('Portal leads')) source = "You're working leads other realtors get too. These people asked for your guide and saw your name on the ad.";
