@@ -23,7 +23,7 @@
 <link rel="preload" href="fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* v3.1, 16 Sep 2026. v3 + fixes from site-rebuild/qa/pass3/qa-report.md (4 HIGH, 10 MEDIUM). Overlap gate: site-rebuild/qa/overlap.py.
+/* v3.2, 16 Sep 2026. v3.1 + fixes from site-rebuild/qa/pass4/qa-report.md (3 MEDIUM, LOWs). Gates: site-rebuild/qa/overlap.py, site-rebuild/qa/minfont.py.
    Component sources, all re-implemented by hand in vanilla HTML/CSS/JS (no React, Tailwind or framer at runtime):
    hero collage : 21st.dev ruixen.ui SocialPostCard (post anatomy) + 21st.dev shugar Book (typographic cover, id 3715), laid out as a 2-column grid so no card covers another
    proof        : trust row moved into the hero left column (HyperUI stats static markup)
@@ -31,7 +31,7 @@
    different    : 21st.dev hirael Comparison 03 registry (before/after panels), rows paired
    how board    : 21st.dev haydenbleasel Kanban (column anatomy) + tool-ui Message Draft (id 20077, follow-up note anatomy); travel = WAAPI, desktop only
    calendar     : 21st.dev shadcnspace Calendar With Event List (id 25353) + ravikatiyar Event Scheduler Card (id 7483) for the answers card
-   results      : shugar Book anatomy for the guide spread; contents titles from the real guide (Drive 1L9reFty...); ledger rows, no frames
+   results      : shugar Book anatomy for the guide spread; cover, contents titles and page numbers from the real guide's PDF export (Drive 1L9reFty...); ledger rows, no frames
    pay          : 21st.dev originui Stepper (numbered, neutral states)
    city map     : Magic UI dotted-map registry (svg-dotted-map 2.0.1, inlined) + a neutral "your city" pin
    quiz         : 21st.dev ddoemonn Wizard Steps (direction-aware panels)
@@ -169,7 +169,7 @@ button{font:inherit;color:inherit}
 .cover::before{content:"";position:absolute;inset:0 auto 0 0;width:12px;background:linear-gradient(90deg,rgba(42,42,53,.22),rgba(42,42,53,0));z-index:1}
 .cover .band{width:100%;height:auto;aspect-ratio:2 / 1}
 .cover-top{display:grid;align-content:start;gap:var(--s-4);padding:var(--s-12) var(--s-12) 0 var(--s-24)}
-.cover-top b{font:700 var(--fs-card)/1.1 var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.cover-top b{font:700 var(--fs-card)/1.1 var(--display);letter-spacing:var(--ls-card);color:var(--head);text-wrap:balance}
 .cover-top .t-label{color:var(--lime-text)}
 .byline{padding:var(--s-8) var(--s-12) var(--s-12) var(--s-24);border-top:1px solid var(--line);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
 
@@ -253,10 +253,10 @@ button{font:inherit;color:inherit}
 .art{height:164px;border-radius:14px;background:var(--sand);border:1px solid var(--border-dark);padding:var(--s-12);display:grid;place-items:center;color:var(--head);overflow:hidden;transition:box-shadow .3s var(--ease-out)}
 .art.lit{box-shadow:0 0 0 2px var(--lime)}
 .art .mk{width:100%;max-width:152px;background:var(--paper);border:1px solid var(--line-2);border-radius:10px;overflow:hidden;text-align:left;box-shadow:0 12px 24px -16px rgba(0,0,0,.5)}
-.mk b{display:block;font:700 var(--fs-ui-sm)/1.25 var(--display);color:var(--head)}
+.mk b{display:block;font:700 var(--fs-ui-sm)/1.25 var(--display);color:var(--head);text-wrap:balance}
 .mk span,.mk p{font:500 var(--fs-ui-sm)/1.25 var(--sans);color:var(--head)}
 /* 1 guide cover */
-.art .m-cover{width:112px;max-width:none;border-radius:2px 6px 6px 2px;display:grid}
+.art .m-cover{width:128px;max-width:none;border-radius:2px 6px 6px 2px;display:grid}
 .m-cover svg{width:100%;height:40px}
 .m-cover b{padding:var(--s-8) var(--s-8) 0}
 .m-cover span{padding:var(--s-4) var(--s-8) var(--s-8);color:var(--muted)}
@@ -273,9 +273,8 @@ button{font:inherit;color:inherit}
 .m-page .o{margin-inline:var(--s-8);padding:var(--s-4) var(--s-8);border-radius:6px;border:1px solid var(--line-2)}
 .m-page .o.on{background:var(--lime);border-color:var(--charcoal)}
 /* 4 follow-up note */
-.m-note{display:grid;gap:var(--s-8);padding:var(--s-8) var(--s-12) var(--s-12)}
+.m-note{display:grid;gap:var(--s-8);padding:var(--s-8) var(--s-8) var(--s-12)}
 .m-note .from{display:flex;align-items:center;gap:var(--s-8);padding-bottom:var(--s-8);border-bottom:1px solid var(--line);color:var(--muted)}
-.m-note .from i{width:16px;height:16px;border-radius:4px;background:var(--lime);flex:none}
 .m-note .ln{display:block;height:4px;border-radius:2px;background:var(--sand-2)}
 .m-note .ln.s{width:64%}
 /* 5 the realtor's day */
@@ -310,6 +309,7 @@ button{font:inherit;color:inherit}
 .cal{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -50px rgba(42,42,53,.45)}
 .cal-h{display:flex;align-items:center;gap:var(--s-12);padding:var(--s-16) var(--s-24);border-bottom:1px solid var(--line)}
 .cal-h .ico{color:var(--lime-text)}
+.cal-h b{font:600 var(--fs-body)/var(--lh-card) var(--sans);color:var(--head)}
 .cal-h .tag{margin-left:auto}
 .cal ol{display:grid}
 .cal li{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:var(--s-16);align-items:start;padding:var(--s-12) var(--s-24);min-height:56px}
@@ -326,29 +326,36 @@ button{font:inherit;color:inherit}
 /* ---------- results: the guide we wrote + what the work did ---------- */
 .results .split{align-items:start}
 .guide-feature{display:grid;gap:var(--s-16)}
-.stage{height:360px;border-radius:20px;background:var(--sand);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;container-type:inline-size}
-.spread{display:grid;grid-template-columns:repeat(2,200px);transform:rotate(-2deg);filter:drop-shadow(0 24px 24px rgba(42,42,53,.18))}
-.pg{height:268px;background:var(--paper);border:1px solid var(--line-2);display:grid;align-content:start;gap:var(--s-8);overflow:hidden}
-.pg-cover{border-radius:8px 2px 2px 8px;padding-bottom:var(--s-16)}
-.pg-cover svg{width:100%;height:96px}
-.pg-cover b{padding-inline:var(--s-16);font:700 18px/1.15 var(--display);letter-spacing:-.01em;color:var(--head)}
-.pg-cover span{padding-inline:var(--s-16);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
-.pg-toc{border-left:0;border-radius:2px 8px 8px 2px;padding:var(--s-32) var(--s-16) var(--s-24);background:linear-gradient(90deg,rgba(42,42,53,.06),rgba(42,42,53,0) 16px),var(--paper);counter-reset:toc;align-content:start}
-.pg-toc .t-label{color:var(--lime-text);padding-bottom:var(--s-8)}
-.pg-toc li{counter-increment:toc;display:grid;grid-template-columns:24px minmax(0,1fr);padding-block:var(--s-8);border-top:1px solid var(--line);font:600 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--head)}
-.pg-toc li::before{content:counter(toc, decimal-leading-zero);font:700 var(--fs-ui-sm)/var(--lh-ui) var(--mono);color:var(--muted)}
-.pg-toc .ln{display:block;height:4px;border-radius:2px;background:var(--sand-2);margin-top:var(--s-4)}
-.pg-toc .ln.s{width:64%}
-@container (max-width:430px){.spread{zoom:.9}}
-@container (max-width:380px){.spread{zoom:.8}}
-@container (max-width:340px){.spread{zoom:.7}}
+.stage{min-height:360px;padding:var(--s-40) var(--s-16);border-radius:20px;background:var(--sand);border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;container-type:inline-size}
+.spread{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,400px);transform:rotate(-2deg);filter:drop-shadow(0 24px 24px rgba(42,42,53,.18))}
+.pg{min-height:296px;background:var(--paper);border:1px solid var(--line-2);display:grid;overflow:hidden}
+.pg .t-label{color:var(--lime-text)}
+.pg-cover{grid-template-rows:minmax(88px,1fr) auto auto;border-radius:8px 2px 2px 8px}
+.pg-cover svg{width:100%;height:100%}
+.pg-cover .pc{display:grid;align-content:start;gap:var(--s-4);padding:var(--s-16) var(--s-16) var(--s-12)}
+.pg-cover .pc b{font:700 18px/1.15 var(--display);letter-spacing:-.01em;color:var(--head);text-wrap:balance}
+.pg-cover .pc span:last-child{font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--muted)}
+.pg-cover .byline{padding:var(--s-8) var(--s-16)}
+.pg-toc{align-content:start;border-left:0;border-radius:2px 8px 8px 2px;padding:var(--s-24) var(--s-16) var(--s-16);background:linear-gradient(90deg,rgba(42,42,53,.06),rgba(42,42,53,0) 16px),var(--paper)}
+.pg-toc .t-label{padding-bottom:var(--s-8)}
+.pg-toc li{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-8);padding-block:var(--s-8);border-top:1px solid var(--line);font:500 var(--fs-ui-sm)/var(--lh-ui) var(--sans);color:var(--head)}
+.pg-toc li span{font:700 var(--fs-ui-sm)/var(--lh-ui) var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+@container (min-width:340px) and (max-width:399px){.pg-toc,.pg-cover .pc,.pg-cover .byline{padding-inline:var(--s-12)}.pg-cover .pc b{font-size:16px}}
+/* below 340px of stage content width the spread becomes one column: cover, then contents, text stays 12px */
+@container (max-width:339px){
+  .spread{grid-template-columns:minmax(0,1fr);width:min(100%,288px);transform:none}
+  .pg{min-height:0}
+  .pg-cover{border-radius:8px 8px 2px 2px}
+  .pg-cover{grid-template-rows:64px auto auto}
+  .pg-toc{border-left:1px solid var(--line-2);border-top:0;border-radius:2px 2px 8px 8px;background:var(--paper)}
+}
 .nw{white-space:nowrap}
 .guide-cap b{display:block;font-weight:600;color:var(--head)}
 .guide-cap span{display:block;margin-top:var(--s-4)}
 .ledger{border-top:1px solid var(--line)}
 .ledger li{display:grid;gap:var(--s-4);padding-block:var(--s-24);border-bottom:1px solid var(--line)}
 .ledger b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
-.ledger p{color:var(--body);text-wrap:pretty}
+.ledger p{color:var(--body);text-wrap:balance}
 
 /* ---------- pay ---------- */
 .stages{counter-reset:st;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap-cols)}
@@ -496,6 +503,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .vs-col.them,.vs-col.us{grid-column:auto}
   .faq .sec-head{position:static}
 }
+@media (min-width:641px) and (max-width:960px){
+  .collage{max-width:none}
+  .step{grid-template-columns:24px minmax(0,1fr) 240px}
+}
 /* ---------- phone ---------- */
 @media (max-width:640px){
   .top .wrap{height:56px}
@@ -528,13 +539,15 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   .day .t-label{border-bottom:0;padding-bottom:0}
   .day svg{grid-column:1;grid-row:1 / span 3;width:96px;height:58px;margin-block:0}
   .vs li{min-height:56px;gap:var(--s-12)}
-  .step{grid-template-columns:24px minmax(0,1fr) 136px;column-gap:var(--s-12)}
+  .step{grid-template-columns:24px minmax(0,1fr) 160px;column-gap:var(--s-8)}
   .steps::before{top:60px;bottom:60px}
-  .art{height:120px;padding:var(--s-4)}
-  .art > *{zoom:.8}
+  .art{height:128px;padding:var(--s-4)}
+  .art .mk{max-width:none}
+  .art .m-cover{width:128px}
+  .m-ad svg{height:36px}
+  .m-page .o:not(.on),.m-note .ln,.m-day i{display:none}
   .cal li{grid-template-columns:40px minmax(0,1fr);padding-inline:var(--s-16);column-gap:var(--s-12)}
   .cal-h{padding-inline:var(--s-16)}
-  .stage{height:280px}
   .stages{grid-template-columns:minmax(0,1fr);row-gap:var(--s-32)}
   .stage-i{padding-top:0;padding-left:var(--s-64);min-height:40px}
   .stage-i::before{top:40px;bottom:calc(var(--s-32) * -1);left:19px;right:auto;width:2px;height:auto}
@@ -590,7 +603,6 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
   </symbol>
   <symbol id="art-house" viewBox="0 0 240 150" preserveAspectRatio="xMidYMid slice">
     <rect width="240" height="150" fill="#EFEBDD"/>
-    <circle cx="44" cy="36" r="12" fill="#FFFDF7"/>
     <path d="M60 78 120 36l60 42z" fill="#2A2A35"/>
     <rect x="70" y="76" width="100" height="64" fill="#FFFDF7"/>
     <rect x="110" y="104" width="20" height="36" fill="#4A4A58"/>
@@ -604,7 +616,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 <header class="top" id="top">
   <div class="wrap">
     <a class="logo" href="/" aria-label="ZippyScale home"><img src="assets/logo-light.png" alt="ZippyScale" width="98" height="28"></a>
-    <div><a class="btn btn-sm" href="#fit" data-open-quiz>See if you qualify</a><noscript><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us to check your city</a></noscript></div>
+    <div><a class="btn btn-sm" href="#fit" data-open-quiz>See if you qualify</a></div>
   </div>
 </header>
 
@@ -648,7 +660,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <div class="book">
         <div class="cover">
           <svg class="band" aria-hidden="true"><use href="#band"/></svg>
-          <p class="cover-top"><span class="t-label">Burnaby 2026</span><b>First condo guide</b></p>
+          <p class="cover-top"><span class="t-label">Burnaby 2026</span><b>First <span class="nw">condo guide</span></b></p>
           <p class="byline">by Your name</p>
         </div>
       </div>
@@ -721,7 +733,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         </div>
         <ul>
           <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span>Only you get them in your city</li>
-          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-report"/></svg></span>Their timeline before you call</li>
+          <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#t-report"/></svg></span>You know their timeline before you call</li>
           <li><span class="thumb" aria-hidden="true"><svg class="ico"><use href="#i-cal"/></svg></span>We follow up until they book</li>
         </ul>
       </div>
@@ -759,7 +771,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
         <li class="step">
           <span class="who we">We</span>
           <h3>Follow up until they book</h3>
-          <div class="art" aria-hidden="true"><div class="mk m-note"><p class="from"><i></i>Your ZippyScale team</p><b>Priya, here's your guide</b><i class="ln"></i><i class="ln s"></i></div></div>
+          <div class="art" aria-hidden="true"><div class="mk m-note"><p class="from">Your ZippyScale team</p><b>Priya, here's your guide</b><i class="ln"></i><i class="ln s"></i></div></div>
           <span class="stop" aria-hidden="true"></span>
         </li>
         <li class="step">
@@ -792,12 +804,12 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       </div>
     </div>
     <figure class="cal" aria-label="Example week of booked calls in Burnaby">
-      <figcaption class="cal-h"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="tag">Example</span></figcaption>
+      <figcaption class="cal-h"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><b>This week · Burnaby</b><span class="tag">Example</span></figcaption>
       <ol>
         <li><span class="d t-label">Tue</span>
           <div class="ev" style="--i:0"><b>2:00 Seller</b><p class="meta">Home evaluation</p></div></li>
         <li><span class="d t-label">Thu</span>
-          <div class="ev hot" style="--i:1"><b>10:30 Priya S.</b></div></li>
+          <div class="ev hot" style="--i:1"><b>10:30 Priya S.</b><p class="meta">First-time buyer · Metrotown</p></div></li>
         <li><span class="d t-label">Fri</span>
           <div class="ev" style="--i:2"><b>4:30 Move-up buyer</b><p class="meta">Condo to townhouse</p></div></li>
       </ol>
@@ -812,16 +824,15 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <figure class="guide-feature">
         <div class="stage" aria-hidden="true">
           <div class="spread">
-            <div class="pg pg-cover"><svg><use href="#band-lime"/></svg><b>Pre-construction in the Fraser Valley</b></div>
-            <div class="pg pg-toc"><ol><li>How presales work</li><li>Deposits and timelines</li><li>Questions to ask</li></ol><i class="ln"></i><i class="ln"></i><i class="ln s"></i></div>
+            <div class="pg pg-cover"><svg><use href="#band-lime"/></svg><p class="pc"><span class="t-label">Fraser Valley</span><b>Pre-construction buyer's guide</b><span>From deposit to doorstep</span></p><p class="byline">by Your name</p></div>
+            <div class="pg pg-toc"><p class="t-label">Contents</p><ol><li>What a presale is<span>1</span></li><li>How presales work<span>2</span></li><li>Questions to ask<span>6</span></li><li>Locking in your price<span>11</span></li><li>Deposit structure<span>16</span></li><li>Getting pre-approved<span>19</span></li></ol></div>
           </div>
         </div>
         <figcaption class="guide-cap small"><b>A buyer's guide we wrote</b><span>Client names kept private.</span></figcaption>
       </figure>
       <ul class="ledger">
         <li class="piece"><b>$25 leads</b><p>Ads and content, Vancouver commercial realtor.</p></li>
-        <li class="piece"><b>$250 to $70</b><p>Cost per booked sales call, real estate company, Metro Vancouver.</p></li>
-        <li class="piece"><b>Hundreds of realtors</b><p>Booked onto sales calls, Metro Vancouver real estate company.</p></li>
+        <li class="piece"><b>Hundreds of realtors</b><p>Booked onto a Metro Vancouver real estate company's sales calls, from $250 to $70 a call.</p></li>
         <li class="piece"><b>Events and LinkedIn</b><p>Realtor events. LinkedIn outreach for a commercial realtor.</p></li>
       </ul>
     </div>
@@ -873,9 +884,9 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
       <details><summary>What counts as qualified?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Someone in your city planning to buy or sell in the next 60 to 90 days. They've answered our questions and booked a time with you. You'll know on the call.</p></details>
       <details><summary>Why would you take the risk?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Most of our fee comes after appointments show up, so we only take realtors we're sure we can help. We grow when you grow.</p></details>
       <details><summary>Do I keep the leads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. Every lead goes into a Google Sheet you can open anytime. They answered ads with your name on them, and nobody else in your city gets them.</p></details>
-      <details><summary>How is this different from the texts I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The people who book asked for your guide and saw your name on the ad. We do this for one realtor per city, and most of our fee comes after they show.</p></details>
+      <details><summary>How is this different from the texts I get?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>The people who book asked for your guide and saw your name on the ad. We do this for one realtor per city.</p></details>
       <details><summary>Buyers or sellers?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Both. Most realtors want buyers: first-time, move-up, downsizers, investors, relocation, presale or pre-construction. Pick your focus in the quiz and we'll build your first guide around it.</p></details>
-      <details><summary>Do I have to make content?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. We write your guides and make your ads. You approve them and take the calls.</p></details>
+      <details><summary>Do I have to make content?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. Your ads promote the guides we write, so there's nothing for you to film or post.</p></details>
       <details><summary>Who pays for the ads?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>You do, from your own ad account. That money goes to Meta and Google, not to us.</p></details>
       <details><summary>What happens on the call?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We look at your market and the first guide we'd build. Then we walk you through the payment plan and the numbers. You decide after that.</p></details>
       <details><summary>Is my city taken?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We take one realtor per city, anywhere in North America, first come, first served. Tell us your city in the quiz and we'll confirm it on your call.</p></details>
@@ -902,7 +913,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;t
 
 <footer>
   <div class="wrap">
-    <p class="sep"><span>ZippyScale</span> <span>Real estate marketing</span> <span>Vancouver, Canada</span></p>
+    <p class="sep"><span>ZippyScale</span> <span>Real estate marketing</span> <span class="nw">Vancouver, Canada</span></p>
     <a href="privacy.html">Privacy policy</a>
   </div>
 </footer>
