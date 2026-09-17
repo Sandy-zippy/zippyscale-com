@@ -36,7 +36,7 @@ Locked visual system (details in DESIGN.md): cream #FFFDF7, charcoal #2A2A35, li
 
 - In real estate since 2023. $130k+ ad spend managed. $2M+ client GCI tracked.
 - $250 to $70 a booked call: sales calls for a Vancouver company that sells to realtors; hundreds of realtors booked.
-- $25 leads: a Vancouver commercial realtor, two years of ads and content.
+- $25 leads: cost per lead for a Vancouver commercial realtor (no duration: owner round 4 gives 6-7 months of ads, older notes say two years).
 - A real buyer's guide we wrote (Fraser Valley pre-construction guide), shown with client names removed.
 
 No client is named anywhere on the site, in this repo or in meta tags (NDA; the repo is public). No client faces or likenesses. The page must not imply we've booked buyer or seller appointments for a solo residential realtor before one exists.
