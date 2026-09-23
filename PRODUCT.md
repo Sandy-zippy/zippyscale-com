@@ -50,8 +50,8 @@ No client is named anywhere on the site, in this repo or in meta tags (NDA; the 
 
 ## Strategic principles
 
-1. One CTA everywhere: "See if you qualify" (2 minutes, one realtor per city). The final section asks for the city first.
+1. One CTA everywhere: "Check my city". A city field in the hero, a mid-page card, the city section and the final section each open the quiz with the city filled in; the header and the phone sticky bar open it empty.
 2. Show the work instead of describing it: the ad, the guide, the booked call, the report card.
 3. Scarcity is structural: one realtor per city, 10 realtors this quarter.
 4. Every claim traces to the owner's stated facts; anything unconfirmed stays off the page.
-5. Motion explains a sequence (ad to guide to booked call, the campaign board, bookings filling, appointments unlocking the rest of the setup) and never hides content.
+5. Motion explains a sequence (ad to guide to booked call, the work strip, the stranger-to-calendar story, the pay line, the CTA card beam, the report preview) and never hides content.

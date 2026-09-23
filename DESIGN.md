@@ -18,7 +18,7 @@ Single-file build: `index.html` with inline CSS and JS, self-hosted fonts in `fo
 | `--head` / `--body` / `--muted` | #1A1A2E / #4A5568 / #5B6270 | Text on light |
 | `--body-dark` | #C9CBD6 | Text on charcoal |
 
-Strategy: restrained, light-dominant. Section grounds run cream (hero, problem, different), charcoal (how), cream (calendar), white (results, pay), sand (city), cream (FAQ), charcoal (final). Lime is spent only on buttons, the ICP highlight, the booked-call states (hero event, one calendar event, step 5 slot, Booked badge), the pay appointments segment and quiz selection. Never gradient text.
+Strategy: restrained, light-dominant. Section grounds run cream (hero), sand (work strip), cream (problem), charcoal (story), cream (we do / you do, with a charcoal CTA card), white (results, pay), sand (city), cream (FAQ), charcoal (final). Buttons are charcoal on light grounds and lime on dark ones. Lime is also spent on the ICP highlight, booked-call states, the "You do" card tint, the pay stage 2 dot, the beam, the report sweep and quiz selection. Never gradient text.
 
 ## Type
 
@@ -54,14 +54,16 @@ No text renders under 12px. Mock artefacts reuse these sizes; they never introdu
 
 ## Motion
 
-Four page-level elements, each plays once, final state is the CSS default, no-JS and `prefers-reduced-motion` show the final state:
+Six page-level elements (round 5, declared exception to the skill's cap of 4). The CSS default is the final state; no-JS and `prefers-reduced-motion` show everything. The H1 and every CTA button never animate.
 
-1. Hero: the ad, the guide and the booked call blur-fade in order, joined by a beam path drawn between them (about 2.3s). The motion class is set in `<head>`, so the first paint is the first frame.
-2. How board (1024px and up): the rail fills stop to stop, each artefact lifts as it is reached, and the buyer pill travels from stop 1 to Booked (2.4s). Pauses when scrolled out of view.
-3. Calendar: bookings fill top to bottom (1.05s).
-4. Pay: the appointments segment fills and its three dots land (1.1s).
+1. Hero assembly: ad rises, a line draws along its curve to the guide, the guide rises, a line draws to the booked call, the event wipes, the tick draws (2.24s, once, only if the stage is on screen at first paint).
+2. Work strip marquee (80s loop, 60s on phones) with a visible Pause switch; pauses on hover, focus and off-screen. Copies are aria-hidden and inert. Reduced motion: a swipe row.
+3. Story (1024px and up): the step crossing the viewport centre swaps the visual in a sticky stage (IntersectionObserver, no scroll listener). Below 1024 each step shows its visual inline. No ancestor of the stage may get `overflow` other than visible.
+4. Pay line: fills with the scrollbar through the three stages (CSS scroll-driven, rAF fallback).
+5. CTA card border beam: one lime lap when a card is half in view, once per viewing (4.5s).
+6. Report preview: one lime highlight sweep over the three rows (1.1s); values are always visible.
 
-Motions 2 to 4 arm only when their section starts below the fold, so nothing already on screen can vanish and redraw. Interaction feedback outside the budget: button press scale, FAQ open and close height, quiz screen slides. Easing `cubic-bezier(0.16,1,0.3,1)`; movement `cubic-bezier(0.77,0,0.175,1)`. Only transform, opacity, clip-path and filter animate.
+Feedback outside the budget: button press, FAQ open and close, quiz screen slides, sticky phone bar slide. Easing `cubic-bezier(0.16,1,0.3,1)`; movement `cubic-bezier(0.77,0,0.175,1)`.
 
 ## Bans
 
@@ -69,4 +71,4 @@ No side-stripe borders, gradient text, glassmorphism, hero-metric templates, ide
 
 ## Gates
 
-`site-rebuild/qa/overlap.py` (nothing covers text inside visuals), `site-rebuild/qa/minfont.py` (no text under 12px), `site-rebuild/audit/design/recheck.py` (type sizes, radii, shadows and spacing stay on these tokens), `site-rebuild/qa/probe.py` (640 visible words).
+`site-rebuild/qa/overlap.py` (nothing covers text inside visuals), `site-rebuild/qa/minfont.py` (no text under 12px), `site-rebuild/audit/design/recheck.py` (type sizes, radii, shadows and spacing stay on these tokens), `landing-page-build/scripts/probe.py` (710 visible words, round 5).
