@@ -522,6 +522,9 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
 .report dd{color:var(--head)}
 .book-line{margin-top:var(--s-40);text-wrap:balance;font:600 var(--fs-card)/var(--lh-card) var(--display);color:var(--head);letter-spacing:var(--ls-card)}
 .cal-embed{margin-top:var(--s-16);width:100%;min-height:660px;overflow:auto}
+.later{margin-top:var(--s-8);color:var(--body)}
+.link-btn{background:none;border:0;padding:12px 0;margin-block:-12px;font:inherit;color:var(--head);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media print{#page,.quiz-bar,.cal-embed,.later,.quiz .micro{display:none!important}.quiz{position:static;overflow:visible}.book-line::after{content:" zippyscale.com/#fit";font-weight:400}}
 .reasons{margin-top:var(--s-24);display:grid;gap:var(--s-12)}
 .reasons li{display:flex;gap:var(--s-12);color:var(--head)}
 .reasons .ico{margin-top:var(--s-4);color:var(--muted)}
@@ -1400,10 +1403,14 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
           h('p', { class: 'byline' }, `by ${titleCase(answers.name) || 'Your name'}`)),
         h('dl', { class: 'report' }, rows.map(([k, v]) => h('div', {}, h('dt', {}, k), h('dd', {}, v))))),
       h('p', { class: 'book-line' }, "Book your 30-minute call. We'll walk you through the payment plan."),
+      h('p', { class: 'later' }, 'Not ready yet? ', h('button', { type: 'button', class: 'link-btn', onclick: saveReport }, `Save your ${city} report as a PDF`), `. ${city === 'your city' ? 'Your city' : city} stays open until another realtor there books.`),
       box,
       h('p', { class: 'micro' }, "Pick a time that suits you. You'll get a confirmation email."),
     ];
   }
+
+  // not ready to book: the browser's own Save as PDF, print CSS keeps only the report. ponytail: no email backend; add one if saves pile up.
+  function saveReport() { track('report_saved'); window.print(); }
 
   // cal.com official inline embed (wiring.md), loaded only when a FIT report shows. Always light, even when the OS is dark.
   let calReady = false;
