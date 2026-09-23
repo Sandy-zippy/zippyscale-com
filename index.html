@@ -994,7 +994,7 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     if (LOCAL) return;
     const body = JSON.stringify(Object.assign({
       event, utm_source: utm.get('utm_source') || '', utm_medium: utm.get('utm_medium') || '', utm_campaign: utm.get('utm_campaign') || '',
-      page_url: location.href, ts: new Date().toISOString(), session_id: SID,
+      page_url: location.href, referrer: document.referrer, ts: new Date().toISOString(), session_id: SID,
     }, extra));
     try { if (!(navigator.sendBeacon && navigator.sendBeacon(QUIZ_ENDPOINT, body))) fetch(QUIZ_ENDPOINT, { method: 'POST', body, keepalive: true, mode: 'no-cors' }); } catch (e) { /* never block the page */ }
   }
@@ -1307,7 +1307,7 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     const q = new URLSearchParams(location.search);
     const payload = Object.assign({}, answers, {
       utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '', utm_campaign: q.get('utm_campaign') || '',
-      page_url: location.href, user_agent: navigator.userAgent,
+      page_url: location.href, referrer: document.referrer, user_agent: navigator.userAgent,
     });
     // No headers on purpose: a string body goes as text/plain, a CORS simple request with no preflight (Apps Script cannot answer one).
     return fetch(QUIZ_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) })
