@@ -210,7 +210,7 @@ button,input{font:inherit;color:inherit}
 .next li span{padding-top:2px}
 
 /* stage: one composed ground (masked grid) behind your ad, your guide and a booked call */
-.stage{grid-column:6 / 13;grid-row:1 / 3;position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:var(--s-24);row-gap:var(--s-24);align-content:start;min-height:500px;padding:var(--s-40) var(--s-24) var(--s-24)}
+.stage{grid-column:6 / 13;grid-row:1 / 3;position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:var(--s-24);row-gap:var(--s-24);align-content:start;padding:var(--s-24)}
 .stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(42,42,53,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(42,42,53,.07) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px;-webkit-mask-image:radial-gradient(closest-side,#000 55%,transparent);mask-image:radial-gradient(closest-side,#000 55%,transparent)}
 .stage > .tag{position:absolute;right:var(--s-24);top:0;z-index:2}
 .stage .ad{grid-column:1;grid-row:1 / 3;align-self:start;width:100%;max-width:320px;justify-self:end}
@@ -380,9 +380,9 @@ html:not(.js) .mq{overflow-x:auto;padding-inline:var(--gutter)}
 .story.pinned .story-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);column-gap:var(--s-64);align-items:start}
 .story.pinned .story-stage{grid-column:1;grid-row:1;position:sticky;top:max(var(--s-80),calc(50vh - 220px));height:440px;display:grid;grid-template:1fr auto / minmax(0,1fr);border-radius:var(--r-card);background:var(--card-dark);border:1px solid var(--border-dark);padding:var(--s-24)}
 .story.pinned .story-stage > .tag{position:absolute;top:var(--s-16);right:var(--s-16);z-index:1}
-.story.pinned .steps{grid-column:2;grid-row:1;gap:0;padding-bottom:16vh}
+.story.pinned .steps{grid-column:2;grid-row:1;gap:0;padding-bottom:var(--s-80)}
 .story.pinned .step-line{font-size:var(--fs-stat);line-height:var(--lh-card)}
-.story.pinned .step{grid-template-columns:minmax(0,1fr);min-height:56vh;align-content:center}
+.story.pinned .step{grid-template-columns:minmax(0,1fr);min-height:40vh;align-content:center}
 .story.pinned .story-stage .art{grid-area:1 / 1;min-height:0;padding:0;background:none;border:0;opacity:0;transform:translateY(12px) scale(.98);transition:opacity .28s var(--ease-out),transform .28s var(--ease-out)}
 .story.pinned .story-stage .art.on{opacity:1;transform:none;transition-duration:.42s}
 .story.pinned .story-stage .mk,.story.pinned .story-stage .m-msgs{max-width:320px}
@@ -398,7 +398,7 @@ html:not(.js) .mq{overflow-x:auto;padding-inline:var(--gutter)}
 html:not(.js) .story-stage{display:none!important}
 
 /* ---------- we do / you do ---------- */
-.wy-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gap-cols);align-items:stretch}
+.wy-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gap-cols);align-items:start}
 .wy{border-radius:var(--r-card);padding:var(--pad-card)}
 .wy.we{background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh-card)}
 .wy.you{background:var(--lime-soft);border:1px solid var(--line)}
@@ -408,8 +408,6 @@ html:not(.js) .story-stage{display:none!important}
 .wy li{display:flex;align-items:center;gap:var(--s-12);min-height:56px;border-top:1px solid var(--line);color:var(--head);font-weight:500}
 .wy li .ico{color:var(--lime-text);stroke-width:2.25}
 .wy.you li .ico{color:var(--charcoal)}
-.wy.you{display:flex;flex-direction:column}
-.wy.you ul{flex:1;display:grid;grid-auto-rows:1fr}
 .wy.you li{font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);min-height:96px;border-color:rgba(42,42,53,.16)}
 .wy.you h3{border-bottom:0}
 
@@ -649,7 +647,11 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
   .js .hdr-cta{display:none} /* the sticky bottom bar carries the action on phones */
   .hero{padding-bottom:var(--s-64)}
   .next{grid-template-columns:minmax(0,1fr);row-gap:var(--s-8)}
-  .stage{margin-top:var(--s-40);grid-template-columns:minmax(0,11fr) minmax(0,8fr);grid-template-rows:auto auto;gap:var(--s-16);min-height:0;padding:var(--s-40) 0 0}
+  /* the booked-call card is the payoff: it sits straight under the CTA so it lands in the first phone screen; the 3 steps follow it */
+  .hero-copy{display:contents}
+  .hero-copy > .next{order:1;margin-top:var(--s-32)}
+  .hero-grid > .proof{order:2}
+  .stage{margin-top:var(--s-24);grid-template-columns:minmax(0,11fr) minmax(0,8fr);grid-template-rows:auto auto;gap:var(--s-16);padding:var(--s-32) 0 0}
   .stage > .tag{right:0}
   .beam{display:none}
   .stage .day-card{grid-column:1 / -1;grid-row:1;display:flex;align-items:center;gap:var(--s-12);padding:var(--s-8) var(--s-8) var(--s-8) var(--s-16)}
@@ -979,7 +981,7 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
     <div class="payline">
       <ol class="stages">
         <li><i class="pdot" aria-hidden="true"></i><b>You start</b><span>Your first payment builds your guides, ads and follow-up.</span></li>
-        <li><i class="pdot" aria-hidden="true"></i><b>3 qualified appointments show up</b><span>The rest of the setup is due. <span class="nw">No-shows</span> don't count.</span></li>
+        <li><i class="pdot" aria-hidden="true"></i><b>3 appointments show up</b><span>The rest of the setup is due. <span class="nw">No-shows</span> don't count.</span></li>
         <li><i class="pdot" aria-hidden="true"></i><b>Your ads grow</b><span>We earn more only if you raise your ad budget.</span></li>
       </ol>
       <span class="rail" aria-hidden="true"><i></i></span>
@@ -1257,13 +1259,17 @@ const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
     rpIO.observe(rp);
   }
 
-  // sticky phone bar: after the hero button has scrolled above the viewport, never near the final CTA, never over the quiz
+  // sticky phone bar: after the hero button has scrolled above the viewport, never near the final CTA, never while another
+  // city field is on screen (two identical buttons in one view), never over the quiz
   const bar = $('[data-sticky-cta]');
   let pastHero = false, nearFinal = false;
-  const syncBar = () => { const on = pastHero && !nearFinal && !html.classList.contains('quiz-open'); bar.classList.toggle('show', on); bar.inert = !on; };
+  const inlineOn = new Set();
+  const syncBar = () => { const on = pastHero && !nearFinal && !inlineOn.size && !html.classList.contains('quiz-open'); bar.classList.toggle('show', on); bar.inert = !on; };
   if (IO) {
     new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; syncBar(); }).observe($('.hero-btn'));
     new IntersectionObserver(([e]) => { nearFinal = e.isIntersecting; syncBar(); }, { rootMargin: '0px 0px 25% 0px' }).observe($('[data-s="final"]'));
+    const formIO = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? inlineOn.add(e.target) : inlineOn.delete(e.target))); syncBar(); });
+    ['#cta2-city', '#city-city'].forEach((s) => formIO.observe($(s).closest('form')));
   }
 
   // ---------- quiz ----------
