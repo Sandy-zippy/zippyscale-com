@@ -418,6 +418,14 @@ button,input{font:inherit;color:inherit}
 .fit{display:grid;justify-items:start;gap:var(--gap-chip);margin-top:var(--s-24)}
 .fit li{display:flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-16);border-radius:var(--r-pill);background:var(--paper);border:1px solid var(--line);font:500 var(--fs-small)/var(--lh-small) var(--sans);color:var(--head)}
 .fit .ico{width:18px;height:18px;color:var(--lime-text);stroke-width:2.25}
+.where{margin-top:var(--gap-block);padding-top:var(--s-24);border-top:1px solid var(--line-2)}
+.where h3{font:600 var(--fs-card)/var(--lh-card) var(--display);letter-spacing:var(--ls-card);color:var(--head)}
+.where dl{display:grid;gap:var(--s-12);margin-top:var(--s-16)}
+.where dt{color:var(--muted)}
+.where dd{margin:var(--s-4) 0 0;font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
+.where a{display:inline-block;padding-block:var(--s-4);color:var(--head);text-underline-offset:3px}
+.where a[aria-current]{font-weight:600;text-decoration:none}
+.where p{margin-top:var(--s-16);font-size:var(--fs-small);line-height:var(--lh-small);color:var(--body)}
 .map{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--pad-card)}
 .map-dots{position:relative}
 .map-dots > svg{width:100%;height:auto}
@@ -671,7 +679,7 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
     </div>
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="lede">We build your city guides and run ads in your name. Buyers and sellers moving in the next 90&nbsp;days book a call on your calendar.</p>
+        <p class="lede">City guides and ads in your name, live within 7&nbsp;days of signing. People moving in the next 90&nbsp;days book a call on your calendar.</p>
         <div class="cta">
           <a class="btn hero-btn" href="#fit" data-open-quiz>See if you qualify <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <noscript><br><a class="nojs" href="mailto:sandy@zippyscale.com?subject=Is%20my%20city%20open%3F">Email us your city</a></noscript>
@@ -904,12 +912,21 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
         <h2>One realtor per city</h2>
         <p class="sub">Any city in North America.</p>
       </div>
-      <p class="scarce"><b>10 realtors</b><span>September to December</span></p>
+      <p class="scarce"><b>10 realtors</b><span data-intake>Every four months</span></p>
       <ul class="fit">
         <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Solo realtor</li>
         <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>6+ closings a year</li>
         <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ready to fund your own ads</li>
       </ul>
+      <nav class="where" aria-labelledby="where-h">
+        <h3 id="where-h">Cities we work in</h3>
+        <dl>
+          <div><dt class="t-label">British Columbia</dt><dd class="sep"><span><a href="realtor-marketing-victoria">Victoria</a></span> <span><a href="realtor-marketing-surrey">Surrey</a></span> <span><a href="realtor-marketing-burnaby">Burnaby</a></span> <span><a href="realtor-marketing-richmond">Richmond</a></span> <span><a href="realtor-marketing-kelowna">Kelowna</a></span></dd></div>
+          <div><dt class="t-label">Alberta</dt><dd class="sep"><span><a href="realtor-marketing-calgary">Calgary</a></span> <span><a href="realtor-marketing-edmonton">Edmonton</a></span></dd></div>
+          <div><dt class="t-label">Ontario</dt><dd class="sep"><span><a href="realtor-marketing-toronto">Toronto</a></span> <span><a href="realtor-marketing-ottawa">Ottawa</a></span> <span><a href="realtor-marketing-mississauga">Mississauga</a></span></dd></div>
+        </dl>
+        <p>Anywhere else in North America: <a href="#fit">check your city</a></p>
+      </nav>
     </div>
     <div class="map">
       <div class="map-dots">
@@ -973,6 +990,24 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
 </div>
 
 <script>
+// Dates that would go stale: intake window (Jan-Apr, May-Aug, Sep-Dec), guide-cover year, example calendar month.
+// ponytail: static HTML fallbacks stay true without JS ("Every four months"; mocks are tagged Example).
+(() => {
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth();
+  const mon = i => new Date(y, i, 1).toLocaleString('en-US', { month: 'long' });
+  const start = m - m % 4, intake = document.querySelector('[data-intake]');
+  if (intake) intake.textContent = mon(start) + ' to ' + mon(start + 3);
+  const cover = document.querySelector('.cover-top .t-label');
+  if (cover) cover.textContent = cover.textContent.replace(/\b20\d\d\b/, y);
+  const last = new Date(y, m + 1, 0).getDate(), ab = mon(m).slice(0, 3);
+  document.querySelectorAll('.cal .d.t-label').forEach(el => {
+    const d = el.textContent.match(/\d+$/);
+    if (d) el.textContent = ab + ' ' + Math.min(+d[0], last);
+  });
+  const city = document.documentElement.dataset.city;
+  if (city) document.querySelectorAll('.where a').forEach(a => { if (a.textContent === city) a.setAttribute('aria-current', 'page'); });
+})();
+
 // Sheet intake per site-rebuild/wiring.md. Lead rows go to the first tab, funnel events (bodies with an `event` field) to the Funnel tab. The report card never waits on it.
 const QUIZ_ENDPOINT = "https://script.google.com/macros/s/AKfycbyLzuJrbNa7VpGnHOCCiwYgd7RnqOrELo-kLaXbFMlncV179AR6rMhQxtR43Ud85LSpHA/exec";
 const CAL_LINK = "sandy-kadyan/realtor-strategy-call";
