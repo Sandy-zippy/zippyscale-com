@@ -278,6 +278,7 @@ button,input{font:inherit;color:inherit}
 /* ---------- proof row ---------- */
 .proof{display:flex;flex-wrap:wrap;column-gap:var(--s-32);row-gap:var(--s-16);padding-top:var(--s-24);border-top:1px solid var(--line)}
 .proof li{display:grid;gap:var(--s-4);align-content:start}
+.proof li:nth-child(2){flex:1 1 0;min-width:0}
 .proof b,.ledger b{font:700 var(--fs-stat)/var(--lh-stat) var(--display);letter-spacing:var(--ls-stat);color:var(--head);font-variant-numeric:tabular-nums}
 .proof span{font-size:var(--fs-small);line-height:var(--lh-small);color:var(--muted)}
 
@@ -821,7 +822,7 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
 
       <ul class="proof" data-s="proof" aria-label="Track record">
         <li><b>Since 2023</b><span>real estate marketing</span></li>
-        <li><b>$130k+</b><span>ad spend managed</span></li>
+        <li><b>860</b><span>sales appointments booked for a real estate coaching partner</span></li>
         <li><b>$2M+</b><span>client GCI tracked</span></li>
       </ul>
     </div>
@@ -963,8 +964,8 @@ footer .sep > span::before{content:"·";display:inline-block;width:var(--s-16);m
         <figcaption class="guide-cap small"><b>Example guide</b><span>We write yours after you sign.</span></figcaption>
       </figure>
       <ul class="ledger">
-        <li><b>$250 to $70 a booked call</b><p>Cost per sales call for a Vancouver company that sells to realtors. Hundreds of realtors booked.</p></li>
-        <li><b>$25 leads</b><p>Cost per lead for a Vancouver commercial realtor.</p></li>
+        <li><b>$250 to $70 a booked call</b><p>Cost per sales call for a real estate coaching company. Hundreds of realtors booked.</p></li>
+        <li><b>$25 leads</b><p>Cost per lead for a commercial realtor.</p></li>
       </ul>
     </div>
   </div>
